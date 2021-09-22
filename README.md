@@ -2,11 +2,6 @@
 Group Project 
 
 <br/>
-## Iteration 1 User Stories
- - Working on UI and basic functionalities.
-<br/>
-
-<br/>
 
 ## Team Members + Roles (for Project Iteration 1)
  - **[Dr. Brian Fraser](mailto:bfraser@sfu.ca)** *as the Instructor*
