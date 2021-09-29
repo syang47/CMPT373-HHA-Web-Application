@@ -49,12 +49,12 @@
         padding-top: 20px;
         box-sizing: border-box;
     }
-    .item input:focus+lable ,.item input:valid+lable{
+    .item input:focus+label ,.item input:valid+label{
         top: 0px;
         font-size: 12px;
         transition: all 0.5 linear;
     }
-    .item lable {
+    .item label {
         position: absolute;
         left: 0;
         top: 12px;
@@ -92,22 +92,20 @@
     <div class="page">
         <div class="box">
             <h2>Login</h2>
-            <form action="">
-                <div class="item">
-                    <input v-model="username" type="text" required>
-                    <lable for="">UserName</lable>
-                </div>
-                <div class="item">
-                    <input v-model="password" type="password" required>
-                    <lable for="">PassWord</lable>
-                </div>
-                <button class="btn" @click="login">submit
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </form>
+            <div class="item">
+                <input v-model="username" type="text" required>
+                <label for="">UserName</label>
+            </div>
+            <div class="item">
+                <input v-model="password" type="password" required>
+                <label for="">PassWord</label>
+            </div>
+            <button class="btn" @click="login">submit
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
         </div>
     </div>
 </template>
