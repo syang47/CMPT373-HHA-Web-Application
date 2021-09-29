@@ -117,7 +117,8 @@
     import {LoginInfo} from "../models/LoginInfo";
     
     export default class Login extends Vue {
-        loginInfo: LoginInfo = new LoginInfo();
+        username = '';
+        password = '';
 
         mounted() {
             let tempThis = this;
@@ -133,14 +134,14 @@
         login(): void{
             let tempThis = this;
             tempThis.$axios.post('/login', {
-                username: tempThis.loginInfo.username,
-                password: tempThis.loginInfo.password,
+                username: tempThis.username,
+                password: tempThis.password,
             })
             .then(response => {
                 console.log(response);
                 let data = response.data;
                 // tempThis.$router.push({path: '/home'})
-                  if (data.code == 200) {
+                  if (data.code != 404) {
                       tempThis.$router.push({path: '/home'})
                   }
             })

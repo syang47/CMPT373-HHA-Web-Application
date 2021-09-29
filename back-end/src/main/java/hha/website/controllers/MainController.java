@@ -1,13 +1,18 @@
 package hha.website.controllers;
 
+import hha.website.models.LoginInfo;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class MainController {
+    @PostMapping("/api/login")
+    @CrossOrigin
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createCalculateDate(@RequestBody LoginInfo user) {
+        System.out.println(user.username);
+        System.out.println(user.password);
+        System.out.println("Success");
+    }
 
 }
