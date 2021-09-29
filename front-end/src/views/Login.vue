@@ -101,7 +101,7 @@
                     <input v-model="password" type="password" required>
                     <lable for="">PassWord</lable>
                 </div>
-                <button class="btn" @click="login()">submit
+                <button class="btn" @click="login">submit
                     <span></span>
                     <span></span>
                     <span></span>
@@ -123,27 +123,30 @@
             let tempThis = this;
             document.onkeydown = function (e) {
                 if(e.key == 'Enter'){
+                    // tempThis.$router.push({path: '/home'})
                     tempThis.login();
                 }
             }
         };
+        
 
         login(): void{
             let tempThis = this;
             tempThis.$axios.post('/login', {
                 username: tempThis.loginInfo.username,
                 password: tempThis.loginInfo.password,
-          })
-          .then(response => {
-              console.log(response);
-              let data = response.data;
-              if (data.code == 200) {
-                  tempThis.$router.replace({path: '/home'})
-              }
-          })
-          .catch(failResponse => {
-              console.log(failResponse);
-          })
+            })
+            .then(response => {
+                console.log(response);
+                let data = response.data;
+                // tempThis.$router.push({path: '/home'})
+                  if (data.code == 200) {
+                      tempThis.$router.push({path: '/home'})
+                  }
+            })
+            .catch(failResponse => {
+                console.log(failResponse);
+            })
         };
     }
 
