@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
-import Login from '../views/Login.vue'
-
+import Login from "../views/Login.vue";
+import Department from "../components/Department.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -23,10 +23,15 @@ const routes: Array<RouteRecordRaw> = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
+  {
+    path: "/department",
+    name: "Department",
+    component: Department,
+  },
 ];
 
 const router = createRouter({
-  history: createWebHistory('/'),
+  history: createWebHistory("/"),
   routes,
 });
 
