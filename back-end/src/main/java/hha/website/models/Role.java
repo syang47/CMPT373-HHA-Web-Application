@@ -1,29 +1,32 @@
 package hha.website.models;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
-/*@Entity
-@Table(name="roles")*/
+@Entity
+@Table(name="roles")
 public class Role {
-    /*@Id
-    @Column(name="role_id")
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    private Integer id;
 
-    public String getName() {
+    private RoleId name;
+    @Id
+    private String id;
+
+    public RoleId getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public void setName(RoleId name) {
         this.name = name;
     }
 
-    private String name;
-    public Integer getId(){
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(String id) {
         this.id = id;
     }
-*/
+
+
 }
