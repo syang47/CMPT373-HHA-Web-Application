@@ -12,9 +12,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.sql.DataSource;
 
 @Configuration
 @EnableWebSecurity
@@ -26,19 +29,34 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Override
-    protected void configure(AuthenticationManagerBuilder authenticationManager) throws Exception {
-        authenticationManager.userDetailsService(hhaUserDetailsService);
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    protected void configureGlobal(AuthenticationManagerBuilder authenticationManager) throws Exception {
+        //authenticationManager.userDetailsService(hhaUserDetailsService);
+        /*authenticationManager.jdbcAuthentication().dataSource(dataSource)
+                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
+                .and()
+                .withUser("admin").password(passwordEncoder().encode("password")).roles("USER", "ADMIN");*/
+        authenticationManager.userDetailsService(hhaUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/api/login").permitAll()
+                .authorizeRequests().antMatchers("/api/login", "/register").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
+                .antMatchers("/user").hasRole("USER")
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+    }
+
+    @Bean
+    public UserDetailsService userDetailsService() {
+        return new HHAUserDetailsService();
     }
 
     @Override
@@ -49,6 +67,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+        return new BCryptPasswordEncoder();
     }
 }

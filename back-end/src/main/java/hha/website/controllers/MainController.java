@@ -3,16 +3,18 @@ package hha.website.controllers;
 import hha.website.AuthenticationRequest;
 import hha.website.AuthenticationResponse;
 import hha.website.HHAUserDetailsService;
+import hha.website.UserRepository;
 import hha.website.config.JwtUtil;
+import hha.website.models.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -21,6 +23,8 @@ public class MainController {
 
     /*
     main authorization process modified from: https://www.youtube.com/watch?v=X80nJ5T7YpE
+    https://www.javainuse.com/webseries/spring-security-jwt/chap5
+    https://medium.com/@szczypka.m/spring-boot-and-spring-security-jwt-mysql-database-bfd2df928ab5
      */
 
 
@@ -45,6 +49,7 @@ public class MainController {
     @Autowired
     private JwtUtil jwtToken;
 
+    private UserRepository userRepository;
 
     /*
     curl -i -H "Content-Type: application/json" -X POST -d '{"username": "user","password": "pass"}' localhost:8080/api/login
@@ -63,17 +68,24 @@ public class MainController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername()));
     }
 
-    @GetMapping("/all")
+
+    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
+        return ResponseEntity.ok(userDetailsService.save(user));
+    }
+
+    @GetMapping("/user")
+    @PreAuthorize("hasRole('USER')")
     public String allAccess() {
-        return "Public Content.";
+        return "User Content.";
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public String userAccess() {
-        return "User Content.";
+        return "Admin Content.";
     }
 }

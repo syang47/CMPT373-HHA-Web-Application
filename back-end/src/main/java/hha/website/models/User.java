@@ -1,36 +1,32 @@
 package hha.website.models;
 
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="users")
-public class User{
+public class User {
     @Id
-    @Column(name="role_id")
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-
+    @Column
     private String username;
+    @Column
     private String password;
+    @Column
+    private String role;
 
-    public boolean enabled;
-
-    public boolean isEnabled() {
-        return enabled;
-    }
-
-
-    @ManyToMany(cascade= CascadeType.ALL, fetch=FetchType.EAGER)
-    @JoinTable(name="users_roles", joinColumns=@JoinColumn(name="user_id"), inverseJoinColumns=@JoinColumn(name="role_id"))
-    private Set<Role> roles = new HashSet<>();
-
-    public Integer getId(){
+    public Integer getId() {
         return id;
     }
 
-    public void setId(Integer id){
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -50,7 +46,11 @@ public class User{
         this.password = password;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }
