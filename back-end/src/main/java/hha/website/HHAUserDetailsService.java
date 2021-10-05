@@ -22,9 +22,27 @@ public class HHAUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+
+        User admin = new User();
+        admin.setId(1);
+        admin.setUsername("admin");
+        admin.setPassword(passwordEncoder.encode("admin"));
+        admin.setRole("ROLE_ADMIN");
+        userRepository.save(admin);
+
+        User randomUser = new User();
+        randomUser.setId(2);
+        randomUser.setUsername("user");
+        randomUser.setPassword(passwordEncoder.encode("user"));
+        randomUser.setRole("ROLE_USER");
+        userRepository.save(randomUser);
+
         User user = userRepository.findByUsername(username);
+
         List<SimpleGrantedAuthority> roles;
         if(user != null) {
             roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));

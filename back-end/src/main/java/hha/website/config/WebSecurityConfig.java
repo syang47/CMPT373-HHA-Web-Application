@@ -30,24 +30,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private JwtRequestFilter jwtRequestFilter;
 
     @Autowired
-    private DataSource dataSource;
-
-    @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder authenticationManager) throws Exception {
-        //authenticationManager.userDetailsService(hhaUserDetailsService);
-        /*authenticationManager.jdbcAuthentication().dataSource(dataSource)
-                .withUser("user").password(passwordEncoder().encode("password")).roles("USER")
-                .and()
-                .withUser("admin").password(passwordEncoder().encode("password")).roles("USER", "ADMIN");*/
+        //if using MSSQL for user registration
         authenticationManager.userDetailsService(hhaUserDetailsService).passwordEncoder(passwordEncoder());
+        //using in-memory auth
+        /*authenticationManager.inMemoryAuthentication().passwordEncoder(passwordEncoder())
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN")
+                .and()
+                .withUser("user").password(passwordEncoder().encode("user")).roles("USER");*/
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/api/login", "/register").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .antMatchers("/user").hasRole("USER")
+                .authorizeRequests().antMatchers("/api/login", "/api/register").permitAll()
                 .anyRequest().authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);

@@ -1,7 +1,5 @@
 package hha.website;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 public class AuthenticationRequest {
 
 

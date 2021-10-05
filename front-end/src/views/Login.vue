@@ -138,11 +138,8 @@
             .then(response => {
                 console.log(response);
                 let data = response.data;
-            //  tempThis.$router.push({path: '/home'})
-                if (response.status == 200) {
-                    localStorage.setItem('username', JSON.stringify(response.data));
-                    tempThis.$router.push('/home')
-                }
+                localStorage.setItem('username', JSON.stringify(response.data));
+                tempThis.$router.push('/home')
             })
             .catch(failResponse => {
                 console.log(failResponse);

@@ -15,6 +15,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -27,9 +28,6 @@ public class MainController {
     https://medium.com/@szczypka.m/spring-boot-and-spring-security-jwt-mysql-database-bfd2df928ab5
      */
 
-
-
-
     /*
     @RequestMapping("/api/login")
     @CrossOrigin
@@ -39,6 +37,8 @@ public class MainController {
         model.setViewName("login");
         return model;
     }*/
+
+
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -52,7 +52,7 @@ public class MainController {
     private UserRepository userRepository;
 
     /*
-    curl -i -H "Content-Type: application/json" -X POST -d '{"username": "user","password": "pass"}' localhost:8080/api/login
+    curl -i -H "Content-Type: application/json" -X POST -d '{"username": "admin","password": "admin"}' localhost:8080/api/login
      */
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
@@ -67,24 +67,40 @@ public class MainController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
-
+        System.out.println(jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername()));
     }
 
+    /*
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
+    curl -i -H "Content-Type: application/json" -X POST -d '{"username": "admin","password": "admin","role": "ROLE_ADMIN"}' localhost:8080/api/register
+     */
+
+    @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
         return ResponseEntity.ok(userDetailsService.save(user));
     }
 
+    /*
+    get JWT from logging in with user account at /api/login then use
+    curl -i -H "Authorization: Bearer **INSERT JWT HERE**" -X GET localhost:8080/user
+    e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/user
+     */
+
     @GetMapping("/user")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public String allAccess() {
         return "User Content.";
     }
 
+    /*
+    get JWT from logging in with admin account at /api/login then use
+    curl -i -H "Authorization: Bearer **INSERT JWT HERE**" -X GET localhost:8080/admin
+    e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/admin
+     */
+
     @GetMapping("/admin")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    @PreAuthorize("hasRole('ADMIN')")
     public String userAccess() {
         return "Admin Content.";
     }
