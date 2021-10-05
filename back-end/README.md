@@ -27,11 +27,11 @@ After a user is registered, must access **/api/login** to get JWT:
 
 Then you can access **localhost:8080/user** using this:
 
-    curl -i -H "Authorization: Bearer INSERT JWT HERE" -X GET localhost:8080/user
+    curl -i -H "Authorization: Bearer INSERT JWT HERE" -X GET localhost:8080/api/user
 
 e.g. 
 
-    curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/user
+    curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/api/user
 
 This should return a data in response object saying "User Content."
 

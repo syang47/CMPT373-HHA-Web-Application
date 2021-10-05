@@ -27,19 +27,6 @@ public class MainController {
     https://www.javainuse.com/webseries/spring-security-jwt/chap5
     https://medium.com/@szczypka.m/spring-boot-and-spring-security-jwt-mysql-database-bfd2df928ab5
      */
-
-    /*
-    @RequestMapping("/api/login")
-    @CrossOrigin
-    @ResponseStatus(HttpStatus.CREATED)
-    public ModelAndView loginPage(@RequestParam(value = "logout", required = false) String logout){
-        ModelAndView model = new ModelAndView();
-        model.setViewName("login");
-        return model;
-    }*/
-
-
-
     @Autowired
     private AuthenticationManager authenticationManager;
 
@@ -87,7 +74,7 @@ public class MainController {
     e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/user
      */
 
-    @GetMapping("/user")
+    @GetMapping("/api/user")
     @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
     public String allAccess() {
         return "User Content.";
@@ -99,7 +86,7 @@ public class MainController {
     e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/admin
      */
 
-    @GetMapping("/admin")
+    @GetMapping("/api/admin")
     @PreAuthorize("hasRole('ADMIN')")
     public String userAccess() {
         return "Admin Content.";
