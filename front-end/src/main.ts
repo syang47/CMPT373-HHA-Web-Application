@@ -13,5 +13,5 @@ const app = createApp(App);
 app.use(store);
 app.use(router);
 app.config.globalProperties.$axios = axios;
-axios.defaults.baseURL = 'http://localhost:8088/api'
+axios.defaults.baseURL = 'http://localhost:8080/'
 app.mount("#app");
