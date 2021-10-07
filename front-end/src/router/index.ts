@@ -11,7 +11,13 @@ const routes: Array<RouteRecordRaw> = [
     component: Login,
   },
   {
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
     path: "/register",
+    name: "Register",
     component: Register,
   },
   {
@@ -40,19 +46,5 @@ const router = createRouter({
   routes,
 });
 
-/*
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/login', '/register', '/home'];
-  const authRequired = !publicPages.includes(to.path);
-  const loggedIn = localStorage.getItem('user');
-
-  // trying to access a restricted page + not logged in
-  // redirect to login page
-  if (authRequired && !loggedIn) {
-    next('/login');
-  } else {
-    next();
-  }
-});*/
 
 export default router;
