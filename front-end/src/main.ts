@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import Vue, { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -10,11 +10,15 @@ declare module "@vue/runtime-core" {
     $axios: AxiosInstance;
   }
 }
-const app = createApp(App).use(store);
+
+const app = createApp(App);
+app.config.globalProperties.$store = store;
+app.provide("$store", store);
+
 app.use(store);
 app.use(router);
 app.config.globalProperties.$axios = axios;
-axios.defaults.baseURL = "http://localhost:8088/api";
+axios.defaults.baseURL = "http://localhost:8080/api";
 app.use(Equal);
 app.mount("#app");
 
