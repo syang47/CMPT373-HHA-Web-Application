@@ -105,7 +105,7 @@ export default {
                     this.successful = true;
                     this.loading = false;
                     console.log("registration successful: " + this.successful);
-                    this.$router.push('/login');
+                    this.$router.push('/');
                 },
                 (error) => {
                     this.message =

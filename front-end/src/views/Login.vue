@@ -141,7 +141,7 @@
 
         login(): void{
             let tempThis = this;
-            tempThis.$axios.post('/login', {
+            tempThis.$axios.post('/api/login', {
                 username: tempThis.username,
                 password: tempThis.password,
             })
