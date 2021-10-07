@@ -100,12 +100,21 @@
                 <input v-model="password" type="password" required>
                 <label for="">PassWord</label>
             </div>
-            <button class="btn" @click="login">submit
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-light" @click="login">submit
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary" @click="goToRegister">Register
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -113,7 +122,8 @@
 <script lang="ts">
     import { Vue } from "vue-class-component";
     import {LoginInfo} from "../models/LoginInfo";
-    
+    import "bootstrap/dist/css/bootstrap.css";
+    import 'bootstrap-vue/dist/bootstrap-vue.css';
     export default class Login extends Vue {
         username = '';
         password = '';
@@ -131,7 +141,7 @@
 
         login(): void{
             let tempThis = this;
-            tempThis.$axios.post('/api/login', {
+            tempThis.$axios.post('/login', {
                 username: tempThis.username,
                 password: tempThis.password,
             })
@@ -145,6 +155,10 @@
                 console.log(failResponse);
             })
         };
+
+        goToRegister(): void {
+            this.$router.push('/register');
+        }
     }
 
 </script>
