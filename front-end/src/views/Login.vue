@@ -87,36 +87,39 @@
 </style>
 
 <template>
-    <div class="background">
-    </div>
-    <div class="page">
-        <div class="box">
-            <h2>Login</h2>
-            <div class="item">
-                <input v-model="username" type="text" required>
-                <label for="">UserName</label>
+    <div>
+        <div class="background">
+        </div>
+        <div class="page">
+            <div class="box">
+                <h2>Login</h2>
+                <div class="item">
+                    <input v-model="username" type="text" required>
+                    <label for="">UserName</label>
+                </div>
+                <div class="item">
+                    <input v-model="password" type="password" required>
+                    <label for="">PassWord</label>
+                </div>
+                <button class="btn" @click="login">submit
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
             </div>
-            <div class="item">
-                <input v-model="password" type="password" required>
-                <label for="">PassWord</label>
-            </div>
-            <button class="btn" @click="login">submit
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
         </div>
     </div>
 </template>
 
 <script lang="ts">
     import { Vue } from "vue-class-component";
-    import {LoginInfo} from "../models/LoginInfo";
     
     export default class Login extends Vue {
         username = '';
         password = '';
+        $axios: any;
+        $router: any;
 
         mounted() {
             let tempThis = this;
@@ -135,13 +138,13 @@
                 username: tempThis.username,
                 password: tempThis.password,
             })
-            .then(response => {
+            .then((response: { data: any; }) => {
                 console.log(response);
                 let data = response.data;
                 localStorage.setItem('username', JSON.stringify(response.data));
                 tempThis.$router.push('/home')
             })
-            .catch(failResponse => {
+            .catch((failResponse: any) => {
                 console.log(failResponse);
             })
         };

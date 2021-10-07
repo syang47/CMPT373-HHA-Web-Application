@@ -6,7 +6,7 @@ import axios, { AxiosInstance } from "axios";
 
 declare module "@vue/runtime-core" {
     interface ComponentCustomProperties {
-        $axios: AxiosInstance;
+        $axios: AxiosInstance
         }
     }
 const app = createApp(App);
