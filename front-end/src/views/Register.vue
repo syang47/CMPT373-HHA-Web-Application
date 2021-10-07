@@ -56,19 +56,19 @@ export default {
     },
     data() {
         const schema = yup.object().shape({
-        username: yup
-            .string()
-            .required("Username is required!")
-            .min(3, "Must be at least 3 characters!")
-            .max(20, "Must be maximum 20 characters!"),
-        department: yup
-            .string()
-            .required("Department is required!"),
-        password: yup
-            .string()
-            .required("Password is required!")
-            .min(6, "Must be at least 6 characters!")
-            .max(40, "Must be maximum 40 characters!"),
+            username: yup
+                .string()
+                .required("Username is required!")
+                .min(3, "Must be at least 3 characters!")
+                .max(20, "Must be maximum 20 characters!"),
+            department: yup
+                .string()
+                .required("Department is required!"),
+            password: yup
+                .string()
+                .required("Password is required!")
+                .min(6, "Must be at least 6 characters!")
+                .max(40, "Must be maximum 40 characters!"),
         });
 
         return {
@@ -80,7 +80,7 @@ export default {
     },
     computed: {
         loggedIn() {
-            console.log("user logged in:?");
+            console.log("user logged in?");
             console.log(this.$store.state.auth.status.loggedIn);
             return this.$store.state.auth.status.loggedIn;
         },
@@ -100,18 +100,19 @@ export default {
 
             this.$store.dispatch("auth/register", user).then(
                 (data) => {
-                this.message = data.message;
-                this.successful = true;
-                this.loading = false;
+                    this.message = data.message;
+                    this.successful = true;
+                    this.loading = false;
                 },
                 (error) => {
-                this.message =
-                    (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                      error.message || error.toString();
-                this.successful = false;
-                this.loading = false;
+                    this.message =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message || error.toString();
+                    this.successful = false;
+                    this.loading = false;
+                    console.log("erroor");
                 }
             );
         },
