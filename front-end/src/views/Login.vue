@@ -127,21 +127,19 @@
                 }
             }
         };
-        
+
 
         login(): void{
             let tempThis = this;
-            tempThis.$axios.post('/login', {
+            tempThis.$axios.post('/api/login', {
                 username: tempThis.username,
                 password: tempThis.password,
             })
             .then(response => {
                 console.log(response);
                 let data = response.data;
-                // tempThis.$router.push({path: '/home'})
-                  if (data.code != 404) {
-                      tempThis.$router.push({path: '/home'})
-                  }
+                localStorage.setItem('username', JSON.stringify(response.data));
+                tempThis.$router.push('/home')
             })
             .catch(failResponse => {
                 console.log(failResponse);
