@@ -6,7 +6,7 @@ module.exports = {
                 changeOrigin: true,
                 ws: true,
             }
-        }
+        },
+        port: 8081
     }
-  },
 };
