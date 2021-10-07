@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Home from "../views/Home.vue";
 import Login from '../views/Login.vue'
+import DataNICUPAED from "../views/InputData.vue"
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -13,6 +14,11 @@ const routes: Array<RouteRecordRaw> = [
     path: "/home",
     name: "Home",
     component: Home,
+  },
+  {
+    path:"/NICUPAED/data",
+    name: "Input data - NICU/PAED",
+    component: DataNICUPAED,
   }
 
 ];
