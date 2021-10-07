@@ -17,9 +17,9 @@
                             <ErrorMessage name="password" class="error-feedback" />
                         </div>
                         <div class="form-group">
-                            <label for="department">Department</label>
-                            <Field name="department" type="text" class="form-control" />
-                            <ErrorMessage name="department" class="error-feedback" />
+                            <label for="role">Role</label>
+                            <Field name="role" type="text" class="form-control" />
+                            <ErrorMessage name="role" class="error-feedback" />
                         </div>
                         <div class="form-group">
                         <button class="btn btn-primary btn-block" :disabled="loading">
@@ -44,9 +44,10 @@
 </template>
 
 <script>
+// https://www.bezkoder.com/vue-3-authentication-jwt/
+
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-
 export default {
     name: "Register",
     components: {
@@ -61,9 +62,9 @@ export default {
                 .required("Username is required!")
                 .min(3, "Must be at least 3 characters!")
                 .max(20, "Must be maximum 20 characters!"),
-            department: yup
+            role: yup
                 .string()
-                .required("Department is required!"),
+                .required("role is required!"),
             password: yup
                 .string()
                 .required("Password is required!")
@@ -103,6 +104,8 @@ export default {
                     this.message = data.message;
                     this.successful = true;
                     this.loading = false;
+                    console.log("registration successful: " + this.successful);
+                    this.$router.push('/login');
                 },
                 (error) => {
                     this.message =
@@ -112,7 +115,8 @@ export default {
                         error.message || error.toString();
                     this.successful = false;
                     this.loading = false;
-                    console.log("erroor");
+                    console.log("registration failed: " + this.successful);
+                    console.log(user);
                 }
             );
         },
