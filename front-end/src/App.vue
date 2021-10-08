@@ -1,42 +1,84 @@
 <template>
-   <div class="container-fluid"> 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#" >
+   <div class="container-fluid sticky-top "> 
+    
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+      <router-link to="/home" class="navbar-brand active">
         <img src="@/assets/logo.png" width="140" alt=""/>
-        
-      </a>
-      <h1>Department</h1>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+      </router-link>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon" />
       </button>
 
-      <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
-        <ul class="navbar-nav">
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+            <router-link to="/department" class="nav-link">Department</router-link>
+            <router-link to="/nicu_paed" class="nav-link">NICU / PAED</router-link>
+            <router-link to="/maternity" class="nav-link">Maternity</router-link>
+            <router-link to="/rehab" class="nav-link">Rehab</router-link>
+            <router-link to="/communityhealth" class="nav-link">Community Health</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
+            <a class="nav-link disabled"  href="#">Leaders Board</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Case Study</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Data Input</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" @click.prevent="logout">Log Out</a>
           </li>
         </ul>
-
-        <form class="form-inline my-2 my-lg-0 ml-auto">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-primary my-2 my-sm-2 margin-right" type="submit">Search</button>
+        
+        <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
+          <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
+        <div class="text-end">
+          <button type="button" class="btn btn-dark me-2">
+            <router-link to="/login" class="nav-link active text-light bg-dark">Login</router-link>
+            
+          </button>
+          <button type="button" class="btn btn-light">
+            <router-link to="/register" class="nav-link active bg-light text-dark">Register</router-link>
+          </button>
+        </div>
       </div>
     </nav>
   </div>
   <router-view />
 </template>
+
+<script>
+export default {
+  
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
+  methods: {
+    logout() {
+      this.$store.dispatch('auth/logout');
+      this.$router.push('/login');
+    },
+    goToDepartment() {
+      this.$router.push('/department');
+    },
+    goToLogin() {
+      this.$router.push('/login');
+    },
+    goToRegister() {
+      this.$router.push('/register');
+    },
+    goToHome() {
+      this.$router.push('/home');    
+    }
+  }
+
+};
+
+
+
+</script>
