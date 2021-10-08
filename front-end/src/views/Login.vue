@@ -87,26 +87,33 @@
 </style>
 
 <template>
-    <div>
-        <div class="background">
-        </div>
-        <div class="page">
-            <div class="box">
-                <h2>Login</h2>
-                <div class="item">
-                    <input v-model="username" type="text" required>
-                    <label for="">UserName</label>
+    <div class="background">
+    </div>
+    <div class="page">
+        <div class="box">
+            <h2>Login</h2>
+            <div class="item">
+                <input v-model="username" type="text" required>
+                <label for="">UserName</label>
+            </div>
+            <div class="item">
+                <input v-model="password" type="password" required>
+                <label for="">PassWord</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-light" @click="login">submit
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="item">
-                    <input v-model="password" type="password" required>
-                    <label for="">PassWord</label>
+                <div class="col">
+                    <button class="btn btn-secondary" @click="goToRegister">Register
+                    </button>
                 </div>
-                <button class="btn" @click="login">submit
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
             </div>
         </div>
     </div>
@@ -114,6 +121,7 @@
 
 <script lang="ts">
     import { Vue } from "vue-class-component";
+    import {LoginInfo} from "../models/LoginInfo";
     
     export default class Login extends Vue {
         username = '';
@@ -148,6 +156,10 @@
                 console.log(failResponse);
             })
         };
+
+        goToRegister(): void {
+            this.$router.push('/register');
+        }
     }
 
 </script>
