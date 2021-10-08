@@ -182,28 +182,48 @@
 </style>
 
 <template>
-  <div class="home">
-  <button class="button">  
-    <h1 class="rectangle-leader-board">LEADER BOARD</h1>
-  </button>
-  <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
-    <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
-  </button>
-  <button style="display:inline-block;" class="button" @click.prevent="goToMaternity">
-    <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
-  </button>
-  <button style="display:inline-block;" class="button" @click.prevent="goToRehab">
-    <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
-  </button>
-  <button style="display:inline-block;" class="button" @click.prevent="goToCommunityHealth">
-    <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
-  </button>
-  <button class="button">
-    <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
-  </button>
-  <button class="button">
-    <h1 class="rectangle-case-studies">CASE STUDY</h1>
-  </button>
+  <div class="home container-fluid justify-content-center">
+    <div class="row justify-content-center">
+      <button class="button">  
+        <h1 class="rectangle-leader-board">LEADER BOARD</h1>
+      </button>
+    </div>
+    <div class="row justify-content-center">
+      <div class="row">
+        <div class="col">
+          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
+            <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+          </button>
+        </div>
+        <div class="col">
+          <button style="display:inline-block;" class="button" @click.prevent="goToMaternity">
+            <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
+          </button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <button style="display:inline-block;" class="button" @click.prevent="goToRehab">
+            <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
+          </button>
+        </div>
+        <div class="col">
+          <button style="display:inline-block;" class="button" @click.prevent="goToCommunityHealth">
+            <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <button class="button">
+        <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
+      </button>
+    </div>
+    <div class="row justify-content-center">
+      <button class="button">
+        <h1 class="rectangle-case-studies">CASE STUDY</h1>
+      </button>
+    </div>
   </div>
 </template>
 
