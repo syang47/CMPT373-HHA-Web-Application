@@ -79,6 +79,9 @@
       background-color: #7a4183;
       box-sizing: border-box;
       box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .nicu-paed_button {
@@ -91,8 +94,8 @@
       width: 580px;
       height: 85px;
       background-color: #ffffff;
+      align-content: center;
     }
-
 
     .rehab_button {
       width: 580px;
@@ -115,6 +118,9 @@
       background-color: #008eaa;
       box-sizing: border-box;
       box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .msg-board_button {
@@ -132,6 +138,9 @@
       background-color: #7a4183;
       box-sizing: border-box;
       box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .case-studies_button {
@@ -149,19 +158,52 @@
       background-color: #008eaa;
       box-sizing: border-box;
       box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+
+    .button {
+      /* width: 550px; */
+      /* height: 85px; */
+      padding: 2px 2px 2px 2px;
+      border-radius: 10px;
+      border: 1px solid #797979;
+      background-color: #008eaa;
+      box-sizing: border-box;
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+
 
 </style>
 
 <template>
   <div class="home">
-  <h1 class="rectangle-leader-board">LEADER BOARD</h1>
-  <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
-  <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
-  <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
-  <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
-  <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
-  <h1 class="rectangle-case-studies">CASE STUDY</h1>
+  <button class="button">  
+    <h1 class="rectangle-leader-board">LEADER BOARD</h1>
+  </button>
+  <button style="display:inline-block;" class="button">
+    <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+  </button>
+  <button style="display:inline-block;" class="button">
+    <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
+  </button>
+  <button style="display:inline-block;" class="button">
+    <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
+  </button>
+  <button style="display:inline-block;" class="button">
+    <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
+  </button>
+  <button class="button">
+    <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
+  </button>
+  <button class="button">
+    <h1 class="rectangle-case-studies">CASE STUDY</h1>
+  </button>
   </div>
 </template>
 
