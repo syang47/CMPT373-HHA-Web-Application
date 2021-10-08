@@ -100,12 +100,21 @@
                 <input v-model="password" type="password" required>
                 <label for="">PassWord</label>
             </div>
-            <button class="btn" @click="login">submit
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-light" @click="login">submit
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
+                </div>
+                <div class="col">
+                    <button class="btn btn-secondary" @click="goToRegister">Register
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -145,6 +154,10 @@
                 console.log(failResponse);
             })
         };
+
+        goToRegister(): void {
+            this.$router.push('/register');
+        }
     }
 
 </script>

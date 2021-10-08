@@ -6,6 +6,6 @@ module.exports = {
                 changeOrigin: true,
                 ws: true,
             }
-        }
+        },
     }
 };
