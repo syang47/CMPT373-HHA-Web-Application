@@ -9,6 +9,7 @@ import CaseStudy from "@/views/CaseStudy.vue";
 import Rehab from "@/views/Rehab_Dep.vue";
 import CommunityHealth from "@/views/Community_Dep.vue";
 import Maternity from "@/views/Maternity_Dep.vue";
+import NICU_PAED_Data from "../views/NICUPAEDData.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -16,11 +17,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Login",
     component: Login,
   },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
+  // {
+  //   path: "/login",
+  //   name: "Login",
+  //   component: Login,
+  // },
   {
     path: "/register",
     component: Register,
@@ -54,13 +55,9 @@ const routes: Array<RouteRecordRaw> = [
     name: "CommunityHealth",
     component: CommunityHealth,
   },
-  { path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
+  { path: "/nicu_paed/data",
+    name: "NICU_PAED_data",
+    component: NICU_PAED_Data,
   },
   {
     path: "/datainput",
