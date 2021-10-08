@@ -186,16 +186,16 @@
   <button class="button">  
     <h1 class="rectangle-leader-board">LEADER BOARD</h1>
   </button>
-  <button style="display:inline-block;" class="button">
+  <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
     <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
   </button>
-  <button style="display:inline-block;" class="button">
+  <button style="display:inline-block;" class="button" @click.prevent="goToMaternity">
     <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
   </button>
-  <button style="display:inline-block;" class="button">
+  <button style="display:inline-block;" class="button" @click.prevent="goToRehab">
     <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
   </button>
-  <button style="display:inline-block;" class="button">
+  <button style="display:inline-block;" class="button" @click.prevent="goToCommunityHealth">
     <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
   </button>
   <button class="button">
@@ -216,7 +216,21 @@ import HelloWorld from "@/components/HelloWorld.vue"; // @ is an alias to /src
     HelloWorld,
   },
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+
+  goToNICUPAED() {
+      this.$router.push('/nicu_paed');
+  };
+  goToMaternity() {
+      this.$router.push('/maternity');
+  };
+  goToRehab() {
+      this.$router.push('/rehab');
+  };
+  goToCommunityHealth() {
+      this.$router.push('/communityhealth');
+  };
+}
 </script>
 
 

@@ -1,7 +1,7 @@
 <template>
   
   <div class="container-fluid"> 
-    <h1 class="display-2 text-center">Maternity</h1>
+    <h1 class="display-2 text-center text-dark">Maternity</h1>
     <div class="container">
         <div class="row">
             <div class="col">

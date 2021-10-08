@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid"> 
-    <h1 class="display-2 text-center">Department</h1> 
+    
     <div class="container">
+    <h1 class="display-2 text-center text-dark">Department</h1> 
         <div class="row">
             <div class="col">
               <div class="row-6 rounded-left">

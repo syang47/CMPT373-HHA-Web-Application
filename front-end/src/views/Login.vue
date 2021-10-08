@@ -122,8 +122,7 @@
 <script lang="ts">
     import { Vue } from "vue-class-component";
     import {LoginInfo} from "../models/LoginInfo";
-    import "bootstrap/dist/css/bootstrap.css";
-    import 'bootstrap-vue/dist/bootstrap-vue.css';
+    
     export default class Login extends Vue {
         username = '';
         password = '';
