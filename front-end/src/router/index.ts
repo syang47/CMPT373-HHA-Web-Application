@@ -12,11 +12,6 @@ import Maternity from "@/views/Maternity_Dep.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
-    name: "Login",
-    component: Login,
-  },
-  {
     path: "/login",
     name: "Login",
     component: Login,
@@ -26,7 +21,7 @@ const routes: Array<RouteRecordRaw> = [
     component: Register,
   },
   {
-    path: "/home",
+    path: "/",
     component: Home,
   },
   {
@@ -53,14 +48,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/communityhealth",
     name: "CommunityHealth",
     component: CommunityHealth,
-  },
-  { path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
   {
     path: "/datainput",

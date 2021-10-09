@@ -121,39 +121,29 @@
 
 <script lang="ts">
     import { Vue } from "vue-class-component";
-    import {LoginInfo} from "../models/LoginInfo";
-    
+    import UserService from "../services/auth.service"
+
     export default class Login extends Vue {
         username = '';
         password = '';
 
         mounted() {
             let tempThis = this;
-            document.onkeydown = function (e) {
-                if(e.key == 'Enter'){
-                    // tempThis.$router.push({path: '/home'})
-                    tempThis.login();
-                }
+            if(tempThis.$store.state.auth.status.loggedIn) {
+                tempThis.$router.push('/');
             }
         };
 
-
-        login(): void{
+        login(): void {
             let tempThis = this;
-            tempThis.$axios.post('/api/login', {
-                username: tempThis.username,
-                password: tempThis.password,
-            })
-            .then(response => {
-                console.log(response);
-                let data = response.data;
-                localStorage.setItem('username', JSON.stringify(response.data));
-                tempThis.$router.push('/home')
-            })
-            .catch(failResponse => {
-                console.log(failResponse);
-            })
-        };
+            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( () => {
+                    tempThis.$router.push("/");
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
 
         goToRegister(): void {
             this.$router.push('/register');

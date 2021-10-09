@@ -1,5 +1,4 @@
 import { ComponentCustomProperties } from 'vue'
-// import { Store } from 'vuex'
 import { Store } from '@/store';// path to store file
 
 
