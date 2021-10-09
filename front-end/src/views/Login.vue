@@ -1,6 +1,6 @@
 <style>
     .background {
-        background-image: url("../assets/IsaacCBRManager.jpeg");
+        background: url('../assets/Isaac CBR Manager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
         position: fixed;
