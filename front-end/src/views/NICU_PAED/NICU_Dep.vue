@@ -70,14 +70,14 @@ import { Vue } from "vue-class-component";
 
 export default class NICU_PAED extends Vue {
   goToDataInput(): void {
-    this.$router.push('/datainput');
+    this.$router.push('/nicu_paed/inputdata');
   };
-  goToCaseStudy(): void {
-    this.$router.push('/casestudy');
-  };
-  gotoBiomech(): void {
-    this.$router.push('/biomech');
-  }
+  // goToCaseStudy(): void {
+  //   this.$router.push('/casestudy');
+  // };
+  // gotoBiomech(): void {
+  //   this.$router.push('/biomech');
+  // }
 }
 </script>
 

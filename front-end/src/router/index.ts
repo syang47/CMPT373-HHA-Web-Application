@@ -39,7 +39,7 @@ const routes: Array<RouteRecordRaw> = [
     component: NICU_PAED,
   },
   { 
-    path: "/nicu_paed/data",
+    path: "/nicu_paed/inputdata",
     name: "NICU_PAED_data",
     component: NICU_PAED_Data,
   },

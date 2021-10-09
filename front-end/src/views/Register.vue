@@ -44,7 +44,9 @@
     </div>
 </template>
 
+
 <script>
+// TODO: need to switch the language to ts
 // https://www.bezkoder.com/vue-3-authentication-jwt/
 
 import { Form, Field, ErrorMessage } from "vee-validate";
