@@ -9,25 +9,19 @@ import CaseStudy from "@/views/CaseStudy.vue";
 import Rehab from "@/views/Rehab_Dep.vue";
 import CommunityHealth from "@/views/Community_Dep.vue";
 import Maternity from "@/views/Maternity_Dep.vue";
-import NICU_PAED_Data from "../views/NICUPAEDData.vue"
 
 const routes: Array<RouteRecordRaw> = [
   {
-    path: "/",
+    path: "/login",
     name: "Login",
     component: Login,
   },
-  // {
-  //   path: "/login",
-  //   name: "Login",
-  //   component: Login,
-  // },
   {
     path: "/register",
     component: Register,
   },
   {
-    path: "/home",
+    path: "/",
     component: Home,
   },
   {
@@ -54,10 +48,6 @@ const routes: Array<RouteRecordRaw> = [
     path: "/communityhealth",
     name: "CommunityHealth",
     component: CommunityHealth,
-  },
-  { path: "/nicu_paed/data",
-    name: "NICU_PAED_data",
-    component: NICU_PAED_Data,
   },
   {
     path: "/datainput",

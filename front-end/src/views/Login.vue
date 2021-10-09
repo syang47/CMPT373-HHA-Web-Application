@@ -87,34 +87,32 @@
 </style>
 
 <template>
-    <div>
-        <div class="background">
-        </div>
-        <div class="page">
-            <div class="box">
-                <h2>Login</h2>
-                <div class="item">
-                    <input v-model="username" type="text" required>
-                    <label for="">UserName</label>
+    <div class="background">
+    </div>
+    <div class="page">
+        <div class="box">
+            <h2>Login</h2>
+            <div class="item">
+                <input v-model="username" type="text" required>
+                <label for="">UserName</label>
+            </div>
+            <div class="item">
+                <input v-model="password" type="password" required>
+                <label for="">PassWord</label>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-light" @click="login">submit
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                    &nbsp;&nbsp;&nbsp;
                 </div>
-                <div class="item">
-                    <input v-model="password" type="password" required>
-                    <label for="">PassWord</label>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <button class="btn btn-light" @click="login">submit
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        &nbsp;&nbsp;&nbsp;
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary" @click="goToRegister">Register
-                        </button>
-                    </div>
+                <div class="col">
+                    <button class="btn btn-secondary" @click="goToRegister">Register
+                    </button>
                 </div>
             </div>
         </div>
@@ -123,40 +121,29 @@
 
 <script lang="ts">
     import { Vue } from "vue-class-component";
-    
+    import UserService from "../services/auth.service"
+
     export default class Login extends Vue {
         username = '';
         password = '';
-        $axios: any;
-        $router: any;
 
         mounted() {
             let tempThis = this;
-            document.onkeydown = function (e) {
-                if(e.key == 'Enter'){
-                    // tempThis.$router.push({path: '/home'})
-                    tempThis.login();
-                }
+            if(tempThis.$store.state.auth.status.loggedIn) {
+                tempThis.$router.push('/');
             }
         };
 
-
-        login(): void{
+        login(): void {
             let tempThis = this;
-            tempThis.$axios.post('/api/login', {
-                username: tempThis.username,
-                password: tempThis.password,
-            })
-            .then((response: { data: any; }) => {
-                console.log(response);
-                let data = response.data;
-                localStorage.setItem('username', JSON.stringify(response.data));
-                tempThis.$router.push('/home')
-            })
-            .catch((failResponse: any) => {
-                console.log(failResponse);
-            })
-        };
+            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( () => {
+                    tempThis.$router.push("/");
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+        }
 
         goToRegister(): void {
             this.$router.push('/register');
