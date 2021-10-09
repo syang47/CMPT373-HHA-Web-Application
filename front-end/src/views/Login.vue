@@ -1,14 +1,15 @@
 <style>
     .background {
-        background: url('../assets/Isaac CBR Manager.jpeg') no-repeat;
+        background-image: url("../assets/IsaacCBRManager.jpeg");
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
-        background-size:100% 100%;
         position: fixed;
         /* background-size: 100% 100%; */
         height: 100%;
         position: fixed;
-        width: 100%;    
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:cover;  
     } 
     *{
         margin: 0;
