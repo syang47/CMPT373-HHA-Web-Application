@@ -1,6 +1,6 @@
 <template>
     
-    <Form class="background" @submit="handleRegister" :validation-schema="schema">
+    <Form class="background" @submit="handleRegister" :validation-schema="userSchema">
         
         <div class="signup-form text-monospace">
             <div class="text-center">
@@ -44,11 +44,11 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-// https://www.bezkoder.com/vue-3-authentication-jwt/
-
+import { Vue } from "vue-class-component";
+import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-export default {
+export default defineComponent({
     name: "Register",
     components: {
         Form,
@@ -56,7 +56,7 @@ export default {
         ErrorMessage,
     },
     data() {
-        const schema = yup.object().shape({
+        const userSchema = yup.object().shape({
             username: yup
                 .string()
                 .required("Username is required!")
@@ -64,34 +64,22 @@ export default {
                 .max(20, "Must be maximum 20 characters!"),
             role: yup
                 .string()
-                .required("role is required!"),
+                .required("role is required!")
+                .lowercase()
+                .notOneOf(['admin']),
             password: yup
                 .string()
                 .required("Password is required!")
                 .min(6, "Must be at least 6 characters!")
                 .max(40, "Must be maximum 40 characters!"),
         });
-
         return {
             successful: false,
             loading: false,
             message: "",
-            schema,
+            userSchema,
         };
-    },
-    computed: {
-        loggedIn() {
-            console.log("user logged in?");
-            console.log(this.$store.state.auth.status.loggedIn);
-            return this.$store.state.auth.status.loggedIn;
-        },
-    },
-    mounted() {
-        if (this.loggedIn == true) {
-            this.$router.push("/");
-        } else {
-            this.$router.push("/register");
-        }
+
     },
     methods: {
         handleRegister(user) {
@@ -115,13 +103,16 @@ export default {
                         error.message || error.toString();
                     this.successful = false;
                     this.loading = false;
-                    console.log("registration failed: " + this.successful);
+                    console.log("registration:" + this.successful);
                     console.log(user);
                 }
             );
         },
-    },
-};
+
+    }
+
+
+});
 </script>
 
 <style scoped>

@@ -121,7 +121,6 @@
 
 <script lang="ts" type="text/typescript">
     import { Vue } from "vue-class-component";
-    import UserService from "../services/auth.service"
 
     export default class Login extends Vue {
         username = '';
