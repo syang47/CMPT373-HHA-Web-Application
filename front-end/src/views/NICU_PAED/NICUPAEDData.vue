@@ -52,7 +52,7 @@
                     
 					<!-- <label class="control-label">Test for letter and number</label>
                     <input class="form-control" onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')"> <br> -->
-                    <button type="button" class="btn btn-primary" @click="submitData">Submit</button>
+                    <button class="btn btn-primary" @click="submitData">Submit</button>
                 </form>
 			</div>
 		</div>
@@ -80,24 +80,25 @@
         };
 
 
-        submitData(): void{
-            let tempThis = this;
-            tempThis.$axios.post('/nicu_paed/inputdata', {
-                inputData: tempThis.msppRequirement
-            })
-            .then((response: { data: any; }) => {
-                console.log(response);
-                let data = response.data;
-                if (data.code == 200) {
-                    // TODO: Add a dialog to let the user know data submits successfully
-                    setTimeout(() => {
-                        tempThis.$router.push("/nicu_paed");
-                    }, 3000)
-                } 
-            })
-            .catch((failResponse: any) => {
-                console.log(failResponse);
-            })
+        submitData(): void {
+            this.$router.push("/nicu_paed");
+            // TODO: need an interface from back-end
+            // let tempThis = this;
+            // tempThis.$axios.post("/nicu_paed/inputdata", tempThis.msppRequirement)
+            // .then(response => {
+            //     console.log(response);
+            //     let data = response.data;
+            //     tempThis.$router.push("/nicu_paed");
+            //     if (data.code == 200) {
+            //         // TODO: Add a dialog to let the user know data submits successfully
+            //         setTimeout(() => {
+            //             tempThis.$router.push("/nicu_paed");
+            //         }, 3000)
+            //     } 
+            // })
+            // .catch((failResponse: any) => {
+            //     console.log(failResponse);
+            // })
         };
     }   
 </script>
