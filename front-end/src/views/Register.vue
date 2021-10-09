@@ -41,7 +41,6 @@
         >
             {{ message }}
         </div>
-    </div>
 </template>
 
 <script lang="ts" type="text/typescript">
