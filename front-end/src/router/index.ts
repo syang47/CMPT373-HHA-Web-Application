@@ -1,21 +1,23 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
-import Department from "@/views/Department.vue";
-import NICU_PAED from "@/views/NICU_Dep.vue";
 import Home from "@/views/Home.vue";
-import DataInput from "@/views/DataInput.vue";
-import CaseStudy from "@/views/CaseStudy.vue";
-import Rehab from "@/views/Rehab_Dep.vue";
-import CommunityHealth from "@/views/Community_Dep.vue";
-import Maternity from "@/views/Maternity_Dep.vue";
+
+import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
+import NICU_PAED_Data from "@/views/NICU_PAED/NICUPAEDData.vue"
+
+import Maternity from "@/views/Maternity/Maternity_Dep.vue";
+
+import Rehab from "@/views/Rehab/Rehab_Dep.vue";
+
+import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
+
+
+
+
 
 const routes: Array<RouteRecordRaw> = [
-  {
-    path: "/",
-    name: "Login",
-    component: Login,
-  },
+  // Basic components
   {
     path: "/login",
     name: "Login",
@@ -26,50 +28,45 @@ const routes: Array<RouteRecordRaw> = [
     component: Register,
   },
   {
-    path: "/home",
+    path: "/",
     component: Home,
   },
-  {
-    path: "/department",
-    name: "Department",
-    component: Department,
-  },
+
+  // NICU/PAED
   {
     path: "/nicu_paed",
     name: "NICU_PAED",
     component: NICU_PAED,
   },
+  { 
+    path: "/nicu_paed/inputdata",
+    name: "NICU_PAED_data",
+    component: NICU_PAED_Data,
+  },
+
+  // Maternity
   {
     path: "/maternity",
     name: "Maternity",
     component: Maternity,
   },
+
+  // Rehab
   {
     path: "/rehab",
     name: "Rehab",
     component: Rehab,
   },
+
+  // Community_Health
   {
     path: "/communityhealth",
     name: "CommunityHealth",
     component: CommunityHealth,
   },
-  { path: "/about",
-    name: "About",
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
-  {
-    path: "/datainput",
-    component: DataInput,
-  },
-  {
-    path: "/casestudy",
-    component: CaseStudy,
-  }
+
+
+  // Other components
 
 ];
 

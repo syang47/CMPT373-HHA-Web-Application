@@ -1,19 +1,19 @@
-import Vue, { createApp } from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import axios, { AxiosInstance } from "axios";
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Equal from "equal-vue";
 import 'equal-vue/dist/style.css';
-import "bootstrap/dist/css/bootstrap.css";
-import 'bootstrap-vue/dist/bootstrap-vue.css';
+
 
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
   }
 }
-
 const app = createApp(App);
 app.config.globalProperties.$store = store;
 app.provide("$store", store);
