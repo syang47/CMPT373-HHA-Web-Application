@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script>
+<script lang="ts" type="text/typescript">
 // https://www.bezkoder.com/vue-3-authentication-jwt/
 
 import { Form, Field, ErrorMessage } from "vee-validate";
