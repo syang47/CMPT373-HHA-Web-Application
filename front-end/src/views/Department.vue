@@ -1,7 +1,8 @@
 <template>
   <div class="container-fluid"> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
+    
     <div class="container">
+    <h1 class="display-2 text-center text-dark">Department</h1> 
         <div class="row">
             <div class="col">
               <div class="row-6 rounded-left">
@@ -10,7 +11,7 @@
                     <h2 class="card-title w-70">Case Study</h2>
                     <h4 class="card-text">Due Date:...</h4>
                     <button class="btn" @click="goToCaseStudy">
-                      <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
+                      <img src="../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
                   </div>
                 </div>
@@ -21,7 +22,7 @@
                     <h2 class="card-title w-40">Data Input</h2>
                     <h4 class="card-text">Due Date:...</h4>    
                     <button class="btn" @click="goToDataInput">
-                      <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
+                      <img src="../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
                   </div>
                 </div>
@@ -42,7 +43,7 @@
             <div class="card-body">
               <h2 class="card-title">Biomechanic Support</h2>
               <button class="btn" @click="gotoBiomech">
-                <img src="../../assets/add_button.png"  class="rounded-circle" alt="">
+                <img src="../assets/add_button.png"  class="rounded-circle" alt="">
               </button>
             </div>
           </div>      
@@ -68,16 +69,16 @@
 <script lang="ts" type="text/typescript">
 import { Vue } from "vue-class-component";
 
-export default class NICU_PAED extends Vue {
+export default class Department extends Vue {
   goToDataInput(): void {
-    this.$router.push('/nicu_paed/inputdata');
+    this.$router.push('/datainput');
   };
-  // goToCaseStudy(): void {
-  //   this.$router.push('/casestudy');
-  // };
-  // gotoBiomech(): void {
-  //   this.$router.push('/biomech');
-  // }
+  goToCaseStudy(): void {
+    this.$router.push('/casestudy');
+  };
+  gotoBiomech(): void {
+    this.$router.push('/biomech');
+  }
 }
 </script>
 

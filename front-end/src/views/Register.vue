@@ -1,38 +1,38 @@
 <template>
-    <div>
-        <Form class="background" @submit="handleRegister" :validation-schema="schema">
-            
-            <div class="signup-form text-monospace">
-                <div class="text-center">
-                    <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
-                    <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+    
+    <Form class="background" @submit="handleRegister" :validation-schema="userSchema">
+        
+        <div class="signup-form text-monospace">
+            <div class="text-center">
+                <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+            </div>
+            <div v-if="!successful">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <Field name="username" type="text" class="form-control" />
+                    <ErrorMessage name="username" class="error-feedback" />
                 </div>
-                <div v-if="!successful">
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <Field name="username" type="text" class="form-control" />
-                        <ErrorMessage name="username" class="error-feedback" />
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <Field name="password" type="password" class="form-control" />
-                        <ErrorMessage name="password" class="error-feedback" />
-                    </div>
-                    <div class="form-group">
-                        <label for="role">Role</label>
-                        <Field name="role" type="text" class="form-control" />
-                        <ErrorMessage name="role" class="error-feedback" />
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-outline-light btn-block" :disabled="loading">
-                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                            Sign Up
-                        </button>
-                    </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <Field name="password" type="password" class="form-control" />
+                    <ErrorMessage name="password" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <Field name="role" type="text" class="form-control" />
+                    <ErrorMessage name="role" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-light btn-block" :disabled="loading">
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                        Sign Up
+                    </button>
                 </div>
             </div>
-        </Form>
+        </div>
+    </Form>
 
         <div
         v-if="message"
@@ -44,14 +44,12 @@
     </div>
 </template>
 
-
-<script>
-// TODO: need to switch the language to ts
-// https://www.bezkoder.com/vue-3-authentication-jwt/
-
+<script lang="ts" type="text/typescript">
+import { Vue } from "vue-class-component";
+import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-export default {
+export default defineComponent({
     name: "Register",
     components: {
         Form,
@@ -59,7 +57,7 @@ export default {
         ErrorMessage,
     },
     data() {
-        const schema = yup.object().shape({
+        const userSchema = yup.object().shape({
             username: yup
                 .string()
                 .required("Username is required!")
@@ -67,7 +65,9 @@ export default {
                 .max(20, "Must be maximum 20 characters!"),
             role: yup
                 .string()
-                .required("role is required!"),
+                .required("role is required!")
+                .lowercase()
+                .notOneOf(['admin']),
             password: yup
                 .string()
                 .required("Password is required!")
@@ -79,22 +79,9 @@ export default {
             successful: false,
             loading: false,
             message: "",
-            schema,
+            userSchema,
         };
-    },
-    computed: {
-        loggedIn() {
-            console.log("user logged in?");
-            console.log(this.$store.state.auth.status.loggedIn);
-            return this.$store.state.auth.status.loggedIn;
-        },
-    },
-    mounted() {
-        if (this.loggedIn == true) {
-            this.$router.push("/");
-        } else {
-            this.$router.push("/register");
-        }
+
     },
     methods: {
         handleRegister(user) {
@@ -118,13 +105,16 @@ export default {
                         error.message || error.toString();
                     this.successful = false;
                     this.loading = false;
-                    console.log("registration failed: " + this.successful);
+                    console.log("registration:" + this.successful);
                     console.log(user);
                 }
             );
         },
-    },
-};
+
+    }
+
+
+});
 </script>
 
 <style scoped>
