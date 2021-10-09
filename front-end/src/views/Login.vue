@@ -1,14 +1,15 @@
 <style>
     .background {
-        background: url('../assets/Isaac CBR Manager.jpeg') no-repeat;
+        background-image: url("../assets/IsaacCBRManager.jpeg");
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
-        background-size:100% 100%;
         position: fixed;
         /* background-size: 100% 100%; */
         height: 100%;
         position: fixed;
-        width: 100%;    
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:cover;
     } 
     *{
         margin: 0;
@@ -88,31 +89,32 @@
 
 <template>
     <div class="background">
-    </div>
-    <div class="page">
-        <div class="box">
-            <h2>Login</h2>
-            <div class="item">
-                <input v-model="username" type="text" required>
-                <label for="">UserName</label>
-            </div>
-            <div class="item">
-                <input v-model="password" type="password" required>
-                <label for="">PassWord</label>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <button class="btn btn-light" @click="login">submit
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </button>
-                    &nbsp;&nbsp;&nbsp;
+        
+        <div class="page">
+            <div class="box">
+                <h2>Login</h2>
+                <div class="item">
+                    <input v-model="username" type="text" required>
+                    <label for="">UserName</label>
                 </div>
-                <div class="col">
-                    <button class="btn btn-secondary" @click="goToRegister">Register
-                    </button>
+                <div class="item">
+                    <input v-model="password" type="password" required>
+                    <label for="">PassWord</label>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <button class="btn btn-light" @click="login">submit
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                        &nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary" @click="goToRegister">Register
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
