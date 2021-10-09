@@ -1,45 +1,46 @@
 <template>
-    
-    <Form class="background" @submit="handleRegister" :validation-schema="schema">
-        
-        <div class="signup-form text-monospace">
-            <div class="text-center">
-                <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+    <div>
+        <Form class="background" @submit="handleRegister" :validation-schema="schema">
+            
+            <div class="signup-form text-monospace">
+                <div class="text-center">
+                    <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
+                    <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+                </div>
+                <div v-if="!successful">
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <Field name="username" type="text" class="form-control" />
+                        <ErrorMessage name="username" class="error-feedback" />
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <Field name="password" type="password" class="form-control" />
+                        <ErrorMessage name="password" class="error-feedback" />
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <Field name="role" type="text" class="form-control" />
+                        <ErrorMessage name="role" class="error-feedback" />
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-outline-light btn-block" :disabled="loading">
+                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div v-if="!successful">
-                <div class="form-group">
-                    <label for="username">Username</label>
-                    <Field name="username" type="text" class="form-control" />
-                    <ErrorMessage name="username" class="error-feedback" />
-                </div>
-                
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <Field name="password" type="password" class="form-control" />
-                    <ErrorMessage name="password" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <Field name="role" type="text" class="form-control" />
-                    <ErrorMessage name="role" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-outline-light btn-block" :disabled="loading">
-                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Sign Up
-                    </button>
-                </div>
-            </div>
-        </div>
-    </Form>
+        </Form>
 
-    <div
-    v-if="message"
-    class="alert alert-danger"
-    :class="successful ? 'alert-success' : 'alert-danger'"
-    >
-        {{ message }}
+        <div
+        v-if="message"
+        class="alert alert-danger"
+        :class="successful ? 'alert-success' : 'alert-danger'"
+        >
+            {{ message }}
+        </div>
     </div>
 </template>
 

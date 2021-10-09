@@ -1,6 +1,5 @@
 import VueRouter, { Route } from 'vue-router'
 import { ComponentCustomProperties } from 'vue'
-import { Store } from '@/store';// path to store file
 import Vue, {VNode} from "vue"
 
 declare global {
@@ -23,17 +22,5 @@ declare module "*.vue"{
 declare module 'vue/types/vue' {
   interface Vue {
     $router: VueRouter
-  }
-}
-
-declare module '@vue/runtime-core' {
-  // declare your own store states
-  interface State {
-    count: number
-  }
-
-  // provide typings for `this.$store`
-  interface ComponentCustomProperties {
-    $store: Store
   }
 }
