@@ -89,7 +89,7 @@
 
 <template>
     <div class="background">
-        
+
         <div class="page">
             <div class="box">
                 <h2>Login</h2>
@@ -132,6 +132,12 @@
             let tempThis = this;
             if(tempThis.$store.state.auth.status.loggedIn) {
                 tempThis.$router.push('/');
+            } else {
+                document.onkeydown = function (e) {
+                    if(e.key == 'Enter'){
+                        tempThis.login();
+                    }
+                }
             }
         };
 

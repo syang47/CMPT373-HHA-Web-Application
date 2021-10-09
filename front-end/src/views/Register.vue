@@ -34,12 +34,13 @@
         </div>
     </Form>
 
-    <div
-    v-if="message"
-    class="alert alert-danger"
-    :class="successful ? 'alert-success' : 'alert-danger'"
-    >
-        {{ message }}
+        <div
+        v-if="message"
+        class="alert alert-danger"
+        :class="successful ? 'alert-success' : 'alert-danger'"
+        >
+            {{ message }}
+        </div>
     </div>
 </template>
 
@@ -73,6 +74,7 @@ export default defineComponent({
                 .min(6, "Must be at least 6 characters!")
                 .max(40, "Must be maximum 40 characters!"),
         });
+
         return {
             successful: false,
             loading: false,

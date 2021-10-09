@@ -12,7 +12,6 @@
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/department" class="nav-link">Department</router-link>
             <router-link to="/nicu_paed" class="nav-link">NICU / PAED</router-link>
             <router-link to="/maternity" class="nav-link">Maternity</router-link>
             <router-link to="/rehab" class="nav-link">Rehab</router-link>
