@@ -25,7 +25,7 @@ public class HHAUserDetailsService implements UserDetailsService {
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
 
         User admin = new User();
         admin.setId(1);
@@ -42,13 +42,13 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.save(randomUser);
 
         User user = userRepository.findByUsername(username);
-
+        System.out.println(user);
         List<SimpleGrantedAuthority> roles;
         if(user != null) {
             roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
         }
-        throw new UsernameNotFoundException(username + " not found.");
+        return null;
     }
 
     public User save(UserDTO user) {

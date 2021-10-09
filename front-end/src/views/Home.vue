@@ -110,8 +110,10 @@
     }
 
     .rectangle-sky-blue-buttons {
-      width: 590px;
-      height: 95px;
+      width: 550px;
+      height: 85px;
+      /* width: 590px;
+      height: 95px; */
       padding: 2px 2px 2px 2px;
       border-radius: 10px;
       border: 1px solid #797979;
@@ -167,11 +169,11 @@
       /* width: 550px; */
       /* height: 85px; */
       padding: 2px 2px 2px 2px;
-      border-radius: 10px;
+      /* border-radius: 10px;
       border: 1px solid #797979;
       background-color: #008eaa;
       box-sizing: border-box;
-      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35); */
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -229,29 +231,20 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
+export default class Home extends Vue {
 
-export default class Home extends Vue{
-
-    mounted() {
-        let tempThis = this;
-        if(!tempThis.$store.state.auth.status.loggedIn) {
-            tempThis.$router.push('/login');
-        }
-    };
-    goToNICUPAED(): void {
-        this.$router.push('/nicu_paed');
-    };
-    goToMaternity(): void {
-        this.$router.push('/maternity');
-    };
-    goToRehab(): void {
-        this.$router.push('/rehab');
-    };
-    goToCommunityHealth(): void {
-        this.$router.push('/communityhealth');
-    };
-
-
+  goToNICUPAED() {
+      this.$router.push('/nicu_paed');
+  };
+  goToMaternity() {
+      this.$router.push('/maternity');
+  };
+  goToRehab() {
+      this.$router.push('/rehab');
+  };
+  goToCommunityHealth() {
+      this.$router.push('/communityhealth');
+  };
 }
 </script>
 

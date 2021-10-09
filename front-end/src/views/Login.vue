@@ -1,6 +1,6 @@
 <style>
     .background {
-        background-image: url("../assets/IsaacCBRManager.jpeg");
+        background: url('../assets/IsaacCBRManager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
         position: fixed;
@@ -9,7 +9,7 @@
         position: fixed;
         background-position: center;
         background-repeat: no-repeat;
-        background-size:cover;  
+        background-size:cover;
     } 
     *{
         margin: 0;
@@ -88,9 +88,8 @@
 </style>
 
 <template>
-    <div>
-        <div class="background">
-        </div>
+    <div class="background">
+
         <div class="page">
             <div class="box">
                 <h2>Login</h2>
@@ -122,7 +121,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" type="text/typescript">
     import { Vue } from "vue-class-component";
 
     export default class Login extends Vue {

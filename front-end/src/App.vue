@@ -2,7 +2,7 @@
    <div class="container-fluid sticky-top "> 
     
     <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <router-link to="/home" class="navbar-brand active">
+      <router-link to="/" class="navbar-brand active">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
       <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
@@ -34,8 +34,7 @@
         <div class="text-end">
           <button class="btn btn-light" @click="loginOrLogout">Log In/Log Out
           </button>
-          <button type="button" class="btn btn-light">
-            <router-link to="/register" class="nav-link active bg-light text-dark">Register</router-link>
+          <button class="btn btn-light" @click="goToRegister">Register
           </button>
         </div>
 
@@ -56,5 +55,10 @@ export default class App extends Vue{
         }
         tempThis.$router.push('/login');
     }
+
+    goToRegister(): void {
+        let tempThis = this;
+        tempThis.$router.push('/register');
+    };
 };
 </script>

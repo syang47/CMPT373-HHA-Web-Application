@@ -8,6 +8,7 @@ import hha.website.config.JwtUtil;
 import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Role;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -17,6 +18,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Locale;
 
 @RestController
 @CrossOrigin
@@ -65,7 +68,17 @@ public class MainController {
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
-        return ResponseEntity.ok(userDetailsService.save(user));
+        final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
+        if(user.getRole().trim().toLowerCase().contains("admin")){
+            System.out.println("Cannot make admin account");
+            return ResponseEntity.badRequest().body("Cannot make admin account");
+        } else if(userDetails != null){
+            System.out.println("User already exists.");
+            return ResponseEntity.badRequest().body("User already exists.");
+        } else {
+            System.out.println("user registered: " +  user.getUsername() + user.getPassword() + user.getRole());
+            return ResponseEntity.ok(userDetailsService.save(user));
+        }
     }
 
     /*
