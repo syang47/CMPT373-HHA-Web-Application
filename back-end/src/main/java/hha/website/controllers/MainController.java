@@ -5,7 +5,7 @@ import hha.website.AuthenticationResponse;
 import hha.website.HHAUserDetailsService;
 import hha.website.UserRepository;
 import hha.website.config.JwtUtil;
-import hha.website.models.UserDTO;
+import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
@@ -91,4 +91,13 @@ public class MainController {
     public String userAccess() {
         return "Admin Content.";
     }
+
+
+
+    // for front-end test; remove later
+//    @RequestMapping(value = "/api/nicu_paed/inputdata", method = RequestMethod.POST)
+//    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirement newItem) {
+//        System.out.println(newItem.bedsAvailable);
+//        return ResponseEntity.ok(0);
+//    }
 }
