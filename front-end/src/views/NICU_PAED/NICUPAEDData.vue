@@ -49,7 +49,7 @@
                     <label class="control-label">Admissions</label>
 					<input v-model="msppRequirement.admissions" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 					<br>
-                    
+
 					<!-- <label class="control-label">Test for letter and number</label>
                     <input class="form-control" onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')"> <br> -->
                     <button class="btn btn-primary" @click="submitData">Submit</button>
@@ -81,24 +81,32 @@
 
 
         submitData(): void {
-            this.$router.push("/nicu_paed");
-            // TODO: need an interface from back-end
-            // let tempThis = this;
-            // tempThis.$axios.post("/nicu_paed/inputdata", tempThis.msppRequirement)
-            // .then(response => {
-            //     console.log(response);
-            //     let data = response.data;
-            //     tempThis.$router.push("/nicu_paed");
-            //     if (data.code == 200) {
-            //         // TODO: Add a dialog to let the user know data submits successfully
-            //         setTimeout(() => {
-            //             tempThis.$router.push("/nicu_paed");
-            //         }, 3000)
-            //     } 
-            // })
-            // .catch((failResponse: any) => {
-            //     console.log(failResponse);
-            // })
+            //this.$router.push("/nicu_paed");
+            //TODO: need an interface from back-end
+            let tempThis = this;
+            let token = JSON.parse(localStorage.getItem('user')!);
+            if(token != null && token.username.includes("admin") ) {
+                tempThis.$axios.post("/api/datainput", tempThis.msppRequirement, {
+                    headers: {
+                        'Authorization': `Bearer ${token.jwt}`
+                    }
+                })
+                 .then(response => {
+                     console.log(response);
+                     let data = response.data;
+                     tempThis.$router.push("/nicu_paed");
+                     /*
+                     if (data.code == 200) {
+                         // TODO: Add a dialog to let the user know data submits successfully
+                         setTimeout(() => {
+                             //tempThis.$router.push("/nicu_paed");
+                         }, 3000)
+                     }*/
+                 })
+                 .catch((failResponse: any) => {
+                     console.log(failResponse);
+                 })
+            }
         };
     }   
 </script>

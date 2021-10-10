@@ -1,4 +1,4 @@
-package hha.website;
+package hha.website.auth;
 
 public class AuthenticationResponse {
     private final String jwt;

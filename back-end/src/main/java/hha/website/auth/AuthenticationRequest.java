@@ -1,4 +1,4 @@
-package hha.website;
+package hha.website.auth;
 
 public class AuthenticationRequest {
 

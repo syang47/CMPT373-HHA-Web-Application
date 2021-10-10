@@ -1,22 +1,12 @@
 package hha.website.models;
 
+import javax.persistence.Column;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name="MSPPData")
-public class MSPPRequirement {
-    @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private Integer id;
+public class MSPPRequirementDTO {
     /*
-    @Column
     private String department;
-    @Column
     private String firstName;
-    @Column
     private String lastName;
-
     public String getDepartment() {
         return department;
     }
@@ -41,42 +31,20 @@ public class MSPPRequirement {
         this.lastName = lastName;
     }
      */
-    @Column
-    private Integer bedsAvailable;
-    @Column
+
     private Integer bedDays;
-    @Column
     private Integer patientDays;
-    @Column
     private Integer hospitalized;
-    @Column
     private Integer dischargedAlive;
-    @Column
     private Integer diedBefore48h;
-    @Column
     private Integer diedAfter48h;
-    @Column
     private Integer daysHospitalised;
-    @Column
     private Integer referrals;
-    @Column
     private Integer transfers;
-    @Column
     private Integer selfDischarged;
-
-    @Column
     private Integer stayedInTheWard;
-    @Column
     private Integer admissions;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
+    private Integer bedsAvailable;
 
     public Integer getBedsAvailable() {
         return bedsAvailable;

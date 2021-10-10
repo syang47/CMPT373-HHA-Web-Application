@@ -1,4 +1,4 @@
-package hha.website.config;
+package hha.website.auth;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

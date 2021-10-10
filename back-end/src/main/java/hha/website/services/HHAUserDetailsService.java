@@ -1,5 +1,6 @@
-package hha.website;
+package hha.website.services;
 
+import hha.website.UserRepository;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
