@@ -11,11 +11,6 @@ or if you want to run back end and front end separately:
 hard-coded users:
 
 1. admin with username: *admin* and password: *admin* with role *ROLE_ADMIN*
-2. admin with username: *user* and password: *user* with role *ROLE_USER*
-
-There are two endpoints only registered users can see: **localhost:8080/admin** and **localhost:8080/user**
-
-For testing purposes, admin can access these two endpoints, but user cannot access /admin endpoint.
 
 If you want to register new users, use terminal (or postman) until we have register page:
 
@@ -33,7 +28,6 @@ e.g.
 
     curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/api/user
 
-This should return a data in response object saying "User Content."
 
 Currently uses in-memory authentication, but need to switch to external database (MySQL, MS-SQL) once we get VM working.
 
