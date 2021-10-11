@@ -10,42 +10,6 @@ public class MSPPRequirement {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
 
-    public MSPPRequirement(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    @Column
-    private String department;
-    @Column
-    private String firstName;
-    @Column
-    private String lastName;
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     @Column
     private Integer bedsAvailable;
     @Column

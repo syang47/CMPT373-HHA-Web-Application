@@ -1,7 +1,4 @@
 export class MSPPRequirement {
-    department = "";
-    firstName = "";
-    lastName = "";
     bedsAvailable = 0;
     bedDays = 0;
     patientDays = 0;

@@ -1,7 +1,6 @@
 <template>
     
     <Form class="background" @submit="handleRegister" :validation-schema="userSchema">
-        
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <img class="mb-4" src="@/assets/logo.png" width="300" alt="">

@@ -4,33 +4,6 @@ import javax.persistence.Column;
 
 public class MSPPRequirementDTO {
 
-    private String department;
-    private String firstName;
-    private String lastName;
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
     private Integer bedDays;
     private Integer patientDays;
     private Integer hospitalized;

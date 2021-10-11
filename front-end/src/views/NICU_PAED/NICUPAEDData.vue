@@ -1,118 +1,202 @@
-<style>
-    .col-md-6{padding-left: 0;}
-    .col-md-12 .col-md-6 input{width: 100%;}
-</style>
-
 <template>
-    <div>
-        <div class="container">
-			<div class="row">
-				<form class="col">
-                    <!-- TODO: need to fix: can't display the h1 text -->
-					<h1>NICUPaeds data input</h1>
-					<label class="control-label">First Name</label>
-                    <input v-model="msppRequirement.firstName" class="form-control">
-					<label class="control-label">Last Name</label>
-                    <input v-model="msppRequirement.lastName" class="form-control">
-                    <br>
-					<label class="control-label">Beds available</label>
-					<input v-model="msppRequirement.bedsAvailable" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Bed days</label>
-					<input v-model="msppRequirement.bedDays" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Patient days</label>
-					<input v-model="msppRequirement.patientDays" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Hospitalized</label>
-					<input v-model="msppRequirement.hospitalized" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Discharged alive</label>
-					<input v-model="msppRequirement.dischargedAlive" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Died before 48h</label>
-					<input v-model="msppRequirement.diedBefore48h" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Died after 48h</label>
-					<input v-model="msppRequirement.diedAfter48h" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Days hospitalised</label>
-					<input v-model="msppRequirement.daysHospitalised" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Referrals</label>
-					<input v-model="msppRequirement.referrals" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Transfers</label>
-					<input v-model="msppRequirement.transfers" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Self-discharged</label>
-					<input v-model="msppRequirement.selfDischarged" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Stayed in the ward</label>
-					<input v-model="msppRequirement.stayedInTheWard" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
-                    <label class="control-label">Admissions</label>
-					<input v-model="msppRequirement.admissions" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
-					<br>
 
-					<!-- <label class="control-label">Test for letter and number</label>
-                    <input class="form-control" onKeyUp="value=value.replace(/[^\w\.\/]/ig,'')"> <br> -->
-                    <button class="btn btn-primary" @click="submitData">Submit</button>
-                </form>
-			</div>
-		</div>
-        <div style="text-align:center;"></div>
+    <Form class="background" @submit="handleData" :validation-schema="dataSchema">
+        <div class="signup-form text-monospace">
+            <div class="text-center">
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
+            </div>
+            <div v-if="!successful">
+                <div class="form-group">
+                    <label for="bedAvailable">Beds Available</label>
+                    <Field name="bedAvailable" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="bedAvailable" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="bedDays">Bed Days</label>
+                    <Field name="bedDays" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="bedDays" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="patientDays">Patient Days</label>
+                    <Field name="patientDays" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="patientDays" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="hospitalized">Hospitalized</label>
+                    <Field name="hospitalized" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="hospitalized" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="dischargedAlive">Discharged Alive</label>
+                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="dischargedAlive" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="diedBefore48h">Died Before 48h</label>
+                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="diedBefore48h" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="diedAfter48h">Died After 48h</label>
+                    <Field name="diedAfter48h" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="diedAfter48h" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="daysHospitalised">Days Hospitalised</label>
+                    <Field name="daysHospitalised" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="daysHospitalised" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="referrals">Referrals</label>
+                    <Field name="referrals" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="referrals" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="transfers">Transfers</label>
+                    <Field name="transfers" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="transfers" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="selfDischarged">Self Discharged</label>
+                    <Field name="selfDischarged" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="selfDischarged" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="stayedInTheWard">Stayed In The Ward</label>
+                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="stayedInTheWard" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <label for="admissions">Admissions</label>
+                    <Field name="admissions" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="admissions" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-light btn-block" :disabled="loading">
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                        Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </Form>
+    <div
+    v-if="message"
+    class="alert alert-danger"
+    :class="successful ? 'alert-success' : 'alert-danger'"
+    >
+        {{ message }}
     </div>
 </template>
 
-<script lang="ts">
-    import { Vue } from "vue-class-component";
-    import { MSPPRequirement } from "../../models/MSPPRequirement"
-    
-    export default class InputData extends Vue {
-        msppRequirement: MSPPRequirement = new MSPPRequirement();
-        $axios: any;
-        $router: any;
-
-        mounted() {
-            let tempThis = this;
-            document.onkeydown = function (e) {
-                if(e.key == 'Enter'){
-                    // tempThis.$router.push("/nicu_paed");
-                    tempThis.submitData();
-                }
-            }
+<script lang="ts" type="text/typescript">
+import { Vue } from "vue-class-component";
+import { defineComponent } from 'vue'
+import { Form, Field, ErrorMessage } from "vee-validate";
+import * as yup from "yup";
+export default defineComponent({
+    name: "MSPP",
+    components: {
+        Form,
+        Field,
+        ErrorMessage,
+    },
+    data() {
+        const dataSchema = yup.object().shape({
+            bedsAvailable: yup
+                .number(),
+                //.min(0, "Cannot be negative.")
+                //.required("Required."),
+            bedDays: yup
+                .number(),
+            patientDays: yup
+                .number(),
+            hospitalized: yup
+                .number(),
+            dischargedAlive: yup
+                .number(),
+            diedBefore48h: yup
+                .number(),
+            diedAfter48h: yup
+                .number(),
+            daysHospitalized: yup
+                .number(),
+            referrals: yup
+                .number(),
+            transfers: yup
+                .number(),
+            selfDischarged: yup
+                .number(),
+            stayedInTheWard: yup
+                .number(),
+            admissions: yup
+                .number(),
+        });
+        return {
+            successful: false,
+            loading: false,
+            message: "",
+            dataSchema,
         };
-
-
-        submitData(): void {
-            //this.$router.push("/nicu_paed");
-            //TODO: need an interface from back-end
-            let tempThis = this;
+    },
+    methods: {
+        handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
-            tempThis.msppRequirement.department = "NICU";
             if(token != null && token.username.includes("admin") ) {
-                tempThis.$axios.post("/api/datainput", tempThis.msppRequirement, {
+                this.$axios.post("/api/datainput", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`
                     }
-                })
-                 .then(response => {
-                     console.log(response);
-                     let data = response.data;
-                     tempThis.$router.push("/nicu_paed");
-                     /*
-                     if (data.code == 200) {
-                         // TODO: Add a dialog to let the user know data submits successfully
-                         setTimeout(() => {
-                             //tempThis.$router.push("/nicu_paed");
-                         }, 3000)
-                     }*/
-                 })
-                 .catch((failResponse: any) => {
-                     console.log(failResponse);
-                 })
+                }).then(response => {
+                        this.message = "test";
+                        this.successful = true;
+                        this.loading = false;
+                        console.log("entry successful: " + this.successful);
+                        this.$router.push('/');
+                    }
+                ).catch((error: any) => {
+                      this.message =
+                          (error.response &&
+                          error.response.data &&
+                          error.response.data.message) ||
+                          error.message;
+                      this.successful = false;
+                      this.loading = false;
+                });
             }
-        };
-    }   
+        },
+
+    }
+});
 </script>
+
+<style>
+    .background {
+        height: 100%;
+        position: relative;
+        width: 100%;
+        overflow: auto;
+    }
+    .form-control{
+        height: 40px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .form-control:focus{
+        border-color: #5cb85c;
+    }
+    .signup-form{
+        width: 400px;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+    .signup-form h2{
+        color: #636363;
+        margin: 0 0 15px;
+        position: realtive;
+        text-align: center;
+    }
+    .signup-form .form-group{
+        margin-bottm: 20px;
+    }
+</style>

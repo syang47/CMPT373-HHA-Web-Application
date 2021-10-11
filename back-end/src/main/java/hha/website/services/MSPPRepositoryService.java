@@ -15,10 +15,7 @@ public class MSPPRepositoryService {
     private MSPPRepository msppRepository;
 
     public MSPPRequirement save(MSPPRequirementDTO mspp) {
-        MSPPRequirement entry = new MSPPRequirement(mspp.getFirstName(), mspp.getLastName());
-        entry.setDepartment(mspp.getDepartment());
-        entry.setFirstName(mspp.getFirstName());
-        entry.setLastName(mspp.getLastName());
+        MSPPRequirement entry = new MSPPRequirement();
         entry.setBedDays(mspp.getBedDays());
         entry.setPatientDays(mspp.getPatientDays());
         entry.setHospitalized(mspp.getHospitalized());
