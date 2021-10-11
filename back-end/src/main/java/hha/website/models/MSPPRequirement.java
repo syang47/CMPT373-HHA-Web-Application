@@ -9,7 +9,8 @@ public class MSPPRequirement {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-
+    @Column
+    private String department;
     @Column
     private Integer bedsAvailable;
     @Column
@@ -38,6 +39,14 @@ public class MSPPRequirement {
     @Column
     private Integer admissions;
 
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -45,7 +54,6 @@ public class MSPPRequirement {
     public void setId(Integer id) {
         this.id = id;
     }
-
 
     public Integer getBedsAvailable() {
         return bedsAvailable;

@@ -9,8 +9,6 @@ class AuthService {
             username: user.username,
             password: user.password
         }).then(response => {
-            console.log(response);
-            const data = response.data;
             localStorage.setItem('user', JSON.stringify(response.data));
             return response.data;
         }).catch((failResponse: any) => {

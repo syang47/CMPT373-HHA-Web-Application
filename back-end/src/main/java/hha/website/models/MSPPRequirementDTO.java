@@ -4,6 +4,7 @@ import javax.persistence.Column;
 
 public class MSPPRequirementDTO {
 
+    private String department;
     private Integer bedDays;
     private Integer patientDays;
     private Integer hospitalized;
@@ -17,6 +18,14 @@ public class MSPPRequirementDTO {
     private Integer stayedInTheWard;
     private Integer admissions;
     private Integer bedsAvailable;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public Integer getBedsAvailable() {
         return bedsAvailable;

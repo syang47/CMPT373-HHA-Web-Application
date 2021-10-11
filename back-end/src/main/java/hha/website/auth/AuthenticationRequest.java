@@ -1,11 +1,8 @@
 package hha.website.auth;
 
 public class AuthenticationRequest {
-
-
     private String username;
     private String password;
-
 
     public AuthenticationRequest(String username, String password) {
         this.username = username;
@@ -27,5 +24,4 @@ public class AuthenticationRequest {
     public void setPassword(String password) {
         this.password = password;
     }
-
 }

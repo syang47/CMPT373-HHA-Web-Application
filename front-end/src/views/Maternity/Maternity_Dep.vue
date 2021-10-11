@@ -70,9 +70,9 @@
 import { Vue } from "vue-class-component";
 
 export default class Maternity extends Vue {
-  // goToDataInput(): void {
-  //   this.$router.push('/datainput');
-  // };
+    goToDataInput(): void {
+        this.$router.push('/inputdata');
+    };
   // goToCaseStudy(): void {
   //   this.$router.push('/casestudy');
   // };

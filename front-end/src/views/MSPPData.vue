@@ -7,9 +7,9 @@
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="bedAvailable">Beds Available</label>
-                    <Field name="bedAvailable" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="bedAvailable" class="error-feedback" />
+                    <label for="bedsAvailable">Beds Available</label>
+                    <Field name="bedsAvailable" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="bedDays">Bed Days</label>
@@ -104,33 +104,70 @@ export default defineComponent({
     data() {
         const dataSchema = yup.object().shape({
             bedsAvailable: yup
-                .number(),
-                //.min(0, "Cannot be negative.")
-                //.required("Required."),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             bedDays: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             patientDays: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             hospitalized: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             dischargedAlive: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             diedBefore48h: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             diedAfter48h: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             daysHospitalized: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             referrals: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             transfers: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             selfDischarged: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             stayedInTheWard: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             admissions: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
         });
         return {
             successful: false,
@@ -142,7 +179,8 @@ export default defineComponent({
     methods: {
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
-            if(token != null && token.username.includes("admin") ) {
+            if(token != null) {
+                entry.department = token.roles[0].authority;
                 this.$axios.post("/api/datainput", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`
@@ -151,8 +189,12 @@ export default defineComponent({
                         this.message = "test";
                         this.successful = true;
                         this.loading = false;
-                        console.log("entry successful: " + this.successful);
-                        this.$router.push('/');
+                        if(response != null) {
+                            console.log("entry successful: " + this.successful);
+                            this.$router.push("/");
+                        } else {
+                            alert("entry could not be submitted");
+                        }
                     }
                 ).catch((error: any) => {
                       this.message =
@@ -162,6 +204,7 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
+                      alert("entry could not be submitted");
                 });
             }
         },

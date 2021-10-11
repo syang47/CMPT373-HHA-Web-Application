@@ -16,6 +16,7 @@ public class MSPPRepositoryService {
 
     public MSPPRequirement save(MSPPRequirementDTO mspp) {
         MSPPRequirement entry = new MSPPRequirement();
+        entry.setDepartment(mspp.getDepartment());
         entry.setBedDays(mspp.getBedDays());
         entry.setPatientDays(mspp.getPatientDays());
         entry.setHospitalized(mspp.getHospitalized());
@@ -29,6 +30,7 @@ public class MSPPRepositoryService {
         entry.setStayedInTheWard(mspp.getStayedInTheWard());
         entry.setAdmissions(mspp.getAdmissions());
         entry.setBedsAvailable(mspp.getBedsAvailable());
+        System.out.println("entry saved");
         return msppRepository.save(entry);
     }
 }
