@@ -1,6 +1,7 @@
 <template>
     
     <Form class="background" @submit="handleRegister" :validation-schema="userSchema">
+    <div class="box">
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
@@ -30,6 +31,7 @@
                     </button>
                 </div>
             </div>
+        </div>
         </div>
     </Form>
 
@@ -120,13 +122,22 @@ export default defineComponent({
         background: url('../assets/project_photos/register_bg.jpg');
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
-        background-size:100% 100%;
         position: fixed;
         /* background-size: 100% 100%; */
         height: 100%;
-        position: fixed;
-        width: 100%;    
-    } 
+        position: relative;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size:cover;
+    }
+    .box {
+        width: 100%;
+        height: 100%;
+        background: #00000060;
+        position: relative;
+        box-sizing: border-box;
+        padding: 40px;
+    }
     .form-control{
         height: 40px;
         box-shadow: none;
@@ -139,11 +150,13 @@ export default defineComponent({
         width: 400px;
         margin: 0 auto;
         padding: 30px 0;
+        position: relative;
+        overflow-y: auto;
     }
     .signup-form h2{
         color: #636363;
         margin: 0 0 15px;
-        position: realtive;
+        position: relative;
         text-align: center;
     }
     .signup-form .form-group{

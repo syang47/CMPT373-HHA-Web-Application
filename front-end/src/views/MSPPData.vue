@@ -236,7 +236,7 @@ export default defineComponent({
     .signup-form h2{
         color: #636363;
         margin: 0 0 15px;
-        position: realtive;
+        position: relative;
         text-align: center;
     }
     .signup-form .form-group{
