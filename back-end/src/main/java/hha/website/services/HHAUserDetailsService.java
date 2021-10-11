@@ -1,5 +1,6 @@
-package hha.website;
+package hha.website.services;
 
+import hha.website.UserRepository;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.save(randomUser);
 
         User user = userRepository.findByUsername(username);
-        System.out.println(user);
         List<SimpleGrantedAuthority> roles;
         if(user != null) {
             roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));

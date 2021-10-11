@@ -1,25 +1,19 @@
 package hha.website.controllers;
 
-import hha.website.AuthenticationRequest;
-import hha.website.AuthenticationResponse;
-import hha.website.HHAUserDetailsService;
-import hha.website.UserRepository;
-import hha.website.config.JwtUtil;
+import hha.website.MSPPRepository;
+import hha.website.auth.AuthenticationRequest;
+import hha.website.auth.AuthenticationResponse;
+import hha.website.services.HHAUserDetailsService;
+import hha.website.auth.JwtUtil;
 import hha.website.models.*;
+import hha.website.services.MSPPRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Role;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.Locale;
 
 @RestController
 @CrossOrigin
@@ -37,9 +31,10 @@ public class MainController {
     private HHAUserDetailsService userDetailsService;
 
     @Autowired
-    private JwtUtil jwtToken;
+    private MSPPRepositoryService msppRepositoryService;
 
-    private UserRepository userRepository;
+    @Autowired
+    private JwtUtil jwtToken;
 
     /*
     curl -i -H "Content-Type: application/json" -X POST -d '{"username": "admin","password": "admin"}' localhost:8080/api/login
@@ -57,8 +52,7 @@ public class MainController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
-        System.out.println(jwt);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername()));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername(), userDetails.getAuthorities()));
     }
 
     /*
@@ -76,41 +70,13 @@ public class MainController {
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
-            System.out.println("user registered: " +  user.getUsername() + user.getPassword() + user.getRole());
+            System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole());
             return ResponseEntity.ok(userDetailsService.save(user));
         }
     }
 
-    /*
-    get JWT from logging in with user account at /api/login then use
-    curl -i -H "Authorization: Bearer **INSERT JWT HERE**" -X GET localhost:8080/user
-    e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/user
-     */
-
-    @GetMapping("/api/user")
-    @PreAuthorize("hasRole('USER') or hasRole('ADMIN')")
-    public String allAccess() {
-        return "User Content.";
+    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
+    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
+        return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
-
-    /*
-    get JWT from logging in with admin account at /api/login then use
-    curl -i -H "Authorization: Bearer **INSERT JWT HERE**" -X GET localhost:8080/admin
-    e.g. curl -i -H "Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlzQWRtaW4iOnRydWUsImV4cCI6MTYzMzQwOTIwNywiaWF0IjoxNjMzNDA1NjA3fQ.8dpK_-L6HpkKZrilSED5GjQKXi-px8s35ZAEgBhp_3g" -X GET localhost:8080/admin
-     */
-
-    @GetMapping("/api/admin")
-    @PreAuthorize("hasRole('ADMIN')")
-    public String userAccess() {
-        return "Admin Content.";
-    }
-
-
-
-    // for front-end test; remove later
-//    @RequestMapping(value = "/api/nicu_paed/inputdata", method = RequestMethod.POST)
-//    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirement newItem) {
-//        System.out.println(newItem.bedsAvailable);
-//        return ResponseEntity.ok(0);
-//    }
 }

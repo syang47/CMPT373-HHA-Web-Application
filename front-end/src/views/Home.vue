@@ -229,9 +229,15 @@
   </div>
 </template>
 
-<script lang="ts">
+<script lang="ts" type="text/typescript">
 import { Vue } from "vue-class-component";
 export default class Home extends Vue {
+    mounted() {
+        let tempThis = this;
+        if(!tempThis.$store.state.auth.status.loggedIn) {
+            tempThis.$router.push('/login');
+        }
+    };
 
   goToNICUPAED() {
       this.$router.push('/nicu_paed');
