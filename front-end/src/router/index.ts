@@ -1,12 +1,13 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
 
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
-import MSPPData from "@/views/MSPPData.vue"
+import NICU_PAED_Data from "@/views/NICU_PAED/NICUPAEDData.vue"
 
 import Maternity from "@/views/Maternity/Maternity_Dep.vue";
+import Maternity_Data from "@/views/Maternity/MaternityData.vue";
 
 import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 
@@ -39,9 +40,9 @@ const routes: Array<RouteRecordRaw> = [
     component: NICU_PAED,
   },
   { 
-    path: "/inputdata",
-    name: "inputdata",
-    component: MSPPData,
+    path: "/nicu_paed/inputdata",
+    name: "NICU_PAED_data",
+    component: NICU_PAED_Data,
   },
 
   // Maternity
@@ -50,7 +51,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "Maternity",
     component: Maternity,
   },
-
+  {
+    path: "/maternity/inputdata",
+    name: "Maternity_Data",
+    component: Maternity_Data,
+  },
   // Rehab
   {
     path: "/rehab",
@@ -72,7 +77,7 @@ const routes: Array<RouteRecordRaw> = [
 
 
 const router = createRouter({
-  history: createWebHistory(),
+  history: createWebHashHistory(),
   routes,
 });
 

@@ -70,9 +70,9 @@
 import { Vue } from "vue-class-component";
 
 export default class CommunityHealth extends Vue {
-    goToDataInput(): void {
-        this.$router.push('/inputdata');
-    };
+  // goToDataInput(): void {
+  //   this.$router.push('/datainput');
+  // };
   // goToCaseStudy(): void {
   //   this.$router.push('/casestudy');
   // };

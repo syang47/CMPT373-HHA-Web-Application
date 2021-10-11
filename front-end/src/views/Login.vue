@@ -143,18 +143,11 @@
 
         login(): void {
             let tempThis = this;
-            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( response => {
-                    if(response != null) {
-                        let token = JSON.parse(localStorage.getItem('user')!);
-                        console.log(token.roles[0].authority);
-                        tempThis.$router.push("/");
-                    } else {
-                        alert("invalid credentials");
-                    }
+            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( () => {
+                    tempThis.$router.push("/");
                 },
                 (error) => {
                     console.log(error);
-                    alert("invalid credentials");
                 }
             );
         }
