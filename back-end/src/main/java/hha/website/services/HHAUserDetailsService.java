@@ -43,7 +43,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.save(randomUser);
 
         User user = userRepository.findByUsername(username);
-        System.out.println(user);
         List<SimpleGrantedAuthority> roles;
         if(user != null) {
             roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));

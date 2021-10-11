@@ -3,7 +3,7 @@ package hha.website.models;
 import javax.persistence.Column;
 
 public class MSPPRequirementDTO {
-    /*
+
     private String department;
     private String firstName;
     private String lastName;
@@ -30,7 +30,6 @@ public class MSPPRequirementDTO {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-     */
 
     private Integer bedDays;
     private Integer patientDays;

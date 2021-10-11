@@ -1,5 +1,6 @@
 package hha.website.controllers;
 
+import hha.website.MSPPRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
 import hha.website.services.HHAUserDetailsService;
@@ -51,7 +52,6 @@ public class MainController {
         }
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
-        System.out.println(jwt);
         return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername()));
     }
 
@@ -70,15 +70,13 @@ public class MainController {
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
-            System.out.println("user registered: " +  user.getUsername() + user.getPassword() + user.getRole());
+            System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole());
             return ResponseEntity.ok(userDetailsService.save(user));
         }
     }
 
-
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry) throws Exception {
-        System.out.println("entry registered: " +  entry.getBedDays());
+    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
 }

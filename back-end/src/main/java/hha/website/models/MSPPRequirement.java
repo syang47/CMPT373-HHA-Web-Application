@@ -9,7 +9,12 @@ public class MSPPRequirement {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Integer id;
-    /*
+
+    public MSPPRequirement(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @Column
     private String department;
     @Column
@@ -40,7 +45,7 @@ public class MSPPRequirement {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-     */
+
     @Column
     private Integer bedsAvailable;
     @Column

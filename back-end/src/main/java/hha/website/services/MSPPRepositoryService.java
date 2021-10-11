@@ -6,16 +6,19 @@ import hha.website.models.MSPPRequirementDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
+@Transactional
 public class MSPPRepositoryService {
     @Autowired
     private MSPPRepository msppRepository;
 
     public MSPPRequirement save(MSPPRequirementDTO mspp) {
-        MSPPRequirement entry = new MSPPRequirement();
-        //entry.setDepartment(mspp.getDepartment());
-        //entry.setFirstName(mspp.getFirstName());
-        //entry.setLastName(mspp.getLastName());
+        MSPPRequirement entry = new MSPPRequirement(mspp.getFirstName(), mspp.getLastName());
+        entry.setDepartment(mspp.getDepartment());
+        entry.setFirstName(mspp.getFirstName());
+        entry.setLastName(mspp.getLastName());
         entry.setBedDays(mspp.getBedDays());
         entry.setPatientDays(mspp.getPatientDays());
         entry.setHospitalized(mspp.getHospitalized());

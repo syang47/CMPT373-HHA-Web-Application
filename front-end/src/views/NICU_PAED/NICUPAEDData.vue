@@ -10,6 +10,11 @@
 				<form class="col">
                     <!-- TODO: need to fix: can't display the h1 text -->
 					<h1>NICUPaeds data input</h1>
+					<label class="control-label">First Name</label>
+                    <input v-model="msppRequirement.firstName" class="form-control">
+					<label class="control-label">Last Name</label>
+                    <input v-model="msppRequirement.lastName" class="form-control">
+                    <br>
 					<label class="control-label">Beds available</label>
 					<input v-model="msppRequirement.bedsAvailable" class="form-control" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')">
 					<br>
@@ -85,6 +90,7 @@
             //TODO: need an interface from back-end
             let tempThis = this;
             let token = JSON.parse(localStorage.getItem('user')!);
+            tempThis.msppRequirement.department = "NICU";
             if(token != null && token.username.includes("admin") ) {
                 tempThis.$axios.post("/api/datainput", tempThis.msppRequirement, {
                     headers: {
