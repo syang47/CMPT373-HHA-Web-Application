@@ -282,7 +282,459 @@
                 <Field name="stillborns_non_maceres" type="text" class="form-control" value=0 />
                 <ErrorMessage name="stillborns_non_maceres" class="error-feedback" />
                 </div>
+                <h4 style="color:red; text-align:center">Maternal death in the hospital</h4>
+                <div class="form-group">
+                <label for="in_hospital">In Hospital</label>
+                <Field name="in_hospital" type="text" class="form-control" value=0 />
+                <ErrorMessage name="in_hospital" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="in_community">In the Community</label>
+                <Field name="in_community" type="text" class="form-control" value=0 />
+                <ErrorMessage name="in_community" class="error-feedback" />
+                </div>
+                <h4 style="color:red; text-align:center">Support for Wife and Mother</h4>
+                <table>
+                    <tr>
+                        <th>Period of pregnancy</th>
+                        <th>1st Visit</th>
+                        <th>2nd Visit</th>
+                        <th>3rd Visit</th>
+                        <th>4th Visit</th>
+                        <th>5th plus Visit</th>
+                        <th>Total</th>
+                    </tr>
+                    <tr>
+                        <td> 0-3 Months </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_first_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_first_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_second_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_second_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_third_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_third_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_fourth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_fourth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_fifth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_fifth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="first_quarter_total" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="first_quarter_total" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            4-6 months
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_first_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_first_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_second_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_second_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_third_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_third_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_fourth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_fourth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_fifth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_fifth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="second_quarter_total" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="second_quarter_total" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            7-9 months
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_first_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_first_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_second_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_second_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_third_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_third_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_fourth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_fourth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_fifth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_fifth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="third_quarter_total" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="third_quarter_total" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Total visits
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_first_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_first_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_second_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_second_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_third_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_third_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_fourth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_fourth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_fifth_visit" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_fifth_visit" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="total_total" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="total_total" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <h4 style="color:red; text-align:center">Support for women hospital</h4>
+                <div class="form-group">
+                <label for="pregnancies_at_risk">Number of Pregnancies at Risk</label>
+                <Field name="pregnancies_at_risk" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnancies_at_risk" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="anemia_pregnant">Case of Anemia in Pregnant Women</label>
+                <Field name="anemia_pregnant" type="text" class="form-control" value=0 />
+                <ErrorMessage name="anemia_pregnant" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_iron_folates">Pregnant Women Receiving Iron Folate</label>
+                <Field name="pregnant_iron_folates" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_iron_folates" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_iron_deficiency_anemia">Pregnant Women Being Treated for Iron Deficiency Anemia</label>
+                <Field name="pregnant_iron_deficiency_anemia" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_iron_deficiency_anemia" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_birth_plan">Pregnant Women with a Birth Plan</label>
+                <Field name="pregnant_birth_plan" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_birth_plan" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_malaria_chloroquine">Pregnant Women with Confirmed Malaria treated with Chloroquine</label>
+                <Field name="pregnant_malaria_chloroquine" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_malaria_chloroquine" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_mosquito_net">Pregnant Women Who Received an Impregnated Mosquito Net</label>
+                <Field name="pregnant_mosquito_net" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_mosquito_net" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="pregnant_MUAC">Pregnant women MUAC&#60;210mm</label>
+                <Field name="pregnant_MUAC" type="text" class="form-control" value=0 />
+                <ErrorMessage name="pregnant_MUAC" class="error-feedback" />
+                </div>
 
+                <h4 style="color:red; text-align:center">Other Services</h4>
+                <div class="form-group">
+                <label for="women_iron_folate">Other Women Receiving Iron Folate</label>
+                <Field name="women_iron_folate" type="text" class="form-control" value=0 />
+                <ErrorMessage name="women_iron_folate" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="women_acetic_inspection">Women Receiving Acetic Acid Inspection</label>
+                <Field name="women_acetic_inspection" type="text" class="form-control" value=0 />
+                <ErrorMessage name="women_acetic_inspection" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="women_smear_test">Positive Women After Smear Test</label>
+                <Field name="women_smear_test" type="text" class="form-control" value=0 />
+                <ErrorMessage name="women_smear_test" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="women_smear_take_care">Women Positive Smear Test taken Care of</label>
+                <Field name="women_smear_take_care" type="text" class="form-control" value=0 />
+                <ErrorMessage name="women_smear_take_care" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="women_postabortion">Women Receiving Postabortion Care</label>
+                <Field name="women_postabortion" type="text" class="form-control" value=0 />
+                <ErrorMessage name="women_postabortion" class="error-feedback" />
+                </div>
+                <h4 style="color:red; text-align:center">Deliveries</h4>
+                <table>
+                    <tr>
+                        <th>Age of Mothers</th>
+                        <th>Normal</th>
+                        <th>Césarienne</th>
+                        <th>Instrumentalsé</th>
+                    </tr>
+                    <tr>
+                        <td>
+                            &lt;15 Years
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_less_than_fifteen_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_less_than_fifteen_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_less_than_fifteen_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_less_than_fifteen_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_less_than_fifteen_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_less_than_fifteen_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            15-19 Years
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_fifteen_to_nineteen_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_fifteen_to_nineteen_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_fifteen_to_nineteen_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_fifteen_to_nineteen_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_fifteen_to_nineteen_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_fifteen_to_nineteen_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            20-24 Years
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_to_twenty_four_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_to_twenty_four_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_to_twenty_four_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_to_twenty_four_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_to_twenty_four_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_to_twenty_four_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            25-29 Years
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_five_to_twenty_nine_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_five_to_twenty_nine_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_five_to_twenty_nine_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_five_to_twenty_nine_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_twenty_five_to_twenty_nine_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_twenty_five_to_twenty_nine_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            30 Years Plus
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_thirty_plus_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_thirty_plus_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_thirty_plus_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_thirty_plus_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_thirty_plus_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_thirty_plus_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Unknown
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_unknown_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_unknown_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_unknown_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_unknown_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="mother_age_unknown_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mother_age_unknown_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <br>
+                <table>
+                    <tr>
+                        <th>Labor management</th>
+                        <th>Normal</th>
+                        <th>Césarienne</th>
+                        <th>Instrumentalsé</th>
+                    </tr>
+                    <tr>
+                        <td>
+                        Use of partograph
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="partograph_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="partograph_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="partograph_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="partograph_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="partograph_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="partograph_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Active Management of the 3rd Phase of Labor</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="labor_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="labor_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="labor_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="labor_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="labor_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="labor_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
