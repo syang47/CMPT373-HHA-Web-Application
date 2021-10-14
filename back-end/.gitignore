@@ -1,6 +1,7 @@
 /src/main/resources/static/*
 /bin/
 
+.gradle
 /.gradle/
 /.idea/
 /.settings/
