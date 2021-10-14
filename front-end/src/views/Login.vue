@@ -3,10 +3,9 @@
         background: url('../assets/IsaacCBRManager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
-        position: fixed;
+        position: relative;
         /* background-size: 100% 100%; */
         height: 100%;
-        position: fixed;
         background-position: center;
         background-repeat: no-repeat;
         background-size:cover;
@@ -33,7 +32,7 @@
         width: 400px;
         height: 364px;
         background: #00000060;
-        position: fixed;
+        position: relative;
         box-sizing: border-box;
         padding: 40px;
     }
@@ -143,11 +142,18 @@
 
         login(): void {
             let tempThis = this;
-            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( () => {
-                    tempThis.$router.push("/");
+            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( response => {
+                    if(response != null) {
+                        let token = JSON.parse(localStorage.getItem('user')!);
+                        console.log(token.roles[0].authority);
+                        tempThis.$router.push("/");
+                    } else {
+                        alert("invalid credentials");
+                    }
                 },
                 (error) => {
                     console.log(error);
+                    alert("invalid credentials");
                 }
             );
         }
