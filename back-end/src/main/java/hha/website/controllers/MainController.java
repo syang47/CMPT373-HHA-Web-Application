@@ -1,6 +1,5 @@
 package hha.website.controllers;
 
-import hha.website.MSPPRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
 import hha.website.services.HHAUserDetailsService;
@@ -14,6 +13,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Arrays;
+import java.util.Collection;
 
 @RestController
 @CrossOrigin
@@ -71,5 +73,9 @@ public class MainController {
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
 
-
+    @GetMapping("/api/roles")
+    public ResponseEntity<?> getAllRoles(){
+        System.out.println(Arrays.toString(userDetailsService.listAllRoles().toArray()));
+        return ResponseEntity.ok(userDetailsService.listAllRoles());
+    }
 }

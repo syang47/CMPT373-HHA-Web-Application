@@ -27,7 +27,7 @@
             <a class="nav-link disabled" href="#">Data Input</a>
           </li>
         </ul>
-        
+
         <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
           <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
         </form>
@@ -35,6 +35,8 @@
           <button class="btn btn-light" @click="loginOrLogout">Log In/Log Out
           </button>
           <button class="btn btn-light" @click="goToRegister">Register
+          </button>
+          <button class="btn btn-light" @click="getDepartments">Show Roles
           </button>
         </div>
 
@@ -60,5 +62,17 @@ export default class App extends Vue{
         let tempThis = this;
         tempThis.$router.push('/register');
     };
+
+    getDepartments(): void {
+        let tempThis = this;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        tempThis.$axios.get("/api/roles", {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+        }).then(response => {
+              console.log(response.data);
+        });
+    }
 };
 </script>
