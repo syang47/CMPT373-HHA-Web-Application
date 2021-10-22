@@ -186,7 +186,7 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button">  
+      <button class="button" @click.prevent="goToLeadersBoard">
         <h1 class="rectangle-leader-board">LEADER BOARD</h1>
       </button>
     </div>
@@ -194,7 +194,7 @@
       <div class="row">
         <div class="col">
           <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
-            <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+            <h1 class="rectangle-sky-blue-buttons">NICU/1PAED</h1>
           </button>
         </div>
         <div class="col">
@@ -238,7 +238,9 @@ export default class Home extends Vue {
             tempThis.$router.push('/login');
         }
     };
-
+  goToLeadersBoard(){
+    this.$router.push('/leadersboard');
+  }
   goToNICUPAED() {
       this.$router.push('/nicu_paed');
   };

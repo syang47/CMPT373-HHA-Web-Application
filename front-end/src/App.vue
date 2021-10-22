@@ -18,7 +18,7 @@
             <router-link to="/communityhealth" class="nav-link">Community Health</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled"  href="#">Leaders Board</a>
+            <router-link to="/leadersboard" class="nav-link">Leaders Board</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled" href="#">Case Study</a>
