@@ -35,10 +35,6 @@ public class MainController {
 
     @Autowired
     private JwtUtil jwtToken;
-
-    /*
-    curl -i -H "Content-Type: application/json" -X POST -d '{"username": "admin","password": "admin"}' localhost:8080/api/login
-     */
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         System.out.println(authenticationRequest.getUsername());
@@ -54,11 +50,6 @@ public class MainController {
         final String jwt = jwtToken.generateToken(userDetails);
         return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername(), userDetails.getAuthorities()));
     }
-
-    /*
-
-    curl -i -H "Content-Type: application/json" -X POST -d '{"username": "admin","password": "admin","role": "ROLE_ADMIN"}' localhost:8080/api/register
-     */
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
@@ -79,4 +70,6 @@ public class MainController {
     public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
+
+
 }

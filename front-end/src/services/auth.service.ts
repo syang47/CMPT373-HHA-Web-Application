@@ -20,10 +20,15 @@ class AuthService {
         localStorage.removeItem('user');
     }
     register(user) {
+        const token = JSON.parse(localStorage.getItem('user')!);
         return axios.post(API_URL + 'register', {
             username: user.username,
             password: user.password,
             role: user.role,
+        }, {
+           headers: {
+               'Authorization': `Bearer ${token.jwt}`
+           }
         });
     }
 }

@@ -35,8 +35,15 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setRole("ROLE_ADMIN");
         userRepository.save(admin);
 
+        User randomHead = new User();
+        randomHead.setId(2);
+        randomHead.setUsername("head");
+        randomHead.setPassword(passwordEncoder.encode("head"));
+        randomHead.setRole("ROLE_HEAD");
+        userRepository.save(randomHead);
+
         User randomUser = new User();
-        randomUser.setId(2);
+        randomUser.setId(3);
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
