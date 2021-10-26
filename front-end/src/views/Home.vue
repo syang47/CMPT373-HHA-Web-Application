@@ -249,7 +249,7 @@ export default class Home extends Vue {
       this.$router.push('/rehab');
   };
   goToCommunityHealth() {
-      this.$router.push('/communityhealth');
+      this.$router.push('/community_health');
   };
 }
 </script>

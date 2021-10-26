@@ -34,13 +34,9 @@
         </div>
     </Form>
 
-        <div
-        v-if="message"
-        class="alert alert-danger"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-        >
-            {{ message }}
-        </div>
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
+        {{ message }}
+    </div>
 </template>
 
 <script lang="ts" type="text/typescript">
@@ -128,7 +124,7 @@ export default defineComponent({
         position: fixed;
         /* background-size: 100% 100%; */
         height: 100%;
-        position: relative;
+        position: absolute;
         background-position: center;
         background-repeat: no-repeat;
         background-size:cover;

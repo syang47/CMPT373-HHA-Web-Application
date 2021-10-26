@@ -3,7 +3,7 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">Maternity MSPP Data Entry Form</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
@@ -71,163 +71,163 @@
                     <Field name="admissions" type="text" class="form-control" value=0 />
                     <ErrorMessage name="admissions" class="error-feedback" />
                 </div>
-
-                <h4 style="color:red; text-align:center">Births</h4>
-                <table>
-                    <tr>
-                        <th>Births</th>
-                        <th>Normal</th>
-                        <th>Césarienne</th>
-                        <th>Instrumentalsé</th>
-                    </tr>
-                    <tr>
-                        <td>Weight&#60;1.5kg</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_less_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_less_Normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_less_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_less_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_less_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_less_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>1.5kg&LessSlantEqual;Weight&#60;2.5kg</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_within_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_within_normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_within_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_within_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_within_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_within_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>2.5kg&#x02A7E;Weight</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_more_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_more_normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_more_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_more_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="weight_more_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="weight_more_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Not Weighted</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="not_weighted_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="not_weighted_normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="not_weighted_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="not_weighted_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="not_weighted_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="not_weighted_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Immediately breastfed</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="immediately_breastfed_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="immediately_breastfed_normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="immediately_breastfed_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="immediately_breastfed_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="immediately_breastfed_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="immediately_breastfed_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Skin to Skin Therapy</td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="skin_therapy_normal" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="skin_therapy_normal" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="skin_therapy_cesarienne" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="skin_therapy_cesarienne" class="error-feedback" />
-                            </div>
-                        </td>
-                        <td>
-                            <div class="form-group" style="width=25%">
-                            <Field name="skin_therapy_instrumentalse" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="skin_therapy_instrumentalse" class="error-feedback" />
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div>
+                    <h4 style="color:red; text-align:center">Births</h4>
+                    <table>
+                        <tr>
+                            <th>Births</th>
+                            <th>Normal</th>
+                            <th>Césarienne</th>
+                            <th>Instrumentalsé</th>
+                        </tr>
+                        <tr>
+                            <td>Weight&#60;1.5kg</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_less_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_less_Normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_less_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_less_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_less_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_less_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1.5kg&LessSlantEqual;Weight&#60;2.5kg</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_within_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_within_normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_within_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_within_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_within_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_within_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2.5kg&#x02A7E;Weight</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_more_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_more_normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_more_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_more_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="weight_more_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="weight_more_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Not Weighted</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="not_weighted_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="not_weighted_normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="not_weighted_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="not_weighted_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="not_weighted_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="not_weighted_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Immediately breastfed</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="immediately_breastfed_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="immediately_breastfed_normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="immediately_breastfed_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="immediately_breastfed_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="immediately_breastfed_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="immediately_breastfed_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Skin to Skin Therapy</td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="skin_therapy_normal" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="skin_therapy_normal" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="skin_therapy_cesarienne" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="skin_therapy_cesarienne" class="error-feedback" />
+                                </div>
+                            </td>
+                            <td>
+                                <div class="form-group" style="width=25%">
+                                <Field name="skin_therapy_instrumentalse" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="skin_therapy_instrumentalse" class="error-feedback" />
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
                 <h4 style="color:red; text-align:center">Post Natal</h4>
-
                 <div class="form-group">
-                <label for="Vitamin_A">Breastfeeding Women Receiving Vitamin A</label>
-                <Field name="Vitamin_A" type="text" class="form-control" value=0 />
-                <ErrorMessage name="Vitamin_A" class="error-feedback" />
+                    <label for="Vitamin_A">Breastfeeding Women Receiving Vitamin A</label>
+                    <Field name="Vitamin_A" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="Vitamin_A" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="MUAC_210mm">Breastfeeding Women with MUAC&#60;210mm </label>
-                <Field name="MUAC_210mm" type="text" class="form-control" value=0 />
-                <ErrorMessage name="MUAC_210mm" class="error-feedback" />
+                    <label for="MUAC_210mm">Breastfeeding Women with MUAC&#60;210mm </label>
+                    <Field name="MUAC_210mm" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="MUAC_210mm" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="Malnutrition">Breastfeeding Women with Malnutrition Support</label>
-                <Field name="Malnutrition" type="text" class="form-control" value=0 />
-                <ErrorMessage name="Malnutrition" class="error-feedback" />
+                    <label for="Malnutrition">Breastfeeding Women with Malnutrition Support</label>
+                    <Field name="Malnutrition" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="Malnutrition" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="domestic_visits">Domestic Visits in 0-3 Days</label>
-                <Field name="domestic_visits" type="text" class="form-control" value=0 />
-                <ErrorMessage name="domestic_visits" class="error-feedback" />
+                    <label for="domestic_visits">Domestic Visits in 0-3 Days</label>
+                    <Field name="domestic_visits" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="domestic_visits" class="error-feedback" />
                 </div>
                 <table>
                     <tr>
@@ -261,15 +261,17 @@
                     </tr>
                 </table>
                 <h4 style="color:red; text-align:center">Complications</h4>
-                <div class="form-group">
-                <label for="complications_recorded">Number of obstetric complications recorded</label>
-                <Field name="complications_recorded" type="text" class="form-control" value=0 />
-                <ErrorMessage name="complications_recorded" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                <label for="complications_referred">Number of obstetric complications referred</label>
-                <Field name="complications_referred" type="text" class="form-control" value=0 />
-                <ErrorMessage name="complications_referred" class="error-feedback" />
+                <div>
+                    <div class="form-group">
+                        <label for="complications_recorded">Number of obstetric complications recorded</label>
+                        <Field name="complications_recorded" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="complications_recorded" class="error-feedback" />
+                    </div>
+                    <div class="form-group">
+                        <label for="complications_referred">Number of obstetric complications referred</label>
+                        <Field name="complications_referred" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="complications_referred" class="error-feedback" />
+                    </div>
                 </div>
                 <h4 style="color:red; text-align:center">Number of Stillborns</h4>
                 <div class="form-group">
@@ -744,11 +746,7 @@
             </div>
         </div>
     </Form>
-    <div
-    v-if="message"
-    class="alert alert-danger"
-    :class="successful ? 'alert-success' : 'alert-danger'"
-    >
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
     </div>
 <form method="GET" id="my_form"></form>
@@ -761,7 +759,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
-    name: "MSPP",
+    name: "Maternity_Data",
     components: {
         Form,
         Field,
@@ -770,33 +768,70 @@ export default defineComponent({
     data() {
         const dataSchema = yup.object().shape({
             bedsAvailable: yup
-                .number(),
-                //.min(0, "Cannot be negative.")
-                //.required("Required."),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             bedDays: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             patientDays: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             hospitalized: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             dischargedAlive: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             diedBefore48h: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             diedAfter48h: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             daysHospitalized: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             referrals: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             transfers: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             selfDischarged: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             stayedInTheWard: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             admissions: yup
-                .number(),
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
         });
         return {
             successful: false,
@@ -809,7 +844,7 @@ export default defineComponent({
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null && token.username.includes("admin") ) {
-                this.$axios.post("/api/maternity/datainput", entry, {
+                this.$axios.post("/api/datainput", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`
                     }
@@ -839,7 +874,7 @@ export default defineComponent({
 <style>
     .background {
         height: 100%;
-        position: relative;
+        position: absolute;
         width: 100%;
         overflow: auto;
     }
@@ -859,7 +894,7 @@ export default defineComponent({
     .signup-form h2{
         color: #636363;
         margin: 0 0 15px;
-        position: realtive;
+        position: relative;
         text-align: center;
     }
     .signup-form .form-group{
