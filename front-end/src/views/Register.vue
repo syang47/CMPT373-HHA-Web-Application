@@ -19,10 +19,9 @@
                     <Field name="password" type="password" class="form-control" />
                     <ErrorMessage name="password" class="error-feedback" />
                 </div>
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <Field name="role" type="text" class="form-control" />
-                    <ErrorMessage name="role" class="error-feedback" />
+                <div class="form-group" v-if="!isAdmin">
+                    <Field name="head" type="checkbox" :value="true"/>
+                    <label for="head"> Department Head/Medical Director?</label>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
@@ -57,22 +56,27 @@ export default defineComponent({
         ErrorMessage,
     },
     data() {
+        let isAdmin = function (): boolean {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            if(token != null && token.user.roles[0] == 'ROLE_ADMIN') {
+                return true;
+            }
+            return false;
+        };
+
         const userSchema = yup.object().shape({
             username: yup
                 .string()
                 .required("Username is required!")
                 .min(4, "Must be at least 4 characters!")
                 .max(20, "Must be maximum 20 characters!"),
-            role: yup
-                .string()
-                .required("role is required!")
-                .lowercase()
-                .notOneOf(['admin']),
             password: yup
                 .string()
                 .required("Password is required!")
                 .min(6, "Must be at least 6 characters!")
                 .max(40, "Must be maximum 40 characters!"),
+            head: yup
+                .boolean()
         });
 
         return {
@@ -88,7 +92,6 @@ export default defineComponent({
             this.message = "";
             this.successful = false;
             this.loading = true;
-
             this.$store.dispatch("auth/register", user).then(
                 (data) => {
                     this.message = data.message;
