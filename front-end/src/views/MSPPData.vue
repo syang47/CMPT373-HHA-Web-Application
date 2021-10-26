@@ -1,5 +1,4 @@
 <template>
-
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
@@ -8,69 +7,88 @@
             <div v-if="!successful">
                 <div class="form-group">
                     <label for="bedsAvailable">Beds Available</label>
-                    <Field name="bedsAvailable" type="text" class="form-control" value=0 />
+                    <Field name="bedsAvailable" type="text" class="form-control"/>
                     <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
+
                 <div class="form-group">
                     <label for="bedDays">Bed Days</label>
-                    <Field name="bedDays" type="text" class="form-control" value=0 />
+                    <Field name="bedDays" type="text" class="form-control"/>
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
+
                 <div class="form-group">
                     <label for="patientDays">Patient Days</label>
-                    <Field name="patientDays" type="text" class="form-control" value=0 />
+                    <Field name="patientDays" type="text" class="form-control"/> 
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
+
                 <div class="form-group">
                     <label for="hospitalized">Hospitalized</label>
-                    <Field name="hospitalized" type="text" class="form-control" value=0 />
+                    <Field name="hospitalized" id="hospitalized" type="text" class="form-control" v-on:keyup="checkHospitalized()"/>
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
+                <div v-if="hospitalizedMor" class="form-group">
+                    <label for="hospitalizedNICU">Hospitalized NICU</label>
+                    <Field name="hospitalizedNICU" type="text" class="form-control" />
+                    <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
+                </div>
+                <div v-if="hospitalizedMor" class="form-group">
+                    <label for="hospitalizedPaed">Hospitalized Paed</label>
+                    <Field name="hospitalizedPaed" type="text" class="form-control" />
+                    <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
+                </div>
+                
+
+
+
                 <div class="form-group">
                     <label for="dischargedAlive">Discharged Alive</label>
-                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
+                    <Field name="dischargedAlive" type="text" class="form-control"/>
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="diedBefore48h">Died Before 48h</label>
-                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
+                    <Field name="diedBefore48h" type="text" class="form-control"/>
                     <ErrorMessage name="diedBefore48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="diedAfter48h">Died After 48h</label>
-                    <Field name="diedAfter48h" type="text" class="form-control" value=0 />
+                    <Field name="diedAfter48h" type="text" class="form-control"/>
                     <ErrorMessage name="diedAfter48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="daysHospitalised">Days Hospitalised</label>
-                    <Field name="daysHospitalised" type="text" class="form-control" value=0 />
+                    <Field name="daysHospitalised" type="text" class="form-control"/>
                     <ErrorMessage name="daysHospitalised" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="referrals">Referrals</label>
-                    <Field name="referrals" type="text" class="form-control" value=0 />
+                    <Field name="referrals" type="text" class="form-control"/>
                     <ErrorMessage name="referrals" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="transfers">Transfers</label>
-                    <Field name="transfers" type="text" class="form-control" value=0 />
+                    <Field name="transfers" type="text" class="form-control"/>
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="selfDischarged">Self Discharged</label>
-                    <Field name="selfDischarged" type="text" class="form-control" value=0 />
+                    <Field name="selfDischarged" type="text" class="form-control"/>
                     <ErrorMessage name="selfDischarged" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="stayedInTheWard">Stayed In The Ward</label>
-                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
+                    <Field name="stayedInTheWard" type="text" class="form-control"/>
                     <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <label for="admissions">Admissions</label>
-                    <Field name="admissions" type="text" class="form-control" value=0 />
+                    <Field name="admissions" type="text" class="form-control"/>
                     <ErrorMessage name="admissions" class="error-feedback" />
                 </div>
+
+
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -108,21 +126,36 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+
             bedDays: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+
             patientDays: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+
             hospitalized: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            hospitalizedNICU: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            hospitalizedPaed: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+
+
             dischargedAlive: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -173,10 +206,19 @@ export default defineComponent({
             successful: false,
             loading: false,
             message: "",
+            hospitalizedMor: false,
             dataSchema,
         };
     },
     methods: {
+        checkHospitalized() {
+            let number: number = (document as any).getElementById("hospitalized").value;
+            if (number > 0) {
+                this.hospitalizedMor = true;
+            } else {
+                this.hospitalizedMor = false;
+            }
+        }, 
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
@@ -208,7 +250,6 @@ export default defineComponent({
                 });
             }
         },
-
     }
 });
 </script>
