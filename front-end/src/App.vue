@@ -15,7 +15,7 @@
             <router-link to="/nicu_paed" class="nav-link">NICU / PAED</router-link>
             <router-link to="/maternity" class="nav-link">Maternity</router-link>
             <router-link to="/rehab" class="nav-link">Rehab</router-link>
-            <router-link to="/communityhealth" class="nav-link">Community Health</router-link>
+            <router-link to="/community_health" class="nav-link">Community Health</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled"  href="#">Leaders Board</a>
@@ -36,7 +36,7 @@
           </button>
           <button class="btn btn-light" @click="goToRegister">Register
           </button>
-          <button class="btn btn-light" @click="getDepartments">Show Roles
+          <button class="btn btn-light" @click="getDepartments">Show Departments
           </button>
         </div>
 
@@ -66,7 +66,7 @@ export default class App extends Vue{
     getDepartments(): void {
         let tempThis = this;
         let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/roles", {
+        tempThis.$axios.get("/api/mspp/department", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }

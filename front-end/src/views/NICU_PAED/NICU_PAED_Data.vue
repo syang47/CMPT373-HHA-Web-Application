@@ -176,7 +176,7 @@ export default defineComponent({
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
-                entry.department = token.roles[0].authority;
+                entry.department = "NICU_PAED";
                 this.$axios.post("/api/datainput", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`

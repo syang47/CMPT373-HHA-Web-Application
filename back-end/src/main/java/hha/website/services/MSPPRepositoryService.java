@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 
 @Service
 @Transactional
@@ -32,5 +33,9 @@ public class MSPPRepositoryService {
         entry.setBedsAvailable(mspp.getBedsAvailable());
         System.out.println("entry saved");
         return msppRepository.save(entry);
+    }
+
+    public Collection<String> listDistinctItemsInField() {
+        return msppRepository.queryDistinctField();
     }
 }

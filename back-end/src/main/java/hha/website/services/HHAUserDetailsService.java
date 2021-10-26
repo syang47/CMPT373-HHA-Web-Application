@@ -1,5 +1,6 @@
 package hha.website.services;
 
+import hha.website.MSPPRepository;
 import hha.website.UserRepository;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
@@ -11,11 +12,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @Service
+@Transactional
 public class HHAUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -65,7 +68,8 @@ public class HHAUserDetailsService implements UserDetailsService {
         return userRepository.save(newUser);
     }
 
-    public Collection<String> listAllRoles() {
-        return userRepository.queryAllRoles();
-    };
+    public Collection<String> listDistinctItemsInField() {
+        return userRepository.queryDistinctField();
+    }
+
 }

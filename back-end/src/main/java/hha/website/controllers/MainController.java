@@ -73,9 +73,15 @@ public class MainController {
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
 
-    @GetMapping("/api/roles")
-    public ResponseEntity<?> getAllRoles(){
-        System.out.println(Arrays.toString(userDetailsService.listAllRoles().toArray()));
-        return ResponseEntity.ok(userDetailsService.listAllRoles());
+    @GetMapping("/api/user/role")
+    public ResponseEntity<?> getUserField() {
+        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
+    }
+
+    @GetMapping("/api/mspp/department")
+    public ResponseEntity<?> getMSPPField(){
+        System.out.println(Arrays.toString(msppRepositoryService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(msppRepositoryService.listDistinctItemsInField());
     }
 }
