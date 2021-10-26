@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -23,8 +24,6 @@ public class HHAUserDetailsService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username) {
 
@@ -35,8 +34,15 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setRole("ROLE_ADMIN");
         userRepository.save(admin);
 
+        User randomHead = new User();
+        randomHead.setId(2);
+        randomHead.setUsername("head");
+        randomHead.setPassword(passwordEncoder.encode("head"));
+        randomHead.setRole("ROLE_HEAD");
+        userRepository.save(randomHead);
+
         User randomUser = new User();
-        randomUser.setId(2);
+        randomUser.setId(3);
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
@@ -58,4 +64,8 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setRole(user.getRole());
         return userRepository.save(newUser);
     }
+
+    public Collection<String> listAllRoles() {
+        return userRepository.queryAllRoles();
+    };
 }

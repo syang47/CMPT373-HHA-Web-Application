@@ -16,14 +16,22 @@ class AuthService {
         });
     }
     logout() {
-        console.log("logged out");
         localStorage.removeItem('user');
     }
     register(user) {
+        const token = JSON.parse(localStorage.getItem('user')!);
+        let role = "ROLE_USER";
+        if(user.head) {
+            role = "ROLE_HEAD";
+        }
         return axios.post(API_URL + 'register', {
             username: user.username,
             password: user.password,
-            role: user.role,
+            role: role,
+        }, {
+           headers: {
+               'Authorization': `Bearer ${token.jwt}`
+           }
         });
     }
 }

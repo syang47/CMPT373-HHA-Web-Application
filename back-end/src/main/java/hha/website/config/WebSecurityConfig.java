@@ -6,6 +6,9 @@ import hha.website.services.MSPPRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.access.expression.SecurityExpressionHandler;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -16,6 +19,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.FilterInvocation;
+import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
@@ -33,10 +38,25 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         authenticationManager.userDetailsService(hhaUserDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    @Bean
+    public RoleHierarchy roleHierarchy() {
+        RoleHierarchyImpl roleH = new RoleHierarchyImpl();
+        roleH.setHierarchy("ROLE_ADMIN > ROLE_HEAD > ROLE_USER");
+        return roleH;
+    }
+
+    private SecurityExpressionHandler<FilterInvocation> webExpressionHandler() {
+        DefaultWebSecurityExpressionHandler defaultHandler = new DefaultWebSecurityExpressionHandler();
+        defaultHandler.setRoleHierarchy(roleHierarchy());
+        return defaultHandler;
+    }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeRequests().antMatchers("/api/login", "/api/register").permitAll()
+                .authorizeRequests().expressionHandler(webExpressionHandler())
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/register").hasRole("HEAD")
                 .antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
@@ -63,4 +83,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
+
 }

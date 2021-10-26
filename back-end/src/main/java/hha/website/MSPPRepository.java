@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface MSPPRepository extends JpaRepository<MSPPRequirement, Integer> {
-    MSPPRequirement findByDepartment(String department);
+    //MSPPRequirement findByDepartment(String department);
 
 }

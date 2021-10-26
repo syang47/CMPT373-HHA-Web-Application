@@ -2,7 +2,7 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">Rehab MSPP Data Entry Form</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
@@ -98,11 +98,7 @@
             </div>
         </div>
     </Form>
-    <div
-    v-if="message"
-    class="alert alert-danger"
-    :class="successful ? 'alert-success' : 'alert-danger'"
-    >
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
     </div>
 </template>
@@ -113,7 +109,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
-    name: "MSPP",
+    name: "Rehab_Data",
     components: {
         Form,
         Field,
@@ -228,7 +224,7 @@ export default defineComponent({
                         'Authorization': `Bearer ${token.jwt}`
                     }
                 }).then(response => {
-                        this.message = "test";
+                        this.message = response.data;
                         this.successful = true;
                         this.loading = false;
                         if(response != null) {
