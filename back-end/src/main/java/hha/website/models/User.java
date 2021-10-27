@@ -15,6 +15,8 @@ public class User {
     private String password;
     @Column
     private String role;
+    @Column
+    private String department;
 
     public Integer getId() {
         return id;
@@ -46,5 +48,13 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

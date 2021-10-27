@@ -1,7 +1,5 @@
 package hha.website.models;
 
-import javax.persistence.Column;
-
 public class MSPPRequirementDTO {
 
     private String department;

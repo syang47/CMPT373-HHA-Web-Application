@@ -71,6 +71,9 @@ export default defineComponent({
                 .required("Password is required!")
                 .min(6, "Must be at least 6 characters!")
                 .max(40, "Must be maximum 40 characters!"),
+            departments: yup
+                .string()
+                .required("Must select a department for the user."),
             head: yup
                 .boolean()
         });
