@@ -23,35 +23,56 @@
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
 
-                <div class="form-group">
-                    <label for="hospitalized">Hospitalized</label>
-                    <Field name="hospitalized" id="hospitalized" type="text" class="form-control" v-on:keyup="checkHospitalized()"/>
-                    <ErrorMessage name="hospitalized" class="error-feedback" />
+                <div>
+                    <div class="form-group">
+                        <label for="hospitalized">Hospitalized</label>
+                        <Field name="hospitalized" id="hospitalized" type="text" class="form-control" v-on:keyup="checkHospitalized()"/>
+                        <ErrorMessage name="hospitalized" class="error-feedback" />
+                    </div>
+                    <div v-if="hospitalizedMor" class="form-group">
+                        <label for="hospitalizedNICU">Hospitalized NICU</label>
+                        <Field name="hospitalizedNICU" type="text" class="form-control" />
+                        <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
+                    </div>
+                    <div v-if="hospitalizedMor" class="form-group">
+                        <label for="hospitalizedPaed">Hospitalized Paed</label>
+                        <Field name="hospitalizedPaed" type="text" class="form-control" />
+                        <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
+                    </div>
                 </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedNICU">Hospitalized NICU</label>
-                    <Field name="hospitalizedNICU" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
+
+                <div>
+                    <div class="form-group">
+                        <label for="dischargedAlive">Discharged Alive</label>
+                        <Field name="dischargedAlive" id="dischargedAlive" type="text" class="form-control" v-on:keyup="checkDischargedAlive()"/>
+                        <ErrorMessage name="dischargedAlive" class="error-feedback" />
+                    </div>
+                    <div v-if="dischargedAliveMor" class="form-group">
+                        <label for="NICUDischarged">OF Total discharged no: NICU discharged</label>
+                        <Field name="NICUDischarged" type="text" class="form-control" />
+                        <ErrorMessage name="NICUDischarged" class="error-feedback" />
+                    </div>
                 </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedPaed">Hospitalized Paed</label>
-                    <Field name="hospitalizedPaed" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
+
+                <div>
+                    <div class="form-group">
+                        <label for="diedBefore48h">Died Before 48h</label>
+                        <Field name="diedBefore48h" id="diedBefore48h" type="text" class="form-control" v-on:keyup="checkDiedBefore48h()"/>
+                        <ErrorMessage name="diedBefore48h" class="error-feedback" />
+                    </div>
+                        <div v-if="diedBefore48hMor" class="form-group">
+                        <label for="diedInNICUBefore48">Died in NICU</label>
+                        <Field name="diedInNICUBefore48" type="text" class="form-control" />
+                        <ErrorMessage name="diedInNICUBefore48" class="error-feedback" />
+                    </div>
+                    <div v-if="diedBefore48hMor" class="form-group">
+                        <label for="diedInPaedBefore48">Died in Paed</label>
+                        <Field name="diedInPaedBefore48" type="text" class="form-control" />
+                        <ErrorMessage name="diedInPaedBefore48" class="error-feedback" />
+                    </div>
                 </div>
-                
 
 
-
-                <div class="form-group">
-                    <label for="dischargedAlive">Discharged Alive</label>
-                    <Field name="dischargedAlive" type="text" class="form-control"/>
-                    <ErrorMessage name="dischargedAlive" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="diedBefore48h">Died Before 48h</label>
-                    <Field name="diedBefore48h" type="text" class="form-control"/>
-                    <ErrorMessage name="diedBefore48h" class="error-feedback" />
-                </div>
                 <div class="form-group">
                     <label for="diedAfter48h">Died After 48h</label>
                     <Field name="diedAfter48h" type="text" class="form-control"/>
@@ -151,17 +172,33 @@ export default defineComponent({
                 .required("Required.")
                 .default(0),
 
-
             dischargedAlive: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            NICUDischarged: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+
             diedBefore48h: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            diedInNICUBefore48: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            diedInPaedBefore48: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+
             diedAfter48h: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -203,6 +240,8 @@ export default defineComponent({
             loading: false,
             message: "",
             hospitalizedMor: false,
+            dischargedAliveMor: false,
+            diedBefore48hMor: false,
             dataSchema,
         };
     },
@@ -215,6 +254,22 @@ export default defineComponent({
                 this.hospitalizedMor = false;
             }
         }, 
+        checkDischargedAlive() {
+            let number: number = (document as any).getElementById("dischargedAlive").value;
+            if (number > 0) {
+                this.dischargedAliveMor = true;
+            } else {
+                this.dischargedAliveMor = false;
+            }
+        }, 
+        checkDiedBefore48h() {
+            let number: number = (document as any).getElementById("diedBefore48h").value;
+            if (number > 0) {
+                this.diedBefore48hMor = true;
+            } else {
+                this.diedBefore48hMor = false;
+            }
+        },
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
