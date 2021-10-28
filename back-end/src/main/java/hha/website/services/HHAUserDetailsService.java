@@ -50,6 +50,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
+        randomUser.setDepartment("NICU_PAED");
         userRepository.save(randomUser);
 
         User user = userRepository.findByUsername(username);
