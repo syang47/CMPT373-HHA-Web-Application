@@ -1,0 +1,13 @@
+{
+    "titles": {
+        "login": "Login",
+        "username": "username",
+        "hha": "Hope Health Action"
+    },
+    "departments": {
+        "nicu/paed": "NICU / PAED",
+        "maternity": "Maternity",
+        "rehab": "Rehab",
+        "communityHealth": "Community Health"
+    }
+}

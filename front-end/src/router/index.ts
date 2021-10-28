@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
+import { Locales } from "./locales";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
@@ -13,8 +14,15 @@ import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 
 import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
 
+import en from "./en.json";
+import fr from "./fr.json";
 
+export const messages = {
+  [Locales.EN]: en,
+  [Locales.FR]: fr
+};
 
+export const defaultLocale = Locales.EN;
 
 
 const routes: Array<RouteRecordRaw> = [
