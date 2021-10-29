@@ -4,18 +4,16 @@ import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
 
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
-import MSPPData from "@/views/MSPPData.vue"
+import NICU_PAED_Data from "@/views/NICU_PAED/NICU_PAED_Data.vue"
 
 import Maternity from "@/views/Maternity/Maternity_Dep.vue";
-import Maternity_Data from "@/views/Maternity/MaternityData.vue";
+import Maternity_Data from "@/views/Maternity/Maternity_Data.vue";
 
 import Rehab from "@/views/Rehab/Rehab_Dep.vue";
+import Rehab_Data from "@/views/Rehab/Rehab_Data.vue";
 
-import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
-
-
-
-
+import Community_Health from "@/views/Com_Heal/Community_Dep.vue";
+import Community_Health_Data from "@/views/Com_Heal/Community_Health_Data.vue";
 
 const routes: Array<RouteRecordRaw> = [
   // Basic components
@@ -40,9 +38,9 @@ const routes: Array<RouteRecordRaw> = [
     component: NICU_PAED,
   },
   { 
-    path: "/inputdata",
-    name: "inputdata",
-    component: MSPPData,
+    path: "/nicu_paed/submit",
+    name: "NICU_PAED_Data",
+    component: NICU_PAED_Data,
   },
 
   // Maternity
@@ -53,7 +51,7 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   {
-    path: "/maternity/inputdata",
+    path: "/maternity/submit",
     name: "Maternity_Data",
     component: Maternity_Data,
   },
@@ -64,14 +62,24 @@ const routes: Array<RouteRecordRaw> = [
     name: "Rehab",
     component: Rehab,
   },
+  {
+    path: "/rehab/submit",
+    name: "Rehab_Data",
+    component: Rehab_Data,
+  },
+
 
   // Community_Health
   {
-    path: "/communityhealth",
-    name: "CommunityHealth",
-    component: CommunityHealth,
+    path: "/community_health",
+    name: "Community_Health",
+    component: Community_Health,
   },
-
+  {
+    path: "/community_health/submit",
+    name: "Community_Health_Data",
+    component: Community_Health_Data,
+  },
 
   // Other components
 
