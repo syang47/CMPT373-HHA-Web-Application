@@ -15,7 +15,7 @@
             <router-link to="/nicu_paed" class="nav-link">msg="$t('departments.nicu_paed')</router-link>
             <router-link to="/maternity" class="nav-link">msg="$t('departments.maternity')</router-link>
             <router-link to="/rehab" class="nav-link">msg="$t('departments.rehab')</router-link>
-            <router-link to="/communityhealth" class="nav-link">msg="$t('departments.communityhealth')</router-link>
+            <router-link to="/communityhealth" class="nav-link">msg="$t('departments.communityhealth')"</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled"  href="#">Leaders Board</a>
@@ -46,6 +46,7 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
+import { TranslateResult } from 'vue-i18n';
 export default class App extends Vue{
 
     loginOrLogout(): void {
