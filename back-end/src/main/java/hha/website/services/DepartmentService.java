@@ -5,8 +5,11 @@ import hha.website.models.Department;
 import hha.website.models.DepartmentDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.List;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import javax.transaction.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
@@ -30,5 +33,11 @@ public class DepartmentServiceImpl implements DepartmentService {
         newDepartment.setName(department.getName());
         newDepartment.setPoints(department.getPoints());
         return departmentRepository.save(newDepartment);
+    }
+    public Collection<String> listAllDepartmentNames() {
+        return departmentRepository.queryAllDepartmentNames();
+    }
+    public Collection<Integer> listAllDepartmentPoints() {
+        return departmentRepository.queryAllDepartmentPoints();
     }
 }
