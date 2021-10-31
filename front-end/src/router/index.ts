@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
-import { Locales } from "./locales";
+import { Locales } from "@/i18n/locales";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
@@ -14,8 +14,8 @@ import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 
 import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
 
-import en from "./en.json";
-import fr from "./fr.json";
+import en from "@/i18n/en.json";
+import fr from "@/i18n/fr.json";
 
 export const messages = {
   [Locales.EN]: en,

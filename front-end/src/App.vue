@@ -12,10 +12,10 @@
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <router-link to="/nicu_paed" class="nav-link">NICU / PAED</router-link>
-            <router-link to="/maternity" class="nav-link">Maternity</router-link>
-            <router-link to="/rehab" class="nav-link">Rehab</router-link>
-            <router-link to="/communityhealth" class="nav-link">Community Health</router-link>
+            <router-link to="/nicu_paed" class="nav-link">msg="$t('departments.nicu_paed')</router-link>
+            <router-link to="/maternity" class="nav-link">msg="$t('departments.maternity')</router-link>
+            <router-link to="/rehab" class="nav-link">msg="$t('departments.rehab')</router-link>
+            <router-link to="/communityhealth" class="nav-link">msg="$t('departments.communityhealth')</router-link>
           </li>
           <li class="nav-item">
             <a class="nav-link disabled"  href="#">Leaders Board</a>

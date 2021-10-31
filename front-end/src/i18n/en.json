@@ -8,6 +8,13 @@
         "nicu/paed": "NICU / PAED",
         "maternity": "Maternity",
         "rehab": "Rehab",
-        "communityHealth": "Community Health"
+        "communityHealth": "Community Health 123"
+    },
+    "header": {
+        "leadersBoard": "Leaders Board",
+        "caseStudy": "Case Study",
+        "dataInput": "Data Input",
+        "logInLogOut": "Log In / Log Out",
+        "register": "Register"
     }
 }

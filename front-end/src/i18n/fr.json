@@ -9,5 +9,12 @@
         "maternity": "TODO",
         "rehab": "TODO",
         "communityHealth": "TODO"
+    },
+    "header": {
+        "leadersBoard": "TODO",
+        "caseStudy": "TODO",
+        "dataInput": "TODO",
+        "logInLogOut": "TODO",
+        "register": "TODO"
     }
 }
