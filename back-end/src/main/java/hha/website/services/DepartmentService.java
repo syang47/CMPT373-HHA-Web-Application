@@ -16,17 +16,12 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class DepartmentServiceImpl implements DepartmentService {
+public class DepartmentService{
 
     @PersistenceContext private EntityManager em;
 
     @Autowired
     private DepartmentRepository departmentRepository;
-
-    @Override
-    public List<Department> findAll() {
-        return em.createQuery("select * from Department", Department.class).getResultList();
-    }
 
     public Department save(DepartmentDTO department) {
         Department newDepartment = new Department();
