@@ -3,6 +3,7 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
 
+import LeadersBoard from "@/views/LeadersBoard.vue"
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
 import NICU_PAED_Data from "@/views/NICU_PAED/NICU_PAED_Data.vue"
 
@@ -29,6 +30,12 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
     component: Home,
+  },
+  //leaders board
+  {
+    path: "/leadersboard",
+    name: "LeadersBoard",
+    component: LeadersBoard,
   },
 
   // NICU/PAED

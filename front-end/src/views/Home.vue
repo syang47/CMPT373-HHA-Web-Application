@@ -186,15 +186,15 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button">  
+      <button class="button" @click.prevent="goToLeadersBoard">
         <h1 class="rectangle-leader-board">LEADER BOARD</h1>
       </button>
     </div>
     <div class="row justify-content-center">
-      <div class="row" >
-        <div class="col" v-if="showNICU">
-          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" > 
-            <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+      <div class="row">
+        <div class="col">
+          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
+            <h1 class="rectangle-sky-blue-buttons">NICU/1PAED</h1>
           </button>
         </div>
         <div class="col" v-if="showMaternity">
@@ -230,6 +230,7 @@
 </template>
 
 <script lang="ts" type="text/typescript">
+<<<<<<< HEAD
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
@@ -272,6 +273,20 @@ export default defineComponent({
       }
     },
     goToNICUPAED() {
+=======
+import { Vue } from "vue-class-component";
+export default class Home extends Vue {
+    mounted() {
+        let tempThis = this;
+        if(!tempThis.$store.state.auth.status.loggedIn) {
+            tempThis.$router.push('/login');
+        }
+    };
+  goToLeadersBoard(){
+    this.$router.push('/leadersboard');
+  }
+  goToNICUPAED() {
+>>>>>>> origin/17-implement-leaders-board-page
       this.$router.push('/nicu_paed');
     },
     goToMaternity() {
