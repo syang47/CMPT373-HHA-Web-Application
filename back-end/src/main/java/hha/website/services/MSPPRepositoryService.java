@@ -3,13 +3,12 @@ package hha.website.services;
 import hha.website.MSPPRepository;
 import hha.website.models.MSPPRequirement;
 import hha.website.models.MSPPRequirementDTO;
+import hha.website.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.time.LocalDateTime;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -18,9 +17,9 @@ public class MSPPRepositoryService {
     @Autowired
     private MSPPRepository msppRepository;
 
-    public MSPPRequirement save(MSPPRequirementDTO data) {
+    public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
-        entry.setDepartment(data.getDepartment());
+        entry.setUser(user);
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());
         entry.setHospitalized(data.getHospitalized());
@@ -127,7 +126,8 @@ public class MSPPRepositoryService {
         return msppRepository.findAll();
     }
 
+    /*
     public Collection<String> listDistinctItemsInField() {
         return msppRepository.queryDistinctField();
-    }
+    }*/
 }

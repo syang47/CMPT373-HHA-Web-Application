@@ -12,8 +12,5 @@ import java.util.List;
 public interface MSPPRepository extends JpaRepository<MSPPRequirement, Integer> {
     //MSPPRequirement findByDepartment(String department);
 
-    @Query("SELECT DISTINCT department FROM MSPPRequirement")
-    Collection<String> queryDistinctField();
-
     List<MSPPRequirement> findAll();
 }

@@ -54,6 +54,7 @@ export default class App extends Vue{
             }
         }).then(response => {
               console.log(response.data);
+              return JSON.stringify(response.data);
         });
     }
 
@@ -66,6 +67,7 @@ export default class App extends Vue{
             }
         }).then(response => {
               console.log(response.data);
+              return JSON.stringify(response.data);
         });
     }
 };

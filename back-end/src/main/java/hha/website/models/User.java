@@ -1,7 +1,10 @@
 package hha.website.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name="users")
@@ -17,6 +20,11 @@ public class User {
     private String role;
     @Column
     private String department;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
+    @JsonIgnoreProperties("folder")
+    private Collection<MSPPRequirement> folder;
+
 
     public Integer getId() {
         return id;
@@ -56,5 +64,13 @@ public class User {
 
     public void setDepartment(String department) {
         this.department = department;
+    }
+
+    public Collection<MSPPRequirement> getFolder() {
+        return folder;
+    }
+
+    public void setFolder(Collection<MSPPRequirement> folder) {
+        this.folder = folder;
     }
 }

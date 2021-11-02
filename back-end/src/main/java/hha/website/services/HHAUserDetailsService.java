@@ -1,6 +1,5 @@
 package hha.website.services;
 
-import hha.website.MSPPRepository;
 import hha.website.UserRepository;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
@@ -8,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -36,6 +33,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole("ROLE_ADMIN");
+        admin.setDepartment("NICU_PAED");
         userRepository.save(admin);
 
         User randomHead = new User();
@@ -43,6 +41,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomHead.setUsername("head");
         randomHead.setPassword(passwordEncoder.encode("head"));
         randomHead.setRole("ROLE_HEAD");
+        randomHead.setDepartment("maternity");
         userRepository.save(randomHead);
 
         User randomUser = new User();
@@ -71,8 +70,15 @@ public class HHAUserDetailsService implements UserDetailsService {
         return userRepository.save(newUser);
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     public Collection<String> listDistinctItemsInField() {
         return userRepository.queryDistinctField();
     }
 
+    public Collection<String> listDepartments() {
+        return userRepository.queryDepartments();
+    }
 }

@@ -15,8 +15,8 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
-import java.util.Collection;
 
 @RestController
 @CrossOrigin
@@ -41,6 +41,7 @@ public class MainController {
 
     @Autowired
     private JwtUtil jwtToken;
+
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         System.out.println(authenticationRequest.getUsername());
@@ -64,9 +65,13 @@ public class MainController {
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        if(user.getRole().trim().toLowerCase().contains("admin")){
+        final String role = user.getRole().trim().toLowerCase();
+        if(role.contains("admin")){
             System.out.println("Cannot make admin account");
             return ResponseEntity.badRequest().body("Cannot make admin account");
+        } else if(role.contains("head")){
+            System.out.println("Cannot make department head/medical director account");
+            return ResponseEntity.badRequest().body("Cannot make department head/medical director account");
         } else if(userDetails != null){
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
@@ -77,8 +82,19 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO data){
-        return ResponseEntity.ok(msppRepositoryService.save(data));
+    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data){
+        final String authorizationHeader = request.getHeader("Authorization");
+        System.out.println(authorizationHeader);
+        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
+        System.out.println(username);
+        final User user = userDetailsService.findByUsername(username);
+        System.out.println(user);
+        /*
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        User user = (User)auth.getPrincipal();
+        System.out.println(auth);
+        return ResponseEntity.ok(msppRepositoryService.save(user, data));*/
+        return ResponseEntity.ok(msppRepositoryService.save(user, data));
     }
 
     @GetMapping("/api/user/role")
@@ -87,10 +103,11 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
+
     @GetMapping("/api/mspp/department")
     public ResponseEntity<?> getMSPPField(){
-        System.out.println(Arrays.toString(msppRepositoryService.listDistinctItemsInField().toArray()));
-        return ResponseEntity.ok(msppRepositoryService.listDistinctItemsInField());
+        System.out.println(Arrays.toString(userDetailsService.listDepartments().toArray()));
+        return ResponseEntity.ok(userDetailsService.listDepartments());
     }
 
     @GetMapping("/api/mspp/data")
