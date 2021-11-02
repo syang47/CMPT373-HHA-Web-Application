@@ -1,5 +1,6 @@
 package hha.website.controllers;
 
+import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
 import hha.website.services.HHAUserDetailsService;
@@ -33,6 +34,9 @@ public class MainController {
     private HHAUserDetailsService userDetailsService;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private MSPPRepositoryService msppRepositoryService;
 
     @Autowired
@@ -48,9 +52,13 @@ public class MainController {
         } catch (BadCredentialsException e) {
             throw new Exception("Wrong username/password", e);
         }
+
+        final User u = userRepository.findByUsername(authenticationRequest.getUsername());
+
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, authenticationRequest.getUsername(), userDetails.getAuthorities()));
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment()));
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
@@ -63,19 +71,25 @@ public class MainController {
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
-            System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole());
+            System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole() + " " + user.getDepartment());
             return ResponseEntity.ok(userDetailsService.save(user));
         }
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
+    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO entry){
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
 
-    @GetMapping("/api/roles")
-    public ResponseEntity<?> getAllRoles(){
-        System.out.println(Arrays.toString(userDetailsService.listAllRoles().toArray()));
-        return ResponseEntity.ok(userDetailsService.listAllRoles());
+    @GetMapping("/api/user/role")
+    public ResponseEntity<?> getUserField() {
+        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
+    }
+
+    @GetMapping("/api/mspp/department")
+    public ResponseEntity<?> getMSPPField(){
+        System.out.println(Arrays.toString(msppRepositoryService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(msppRepositoryService.listDistinctItemsInField());
     }
 }

@@ -842,30 +842,36 @@ export default defineComponent({
     },
     methods: {
         handleData(entry) {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            if(token != null && token.username.includes("admin") ) {
-                this.$axios.post("/api/datainput", entry, {
-                    headers: {
-                        'Authorization': `Bearer ${token.jwt}`
-                    }
-                }).then(response => {
-                        this.message = "test";
-                        this.successful = true;
-                        this.loading = false;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token != null) {
+            entry.department = "maternity";
+            this.$axios.post("/api/datainput", entry, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                    this.message = response.data;
+                    this.successful = true;
+                    this.loading = false;
+                    if(response != null) {
                         console.log("entry successful: " + this.successful);
-                        this.$router.push('/');
+                        this.$router.push("/");
+                    } else {
+                        alert("entry could not be submitted");
                     }
-                ).catch((error: any) => {
-                      this.message =
-                          (error.response &&
-                          error.response.data &&
-                          error.response.data.message) ||
-                          error.message;
-                      this.successful = false;
-                      this.loading = false;
-                });
-            }
-        },
+                }
+            ).catch((error: any) => {
+                  this.message =
+                      (error.response &&
+                      error.response.data &&
+                      error.response.data.message) ||
+                      error.message;
+                  this.successful = false;
+                  this.loading = false;
+                  alert("entry could not be submitted");
+            });
+        }
+    },
 
     }
 });
