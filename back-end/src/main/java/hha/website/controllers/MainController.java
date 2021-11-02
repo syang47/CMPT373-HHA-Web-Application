@@ -77,8 +77,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO entry){
-        return ResponseEntity.ok(msppRepositoryService.save(entry));
+    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO data){
+        return ResponseEntity.ok(msppRepositoryService.save(data));
     }
 
     @GetMapping("/api/user/role")
@@ -91,5 +91,10 @@ public class MainController {
     public ResponseEntity<?> getMSPPField(){
         System.out.println(Arrays.toString(msppRepositoryService.listDistinctItemsInField().toArray()));
         return ResponseEntity.ok(msppRepositoryService.listDistinctItemsInField());
+    }
+
+    @GetMapping("/api/mspp/data")
+    public ResponseEntity<?> getAllMSPPData(){
+        return ResponseEntity.ok(msppRepositoryService.listAllData());
     }
 }

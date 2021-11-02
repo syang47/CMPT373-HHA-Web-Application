@@ -9,11 +9,11 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Integer id;
-    @Column
+    @Column(nullable=false, unique=true)
     private String username;
-    @Column
+    @Column(nullable=false)
     private String password;
-    @Column
+    @Column(nullable=false)
     private String role;
     @Column
     private String department;

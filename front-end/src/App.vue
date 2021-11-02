@@ -18,6 +18,8 @@
           </button>
           <button class="btn btn-light" @click="getDepartments">Show Departments
           </button>
+          <button class="btn btn-light" @click="getData">Show Data
+          </button>
         </div>
 
       </div>
@@ -47,6 +49,18 @@ export default class App extends Vue{
         let tempThis = this;
         let token = JSON.parse(localStorage.getItem('user')!);
         tempThis.$axios.get("/api/mspp/department", {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+        }).then(response => {
+              console.log(response.data);
+        });
+    }
+
+    getData(): void {
+        let tempThis = this;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        tempThis.$axios.get("/api/mspp/data", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }

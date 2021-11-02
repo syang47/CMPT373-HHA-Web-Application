@@ -26,7 +26,6 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -116,6 +115,6 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
 </style>
