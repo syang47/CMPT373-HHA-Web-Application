@@ -76,7 +76,7 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/datainput/**", method = RequestMethod.POST)
     public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO entry){
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }

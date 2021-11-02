@@ -850,7 +850,6 @@ export default defineComponent({
             numberOfOutpatients: yup
                 .number()
                 .min(0, "Cannot be negative.")
-                .required("Required.")
                 .default(0),
             numberOfOutpatientsExtremelyPreterm: yup
                 .number()
@@ -1071,7 +1070,7 @@ export default defineComponent({
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
                 entry.department = "NICU_PAED";
-                this.$axios.post("/api/datainput", entry, {
+                this.$axios.post("/api/datainput/NICU_PAED", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`
                     }
