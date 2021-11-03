@@ -20,6 +20,8 @@
           </button>
           <button class="btn btn-light" @click="getData">Show Data
           </button>
+          <button class="btn btn-light" @click="getUsersInNICU">NICU Users
+          </button>
         </div>
 
       </div>
@@ -48,7 +50,20 @@ export default class App extends Vue{
     getDepartments(): void {
         let tempThis = this;
         let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/mspp/department", {
+        tempThis.$axios.get("/api/departments", {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+        }).then(response => {
+              console.log(response.data);
+              return JSON.stringify(response.data);
+        });
+    }
+
+    getUsersInNICU(): void {
+        let tempThis = this;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        tempThis.$axios.get("/api/departments/nicu_users", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }

@@ -1,7 +1,6 @@
 package hha.website.models;
 
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -10,15 +9,15 @@ import java.util.Calendar;
 @Table(name="MSPPData")
 public class MSPPRequirement {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer document_id;
     @Temporal(value=TemporalType.TIMESTAMP)
     @Column(nullable=false)
     private Calendar dateSubmitted;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "user_id")
-    @JsonBackReference
+    @JsonIgnore
     private User user;
 
 
@@ -607,10 +606,6 @@ public class MSPPRequirement {
 
     public Integer getLabor_instrumentalse() {
         return labor_instrumentalse;
-    }
-
-    public void setId(Integer document_id) {
-        this.document_id = document_id;
     }
 
     public void setDateSubmitted(Calendar dateSubmitted) {

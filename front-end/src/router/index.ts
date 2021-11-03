@@ -25,6 +25,14 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/register",
     component: Register,
+    beforeEnter: (to, from, next) => {
+      const token = JSON.parse(localStorage.getItem('user')!);
+      if (token.roles[0].authority == 'ROLE_USER') {
+        next(false);
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/",

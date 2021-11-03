@@ -13,7 +13,4 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT DISTINCT role FROM User")
     Collection<String> queryDistinctField();
-
-    @Query("SELECT DISTINCT department FROM User")
-    Collection<String> queryDepartments();
 }

@@ -3,6 +3,7 @@ package hha.website.controllers;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
+import hha.website.services.HHADepartmentService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
@@ -37,6 +38,9 @@ public class MainController {
     private UserRepository userRepository;
 
     @Autowired
+    private HHADepartmentService HHADepartmentService;
+
+    @Autowired
     private MSPPRepositoryService msppRepositoryService;
 
     @Autowired
@@ -59,7 +63,9 @@ public class MainController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment()));
+
+
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartments().getDepartmentname()));
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
@@ -69,9 +75,6 @@ public class MainController {
         if(role.contains("admin")){
             System.out.println("Cannot make admin account");
             return ResponseEntity.badRequest().body("Cannot make admin account");
-        } else if(role.contains("head")){
-            System.out.println("Cannot make department head/medical director account");
-            return ResponseEntity.badRequest().body("Cannot make department head/medical director account");
         } else if(userDetails != null){
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
@@ -104,14 +107,19 @@ public class MainController {
     }
 
 
-    @GetMapping("/api/mspp/department")
-    public ResponseEntity<?> getMSPPField(){
-        System.out.println(Arrays.toString(userDetailsService.listDepartments().toArray()));
-        return ResponseEntity.ok(userDetailsService.listDepartments());
+    @GetMapping("/api/departments")
+    public ResponseEntity<?> getDepartments(){
+        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
+        return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
     @GetMapping("/api/mspp/data")
     public ResponseEntity<?> getAllMSPPData(){
         return ResponseEntity.ok(msppRepositoryService.listAllData());
+    }
+
+    @GetMapping("/api/departments/nicu_users")
+    public ResponseEntity<?> getNICUUsers(){
+        return ResponseEntity.ok(HHADepartmentService.listUsersInNICU());
     }
 }

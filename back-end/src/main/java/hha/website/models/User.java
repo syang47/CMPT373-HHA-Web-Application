@@ -1,10 +1,9 @@
 package hha.website.models;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
-import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Table(name="users")
@@ -18,13 +17,16 @@ public class User {
     private String password;
     @Column(nullable=false)
     private String role;
-    @Column
-    private String department;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    @JsonIgnoreProperties("folder")
-    private Collection<MSPPRequirement> folder;
 
+    @ManyToOne
+    @JoinColumn(name = "department_id")
+    @JsonIgnore
+    private Department department;
+
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<MSPPRequirement> folder;
 
     public Integer getId() {
         return id;
@@ -58,19 +60,27 @@ public class User {
         this.role = role;
     }
 
-    public String getDepartment() {
+    public Department getDepartments() {
         return department;
     }
 
-    public void setDepartment(String department) {
-        this.department = department;
+    public void setDepartments(Department departments) {
+        this.department = departments;
     }
 
-    public Collection<MSPPRequirement> getFolder() {
+    /*public Set<Department> getDepartments() {
+        return departments;
+    }
+
+    public void setDepartments(Set<Department> departments) {
+        this.departments = departments;
+    }*/
+
+    public Set<MSPPRequirement> getFolder() {
         return folder;
     }
 
-    public void setFolder(Collection<MSPPRequirement> folder) {
+    public void setFolder(Set<MSPPRequirement> folder) {
         this.folder = folder;
     }
 }
