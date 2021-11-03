@@ -63,14 +63,17 @@
                                 <table>
                                     <tr>
                                         <th> Submitted Reports: </th>
+                                        <td> {{ submittedReports }} </td>
                                     </tr>
                                     <tr></tr>
                                     <tr>
                                         <th> Quality of Most Recent Report: </th>
+                                        <td> {{ bestReportPoints }} </td>
                                     </tr>
                                     <tr></tr>
                                     <tr>
                                         <th> Current Submission Status: </th>
+                                        <td> {{ reportSubmissionStatus }} </td>
                                     </tr>
                                     <tr></tr>
                                 </table>
@@ -83,7 +86,7 @@
                     <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                         <div class="card-body">
                             <h2 style="color:#000000;">Case Study of the Month</h2>
-                            <p class="card-text">...</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -93,6 +96,62 @@
 </div>
 </template>
 
+<script lang="ts" type="text/typescript">
+import { defineComponent } from 'vue';
+import authHeader from '../services/auth-header';
+import axios from 'axios';
+
+export default defineComponent({
+    name: "LeadersBoard",
+    mounted() {
+        this.getSumbittedReports();
+        this.getBestReportPoints();
+        this.getReportSubmissionStatus();
+    },
+    data: function() {
+        return {
+            submittedReports: 0,
+            bestReportPoints: 0,
+            reportSubmissionStatus: false
+        }
+    },
+    methods: {
+        getSumbittedReports(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/casestudy/totalreports", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.submittedReports = response.data;
+            });
+        },
+
+        getBestReportPoints(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/casestudy/points", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.bestReportPoints = response.data;
+            });
+        },
+        
+        getReportSubmissionStatus(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/casestudy/submissionstatus", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.reportSubmissionStatus = response.data;
+            });
+        }
+    }
+    
+});
+</script>
 
 <style scoped>
 * {

@@ -230,7 +230,6 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-<<<<<<< HEAD
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
@@ -272,21 +271,11 @@ export default defineComponent({
         this.showRehab = true;
       }
     },
+  
+    goToLeadersBoard(){
+      this.$router.push('/leadersboard');
+    },
     goToNICUPAED() {
-=======
-import { Vue } from "vue-class-component";
-export default class Home extends Vue {
-    mounted() {
-        let tempThis = this;
-        if(!tempThis.$store.state.auth.status.loggedIn) {
-            tempThis.$router.push('/login');
-        }
-    };
-  goToLeadersBoard(){
-    this.$router.push('/leadersboard');
-  }
-  goToNICUPAED() {
->>>>>>> origin/17-implement-leaders-board-page
       this.$router.push('/nicu_paed');
     },
     goToMaternity() {
