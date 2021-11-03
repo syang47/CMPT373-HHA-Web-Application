@@ -2,7 +2,8 @@ import { createApp } from "vue";
 // import Vue from 'vue'
 import VueI18n from "vue-i18n";
 import Vue from 'vue/dist/vue';
-import { messages, defaultLocale } from "@/i18n";
+// import { messages, defaultLocale } from "@/i18n";
+import i18n from './i18n'
 import App from "./App.vue";
 import router from "./router";
 import store from "./store";
@@ -30,19 +31,22 @@ declare module "@vue/runtime-core" {
     $axios: AxiosInstance;
   }
 }
+
+// const i18n = new VueI18n({
+//   messages,
+//   locale: defaultLocale,
+//   fallbackLocale: defaultLocale
+// });
+
 const app = createApp(App);
 app.config.globalProperties.$store = store;
 app.provide("$store", store);
 
 app.use(store);
 app.use(router);
-app.use(VueI18n);
+app.use(i18n);
 
-const i18n = new VueI18n({
-  messages,
-  locale: defaultLocale,
-  fallbackLocale: defaultLocale
-});
+
 
 // new Vue({
 //   i18n,

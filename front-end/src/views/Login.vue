@@ -91,10 +91,11 @@
 
         <div class="page">
             <div class="box">
-                <h2>Login</h2>
+                <!-- Todo: modifiy each hard-code html element for "$t" templete -->
+                <h2>{{ $t('message.login') }}</h2>
                 <div class="item">
                     <input v-model="username" type="text" required>
-                    <label for="">UserName</label>
+                    <label for="">Username</label>
                 </div>
                 <div class="item">
                     <input v-model="password" type="password" required>
