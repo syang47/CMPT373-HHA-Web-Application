@@ -336,9 +336,9 @@
                             <ErrorMessage name="admissionsSeverePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsOthermMedical">Other medical: </label>
-                            <Field name="admissionsOthermMedical" type="text" class="form-control"/>
-                            <ErrorMessage name="admissionsOthermMedical" class="error-feedback" />
+                            <label for="admissionsOtherMedical">Other medical: </label>
+                            <Field name="admissionsOtherMedical" type="text" class="form-control"/>
+                            <ErrorMessage name="admissionsOtherMedical" class="error-feedback" />
                         </div>
                     </div>
                 </div>
@@ -486,9 +486,9 @@
                             <ErrorMessage name="numberOfOutpatientsSeverePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsOthermMedical">Other medical: </label>
-                            <Field name="numberOfOutpatientsOthermMedical" type="text" class="form-control"/>
-                            <ErrorMessage name="numberOfOutpatientsOthermMedical" class="error-feedback" />
+                            <label for="numberOfOutpatientsOtherMedical">Other medical: </label>
+                            <Field name="numberOfOutpatientsOtherMedical" type="text" class="form-control"/>
+                            <ErrorMessage name="numberOfOutpatientsOtherMedical" class="error-feedback" />
                         </div>
                     </div>
                     <div>
@@ -842,7 +842,7 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-            admissionsOthermMedical: yup
+            admissionsOtherMedical: yup
                 .string()
                 .default(""),
 
@@ -981,7 +981,7 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-            numberOfOutpatientsOthermMedical: yup
+            numberOfOutpatientsOtherMedical: yup
                 .string()
                 .default(""),
             boy: yup

@@ -1,4 +1,4 @@
-package hha.website;
+package hha.website.dataInterface;
 
 import hha.website.models.datainput.NICUPAEDData;
 import org.springframework.data.jpa.repository.JpaRepository;

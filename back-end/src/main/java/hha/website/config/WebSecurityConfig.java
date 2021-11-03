@@ -3,6 +3,7 @@ package hha.website.config;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtRequestFilter;
 import hha.website.services.MSPPRepositoryService;
+import hha.website.services.NICUPAEDDataRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -71,6 +72,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public MSPPRepositoryService msppRepositoryService() {
         return new MSPPRepositoryService();
+    }
+
+    @Bean
+    public NICUPAEDDataRepositoryService nicupaedDataRepositoryService() {
+        return new NICUPAEDDataRepositoryService();
     }
 
     @Override
