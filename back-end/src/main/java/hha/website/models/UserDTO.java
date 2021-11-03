@@ -29,4 +29,12 @@ public class UserDTO {
     public void setRole(String role) {
         this.role = role;
     }
+    
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 }

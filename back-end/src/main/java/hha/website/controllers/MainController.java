@@ -7,6 +7,11 @@ import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
 import hha.website.services.MSPPRepositoryService;
+import hha.website.CaseStudyRepository;
+import hha.website.models.CaseStudy;
+import hha.website.services.CaseStudyService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -14,6 +19,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -41,6 +47,10 @@ public class MainController {
 
     @Autowired
     private JwtUtil jwtToken;
+
+    @Autowired
+    private CaseStudyService caseStudyRepositoryService;
+
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
         System.out.println(authenticationRequest.getUsername());
@@ -87,9 +97,42 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
-    @GetMapping("/api/mspp/department")
-    public ResponseEntity<?> getMSPPField(){
-        System.out.println(Arrays.toString(msppRepositoryService.listDistinctItemsInField().toArray()));
-        return ResponseEntity.ok(msppRepositoryService.listDistinctItemsInField());
+    @RequestMapping(value = "/api/casestudy", method = RequestMethod.POST)
+    public ResponseEntity<?> getCaseStudyField(@RequestBody CaseStudyDTO entry) {
+        System.out.println("entring case study");
+        System.out.println("casestudy added: " +  entry.getTitle() + " " + entry.getDate() + " " + entry.getPoints() + " " + entry.getSubmissionStatus());
+        return ResponseEntity.ok(caseStudyRepositoryService.save(entry));
+    }
+
+    @RequestMapping(value = "/api/casestudy", method = RequestMethod.GET)
+    public ResponseEntity<?> getCaseStudyField() {
+        caseStudyRepositoryService.loadCaseStudyByTitle();
+        System.out.println("casestudycasestudy");
+        System.out.println(Arrays.toString(caseStudyRepositoryService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(caseStudyRepositoryService.listDistinctItemsInField());
+        
+    }
+
+    @RequestMapping(value = "/api/casestudy/points", method = RequestMethod.GET)
+    public ResponseEntity<?> getCaseStudyPointsField() {
+        System.out.println("casestudypoints");
+        System.out.println(Arrays.toString(caseStudyRepositoryService.listPointsInField().toArray()));
+        return ResponseEntity.ok(caseStudyRepositoryService.listPointsInField());
+        
+    }
+    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
+    public ResponseEntity<?> getCaseStudySubStatusField() {
+        System.out.println("casestudysubmission status");
+        System.out.println(Arrays.toString(caseStudyRepositoryService.listSubmissionStatusInField().toArray()));
+        return ResponseEntity.ok(caseStudyRepositoryService.listSubmissionStatusInField());
+        
+    }
+
+    @RequestMapping(value = "/api/casestudy/totalreports", method = RequestMethod.GET)
+    public ResponseEntity<?> getCaseStudyTotReportField() {
+        System.out.println("total casestudy submitted");
+        System.out.println(Arrays.toString(caseStudyRepositoryService.listTotalReportsSubmittedField().toArray()));
+        return ResponseEntity.ok(caseStudyRepositoryService.listTotalReportsSubmittedField());
+        
     }
 }
