@@ -57,9 +57,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
-                .antMatchers("/api/**").permitAll()
-                //.antMatchers("/api/register").hasRole("HEAD")
-                //.antMatchers("/api/**").authenticated()
+                .antMatchers("/api/login").permitAll()
+                .antMatchers("/api/register").hasRole("HEAD")
+                .antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
@@ -90,5 +90,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
+
 
 }

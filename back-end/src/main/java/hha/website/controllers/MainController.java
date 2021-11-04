@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
+import java.util.Collection;
 
 @RestController
 @CrossOrigin
@@ -85,7 +86,7 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data){
+    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data) {
         final String authorizationHeader = request.getHeader("Authorization");
         System.out.println(authorizationHeader);
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
