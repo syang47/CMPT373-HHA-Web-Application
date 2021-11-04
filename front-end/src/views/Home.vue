@@ -217,7 +217,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <button class="button">
+      <button style="display:inline-block;" class="button" @click.prevent="goToMessageBoard">
         <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
       </button>
     </div>
@@ -283,6 +283,9 @@ export default defineComponent({
     goToCommunityHealth() {
       this.$router.push('/community_health');
     },
+    goToMessageBoard() {
+      this.$router.push('/Message_Board');
+    }
 
   }
   
