@@ -10,16 +10,29 @@
   box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
     0 0 100px 0 #c6fafe;
 }
+
+.rectangle-leader-board {
+      width: 1210px;
+      height: 110px;
+      padding: 2px 2px 2px 2px;
+      border-radius: 10px;
+      border: 1px solid #797979;
+      background-color: #7a4183;
+      box-sizing: border-box;
+      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
 </style>
 
 <template>
   <div class="container-fluid"> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
-    <h1 class="display-2 text-center text-dark">NICU/PAED</h1> 
+    <button class="button">  
+    <h1 class="rectangle-leader-board">Add Message</h1> 
+    </button>
   </div>
 </template>
 
@@ -31,7 +44,7 @@ import * as yup from "yup";
 
 export default class Message_Board extends Vue {
     goToMessageBoard(): void {
-        this.$router.push('/Message_Board/submit');
+        this.$router.push('/message_board/submit');
     };
 }
 </script>

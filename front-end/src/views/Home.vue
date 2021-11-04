@@ -284,7 +284,7 @@ export default defineComponent({
       this.$router.push('/community_health');
     },
     goToMessageBoard() {
-      this.$router.push('/Message_Board');
+      this.$router.push('/message_board');
     }
 
   }
