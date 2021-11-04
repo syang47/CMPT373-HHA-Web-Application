@@ -3,10 +3,12 @@ package hha.website.controllers;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
+import hha.website.models.datainput.NICUPAEDDataDTO;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
 import hha.website.services.MSPPRepositoryService;
+import hha.website.services.NICUPAEDDataRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -76,9 +78,16 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO entry){
-        return ResponseEntity.ok(msppRepositoryService.save(entry));
+//    @RequestMapping(value = "/api/datainput/**", method = RequestMethod.POST)
+//    public ResponseEntity<?> saveData(@RequestBody MSPPRequirementDTO entry){
+//        return ResponseEntity.ok(msppRepositoryService.save(entry));
+//    }
+
+    @Autowired
+    private NICUPAEDDataRepositoryService nicupaedDataRepositoryService;
+    @RequestMapping(value = "/api/datainput/NICU_PAED", method = RequestMethod.POST)
+    public ResponseEntity<?> saveNICUPAEDData(@RequestBody NICUPAEDDataDTO entry){
+        return ResponseEntity.ok(nicupaedDataRepositoryService.save(entry));
     }
 
     @GetMapping("/api/user/role")
