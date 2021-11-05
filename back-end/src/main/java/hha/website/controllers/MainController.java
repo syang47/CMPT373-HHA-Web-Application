@@ -3,6 +3,7 @@ package hha.website.controllers;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
+import hha.website.services.AdditionalMSPPRepositoryService;
 import hha.website.services.HHADepartmentService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 
 @RestController
 @CrossOrigin
@@ -43,6 +45,9 @@ public class MainController {
 
     @Autowired
     private MSPPRepositoryService msppRepositoryService;
+
+    @Autowired
+    private AdditionalMSPPRepositoryService additionalMSPPRepositoryService;
 
     @Autowired
     private JwtUtil jwtToken;
@@ -122,5 +127,17 @@ public class MainController {
     @GetMapping("/api/departments/nicu_users")
     public ResponseEntity<?> getNICUUsers(){
         return ResponseEntity.ok(HHADepartmentService.listUsersInNICU());
+    }
+
+    @GetMapping("/api/mspp/{documentId}")
+    public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
+        MSPPRequirement requiredData = msppRepositoryService.getAForm(documentId);
+        AdditionalMSPP additionalData = additionalMSPPRepositoryService.getAdditionalData(requiredData);
+
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("main required data: ", requiredData);
+        result.put("additional data: ", additionalData);
+
+        return ResponseEntity.ok(result);
     }
 }

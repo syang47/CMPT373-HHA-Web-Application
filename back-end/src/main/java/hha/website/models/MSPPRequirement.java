@@ -1,18 +1,21 @@
 package hha.website.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
 @Table(name="MSPPData")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MSPPRequirement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer document_id;
-    @Temporal(value=TemporalType.TIMESTAMP)
-    @Column(nullable=false)
+    private Integer id;
+
+    @Temporal(value = TemporalType.TIMESTAMP)
+    @Column(nullable = false)
     private Calendar dateSubmitted;
 
     @ManyToOne
@@ -20,6 +23,10 @@ public class MSPPRequirement {
     @JsonIgnore
     private User user;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "additionaldata_id", referencedColumnName = "id")
+    @JsonIgnore
+    private AdditionalMSPP additionalData;
 
     @Column
     private Integer bedsAvailable;
@@ -216,8 +223,8 @@ public class MSPPRequirement {
     private Integer labor_instrumentalse;
 
 
-    public Integer getDocument_id() {
-        return document_id;
+    public Integer getId() {
+        return id;
     }
 
     public Calendar getDateSubmitted() {

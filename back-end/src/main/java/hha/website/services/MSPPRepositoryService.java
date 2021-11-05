@@ -127,6 +127,10 @@ public class MSPPRepositoryService {
         return msppRepository.findAll();
     }
 
+    public MSPPRequirement getAForm(Integer documentId) {
+        return msppRepository.findByid(documentId);
+    }
+
     /*
     public Collection<String> listDistinctItemsInField() {
         return msppRepository.queryDistinctField();

@@ -9,13 +9,13 @@ import java.util.Set;
 @Table(name="users")
 public class User {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable=false, unique=true)
+    @Column(nullable = false, unique = true)
     private String username;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String password;
-    @Column(nullable=false)
+    @Column(nullable = false)
     private String role;
 
 

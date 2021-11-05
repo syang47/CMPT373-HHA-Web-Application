@@ -16,8 +16,6 @@
           </button>
           <button class="btn btn-light" @click="goToRegister">Register
           </button>
-          <button class="btn btn-light" @click="getDepartments">Show Departments
-          </button>
           <button class="btn btn-light" @click="getData">Show Data
           </button>
           <button class="btn btn-light" @click="getUsersInNICU">NICU Users
@@ -46,19 +44,6 @@ export default class App extends Vue{
         let tempThis = this;
         tempThis.$router.push('/register');
     };
-
-    getDepartments(): void {
-        let tempThis = this;
-        let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/departments", {
-            headers: {
-                'Authorization': `Bearer ${token.jwt}`
-            }
-        }).then(response => {
-              console.log(response.data);
-              return JSON.stringify(response.data);
-        });
-    }
 
     getUsersInNICU(): void {
         let tempThis = this;

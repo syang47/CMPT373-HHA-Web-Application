@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface MSPPRepository extends JpaRepository<MSPPRequirement, Integer> {
-    //MSPPRequirement findByDepartment(String department);
+    MSPPRequirement findByid(Integer id);
 
     List<MSPPRequirement> findAll();
 }
