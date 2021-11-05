@@ -3,12 +3,9 @@ package hha.website.controllers;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
-import hha.website.services.AdditionalMSPPRepositoryService;
-import hha.website.services.HHADepartmentService;
-import hha.website.services.HHAUserDetailsService;
+import hha.website.services.*;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
-import hha.website.services.MSPPRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -50,6 +47,9 @@ public class MainController {
     private AdditionalMSPPRepositoryService additionalMSPPRepositoryService;
 
     @Autowired
+    private CaseStudyService caseStudyService;
+
+    @Autowired
     private JwtUtil jwtToken;
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
@@ -68,8 +68,6 @@ public class MainController {
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
-
-
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartments().getDepartmentname()));
     }
@@ -93,17 +91,17 @@ public class MainController {
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
     public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data) {
         final String authorizationHeader = request.getHeader("Authorization");
-        System.out.println(authorizationHeader);
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        System.out.println(username);
         final User user = userDetailsService.findByUsername(username);
-        System.out.println(user);
-        /*
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        User user = (User)auth.getPrincipal();
-        System.out.println(auth);
-        return ResponseEntity.ok(msppRepositoryService.save(user, data));*/
         return ResponseEntity.ok(msppRepositoryService.save(user, data));
+    }
+
+    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
+    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
+        final String authorizationHeader = request.getHeader("Authorization");
+        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
+        final User user = userDetailsService.findByUsername(username);
+        return ResponseEntity.ok(caseStudyService.save(user, data));
     }
 
     @GetMapping("/api/user/role")

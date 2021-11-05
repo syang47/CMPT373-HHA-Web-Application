@@ -21,6 +21,8 @@ public class MSPPRepositoryService {
     public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
         entry.setUser(user);
+        entry.setDateSubmitted(Calendar.getInstance());
+
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());
         entry.setHospitalized(data.getHospitalized());
@@ -34,7 +36,7 @@ public class MSPPRepositoryService {
         entry.setStayedInTheWard(data.getStayedInTheWard());
         entry.setAdmissions(data.getAdmissions());
         entry.setBedsAvailable(data.getBedsAvailable());
-        entry.setDateSubmitted(Calendar.getInstance());
+
 
         entry.setWeight_less_normal(data.getWeight_less_normal());
         entry.setWeight_less_cesarienne(data.getWeight_less_cesarienne());

@@ -28,6 +28,12 @@ public class User {
     @JsonIgnore
     private Set<MSPPRequirement> folder;
 
+    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    private Set<CaseStudy> caseStudies;
+
+
+
     public Integer getId() {
         return id;
     }

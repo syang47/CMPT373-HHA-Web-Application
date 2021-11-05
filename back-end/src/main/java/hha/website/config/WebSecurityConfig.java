@@ -1,5 +1,6 @@
 package hha.website.config;
 
+import hha.website.services.CaseStudyService;
 import hha.website.services.HHADepartmentService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtRequestFilter;
@@ -73,11 +74,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public MSPPRepositoryService msppRepositoryService() {
         return new MSPPRepositoryService();
-    }
-
-    @Bean
-    public HHADepartmentService departmentService() {
-        return new HHADepartmentService();
     }
 
     @Override

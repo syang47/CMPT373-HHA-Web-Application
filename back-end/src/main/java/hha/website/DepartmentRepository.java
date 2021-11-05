@@ -17,8 +17,6 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     @Query("SELECT departmentname FROM Department")
     Collection<String> queryDepartmentNames();
 
-    List<Department> findAll();
-
     @Query("SELECT users FROM Department WHERE departmentname = 'NICU_PAED'")
     Set<User> queryUsersInNICU();
 }

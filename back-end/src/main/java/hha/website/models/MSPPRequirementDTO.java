@@ -4,8 +4,6 @@ import javax.persistence.Column;
 
 public class MSPPRequirementDTO {
 
-    private User user;
-
     private Integer bedDays;
     private Integer patientDays;
     private Integer hospitalized;
@@ -103,10 +101,6 @@ public class MSPPRequirementDTO {
     private Integer labor_normal;
     private Integer labor_cesarienne;
     private Integer labor_instrumentalse;
-
-    public User getUser() {
-        return user;
-    }
 
     public Integer getBedsAvailable() {
         return bedsAvailable;
