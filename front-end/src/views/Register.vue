@@ -5,29 +5,29 @@
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('registerPage.registration') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">{{ $t('registerPage.username') }}</label>
                     <Field name="username" type="text" class="form-control" />
                     <ErrorMessage name="username" class="error-feedback" />
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">{{ $t('registerPage.password') }}</label>
                     <Field name="password" type="password" class="form-control" />
                     <ErrorMessage name="password" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="role">Role</label>
+                    <label for="role">{{ $t('registerPage.role') }}</label>
                     <Field name="role" type="text" class="form-control" />
                     <ErrorMessage name="role" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Sign Up
+                        {{ $t('registerPage.signUp') }}
                     </button>
                 </div>
             </div>
@@ -57,7 +57,7 @@ export default defineComponent({
         ErrorMessage,
     },
     data() {
-        const userSchema = yup.object().shape({
+        const userSchema = yup.object().shape({ //need translation handling for err messages
             username: yup
                 .string()
                 .required("Username is required!")
@@ -65,7 +65,7 @@ export default defineComponent({
                 .max(20, "Must be maximum 20 characters!"),
             role: yup
                 .string()
-                .required("role is required!")
+                .required("Role is required!")
                 .lowercase()
                 .notOneOf(['admin']),
             password: yup

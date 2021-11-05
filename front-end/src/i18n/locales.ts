@@ -7,3 +7,5 @@ export enum Locales {
     { value: Locales.EN, caption: 'English' },
     { value: Locales.FR, caption: 'Français' }
   ]
+
+  export const defaultLocale = Locales.FR;

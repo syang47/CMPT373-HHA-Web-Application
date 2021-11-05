@@ -11,7 +11,7 @@ import Maternity_Data from "@/views/Maternity/MaternityData.vue";
 
 import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 
-import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
+import Community_Health from "@/views/Community_Health/Community_Dep.vue";
 
 
 const routes: Array<RouteRecordRaw> = [
@@ -64,11 +64,10 @@ const routes: Array<RouteRecordRaw> = [
 
   // Community_Health
   {
-    path: "/communityhealth",
-    name: "CommunityHealth",
-    component: CommunityHealth,
+    path: "/community_health",
+    name: "Community_Health",
+    component: Community_Health,
   },
-
 
   // Other components
 

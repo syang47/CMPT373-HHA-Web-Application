@@ -3,78 +3,78 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="bedsAvailable">Beds Available</label>
+                    <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
                     <Field name="bedsAvailable" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="bedDays">Bed Days</label>
+                    <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
                     <Field name="bedDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="patientDays">Patient Days</label>
+                    <label for="patientDays">{{ $t('msppData.patientDays') }}</label>
                     <Field name="patientDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="hospitalized">Hospitalized</label>
+                    <label for="hospitalized">{{ $t('msppData.hospitalised') }}</label>
                     <Field name="hospitalized" type="text" class="form-control" value=0 />
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="dischargedAlive">Discharged Alive</label>
+                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
                     <Field name="dischargedAlive" type="text" class="form-control" value=0 />
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedBefore48h">Died Before 48h</label>
+                    <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                     <Field name="diedBefore48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedBefore48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedAfter48h">Died After 48h</label>
+                    <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                     <Field name="diedAfter48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedAfter48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="daysHospitalised">Days Hospitalised</label>
+                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
                     <Field name="daysHospitalised" type="text" class="form-control" value=0 />
                     <ErrorMessage name="daysHospitalised" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="referrals">Referrals</label>
+                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
                     <Field name="referrals" type="text" class="form-control" value=0 />
                     <ErrorMessage name="referrals" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="transfers">Transfers</label>
+                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
                     <Field name="transfers" type="text" class="form-control" value=0 />
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="selfDischarged">Self Discharged</label>
+                    <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
                     <Field name="selfDischarged" type="text" class="form-control" value=0 />
                     <ErrorMessage name="selfDischarged" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="stayedInTheWard">Stayed In The Ward</label>
+                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
                     <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
                     <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="admissions">Admissions</label>
+                    <label for="admissions">{{ $t('msppData.admissions') }}</label>
                     <Field name="admissions" type="text" class="form-control" value=0 />
                     <ErrorMessage name="admissions" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('msppData.submit') }}
                     </button>
                 </div>
             </div>

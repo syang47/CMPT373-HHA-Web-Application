@@ -187,69 +187,103 @@
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
       <button class="button">  
-        <h1 class="rectangle-leader-board">LEADER BOARD</h1>
+        <h1 class="rectangle-leader-board">{{ $t('homePage.leaderBoard') }}</h1>
       </button>
     </div>
     <div class="row justify-content-center">
-      <div class="row">
-        <div class="col">
-          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED">
-            <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+      <div class="row" >
+        <div class="col" v-if="showNICU">
+          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" > 
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.nicuPaed') }}</h1>
           </button>
         </div>
-        <div class="col">
+        <div class="col" v-if="showMaternity">
           <button style="display:inline-block;" class="button" @click.prevent="goToMaternity">
-            <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.maternity') }}</h1>
           </button>
         </div>
       </div>
       <div class="row">
-        <div class="col">
+        <div class="col" v-if="showRehab">
           <button style="display:inline-block;" class="button" @click.prevent="goToRehab">
-            <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.rehab') }}</h1>
           </button>
         </div>
-        <div class="col">
+        <div class="col" v-if="showComHealth">
           <button style="display:inline-block;" class="button" @click.prevent="goToCommunityHealth">
-            <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.communityHealth') }}</h1>
           </button>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
       <button class="button">
-        <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
+        <h1 class="rectangle-msg-board">{{ $t('homePage.messageBoard') }}</h1>
       </button>
     </div>
     <div class="row justify-content-center">
       <button class="button">
-        <h1 class="rectangle-case-studies">CASE STUDY</h1>
+        <h1 class="rectangle-case-studies">{{ $t('homePage.caseStudy') }}</h1>
       </button>
     </div>
   </div>
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
-export default class Home extends Vue {
-    mounted() {
-        let tempThis = this;
-        if(!tempThis.$store.state.auth.status.loggedIn) {
-            tempThis.$router.push('/login');
-        }
-    };
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: "Home",
+  mounted() {
+      if(!this.$store.state.auth.status.loggedIn) {
+          this.$router.push('/login');
+      }
+      this.showDepartments();
+  },
+  data: function() {
 
-  goToNICUPAED() {
+    return {
+      showNICU: false,
+      showComHealth: false,
+      showMaternity: false,
+      showRehab: false,
+      
+    }
+  },
+  methods: {
+    showDepartments(): void {
+      const token = JSON.parse(localStorage.getItem('user')!);
+      if(token.roles[0].authority == 'ROLE_ADMIN' || token.roles[0].authority == 'ROLE_HEAD') {
+        this.showNICU = true;
+        this.showComHealth = true;
+        this.showMaternity = true;
+        this.showRehab = true;
+      }
+      if(token.department == "NICU_PAED") {
+        this.showNICU = true;
+      }
+      if(token.department == "community_health") {
+        this.showComHealth = true;
+      }
+      if(token.department == "maternity")  {
+        this.showMaternity = true;
+      }
+      if(token.department == "rehab")  {
+        this.showRehab = true;
+      }
+    },
+    goToNICUPAED() {
       this.$router.push('/nicu_paed');
-  };
-  goToMaternity() {
+    },
+    goToMaternity() {
       this.$router.push('/maternity');
-  };
-  goToRehab() {
+    },
+    goToRehab() {
       this.$router.push('/rehab');
-  };
-  goToCommunityHealth() {
-      this.$router.push('/communityhealth');
-  };
-}
+    },
+    goToCommunityHealth() {
+      this.$router.push('/community_health');
+    },
+
+  }
+});
 </script>
