@@ -14,6 +14,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
 
 @RestController
 @CrossOrigin
@@ -78,5 +82,15 @@ public class MainController {
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
     public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
         return ResponseEntity.ok(msppRepositoryService.save(entry));
+    }
+    @GetMapping("/datainput")
+    public String datainputForm(Model model){
+        model.addAttribute("datainput", new DataInput());
+        return "dataInput";
+    }
+    @PostMapping("/datainput")
+    public String datainputSubmit(@ModelAttribute DataInput datainput, Model model){
+        model.addAttribute("datainput", datainput);
+        return "result";
     }
 }

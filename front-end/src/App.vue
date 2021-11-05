@@ -24,7 +24,7 @@
             <a class="nav-link disabled" href="#">Case Study</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link disabled" href="#">Data Input</a>
+            <router-link to="/datainput" class="nav-link">Data Input</router-link>
           </li>
         </ul>
         

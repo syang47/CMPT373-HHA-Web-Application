@@ -14,7 +14,7 @@ import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 
 import CommunityHealth from "@/views/Com_Heal/Community_Dep.vue";
 
-
+import DataInput from "@/views/DataInput.vue"
 
 
 
@@ -78,6 +78,11 @@ const routes: Array<RouteRecordRaw> = [
     name: "CommunityHealth",
     component: CommunityHealth,
   },
+    {
+      path: "/datainput",
+      name: "DataInput",
+      component: DataInput,
+    },
 
 
   // Other components
