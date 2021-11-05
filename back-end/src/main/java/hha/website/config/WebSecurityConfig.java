@@ -1,6 +1,5 @@
 package hha.website.config;
 
-import hha.website.services.CaseStudyService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtRequestFilter;
 import hha.website.services.MSPPRepositoryService;
@@ -56,7 +55,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
-                .antMatchers("/api/casestudy/**").permitAll()
+                // .antMatchers("/api/casestudy/**").permitAll()
                 .antMatchers("/api/login").permitAll()
                 .antMatchers("/api/register").hasRole("HEAD")
                 .antMatchers("/api/**").authenticated()

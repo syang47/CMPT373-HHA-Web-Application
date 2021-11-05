@@ -21,6 +21,7 @@ public class CaseStudyService {
     @Autowired
     private CaseStudyRepository caseStudyRepository;
 
+    // hardcoded case studies, to be deleted when case study page is setup
     public void loadCaseStudyByTitle() {
         CaseStudy tempCase1 = new CaseStudy();
         tempCase1.setTitle("tempCaseStudy1");
@@ -50,6 +51,7 @@ public class CaseStudyService {
 
     public CaseStudy save(CaseStudyDTO casestudy) {
         CaseStudy entry = new CaseStudy();
+        entry.setDepartment(casestudy.getDepartment());
         entry.setTitle(casestudy.getTitle());
         entry.setDate(casestudy.getDate());
         entry.setPoints(casestudy.getPoints());

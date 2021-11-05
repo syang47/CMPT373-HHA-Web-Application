@@ -11,6 +11,9 @@ public class CaseStudy {
     private Integer id;
 
     @Column
+    private String department; 
+
+    @Column
     private String title;
 
     @Column
@@ -21,6 +24,14 @@ public class CaseStudy {
 
     @Column
     private Boolean status;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String object) {
+        this.department = department;
+    }
 
     public String getTitle() {
         return title;

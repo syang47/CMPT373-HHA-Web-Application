@@ -104,8 +104,9 @@ public class MainController {
         return ResponseEntity.ok(caseStudyRepositoryService.save(entry));
     }
 
+    
     @RequestMapping(value = "/api/casestudy", method = RequestMethod.GET)
-    public ResponseEntity<?> getCaseStudyField() {
+    public ResponseEntity<?> saveCaseStudyField() {
         caseStudyRepositoryService.loadCaseStudyByTitle();
         System.out.println("casestudycasestudy");
         System.out.println(Arrays.toString(caseStudyRepositoryService.listDistinctItemsInField().toArray()));

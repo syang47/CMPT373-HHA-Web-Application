@@ -3,10 +3,19 @@ package hha.website.models;
 import java.time.LocalDate;
 
 public class CaseStudyDTO {
+    private String department;
     private String title;
     private LocalDate date;
     private Integer points;
     private Boolean status;
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
+    }
 
     public String getTitle() {
         return title;
