@@ -1,6 +1,7 @@
 package hha.website.services;
 
 import hha.website.MSPPRepository;
+import hha.website.models.Department;
 import hha.website.models.MSPPRequirement;
 import hha.website.models.MSPPRequirementDTO;
 import hha.website.models.User;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;

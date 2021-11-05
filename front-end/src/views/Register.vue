@@ -116,7 +116,6 @@ export default defineComponent({
             this.message = "";
             this.successful = false;
             this.loading = true;
-            console.log(user.departments);
             this.$store.dispatch("auth/register", user).then(
                 (data) => {
                     this.message = data.message;

@@ -7,12 +7,14 @@ import hha.website.services.*;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
@@ -97,10 +99,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
+    public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
+        System.out.println(data);
         final String authorizationHeader = request.getHeader("Authorization");
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
         final User user = userDetailsService.findByUsername(username);
+
+
         return ResponseEntity.ok(caseStudyService.save(user, data));
     }
 
@@ -137,5 +142,10 @@ public class MainController {
         result.put("additional data: ", additionalData);
 
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/api/casestudy/types")
+    public ResponseEntity<?> getCaseStudyTypes(){
+        return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
 }

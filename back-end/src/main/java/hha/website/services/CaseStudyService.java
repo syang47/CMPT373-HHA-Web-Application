@@ -1,5 +1,6 @@
 package hha.website.services;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.CaseStudyRepository;
 import hha.website.models.CaseStudy;
 import hha.website.models.CaseStudyDTO;
@@ -7,10 +8,14 @@ import hha.website.models.Department;
 import hha.website.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
+import java.io.File;
+import java.io.IOException;
 import java.util.Calendar;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -22,10 +27,28 @@ public class CaseStudyService {
     public CaseStudy save(User user, CaseStudyDTO data) {
         CaseStudy entry = new CaseStudy();
 
+//        CaseStudyDTO data = new CaseStudyDTO();
+//        try {
+//            ObjectMapper objMapper = new ObjectMapper();
+//            data = objMapper.readValue(dataString, CaseStudyDTO.class);
+//        } catch(IOException e) {
+//            System.out.println(e);
+//        }
+
+
         entry.setDateSubmitted(Calendar.getInstance());
         entry.setUser(user);
+        entry.setCaseStudyType(data.getCaseStudyType());
 
-        entry.setPhoto(data.getPhoto());
+        Optional<MultipartFile> photoBytes = Optional.ofNullable(data.getPhoto());
+        photoBytes.ifPresent(p -> {
+            try{
+                entry.setPhoto(p.getBytes());
+            } catch(IOException e) {
+                System.out.println(e);
+            }
+        });
+
 
         entry.setPatientName(data.getPatientName());
         entry.setPatientAge(data.getPatientAge());
@@ -48,16 +71,21 @@ public class CaseStudyService {
 
         entry.setEquipmentReceived(data.getEquipmentReceived());
         entry.setEquipmentDepartmentTo(data.getEquipmentDepartmentTo());
-        entry.setEquipmentDepartmentFrom(data.getEquipmentDepartmentFrom());
+        entry.setEquipmentDepartmentFrom(data.getEquipmentFrom());
         entry.setEquipmentOrigin(data.getEquipmentOrigin());
         entry.setEquipmentUsage(data.getEquipmentUsage());
 
         entry.setStory(data.getStory());
-
+        System.out.println("case study saved");
         return caseStudyRepository.save(entry);
     }
 
     public List<CaseStudy> listAllCaseStudies() {
         return caseStudyRepository.findAll();
     }
+
+    public List<String> listCaseStudyTypes() {
+        return caseStudyRepository.queryCaseStudyTypes();
+    }
+
 }

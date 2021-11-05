@@ -1,10 +1,13 @@
 package hha.website.models;
 
-import javax.persistence.Column;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.Part;
 
 public class CaseStudyDTO {
 
-    private byte[] photo;
+    private MultipartFile photo;
+    private String caseStudyType;
 
     //patient story
     private String patientName;
@@ -31,15 +34,19 @@ public class CaseStudyDTO {
     //equipment received
     private String equipmentReceived;
     private String equipmentDepartmentTo;
-    private String equipmentDepartmentFrom;
+    private String equipmentFrom;
     private String equipmentOrigin;
     private String equipmentUsage;
 
     
     private String story;
 
-    public byte[] getPhoto() {
+    public MultipartFile getPhoto() {
         return photo;
+    }
+
+    public String getCaseStudyType() {
+        return caseStudyType;
     }
 
     public String getPatientName() {
@@ -114,8 +121,8 @@ public class CaseStudyDTO {
         return equipmentDepartmentTo;
     }
 
-    public String getEquipmentDepartmentFrom() {
-        return equipmentDepartmentFrom;
+    public String getEquipmentFrom() {
+        return equipmentFrom;
     }
 
     public String getEquipmentOrigin() {
@@ -128,5 +135,101 @@ public class CaseStudyDTO {
 
     public String getStory() {
         return story;
+    }
+
+    public void setPhoto(MultipartFile photo) {
+        this.photo = photo;
+    }
+
+    public void setCaseStudyType(String caseStudyType) {
+        this.caseStudyType = caseStudyType;
+    }
+
+    public void setPatientName(String patientName) {
+        this.patientName = patientName;
+    }
+
+    public void setPatientAge(String patientAge) {
+        this.patientAge = patientAge;
+    }
+
+    public void setPatientOrigin(String patientOrigin) {
+        this.patientOrigin = patientOrigin;
+    }
+
+    public void setPatientReasoning(String patientReasoning) {
+        this.patientReasoning = patientReasoning;
+    }
+
+    public void setPatientDuration(String patientDuration) {
+        this.patientDuration = patientDuration;
+    }
+
+    public void setPatientDiagnosis(String patientDiagnosis) {
+        this.patientDiagnosis = patientDiagnosis;
+    }
+
+    public void setStaffName(String staffName) {
+        this.staffName = staffName;
+    }
+
+    public void setStaffTitle(String staffTitle) {
+        this.staffTitle = staffTitle;
+    }
+
+    public void setStaffDepartment(String staffDepartment) {
+        this.staffDepartment = staffDepartment;
+    }
+
+    public void setStaffEmploymentDuration(String staffEmploymentDuration) {
+        this.staffEmploymentDuration = staffEmploymentDuration;
+    }
+
+    public void setStaffEnjoymentPoints(String staffEnjoymentPoints) {
+        this.staffEnjoymentPoints = staffEnjoymentPoints;
+    }
+
+    public void setTrainingDate(String trainingDate) {
+        this.trainingDate = trainingDate;
+    }
+
+    public void setTrainingSubject(String trainingSubject) {
+        this.trainingSubject = trainingSubject;
+    }
+
+    public void setTrainingConductor(String trainingConductor) {
+        this.trainingConductor = trainingConductor;
+    }
+
+    public void setTrainingAttendees(String trainingAttendees) {
+        this.trainingAttendees = trainingAttendees;
+    }
+
+    public void setTrainingBenefits(String trainingBenefits) {
+        this.trainingBenefits = trainingBenefits;
+    }
+
+    public void setEquipmentReceived(String equipmentReceived) {
+        this.equipmentReceived = equipmentReceived;
+    }
+
+    public void setEquipmentDepartmentTo(String equipmentDepartmentTo) {
+        this.equipmentDepartmentTo = equipmentDepartmentTo;
+    }
+
+    public void setEquipmentFrom(String equipmentFrom) {
+        this.equipmentFrom = equipmentFrom;
+    }
+
+    public void setEquipmentOrigin(String equipmentOrigin) {
+        this.equipmentOrigin = equipmentOrigin;
+    }
+
+    public void setEquipmentUsage(String equipmentUsage) {
+        this.equipmentUsage = equipmentUsage;
+    }
+
+    public void setStory(String story) {
+        this.story = story;
     }
 }

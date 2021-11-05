@@ -69,24 +69,14 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole("ROLE_ADMIN");
-        /*
-        Set<Department> adminHeadDepts = new HashSet<Department>();
-        adminHeadDepts.add(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
-        adminHeadDepts.add(HHADepartmentService.loadDepartmentByDepartmentName("maternity"));
-        adminHeadDepts.add(HHADepartmentService.loadDepartmentByDepartmentName("rehab"));
-        adminHeadDepts.add(HHADepartmentService.loadDepartmentByDepartmentName("community_health"));
-        admin.setDepartments(adminHeadDepts);*/
-        System.out.println(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
         admin.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
         userRepository.save(admin);
-        System.out.println(userRepository.findByUsername("admin").getDepartments().getDepartmentname());
 
         User randomHead = new User();
         randomHead.setId(2);
         randomHead.setUsername("head");
         randomHead.setPassword(passwordEncoder.encode("head"));
         randomHead.setRole("ROLE_HEAD");
-        //randomHead.setDepartments(adminHeadDepts);
         randomHead.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
         userRepository.save(randomHead);
 
@@ -95,9 +85,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
-        /*Set<Department> userDepts = new HashSet<Department>();
-        userDepts.add(HHADepartmentService.loadDepartmentByDepartmentName("maternity"));
-        randomUser.setDepartments(userDepts);*/
         randomUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("maternity"));
         userRepository.save(randomUser);
     }

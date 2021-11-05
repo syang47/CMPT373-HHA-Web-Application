@@ -25,7 +25,7 @@ public class CaseStudy {
     @Column
     private byte[] photo;
 
-    @Column(nullable = false, unique = true)
+    @Column
     private String caseStudyType;
 
 
@@ -44,7 +44,6 @@ public class CaseStudy {
     private String patientDiagnosis;
 
     //staff recognition
-
     @Column
     private String staffName;
     @Column
@@ -57,7 +56,6 @@ public class CaseStudy {
     private String staffEnjoymentPoints;
 
     //training session
-
     @Column
     private String trainingDate;
     @Column
@@ -70,7 +68,6 @@ public class CaseStudy {
     private String trainingBenefits;
 
     //equipment received
-
     @Column
     private String equipmentReceived;
     @Column
