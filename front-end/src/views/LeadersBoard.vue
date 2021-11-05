@@ -107,34 +107,48 @@ export default defineComponent({
         this.getSumbittedReports();
         this.getBestReportPoints();
         this.getReportSubmissionStatus();
+        
     },
     data: function() {
         return {
             submittedReports: 0,
             bestReportPoints: 0,
-            reportSubmissionStatus: false
+            reportSubmissionStatus: false,
+            departments: []
         }
     },
     methods: {
+        isAdmin(): boolean {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            if(token.roles[0].authority == 'ROLE_ADMIN') {
+                return true;
+            }
+            return false;
+        },
+
         getSumbittedReports(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
-            axios.get("/api/casestudy/totalreports", {
+            this.$axios.get("/api/casestudy/totalreports", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`
                 }
             }).then(response => {
                 this.submittedReports = response.data;
+            }).catch((error: any) => {
+                      alert("could not get submitted reports");
             });
         },
 
         getBestReportPoints(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
-            axios.get("/api/casestudy/points", {
+            this.$axios.get("/api/casestudy/points", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`
                 }
             }).then(response => {
                 this.bestReportPoints = response.data;
+            }).catch((error: any) => {
+                      alert("could not get best report points");
             });
         },
         
@@ -146,6 +160,8 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.reportSubmissionStatus = response.data;
+            }).catch((error: any) => {
+                      alert("could not get submission status");
             });
         }
     }

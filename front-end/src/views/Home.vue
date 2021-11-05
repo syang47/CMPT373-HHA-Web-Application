@@ -246,7 +246,6 @@ export default defineComponent({
       showComHealth: false,
       showMaternity: false,
       showRehab: false,
-      
     }
   },
   methods: {

@@ -38,6 +38,8 @@
           </button>
           <button class="btn btn-light" @click="getDepartments">Show Departments
           </button>
+          <button class="btn btn-dark"  @click="getLeadersboard">Post Casestudy Data 
+          </button>
         </div>
 
       </div>
@@ -67,6 +69,19 @@ export default class App extends Vue{
         let tempThis = this;
         let token = JSON.parse(localStorage.getItem('user')!);
         tempThis.$axios.get("/api/mspp/department", {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+        }).then(response => {
+              console.log(response.data);
+        });
+    }
+    
+    // force push 3 case studies to test leadersboard implementation
+    getLeadersboard(): void {
+        let tempThis = this;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        tempThis.$axios.get("/api/casestudy", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }
