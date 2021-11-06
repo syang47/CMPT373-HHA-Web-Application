@@ -8,24 +8,21 @@
       <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon" />
       </button>
-        <div class="text-end" style="margin-left:auto; margin-left: 0;">
-          <button class="btn btn-light" @click="changeToFrench">Français</button>
-          <button class="btn btn-light" @click="changeToEnglish">English</button>
-        </div>
-        <div class="navbar-collapse offcanvas-collapse" >
-            <div class="text-end" style="margin-left:auto; margin-right: 0;">
-              <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
-              </button>
-              <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
-              </button>
-              <button class="btn btn-light" @click="getData">Show Data
-              </button>
-              <button class="btn btn-light" @click="getUsersInNICU">NICU Users
-              </button>
-              <button class="btn btn-light" @click="getCaseStudyTypes">NICU Users
-              </button>
-            </div>
-           </div>
+      <div class="text-end" style="margin-left:auto; margin-left: 0;">
+        <button class="btn btn-light" @click="changeToFrench">Français</button>
+        <button class="btn btn-light" @click="changeToEnglish">English</button>
+      </div>
+      <div class="navbar-collapse offcanvas-collapse" >
+          <div class="text-end" style="margin-left:auto; margin-right: 0;">
+            <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
+            </button>
+            <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
+            </button>
+            <button class="btn btn-light" @click="getData">Show Data
+            </button>
+            <button class="btn btn-light" @click="getUsersInNICU">NICU Users
+            </button>
+          </div>
       </div>
     </nav>
   </div>
@@ -49,19 +46,6 @@ export default class App extends Vue{
   goToRegister(): void {
     let tempThis = this;
     tempThis.$router.push('/register');
-  }
-
-  getCaseStudyTypes(): void {
-    let tempThis = this;
-    const token = JSON.parse(localStorage.getItem('user')!);
-    tempThis.$axios.get("/api/casestudy/types", {
-    headers: {
-      'Authorization': `Bearer ${token.jwt}`
-    }
-    }).then(response => {
-      console.log(response.data);
-      return JSON.stringify(response.data);
-    });
   }
 
   getUsersInNICU(): void {

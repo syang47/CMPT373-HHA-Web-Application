@@ -70,9 +70,9 @@ export default class Rehab extends Vue {
     goToDataInput(): void {
         this.$router.push('/rehab/submit');
     };
-  // goToCaseStudy(): void {
-  //   this.$router.push('/casestudy');
-  // };
+  goToCaseStudy(): void {
+    this.$router.push('/casestudy');
+  };
   // gotoBiomech(): void {
   //   this.$router.push('/biomech');
   // }

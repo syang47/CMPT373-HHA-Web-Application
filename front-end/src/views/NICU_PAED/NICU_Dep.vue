@@ -71,9 +71,9 @@ export default class NICU_PAED extends Vue {
   goToDataInput(): void {
     this.$router.push('/nicu_paed/submit');
   };
-  // goToCaseStudy(): void {
-  //   this.$router.push('/casestudy');
-  // };
+  goToCaseStudy(): void {
+    this.$router.push('/casestudy');
+  };
   // gotoBiomech(): void {
   //   this.$router.push('/biomech');
   // }
