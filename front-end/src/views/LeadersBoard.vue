@@ -44,10 +44,10 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr v-for="(dep, index) in departments" :key="index">
+                                        <tr v-for="(points, dep, index) in departmentPoints" :key="index">
                                             <th>{{ index + 1 }}</th>
                                             <td>{{ dep }}</td>
-                                            <td>{{ this.departmentPoints[this.departments[index]] }}</td>
+                                            <td>{{ points }}</td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -83,7 +83,7 @@ export default defineComponent({
     },
     data: function() {
         return {
-            departmentPoints: [],
+            departmentPoints: {},
             departments: [""],
             MonthlyPrize: [""],
             AnnualPrize: [""]
@@ -117,8 +117,12 @@ export default defineComponent({
         },
         getDepartmentPoints(): void {
             axios.get("/api/departments/points").then(response=> {
-                this.departments = Object.keys(response.data);
-                this.departmentPoints = response.data;
+                var departmentPointsData = response.data;
+                
+                this.departmentPoints = Object.keys(departmentPointsData).sort().reduce(function (result, key) {
+                                            result[key] = departmentPointsData[key];
+                                            return result;
+                                        }, {});
             });
         }
     }
