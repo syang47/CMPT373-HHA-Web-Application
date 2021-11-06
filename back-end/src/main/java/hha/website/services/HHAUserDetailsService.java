@@ -1,5 +1,6 @@
 package hha.website.services;
 
+import hha.website.MSPPRepository;
 import hha.website.UserRepository;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
@@ -11,10 +12,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 @Service
+@Transactional
 public class HHAUserDetailsService implements UserDetailsService {
 
     @Autowired
@@ -22,8 +27,6 @@ public class HHAUserDetailsService implements UserDetailsService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-
 
     @Override
     public UserDetails loadUserByUsername(String username) {
@@ -35,17 +38,25 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setRole("ROLE_ADMIN");
         userRepository.save(admin);
 
+        User randomHead = new User();
+        randomHead.setId(2);
+        randomHead.setUsername("head");
+        randomHead.setPassword(passwordEncoder.encode("head"));
+        randomHead.setRole("ROLE_HEAD");
+        userRepository.save(randomHead);
+
         User randomUser = new User();
-        randomUser.setId(2);
+        randomUser.setId(3);
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
+        randomUser.setDepartment("NICU_PAED");
         userRepository.save(randomUser);
 
         User user = userRepository.findByUsername(username);
         List<SimpleGrantedAuthority> roles;
         if(user != null) {
-            roles = Arrays.asList(new SimpleGrantedAuthority(user.getRole()));
+            roles = Collections.singletonList(new SimpleGrantedAuthority(user.getRole()));
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), roles);
         }
         return null;
@@ -56,6 +67,12 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
+        newUser.setDepartment(user.getDepartment());
         return userRepository.save(newUser);
     }
+
+    public Collection<String> listDistinctItemsInField() {
+        return userRepository.queryDistinctField();
+    }
+
 }

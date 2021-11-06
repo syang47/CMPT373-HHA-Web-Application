@@ -8,11 +8,13 @@ public class AuthenticationResponse {
     private final String jwt;
     private final String username;
     Collection<? extends GrantedAuthority> roles;
+    private final String department;
 
-    public AuthenticationResponse(String jwt, String username, Collection<? extends GrantedAuthority> roles) {
+    public AuthenticationResponse(String jwt, String username, Collection<? extends GrantedAuthority> roles, String department) {
         this.jwt = jwt;
         this.username = username;
         this.roles = roles;
+        this.department = department;
     }
 
     public String getUsername() {
@@ -25,5 +27,9 @@ public class AuthenticationResponse {
 
     public Collection<? extends GrantedAuthority> getRoles() {
         return roles;
+    }
+
+    public String getDepartment() {
+        return department;
     }
 }

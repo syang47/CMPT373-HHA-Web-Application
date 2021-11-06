@@ -1,4 +1,4 @@
-<template xmlns:th="https://www.thymeleaf.org">
+<template>
 <div class = "background">
     <div class="container-fluid">
         <h1 class="display-2 text-center text-dark">Leaders Board</h1>
@@ -17,9 +17,7 @@
                     <div class="card w-100 text-center text-white mb-3 mt-3" style="background:#C0C0C0;">
                         <div class="card-body">
                             <h2 style="color:#000000;" class="card-title w-40">Annual Award</h2>
-                            <p style="color:#000000;" class="card-text"> {{ AnnualPrize }} </p>
-<!--                            <p th:text="'Monthly Prize: ' + ${datainput.annual}" />-->
-<!--                            <p th:text="'Annual Prize: ' + ${datainput.monthly}" />-->
+                            <p style="color:#000000;" class="card-text">{{ AnnualPrize }}</p>
                         </div>
                     </div>
                 </div>
@@ -65,14 +63,17 @@
                                 <table>
                                     <tr>
                                         <th> Submitted Reports: </th>
+                                        <td> {{ submittedReports }} </td>
                                     </tr>
                                     <tr></tr>
                                     <tr>
                                         <th> Quality of Most Recent Report: </th>
+                                        <td> {{ bestReportPoints }} </td>
                                     </tr>
                                     <tr></tr>
                                     <tr>
                                         <th> Current Submission Status: </th>
+                                        <td> {{ reportSubmissionStatus }} </td>
                                     </tr>
                                     <tr></tr>
                                 </table>
@@ -97,20 +98,29 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue';
+import authHeader from '../services/auth-header';
 import axios from 'axios';
+
 export default defineComponent({
-    name:"LeadersBoard",
+    name: "LeadersBoard",
     mounted() {
+        this.getSumbittedReports();
+        this.getBestReportPoints();
+        this.getReportSubmissionStatus();
         this.getMonthlyPrize();
         this.getAnnualPrize();
     },
-    data: function(){
-        return{
+    data: function() {
+        return {
+            submittedReports: 0,
+            bestReportPoints: 0,
+            reportSubmissionStatus: false,
+            departments: [],
             MonthlyPrize: false,
             AnnualPrize: false
         }
     },
-    methods:{
+    methods: {
         getMonthlyPrize(): void {
             axios.get("/datainput/monthly").then(response => {
                 this.MonthlyPrize = response.data;
@@ -120,12 +130,57 @@ export default defineComponent({
             axios.get("/datainput/annual").then(response=> {
                 this.AnnualPrize = response.data;
             });
+        },
+        isAdmin(): boolean {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            if(token.roles[0].authority == 'ROLE_ADMIN') {
+                return true;
+            }
+            return false;
+        },
+
+        getSumbittedReports(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            this.$axios.get("/api/casestudy/totalreports", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.submittedReports = response.data;
+            }).catch((error: any) => {
+                      alert("could not get submitted reports");
+            });
+        },
+
+        getBestReportPoints(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            this.$axios.get("/api/casestudy/points", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.bestReportPoints = response.data;
+            }).catch((error: any) => {
+                      alert("could not get best report points");
+            });
+        },
+
+        getReportSubmissionStatus(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/casestudy/submissionstatus", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                }
+            }).then(response => {
+                this.reportSubmissionStatus = response.data;
+            }).catch((error: any) => {
+                      alert("could not get submission status");
+            });
         }
-   }
+    }
+
 });
-
 </script>
-
 
 <style scoped>
 * {
