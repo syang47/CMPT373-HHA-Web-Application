@@ -132,7 +132,7 @@ const i18n = createI18n({
         dueDate: "Date d'échéance",
         dataInput: "Entrée de données",
         employeeOfTheMonth: "Employé du mois",
-        someWords: "Employé du mois..",
+        someWords: "Quelques mots..",
         biomechSupport: "Soutien biomécanique",
         departmentPoints: "Points de service",
         monthly: "Mensuel: ",

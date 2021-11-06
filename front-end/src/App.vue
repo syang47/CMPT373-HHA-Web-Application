@@ -1,3 +1,9 @@
+<style>
+  .button{
+    color:black;
+  }
+</style>
+
 <template>
    <div class="container-fluid">
     
@@ -9,18 +15,26 @@
         <span class="navbar-toggler-icon" />
       </button>
       <div class="text-end" style="margin-left:auto; margin-left: 0;">
-        <button class="btn btn-light" @click="changeToFrench">Français</button>
-        <button class="btn btn-light" @click="changeToEnglish">English</button>
+        <button class="btn btn-light" @click="changeToFrench">
+          <p class="text-dark">Français</p>
+        </button>
+        <button class="btn btn-light" @click="changeToEnglish">
+          <p class="text-dark">English</p>
+        </button>
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
-            <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
+            <button class="btn btn-light" @click="loginOrLogout">
+              <p class="text-dark">{{ $t('header.loginOut') }}</p>
             </button>
-            <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
+            <button class="btn btn-light" @click="goToRegister">
+              <p class="text-dark">{{ $t('header.register') }}</p>
             </button>
-            <button class="btn btn-light" @click="getData">Show Data
+            <button class="btn btn-light" @click="getData">
+              <p class="text-dark">Show Data</p>
             </button>
-            <button class="btn btn-light" @click="getUsersInNICU">NICU Users
+            <button class="btn btn-light" @click="getUsersInNICU">
+              <p class="text-dark">NICU Users</p>
             </button>
           </div>
       </div>
