@@ -1,4 +1,4 @@
-<template>
+<template xmlns:th="https://www.thymeleaf.org">
 <div class = "background">
     <div class="container-fluid">
         <h1 class="display-2 text-center text-dark">Leaders Board</h1>
@@ -8,7 +8,7 @@
                         <div class="card rounded text-center text-white mb-3 mt-3" style="background: lightblue;">
                             <div class="card-body">
                                 <h2 style="color:#000000;" class="card-title w-70">Montly Award</h2>
-                                <p style="color:#000000;" class="card-text">prizes...</p>
+                                <p style="color:#000000;" class="card-text"> {{ MonthlyPrize }} </p>
                             </div>
                         </div>
 
@@ -17,7 +17,9 @@
                     <div class="card w-100 text-center text-white mb-3 mt-3" style="background:#C0C0C0;">
                         <div class="card-body">
                             <h2 style="color:#000000;" class="card-title w-40">Annual Award</h2>
-                            <p style="color:#000000;" class="card-text">prizes.....</p>
+                            <p style="color:#000000;" class="card-text"> {{ AnnualPrize }} </p>
+<!--                            <p th:text="'Monthly Prize: ' + ${datainput.annual}" />-->
+<!--                            <p th:text="'Annual Prize: ' + ${datainput.monthly}" />-->
                         </div>
                     </div>
                 </div>
@@ -92,6 +94,37 @@
     </div>
 </div>
 </template>
+
+<script lang="ts" type="text/typescript">
+import { defineComponent } from 'vue';
+import axios from 'axios';
+export default defineComponent({
+    name:"LeadersBoard",
+    mounted() {
+        this.getMonthlyPrize();
+        this.getAnnualPrize();
+    },
+    data: function(){
+        return{
+            MonthlyPrize: false,
+            AnnualPrize: false
+        }
+    },
+    methods:{
+        getMonthlyPrize(): void {
+            axios.get("/datainput/monthly").then(response => {
+                this.MonthlyPrize = response.data;
+            });
+        },
+        getAnnualPrize(): void{
+            axios.get("/datainput/annual").then(response=> {
+                this.AnnualPrize = response.data;
+            });
+        }
+   }
+});
+
+</script>
 
 
 <style scoped>

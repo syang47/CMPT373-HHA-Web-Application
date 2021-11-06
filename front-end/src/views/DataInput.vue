@@ -1,17 +1,20 @@
-<template>
+<template xmlns:th="https://www.thymeleaf.org">
     <h1 style="color:#000000;">Awards</h1>
-    <p>Please Select One of the Award Types</p>
-    <form action="#" th:action="@{/datainput}" th:object="{/datainput}" method="post">
-        <label>Choose a award type:</label>
-        <select name="award" id="award" th:field="*{type}">
-            <option value = "annual">Annual Award</option>
-            <option value = "monthly">Monthly Award</option>
-        </select>
-        <br><br>
-        <p>Message: <input type="text" th:field="*{award}"> </p>
+    <Form th:object="{datainput}" method="post">
+        <p>Monthly Prize: <input name="monthly" id="monthly" type="text" th:field="*{monthly}"> </p>
+        <p>Annual Prize: <input name="annual" id="annual" type="text" th:field="*{annual}"> </p>
         <br>
-        <input type="submit" value="Submit">
-    </form>
-
+        <p><input @click="goToLeadersBoard" type="submit" value="Submit"/></p>
+    </Form>
 </template>
 
+<script lang="ts" type="text/typescript">
+import { defineComponent } from 'vue'
+import axios from 'axios';
+export default defineComponent({
+    goToLeadersBoard(): void {
+        this.$router.push('/leadersboard')
+    }
+});
+
+</script>

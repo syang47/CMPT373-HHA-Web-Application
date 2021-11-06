@@ -1,19 +1,19 @@
 package hha.website.models;
 
 public class DataInput{
-    private String type;
-    private String award;
+    private String monthly;
+    private String annual;
 
-    public String getType(){
-        return type;
+    public String getMonthly(){
+        return monthly;
     }
-    public void setType(String type){
-        this.type = type;
+    public void setMonthly(String monthly){
+        this.monthly = monthly;
     }
-    public String getAward(){
-        return award;
+    public String getAnnual(){
+        return annual;
     }
-    public void setAward(String award){
-        this.award = award;
+    public void setAnnual(String annual){
+        this.annual = annual;
     }
 }

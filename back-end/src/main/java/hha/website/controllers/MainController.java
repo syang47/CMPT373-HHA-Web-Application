@@ -67,30 +67,45 @@ public class MainController {
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
-        if(user.getRole().trim().toLowerCase().contains("admin")){
+        if (user.getRole().trim().toLowerCase().contains("admin")) {
             System.out.println("Cannot make admin account");
             return ResponseEntity.badRequest().body("Cannot make admin account");
-        } else if(userDetails != null){
+        } else if (userDetails != null) {
             System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
-            System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole());
+            System.out.println("user registered: " + user.getUsername() + " " + user.getPassword() + " " + user.getRole());
             return ResponseEntity.ok(userDetailsService.save(user));
         }
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry){
+    public ResponseEntity<?> getNICUPAEDData(@RequestBody MSPPRequirementDTO entry) {
         return ResponseEntity.ok(msppRepositoryService.save(entry));
     }
+
     @GetMapping("/datainput")
-    public String datainputForm(Model model){
+    public String datainputForm(Model model) {
         model.addAttribute("datainput", new DataInput());
         return "dataInput";
     }
     @PostMapping("/datainput")
-    public String datainputSubmit(@ModelAttribute DataInput datainput, Model model){
+    public String datainputSubmit(@ModelAttribute DataInput datainput, Model model) {
         model.addAttribute("datainput", datainput);
-        return "result";
+        Object result = model.getAttribute("datainput");
+        return datainput.getMonthly() + datainput.getAnnual();
+    }
+
+    @GetMapping("/datainput/monthly")
+    public String datainputSubmitMonthly(@ModelAttribute DataInput datainput, Model model) {
+        model.addAttribute("datainput", datainput);
+        Object result = model.getAttribute("datainput");
+        return datainput.getMonthly();
+    }
+    @GetMapping("/datainput/annual")
+    public String datainputSubmitAnnual(@ModelAttribute DataInput datainput, Model model) {
+        model.addAttribute("datainput", datainput);
+        Object result = model.getAttribute("datainput");
+        return datainput.getAnnual();
     }
 }
