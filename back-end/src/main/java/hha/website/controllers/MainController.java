@@ -1,8 +1,11 @@
 package hha.website.controllers;
 
 import hha.website.UserRepository;
+import hha.website.MSPPRepository;
+import hha.website.DataInputRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
+import hha.website.services.DataInputService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
@@ -48,6 +51,9 @@ public class MainController {
 
     @Autowired
     private MSPPRepositoryService msppRepositoryService;
+
+    @Autowired
+    private DataInputService dataInputService;
 
     @Autowired
     private JwtUtil jwtToken;
@@ -141,27 +147,26 @@ public class MainController {
 
     }
     @GetMapping("/datainput")
-    public String datainputForm(Model model) {
-        model.addAttribute("datainput", new DataInput());
-        return "dataInput";
+    public ResponseEntity<?> getAwardDetails() {
+        System.out.println(Arrays.toString(dataInputService.listAllItem().toArray()));
+        return ResponseEntity.ok(dataInputService.listAllItem());
     }
-    @PostMapping("/datainput")
-    public String datainputSubmit(@ModelAttribute DataInput datainput, Model model) {
-        model.addAttribute("datainput", datainput);
-        Object result = model.getAttribute("datainput");
-        return datainput.getMonthly() + datainput.getAnnual();
+
+    @RequestMapping(value = "/datainput", method = RequestMethod.POST)
+    public ResponseEntity<DataInput> saveAwardDetails(@RequestBody DataInputDTO awards) {
+       System.out.println("posting to award input");
+       System.out.println("award data modified: " + awards.getAnnual() + " " + awards.getMonthly());
+       return ResponseEntity.ok(dataInputService.save(awards));
     }
 
     @GetMapping("/datainput/monthly")
-    public String datainputSubmitMonthly(@ModelAttribute DataInput datainput, Model model) {
-        model.addAttribute("datainput", datainput);
-        Object result = model.getAttribute("datainput");
-        return datainput.getMonthly();
+    public String datainputSubmitMonthly() {
+        System.out.println("grabbing monthly award data");
+        return Arrays.toString(dataInputService.listMonthlyItem().toArray()).replace("[", "").replace("]","");
     }
     @GetMapping("/datainput/annual")
-    public String datainputSubmitAnnual(@ModelAttribute DataInput datainput, Model model) {
-        model.addAttribute("datainput", datainput);
-        Object result = model.getAttribute("datainput");
-        return datainput.getAnnual();
+    public String datainputSubmitAnnual() {
+        System.out.println("grabbing annual award data");
+        return Arrays.toString(dataInputService.listAnnualItem().toArray()).replace("[", "").replace("]","");
     }
 }
