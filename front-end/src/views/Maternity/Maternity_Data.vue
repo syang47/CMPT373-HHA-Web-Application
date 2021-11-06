@@ -8,34 +8,60 @@
             <div v-if="!successful">
                 <div class="form-group">
                     <label for="bedAvailable">Beds Available</label>
-                    <Field name="bedAvailable" type="text" class="form-control" value=0 />
+                    <Field name="bedAvailable" type="text" class="form-control" />
                     <ErrorMessage name="bedAvailable" class="error-feedback" />
                 </div>
+
+
                 <div class="form-group">
                     <label for="bedDays">Bed Days</label>
-                    <Field name="bedDays" type="text" class="form-control" value=0 />
+                    <Field name="bedDays" type="text" class="form-control" />
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
+
+
                 <div class="form-group">
                     <label for="patientDays">Patient Days</label>
-                    <Field name="patientDays" type="text" class="form-control" value=0 />
+                    <Field name="patientDays" type="text" class="form-control"/>
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
+
+
                 <div class="form-group">
                     <label for="hospitalized">Hospitalized</label>
-                    <Field name="hospitalized" type="text" class="form-control" value=0 />
+                    <Field name="hospitalized" type="text" class="form-control"/>
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
+
+
                 <div class="form-group">
                     <label for="dischargedAlive">Discharged Alive</label>
-                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
+                    <Field name="dischargedAlive" type="text" class="form-control"/>
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
-                <div class="form-group">
-                    <label for="diedBefore48h">Died Before 48h</label>
-                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="diedBefore48h" class="error-feedback" />
+
+                <div>
+                    <div class="form-group">
+                        <label for="diedBefore48h">Died Before 48h</label>
+                        <!-- <Field name="diedBefore48h" type="text" class="form-control" id="diedBefore48h" v-on:keyup="checkDiedBefore48h()"/> -->
+                        <Field name="diedBefore48h" type="text" class="form-control" id="diedBefore48h">
+                        <ErrorMessage name="diedBefore48h" class="error-feedback" />
+                    </div>
+                    <!-- Todo: Add dynamic input system and create yup object automatically (Hard)  -->
+                    <!-- <div v-if="diedBefore48hMor" class="form-group">
+                        <form-item v-for="(item, i) of items" v-model="items[i]" :key="i">
+                            <h4>Patient 1</h4>
+                            <label for="diedBefore48Age">Age</label>
+                            <Field name="diedBefore48Age" type="text" class="form-control" />
+                            <ErrorMessage name="diedBefore48Age" class="error-feedback" />
+                            <label for="diedBefore48Cause">Cause of death</label>
+                            <Field name="diedBefore48Cause" type="text" class="form-control" />
+                            <ErrorMessage name="diedBefore48Cause" class="error-feedback" />
+                        <button @click="addDiedBefore48hPatients">Add</button>
+                    </div> -->
                 </div>
+
+
                 <div class="form-group">
                     <label for="diedAfter48h">Died After 48h</label>
                     <Field name="diedAfter48h" type="text" class="form-control" value=0 />
