@@ -25,4 +25,11 @@ public interface DepartmentRepository extends JpaRepository<Department, String> 
     @Modifying
     @Query("UPDATE Department SET reportsSubmitted = reportsSubmitted + 1 WHERE departmentname = ?1")
     void updateDepartmentReportsSubmitted(String departmentname);
+
+    @Query("SELECT points FROM Department")
+    List<Integer> queryAllDepartmentPoints();
+
+    @Modifying
+    @Query("UPDATE Department SET points = points + 1 WHERE departmentname = ?1")
+    void updateDepartmentPoints(String departmentname);
 }

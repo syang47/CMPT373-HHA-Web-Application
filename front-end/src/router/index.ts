@@ -20,6 +20,8 @@ import Community_Health_Data from "@/views/Community_Health/Community_Health_Dat
 
 import DataInput from "@/views/DataInput.vue";
 
+import Announcement from "@/views/Announcement.vue";
+
 const routes: Array<RouteRecordRaw> = [
   // Basic components
   {
@@ -53,6 +55,11 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/casestudy",
     component: Case_Study,
+  },
+
+  {
+    path: "/announcement",
+    component: Announcement,
   },
 
   // NICU/PAED

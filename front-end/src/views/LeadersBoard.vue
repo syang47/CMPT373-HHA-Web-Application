@@ -7,8 +7,12 @@
                 <div class="col">
                         <div class="card rounded text-center text-white mb-3 mt-3" style="background: lightblue;">
                             <div class="card-body">
-                                <h2 style="color:#000000;" class="card-title w-70">Montly Award</h2>
-                                <p style="color:#000000;" class="card-text"> {{ MonthlyPrize }} </p>
+                                <h2 style="color:#000000;" class="card-title w-70">Monthly Award</h2>
+                                <ul>
+                                    <li v-for="prize in MonthlyPrize" :key="prize">
+                                        {{ prize }}
+                                    </li>
+                                </ul>
                             </div>
                         </div>
 
@@ -17,7 +21,11 @@
                     <div class="card w-100 text-center text-white mb-3 mt-3" style="background:#C0C0C0;">
                         <div class="card-body">
                             <h2 style="color:#000000;" class="card-title w-40">Annual Award</h2>
-                            <p style="color:#000000;" class="card-text">{{ AnnualPrize }}</p>
+                            <ul>
+                                <li v-for="prize in AnnualPrize" :key="prize">
+                                    {{ prize }}
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -28,58 +36,23 @@
                         <div class="card rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
                             <div class="card-body">
                                 <table>
-                                    <tr>
-                                        <th>Pos</th>
-                                        <th>Department</th>
-                                        <th>Points</th>
-                                    </tr>
-                                    <tr>
-                                        <th>1</th>
-                                        <th>Maternity</th>
-                                        <th>...</th>
-                                    </tr>
-                                    <tr>
-                                        <th>2</th>
-                                        <th>Rehab</th>
-                                        <th>...</th>
-                                    </tr>
-                                    <tr>
-                                        <th>3</th>
-                                        <th>NICU / PAED</th>
-                                        <th>...</th>
-                                    </tr>
-                                    <tr>
-                                        <th>4</th>
-                                        <th>Community Health</th>
-                                        <th>...</th>
-                                    </tr>
+                                    <thead>
+                                        <tr>
+                                            <th>Pos</th>
+                                            <th>Department</th>
+                                            <th>Points</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr v-for="(dep, index) in departments" :key="index">
+                                            <th>{{ index + 1 }}</th>
+                                            <td>{{ dep }}</td>
+                                            <td>{{ this.departmentPoints[this.departments[index]] }}</td>
+                                        </tr>
+                                    </tbody>
                                 </table>
                             </div>
                         </div>
-                    </div>
-                    <div class="row-6">
-                        <div class="card text-center text-white mb-3 mt-3" style="background:#7cfc00;">
-                            <div class="card-body">
-                                <table>
-                                    <tr>
-                                        <th> Submitted Reports: </th>
-                                        <td> {{ submittedReports }} </td>
-                                    </tr>
-                                    <tr></tr>
-                                    <tr>
-                                        <th> Quality of Most Recent Report: </th>
-                                        <td> {{ bestReportPoints }} </td>
-                                    </tr>
-                                    <tr></tr>
-                                    <tr>
-                                        <th> Current Submission Status: </th>
-                                        <td> {{ reportSubmissionStatus }} </td>
-                                    </tr>
-                                    <tr></tr>
-                                </table>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
                 <div class="col rounded mb-3 mt-3" style="background: #F59A23">
@@ -104,33 +77,19 @@ import axios from 'axios';
 export default defineComponent({
     name: "LeadersBoard",
     mounted() {
-        this.getSubmittedReports();
-        this.getBestReportPoints();
-        this.getReportSubmissionStatus();
         this.getMonthlyPrize();
         this.getAnnualPrize();
+        this.getDepartmentPoints();
     },
     data: function() {
         return {
-            submittedReports: 0,
-            bestReportPoints: 0,
-            reportSubmissionStatus: false,
-            departments: [],
-            MonthlyPrize: "",
-            AnnualPrize: ""
+            departmentPoints: [],
+            departments: [""],
+            MonthlyPrize: [""],
+            AnnualPrize: [""]
         }
     },
     methods: {
-        getMonthlyPrize(): void {
-            axios.get("/datainput/monthly").then(response => {
-                this.MonthlyPrize = response.data;
-            });
-        },
-        getAnnualPrize(): void{
-            axios.get("/datainput/annual").then(response=> {
-                this.AnnualPrize = response.data;
-            });
-        },
         isAdmin(): boolean {
             const token = JSON.parse(localStorage.getItem('user')!);
             if(token.roles[0].authority == 'ROLE_ADMIN') {
@@ -138,46 +97,28 @@ export default defineComponent({
             }
             return false;
         },
-
-        getSubmittedReports(): void {
-            const token = JSON.parse(localStorage.getItem('user')!);
-            this.$axios.get("/api/departments/totalreports", {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`
-                },
+        getMonthlyPrize(): void {
+            axios.get("/api/announcements", {
                 params: {
-                    department: token.department
+                    field: "monthly"
                 }
-            }).then(response => {
-                console.log(response.data);
-                this.submittedReports = response.data;
-            }).catch((error: any) => {
-                alert("could not get submitted reports");
+            }).then(response=> {
+                this.MonthlyPrize = response.data;
             });
         },
-
-        getBestReportPoints(): void {
-            const token = JSON.parse(localStorage.getItem('user')!);
-            this.$axios.get("/api/casestudy/points", {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`
+        getAnnualPrize(): void{
+            axios.get("/api/announcements", {
+                params: {
+                    field: "annual"
                 }
-            }).then(response => {
-                this.bestReportPoints = response.data;
-            }).catch((error: any) => {
-                      alert("could not get best report points");
+            }).then(response=> {
+                this.AnnualPrize = response.data;
             });
         },
-        getReportSubmissionStatus(): void {
-            const token = JSON.parse(localStorage.getItem('user')!);
-            axios.get("/api/casestudy/submissionstatus", {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`
-                }
-            }).then(response => {
-                this.reportSubmissionStatus = response.data;
-            }).catch((error: any) => {
-                alert("could not get submission status");
+        getDepartmentPoints(): void {
+            axios.get("/api/departments/points").then(response=> {
+                this.departments = Object.keys(response.data);
+                this.departmentPoints = response.data;
             });
         }
     }
@@ -200,10 +141,9 @@ export default defineComponent({
         background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
         /* -moz-background-size:100% 100%; */
-        position: relative;
+        position: absolute;
         /* background-size: 100% 100%; */
         height: 100%;
-        position: relative;
         background-position: center;
         background-repeat: no-repeat;
         background-size:cover;

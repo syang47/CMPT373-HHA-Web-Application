@@ -18,6 +18,8 @@
             </button>
             <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
             </button>
+            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
+            </button>
           </div>
       </div>
     </nav>
@@ -42,6 +44,11 @@ export default class App extends Vue{
   goToRegister(): void {
     let tempThis = this;
     tempThis.$router.push('/register');
+  }
+
+  goToAddAnnouncement(): void {
+    let tempThis = this;
+    tempThis.$router.push('/announcement');
   }
 
   getData(): void {

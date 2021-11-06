@@ -1,6 +1,6 @@
 package hha.website.models;
 
-public class DataInputDTO {
+public class AnnouncementDTO {
     private String annual;
     private String monthly;
 

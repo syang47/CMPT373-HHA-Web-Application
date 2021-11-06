@@ -18,9 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
+import java.util.*;
 
 
 @RestController
@@ -52,6 +50,9 @@ public class MainController {
 
     @Autowired
     private CaseStudyService caseStudyService;
+
+    @Autowired
+    private AnnouncementService announcementService;
 
     @Autowired
     private JwtUtil jwtToken;
@@ -109,18 +110,21 @@ public class MainController {
         return ResponseEntity.ok(caseStudyService.save(user, data));
     }
 
+    @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
         System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
+    @CrossOrigin
     @GetMapping("/api/departments")
     public ResponseEntity<?> getAllDepartments(){
         System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
+    @CrossOrigin
     @GetMapping("/api/mspp/data")
     public ResponseEntity<?> getAllMSPPData(){
         return ResponseEntity.ok(msppRepositoryService.listAllData());
@@ -137,20 +141,11 @@ public class MainController {
         return ResponseEntity.ok(result);
     }
 
+    @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
-
-
-
-
-//    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
-//    public String getCaseStudySubStatusField() {
-//        System.out.println("casestudysubmission status");
-//        System.out.println(Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()));
-//        return Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
-//    }
 
     @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
@@ -158,4 +153,36 @@ public class MainController {
         System.out.println(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
         return ResponseEntity.ok(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
     }
+
+    @RequestMapping(value = "/api/departments/points", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllDepartmentPoints() {
+        List<Department> departments = HHADepartmentService.listAllDepartments();
+        HashMap<String, Integer> departmentPoints = new HashMap<>();
+        for(Department d : departments){
+            departmentPoints.put(d.getDepartmentname(), d.getPoints());
+        }
+        return ResponseEntity.ok(departmentPoints);
+    }
+
+    @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> saveAnnouncement(HttpServletRequest request, @RequestBody AnnouncementDTO data) {
+        final String authorizationHeader = request.getHeader("Authorization");
+        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
+        final User user = userDetailsService.findByUsername(username);
+        return ResponseEntity.ok(announcementService.save(data));
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/announcements")
+    public ResponseEntity<?> getAnnouncements(@RequestParam("field") String field){
+        return ResponseEntity.ok(announcementService.listAField(field));
+    }
+//    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
+//    public String getCaseStudySubStatusField() {
+//        System.out.println("casestudysubmission status");
+//        System.out.println(Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()));
+//        return Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
+//    }
+
+
 }

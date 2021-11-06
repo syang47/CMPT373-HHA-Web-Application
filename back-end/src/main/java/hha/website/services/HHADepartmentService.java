@@ -6,6 +6,7 @@ import hha.website.models.DepartmentDTO;
 import hha.website.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -67,11 +68,12 @@ public class HHADepartmentService {
 
     public void addASubmittedReport(User user) {
         userDetailsService.addASubmittedReportForUser(user);
+        departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
         departmentRepository.updateDepartmentReportsSubmitted(user.getDepartment().getDepartmentname());
     }
 
     public List<Department> listAllDepartments() {
-        return departmentRepository.findAll();
+        return departmentRepository.findAll(Sort.by(Sort.Direction.DESC, "points"));
     }
 
     public Collection<String> listDepartmentNames() {
