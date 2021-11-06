@@ -1,7 +1,7 @@
-package hha.website.models.datainput;
+package hha.website.models;
 
 
-public class NICUPAEDDataDTO {
+public class AdditionalMSPPDTO {
     private String department;
     private Integer bedsAvailable;
     private Integer bedDays;

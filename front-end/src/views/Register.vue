@@ -5,17 +5,17 @@
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Registration</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('registerPage.registration') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="username">Username</label>
+                    <label for="username">{{ $t('registerPage.username') }}</label>
                     <Field name="username" type="text" class="form-control" />
                     <ErrorMessage name="username" class="error-feedback" />
                 </div>
                 
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">{{ $t('registerPage.password') }}</label>
                     <Field name="password" type="password" class="form-control" />
                     <ErrorMessage name="password" class="error-feedback" />
                 </div>
@@ -34,7 +34,7 @@
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Sign Up
+                        {{ $t('registerPage.signUp') }}
                     </button>
                 </div>
             </div>
@@ -52,6 +52,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import axios from 'axios';
+import router from '../router';
 export default defineComponent({
     name: "Register",
     components: {
@@ -60,7 +61,7 @@ export default defineComponent({
         ErrorMessage,
     },
     data: function() {
-        const userSchema = yup.object().shape({
+        const userSchema = yup.object().shape({ //need translation handling for err messages
             username: yup
                 .string()
                 .required("Username is required!")
@@ -83,6 +84,7 @@ export default defineComponent({
             loading: false,
             message: "",
             departments: [],
+            d: null,
             userSchema,
         };
 
@@ -98,10 +100,10 @@ export default defineComponent({
             }
             return false;
         },
- 
+
         getDepartments(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
-            axios.get("/api/mspp/department", {
+            axios.get("/api/departments", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }
@@ -114,6 +116,7 @@ export default defineComponent({
             this.message = "";
             this.successful = false;
             this.loading = true;
+
             this.$store.dispatch("auth/register", user).then(
                 (data) => {
                     this.message = data.message;

@@ -1,9 +1,10 @@
 package hha.website.config;
 
+import hha.website.services.CaseStudyService;
+import hha.website.services.HHADepartmentService;
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtRequestFilter;
 import hha.website.services.MSPPRepositoryService;
-import hha.website.services.NICUPAEDDataRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
     @Autowired
     private HHAUserDetailsService hhaUserDetailsService;
 
@@ -54,29 +56,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http.csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
-                .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/register").hasRole("HEAD")
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/**").permitAll()
+                //.antMatchers("/api/register").hasRole("HEAD")
+                //.antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new HHAUserDetailsService();
-    }
-
-    @Bean
-    public MSPPRepositoryService msppRepositoryService() {
-        return new MSPPRepositoryService();
-    }
-
-    @Bean
-    public NICUPAEDDataRepositoryService nicupaedDataRepositoryService() {
-        return new NICUPAEDDataRepositoryService();
     }
 
     @Override
@@ -89,8 +77,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
-
 
 }

@@ -2,30 +2,27 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Rehab MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="bedsAvailable">Beds Available</label>
-                    <Field name="bedsAvailable" type="text" class="form-control"/>
+                    <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
+                    <Field name="bedsAvailable" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
-
                 <div class="form-group">
-                    <label for="bedDays">Bed Days</label>
-                    <Field name="bedDays" type="text" class="form-control"/>
+                    <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
+                    <Field name="bedDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
-
                 <div class="form-group">
-                    <label for="patientDays">Patient Days</label>
-                    <Field name="patientDays" type="text" class="form-control"/> 
+                    <label for="patientDays">{{ $t('msppData.patientDays') }}</label>
+                    <Field name="patientDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
-
                 <div class="form-group">
-                    <label for="hospitalized">Hospitalized</label>
-                    <Field name="hospitalized" id="hospitalized" type="text" class="form-control" v-on:keyup="checkHospitalized()"/>
+                    <label for="hospitalized">{{ $t('msppData.hospitalised') }}</label>
+                    <Field name="hospitalized" type="text" class="form-control" value=0 />
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
                 <div v-if="hospitalizedMor" class="form-group">
@@ -38,61 +35,59 @@
                     <Field name="hospitalizedPaed" type="text" class="form-control" />
                     <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
                 </div>
-                
+
 
 
 
                 <div class="form-group">
-                    <label for="dischargedAlive">Discharged Alive</label>
-                    <Field name="dischargedAlive" type="text" class="form-control"/>
+                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
+                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedBefore48h">Died Before 48h</label>
-                    <Field name="diedBefore48h" type="text" class="form-control"/>
+                    <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
+                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedBefore48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedAfter48h">Died After 48h</label>
-                    <Field name="diedAfter48h" type="text" class="form-control"/>
+                    <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
+                    <Field name="diedAfter48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedAfter48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="daysHospitalised">Days Hospitalised</label>
-                    <Field name="daysHospitalised" type="text" class="form-control"/>
+                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
+                    <Field name="daysHospitalised" type="text" class="form-control" value=0 />
                     <ErrorMessage name="daysHospitalised" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="referrals">Referrals</label>
-                    <Field name="referrals" type="text" class="form-control"/>
+                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
+                    <Field name="referrals" type="text" class="form-control" value=0 />
                     <ErrorMessage name="referrals" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="transfers">Transfers</label>
-                    <Field name="transfers" type="text" class="form-control"/>
+                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
+                    <Field name="transfers" type="text" class="form-control" value=0 />
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="selfDischarged">Self Discharged</label>
-                    <Field name="selfDischarged" type="text" class="form-control"/>
+                    <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
+                    <Field name="selfDischarged" type="text" class="form-control" value=0 />
                     <ErrorMessage name="selfDischarged" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="stayedInTheWard">Stayed In The Ward</label>
-                    <Field name="stayedInTheWard" type="text" class="form-control"/>
+                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
+                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
                     <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="admissions">Admissions</label>
-                    <Field name="admissions" type="text" class="form-control"/>
+                    <label for="admissions">{{ $t('msppData.admissions') }}</label>
+                    <Field name="admissions" type="text" class="form-control" value=0 />
                     <ErrorMessage name="admissions" class="error-feedback" />
                 </div>
-
-
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('msppData.submit') }}
                     </button>
                 </div>
             </div>
@@ -122,19 +117,16 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-
             bedDays: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-
             patientDays: yup
                 .number()
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-
             hospitalized: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -214,7 +206,7 @@ export default defineComponent({
             } else {
                 this.hospitalizedMor = false;
             }
-        }, 
+        },
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
@@ -277,6 +269,6 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
 </style>
