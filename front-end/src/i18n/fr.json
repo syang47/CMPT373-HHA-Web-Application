@@ -1,0 +1,20 @@
+{
+    "titles": {
+        "login": "TODO",
+        "username": "TODO",
+        "hha": "TODO"
+    },
+    "departments": {
+        "nicu/paed": "TODO",
+        "maternity": "TODO",
+        "rehab": "TODO",
+        "communityHealth": "TODO"
+    },
+    "header": {
+        "leadersBoard": "TODO",
+        "caseStudy": "TODO",
+        "dataInput": "TODO",
+        "logInLogOut": "TODO",
+        "register": "TODO"
+    }
+}

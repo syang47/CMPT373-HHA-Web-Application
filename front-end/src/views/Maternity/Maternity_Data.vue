@@ -3,242 +3,242 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Maternity MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="bedAvailable">Beds Available</label>
+                    <label for="bedAvailable">{{ $t('msppData.bedsAvailable') }}</label>
                     <Field name="bedAvailable" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedAvailable" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="bedDays">Bed Days</label>
+                    <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
                     <Field name="bedDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="patientDays">Patient Days</label>
+                    <label for="patientDays">{{ $t('msppData.patientDays') }}</label>
                     <Field name="patientDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="hospitalized">Hospitalized</label>
+                    <label for="hospitalized">{{ $t('msppData.hospitalised') }}</label>
                     <Field name="hospitalized" type="text" class="form-control" value=0 />
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="dischargedAlive">Discharged Alive</label>
+                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
                     <Field name="dischargedAlive" type="text" class="form-control" value=0 />
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedBefore48h">Died Before 48h</label>
+                    <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                     <Field name="diedBefore48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedBefore48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="diedAfter48h">Died After 48h</label>
+                    <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                     <Field name="diedAfter48h" type="text" class="form-control" value=0 />
                     <ErrorMessage name="diedAfter48h" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="daysHospitalised">Days Hospitalised</label>
+                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
                     <Field name="daysHospitalised" type="text" class="form-control" value=0 />
                     <ErrorMessage name="daysHospitalised" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="referrals">Referrals</label>
+                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
                     <Field name="referrals" type="text" class="form-control" value=0 />
                     <ErrorMessage name="referrals" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="transfers">Transfers</label>
+                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
                     <Field name="transfers" type="text" class="form-control" value=0 />
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="selfDischarged">Self Discharged</label>
+                    <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
                     <Field name="selfDischarged" type="text" class="form-control" value=0 />
                     <ErrorMessage name="selfDischarged" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="stayedInTheWard">Stayed In The Ward</label>
+                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
                     <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
                     <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="admissions">Admissions</label>
+                    <label for="admissions">{{ $t('msppData.admissions') }}</label>
                     <Field name="admissions" type="text" class="form-control" value=0 />
                     <ErrorMessage name="admissions" class="error-feedback" />
                 </div>
-                <div>
-                    <h4 style="color:red; text-align:center">Births</h4>
-                    <table>
-                        <tr>
-                            <th>Births</th>
-                            <th>Normal</th>
-                            <th>Césarienne</th>
-                            <th>Instrumentalsé</th>
-                        </tr>
-                        <tr>
-                            <td>Weight&#60;1.5kg</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_less_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_less_Normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_less_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_less_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_less_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_less_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>1.5kg&LessSlantEqual;Weight&#60;2.5kg</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_within_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_within_normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_within_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_within_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_within_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_within_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2.5kg&#x02A7E;Weight</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_more_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_more_normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_more_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_more_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="weight_more_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="weight_more_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Not Weighted</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="not_weighted_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="not_weighted_normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="not_weighted_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="not_weighted_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="not_weighted_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="not_weighted_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Immediately breastfed</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="immediately_breastfed_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="immediately_breastfed_normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="immediately_breastfed_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="immediately_breastfed_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="immediately_breastfed_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="immediately_breastfed_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Skin to Skin Therapy</td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="skin_therapy_normal" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="skin_therapy_normal" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="skin_therapy_cesarienne" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="skin_therapy_cesarienne" class="error-feedback" />
-                                </div>
-                            </td>
-                            <td>
-                                <div class="form-group" style="width=25%">
-                                <Field name="skin_therapy_instrumentalse" type="text" class="form-control" value=0 />
-                                <ErrorMessage name="skin_therapy_instrumentalse" class="error-feedback" />
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <h4 style="color:red; text-align:center">Post Natal</h4>
+
+                <h4 style="color:red; text-align:center">{{ $t('msppData.births') }}</h4>
+                <table>
+                    <tr>
+                        <th>{{ $t('msppData.births') }}</th>
+                        <th>{{ $t('msppData.normal') }}</th>
+                        <th>{{ $t('msppData.cesarean') }}</th>
+                        <th>{{ $t('msppData.instruments') }}</th>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.weight1_5') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_less_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_less_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_less_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_less_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_less_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_less_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.weight1_5To2_5') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_within_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_within_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_within_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_within_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_within_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_within_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.weight2_5Up') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_more_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_more_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_more_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_more_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="weight_more_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="weight_more_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.notWeighted') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="not_weighted_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="not_weighted_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="not_weighted_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="not_weighted_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="not_weighted_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="not_weighted_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.immediatelyBreastfed') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="immediately_breastfed_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="immediately_breastfed_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="immediately_breastfed_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="immediately_breastfed_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="immediately_breastfed_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="immediately_breastfed_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>{{ $t('msppData.skinToSkinTherapy') }}</td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="skin_therapy_normal" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="skin_therapy_normal" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="skin_therapy_cesarienne" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="skin_therapy_cesarienne" class="error-feedback" />
+                            </div>
+                        </td>
+                        <td>
+                            <div class="form-group" style="width=25%">
+                            <Field name="skin_therapy_instrumentalse" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="skin_therapy_instrumentalse" class="error-feedback" />
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.postNatal') }}</h4>
+
                 <div class="form-group">
-                    <label for="Vitamin_A">Breastfeeding Women Receiving Vitamin A</label>
-                    <Field name="Vitamin_A" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="Vitamin_A" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="MUAC_210mm">Breastfeeding Women with MUAC&#60;210mm </label>
-                    <Field name="MUAC_210mm" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="MUAC_210mm" class="error-feedback" />
+                <label for="Vitamin_A">{{ $t('msppData.bFWomenVitA') }}</label>
+                <Field name="Vitamin_A" type="text" class="form-control" value=0 />
+                <ErrorMessage name="Vitamin_A" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="Malnutrition">Breastfeeding Women with Malnutrition Support</label>
-                    <Field name="Malnutrition" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="Malnutrition" class="error-feedback" />
+                <label for="MUAC_210mm">{{ $t('msppData.bFWomenMUAC') }}</label>
+                <Field name="MUAC_210mm" type="text" class="form-control" value=0 />
+                <ErrorMessage name="MUAC_210mm" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="domestic_visits">Domestic Visits in 0-3 Days</label>
-                    <Field name="domestic_visits" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="domestic_visits" class="error-feedback" />
+                <label for="Malnutrition">{{ $t('msppData.bFWomenMalnutrition') }}</label>
+                <Field name="Malnutrition" type="text" class="form-control" value=0 />
+                <ErrorMessage name="Malnutrition" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="domestic_visits">{{ $t('msppData.domesticVisits') }}</label>
+                <Field name="domestic_visits" type="text" class="form-control" value=0 />
+                <ErrorMessage name="domestic_visits" class="error-feedback" />
                 </div>
                 <table>
                     <tr>
                         <th></th>
-                        <th>0-6 heures</th>
-                        <th>7h-6 jours</th>
-                        <th>7-42 jours</th>
+                        <th>{{ $t('msppData.hours0_6') }}</th>
+                        <th>{{ $t('msppData.hoursDays7_6') }}</th>
+                        <th>7-42 {{ $t('msppData.days7_42') }}</th>
                     </tr>
                     <tr>
                         <td>
-                        Post natal consultations
+                        {{ $t('msppData.postNatalConsultations') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -260,54 +260,52 @@
                         </td>
                     </tr>
                 </table>
-                <h4 style="color:red; text-align:center">Complications</h4>
-                <div>
-                    <div class="form-group">
-                        <label for="complications_recorded">Number of obstetric complications recorded</label>
-                        <Field name="complications_recorded" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="complications_recorded" class="error-feedback" />
-                    </div>
-                    <div class="form-group">
-                        <label for="complications_referred">Number of obstetric complications referred</label>
-                        <Field name="complications_referred" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="complications_referred" class="error-feedback" />
-                    </div>
-                </div>
-                <h4 style="color:red; text-align:center">Number of Stillborns</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.complications') }}</h4>
                 <div class="form-group">
-                <label for="stillborns_maceres">Macérés</label>
+                <label for="complications_recorded">{{ $t('msppData.compRec') }}</label>
+                <Field name="complications_recorded" type="text" class="form-control" value=0 />
+                <ErrorMessage name="complications_recorded" class="error-feedback" />
+                </div>
+                <div class="form-group">
+                <label for="complications_referred">{{ $t('msppData.compRef') }}</label>
+                <Field name="complications_referred" type="text" class="form-control" value=0 />
+                <ErrorMessage name="complications_referred" class="error-feedback" />
+                </div>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.numberOfStillborns') }}</h4>
+                <div class="form-group">
+                <label for="stillborns_maceres">{{ $t('msppData.macerated') }}</label>
                 <Field name="stillborns_maceres" type="text" class="form-control" value=0 />
                 <ErrorMessage name="stillborns_maceres" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="stillborns_non_maceres">Non Macérés</label>
+                <label for="stillborns_non_maceres">{{ $t('msppData.notMacerated') }}</label>
                 <Field name="stillborns_non_maceres" type="text" class="form-control" value=0 />
                 <ErrorMessage name="stillborns_non_maceres" class="error-feedback" />
                 </div>
-                <h4 style="color:red; text-align:center">Maternal death in the hospital</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.maternalDeathInTheHospital') }}</h4>
                 <div class="form-group">
-                <label for="in_hospital">In Hospital</label>
+                <label for="in_hospital">{{ $t('msppData.inHospital') }}</label>
                 <Field name="in_hospital" type="text" class="form-control" value=0 />
                 <ErrorMessage name="in_hospital" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="in_community">In the Community</label>
+                <label for="in_community">{{ $t('msppData.inTheCommunity') }}</label>
                 <Field name="in_community" type="text" class="form-control" value=0 />
                 <ErrorMessage name="in_community" class="error-feedback" />
                 </div>
-                <h4 style="color:red; text-align:center">Support for Wife and Mother</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.supportForWifeAndMother') }}</h4>
                 <table>
                     <tr>
-                        <th>Period of pregnancy</th>
-                        <th>1st Visit</th>
-                        <th>2nd Visit</th>
-                        <th>3rd Visit</th>
-                        <th>4th Visit</th>
-                        <th>5th plus Visit</th>
-                        <th>Total</th>
+                        <th>{{ $t('msppData.periodOfPregnancy') }}</th>
+                        <th>{{ $t('msppData.visit1') }}</th>
+                        <th>{{ $t('msppData.visit2') }}</th>
+                        <th>{{ $t('msppData.visit3') }}</th>
+                        <th>{{ $t('msppData.visit4') }}</th>
+                        <th>{{ $t('msppData.visit5Up') }}</th>
+                        <th>{{ $t('msppData.total') }}</th>
                     </tr>
                     <tr>
-                        <td> 0-3 Months </td>
+                        <td>{{ $t('msppData.months0_3') }}</td>
                         <td>
                             <div class="form-group" style="width=25%">
                             <Field name="first_quarter_first_visit" type="text" class="form-control" value=0 />
@@ -347,7 +345,7 @@
                     </tr>
                     <tr>
                         <td>
-                            4-6 months
+                            {{ $t('msppData.months4_6') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -388,7 +386,7 @@
                     </tr>
                     <tr>
                         <td>
-                            7-9 months
+                            {{ $t('msppData.months7_9') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -429,7 +427,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Total visits
+                            {{ $t('msppData.totalVisits') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -445,109 +443,109 @@
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
-                            <Field name="total_third_visit" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="total_third_visit" class="error-feedback" />
+                                <Field name="total_third_visit" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="total_third_visit" class="error-feedback" />
                             </div>
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
-                            <Field name="total_fourth_visit" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="total_fourth_visit" class="error-feedback" />
+                                <Field name="total_fourth_visit" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="total_fourth_visit" class="error-feedback" />
                             </div>
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
-                            <Field name="total_fifth_visit" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="total_fifth_visit" class="error-feedback" />
+                                <Field name="total_fifth_visit" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="total_fifth_visit" class="error-feedback" />
                             </div>
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
-                            <Field name="total_total" type="text" class="form-control" value=0 />
-                            <ErrorMessage name="total_total" class="error-feedback" />
+                                <Field name="total_total" type="text" class="form-control" value=0 />
+                                <ErrorMessage name="total_total" class="error-feedback" />
                             </div>
                         </td>
                     </tr>
                 </table>
-                <h4 style="color:red; text-align:center">Support for women hospital</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.supportForWomenHospital') }}</h4>
                 <div class="form-group">
-                <label for="pregnancies_at_risk">Number of Pregnancies at Risk</label>
+                <label for="pregnancies_at_risk">{{ $t('msppData.numberOfPregnanciesAtRisk') }}</label>
                 <Field name="pregnancies_at_risk" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnancies_at_risk" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="anemia_pregnant">Case of Anemia in Pregnant Women</label>
+                <label for="anemia_pregnant">{{ $t('msppData.caseAnemia') }}</label>
                 <Field name="anemia_pregnant" type="text" class="form-control" value=0 />
                 <ErrorMessage name="anemia_pregnant" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_iron_folates">Pregnant Women Receiving Iron Folate</label>
+                <label for="pregnant_iron_folates">{{ $t('msppData.pWIronFolate') }}</label>
                 <Field name="pregnant_iron_folates" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_iron_folates" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_iron_deficiency_anemia">Pregnant Women Being Treated for Iron Deficiency Anemia</label>
+                <label for="pregnant_iron_deficiency_anemia">{{ $t('msppData.pWIronDef') }}</label>
                 <Field name="pregnant_iron_deficiency_anemia" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_iron_deficiency_anemia" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_birth_plan">Pregnant Women with a Birth Plan</label>
+                <label for="pregnant_birth_plan">{{ $t('msppData.pWBirthPlan') }}</label>
                 <Field name="pregnant_birth_plan" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_birth_plan" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_malaria_chloroquine">Pregnant Women with Confirmed Malaria treated with Chloroquine</label>
+                <label for="pregnant_malaria_chloroquine">{{ $t('msppData.pWMalaria') }}</label>
                 <Field name="pregnant_malaria_chloroquine" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_malaria_chloroquine" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_mosquito_net">Pregnant Women Who Received an Impregnated Mosquito Net</label>
+                <label for="pregnant_mosquito_net">{{ $t('msppData.pWMosquito') }}</label>
                 <Field name="pregnant_mosquito_net" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_mosquito_net" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="pregnant_MUAC">Pregnant women MUAC&#60;210mm</label>
+                <label for="pregnant_MUAC">{{ $t('msppData.pWMUAC') }}</label>
                 <Field name="pregnant_MUAC" type="text" class="form-control" value=0 />
                 <ErrorMessage name="pregnant_MUAC" class="error-feedback" />
                 </div>
 
-                <h4 style="color:red; text-align:center">Other Services</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.otherServices') }}</h4>
                 <div class="form-group">
-                <label for="women_iron_folate">Other Women Receiving Iron Folate</label>
+                <label for="women_iron_folate">{{ $t('msppData.wIronFolate') }}</label>
                 <Field name="women_iron_folate" type="text" class="form-control" value=0 />
                 <ErrorMessage name="women_iron_folate" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="women_acetic_inspection">Women Receiving Acetic Acid Inspection</label>
+                <label for="women_acetic_inspection">{{ $t('msppData.wAceticAcid') }}</label>
                 <Field name="women_acetic_inspection" type="text" class="form-control" value=0 />
                 <ErrorMessage name="women_acetic_inspection" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="women_smear_test">Positive Women After Smear Test</label>
+                <label for="women_smear_test">{{ $t('msppData.wSmearTest') }}</label>
                 <Field name="women_smear_test" type="text" class="form-control" value=0 />
                 <ErrorMessage name="women_smear_test" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="women_smear_take_care">Women Positive Smear Test taken Care of</label>
+                <label for="women_smear_take_care">{{ $t('msppData.wSmearTakenCare') }}</label>
                 <Field name="women_smear_take_care" type="text" class="form-control" value=0 />
                 <ErrorMessage name="women_smear_take_care" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                <label for="women_postabortion">Women Receiving Postabortion Care</label>
+                <label for="women_postabortion">{{ $t('msppData.wPostabortion') }}</label>
                 <Field name="women_postabortion" type="text" class="form-control" value=0 />
                 <ErrorMessage name="women_postabortion" class="error-feedback" />
                 </div>
-                <h4 style="color:red; text-align:center">Deliveries</h4>
+                <h4 style="color:red; text-align:center">{{ $t('msppData.deliveries') }}</h4>
                 <table>
                     <tr>
-                        <th>Age of Mothers</th>
-                        <th>Normal</th>
-                        <th>Césarienne</th>
-                        <th>Instrumentalsé</th>
+                        <th>{{ $t('msppData.ageOfMothers') }}</th>
+                        <th>{{ $t('msppData.normal') }}</th>
+                        <th>{{ $t('msppData.cesarean') }}</th>
+                        <th>{{ $t('msppData.instruments') }}</th>
                     </tr>
                     <tr>
                         <td>
-                            &lt;15 Years
+                            {{ $t('msppData.years15') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -570,7 +568,7 @@
                     </tr>
                     <tr>
                         <td>
-                            15-19 Years
+                            {{ $t('msppData.years15_19') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -593,7 +591,7 @@
                     </tr>
                     <tr>
                         <td>
-                            20-24 Years
+                            {{ $t('msppData.years20_24') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -616,7 +614,7 @@
                     </tr>
                     <tr>
                         <td>
-                            25-29 Years
+                            {{ $t('msppData.years25_29') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -639,7 +637,7 @@
                     </tr>
                     <tr>
                         <td>
-                            30 Years Plus
+                            {{ $t('msppData.years30Up') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -662,7 +660,7 @@
                     </tr>
                     <tr>
                         <td>
-                            Unknown
+                            {{ $t('msppData.unknown') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -687,14 +685,14 @@
                 <br>
                 <table>
                     <tr>
-                        <th>Labor management</th>
-                        <th>Normal</th>
-                        <th>Césarienne</th>
-                        <th>Instrumentalsé</th>
+                        <th>{{ $t('msppData.labourManagement') }}</th>
+                        <th>{{ $t('msppData.normal') }}</th>
+                        <th>{{ $t('msppData.cesarean') }}</th>
+                        <th>{{ $t('msppData.instruments') }}</th>
                     </tr>
                     <tr>
                         <td>
-                        Use of partograph
+                        {{ $t('msppData.useOfPartograph') }}
                         </td>
                         <td>
                             <div class="form-group" style="width=25%">
@@ -716,7 +714,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>Active Management of the 3rd Phase of Labor</td>
+                        <td>{{ $t('msppData.managementLabour3rdYear') }}</td>
                         <td>
                             <div class="form-group" style="width=25%">
                             <Field name="labor_normal" type="text" class="form-control" value=0 />
@@ -740,7 +738,7 @@
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('msppData.submit') }}
                     </button>
                 </div>
             </div>
@@ -754,7 +752,6 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
@@ -832,6 +829,417 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            weight_less_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_less_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_less_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_within_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_within_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_within_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_more_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_more_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            weight_more_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            Vitamin_A: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            MUAC_210mm: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            Malnutrition: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            domestic_visits: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            post_natal_first: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            post_natal_second: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            post_natal_third: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            complications_recorded: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            complications_referred: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            stillborns_maceres: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            stillborns_non_maceres: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            in_hospital: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            in_community: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_first_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_second_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_third_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_fourth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_fifth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            first_quarter_total: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_first_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_second_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_third_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_fourth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_fifth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            second_quarter_total: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_first_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_second_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_third_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_fourth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_fifth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            third_quarter_total: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_first_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_second_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_third_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_fourth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_fifth_visit: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            total_total: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnancies_at_risk: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            anemia_pregnant: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_iron_folates: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_iron_deficiency_anemia: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_birth_plan: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_malaria_chloroquine: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_mosquito_net: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            pregnant_MUAC: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            women_acetic_inspection: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            women_smear_test: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            women_smear_take_care: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            women_postabortion: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_less_than_fifteen_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_less_than_fifteen_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_less_than_fifteen_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_fifteen_to_nineteen_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_fifteen_to_nineteen_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_fifteen_to_nineteen_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_to_twenty_four_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_to_twenty_four_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_to_twenty_four_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_five_to_twenty_nine_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_five_to_twenty_nine_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_twenty_five_to_twenty_nine_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_thirty_plus_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_thirty_plus_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_thirty_plus_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_unknown_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_unknown_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mother_age_unknown_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            partograph_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            partograph_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            partograph_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            labor_normal: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            labor_cesarienne: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            labor_instrumentalse: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            
         });
         return {
             successful: false,
@@ -904,7 +1312,7 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
     .category-heading{
         font-size:20px;

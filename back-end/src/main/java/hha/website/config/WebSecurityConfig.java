@@ -2,7 +2,6 @@ package hha.website.config;
 
 import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtRequestFilter;
-import hha.website.services.MSPPRepositoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -53,25 +52,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.headers().frameOptions().disable();
         http.csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
-                // .antMatchers("/api/casestudy/**").permitAll()
-                .antMatchers("/api/login").permitAll()
-                .antMatchers("/api/register").hasRole("HEAD")
-                .antMatchers("/api/**").authenticated()
+                .antMatchers("/**").permitAll()
+                //.antMatchers("/api/register").hasRole("HEAD")
+                //.antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
-    }
-
-    @Bean
-    public UserDetailsService userDetailsService() {
-        return new HHAUserDetailsService();
-    }
-
-    @Bean
-    public MSPPRepositoryService msppRepositoryService() {
-        return new MSPPRepositoryService();
     }
 
     @Override
@@ -84,8 +73,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-
-
 
 }

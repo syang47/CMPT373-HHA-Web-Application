@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.Query;
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface CaseStudyRepository extends JpaRepository<CaseStudy, Integer> {
@@ -20,4 +21,7 @@ public interface CaseStudyRepository extends JpaRepository<CaseStudy, Integer> {
 
     @Query("SELECT COUNT(d.title) FROM CaseStudy d")
     Collection<Integer> queryTotalReportsField();
+
+    @Query("SELECT DISTINCT caseStudyType FROM CaseStudy")
+    List<String> queryCaseStudyTypes();
 }

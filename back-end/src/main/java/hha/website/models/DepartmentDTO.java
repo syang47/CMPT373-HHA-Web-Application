@@ -1,22 +1,25 @@
 package hha.website.models;
 
+import java.util.Set;
+
 public class DepartmentDTO {
-    private String name;
-    private Integer points;
+    private Set<User> users;
 
-    public String getName() {
-        return name;
+    private String departmentname;
+
+    public Set<User> getUsers() {
+        return users;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsers(Set<User> users) {
+        this.users = users;
     }
 
-    public Integer getPoints() {
-        return points;
+    public String getDepartment() {
+        return departmentname;
     }
 
-    public void setPoints(Integer points) {
-        this.points = points;
+    public void setDepartment(String departmentname) {
+        this.departmentname = departmentname;
     }
 }
