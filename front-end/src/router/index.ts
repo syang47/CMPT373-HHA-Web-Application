@@ -16,6 +16,9 @@ import Community_Health from "@/views/Com_Heal/Community_Dep.vue";
 import Community_Health_Data from "@/views/Com_Heal/Community_Health_Data.vue";
 
 import Message_Board from "@/views/Message_Board/Message_Board.vue";
+import Message_Board_Data from "@/views/Message_Board/Message_Board_Data.vue";
+
+
 
 const routes: Array<RouteRecordRaw> = [
   // Basic components
@@ -87,6 +90,12 @@ const routes: Array<RouteRecordRaw> = [
     path: "/message_board",
     name: "Message_Board",
     component: Message_Board,
+  },
+
+  {
+    path: "/message_board/submit",
+    name: "Message_Board_Data",
+    component: Message_Board_Data,
   },
 
   // Other components

@@ -43,10 +43,11 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 
 export default class Message_Board extends Vue {
-    goToMessageBoard(): void {
+    goToDataInput(): void {
         this.$router.push('/message_board/submit');
     };
 }
+
 </script>
 
 
