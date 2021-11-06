@@ -16,7 +16,11 @@
           </button>
           <button class="btn btn-light" @click="goToRegister">Register
           </button>
-          <button class="btn btn-light" @click="getDepartments">Show Departments
+          <button class="btn btn-light" @click="getData">Show Data
+          </button>
+          <button class="btn btn-light" @click="getUsersInNICU">NICU Users
+          </button>
+          <button class="btn btn-light" @click="getCaseStudyTypes">NICU Users
           </button>
         </div>
 
@@ -30,29 +34,56 @@
 import { Vue } from "vue-class-component";
 export default class App extends Vue{
 
-    loginOrLogout(): void {
-        let tempThis = this;
-        if(tempThis.$store.state.auth.status.loggedIn) {
-            tempThis.$store.dispatch('auth/logout');
-        }
-        tempThis.$router.push('/login');
+  loginOrLogout(): void {
+    let tempThis = this;
+    if(tempThis.$store.state.auth.status.loggedIn) {
+        tempThis.$store.dispatch('auth/logout');
     }
+    tempThis.$router.push('/login');
+  }
 
-    goToRegister(): void {
-        let tempThis = this;
-        tempThis.$router.push('/register');
-    };
+  goToRegister(): void {
+    let tempThis = this;
+    tempThis.$router.push('/register');
+  }
 
-    getDepartments(): void {
-        let tempThis = this;
-        let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/mspp/department", {
-            headers: {
-                'Authorization': `Bearer ${token.jwt}`
-            }
-        }).then(response => {
-              console.log(response.data);
-        });
+  getCaseStudyTypes(): void {
+    let tempThis = this;
+    const token = JSON.parse(localStorage.getItem('user')!);
+    tempThis.$axios.get("/api/casestudy/types", {
+    headers: {
+      'Authorization': `Bearer ${token.jwt}`
     }
+    }).then(response => {
+      console.log(response.data);
+      return JSON.stringify(response.data);
+    });
+  }
+
+  getUsersInNICU(): void {
+      let tempThis = this;
+      let token = JSON.parse(localStorage.getItem('user')!);
+      tempThis.$axios.get("/api/departments/nicu_users", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+            console.log(response.data);
+            return JSON.stringify(response.data);
+      });
+  }
+
+  getData(): void {
+      let tempThis = this;
+      let token = JSON.parse(localStorage.getItem('user')!);
+      tempThis.$axios.get("/api/mspp/data", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+            console.log(response.data);
+            return JSON.stringify(response.data);
+      });
+  }
 };
 </script>

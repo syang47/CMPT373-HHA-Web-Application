@@ -2,6 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
+import Case_Study from "@/views/Case_Study.vue";
 
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
 import NICU_PAED_Data from "@/views/NICU_PAED/NICU_PAED_Data.vue"
@@ -25,10 +26,23 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: "/register",
     component: Register,
+    beforeEnter: (to, from, next) => {
+      const token = JSON.parse(localStorage.getItem('user')!);
+      if (token.roles[0].authority == 'ROLE_USER') {
+        next(false);
+      } else {
+        next();
+      }
+    },
   },
   {
     path: "/",
     component: Home,
+  },
+
+  {
+    path: "/casestudy",
+    component: Case_Study,
   },
 
   // NICU/PAED

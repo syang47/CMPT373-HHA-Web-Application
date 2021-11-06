@@ -277,6 +277,6 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
 </style>

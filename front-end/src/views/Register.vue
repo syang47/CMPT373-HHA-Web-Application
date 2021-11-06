@@ -52,6 +52,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import axios from 'axios';
+import router from '../router';
 export default defineComponent({
     name: "Register",
     components: {
@@ -83,6 +84,7 @@ export default defineComponent({
             loading: false,
             message: "",
             departments: [],
+            d: null,
             userSchema,
         };
 
@@ -101,7 +103,7 @@ export default defineComponent({
  
         getDepartments(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
-            axios.get("/api/mspp/department", {
+            axios.get("/api/departments", {
             headers: {
                 'Authorization': `Bearer ${token.jwt}`
             }

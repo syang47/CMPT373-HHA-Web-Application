@@ -1,6 +1,5 @@
 package hha.website.auth;
 
-import hha.website.auth.JwtUtil;
 import hha.website.services.HHAUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
