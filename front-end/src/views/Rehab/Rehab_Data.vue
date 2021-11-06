@@ -1,5 +1,4 @@
 <template>
-
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
@@ -26,6 +25,20 @@
                     <Field name="hospitalized" type="text" class="form-control" value=0 />
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
+                <div v-if="hospitalizedMor" class="form-group">
+                    <label for="hospitalizedNICU">Hospitalized NICU</label>
+                    <Field name="hospitalizedNICU" type="text" class="form-control" />
+                    <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
+                </div>
+                <div v-if="hospitalizedMor" class="form-group">
+                    <label for="hospitalizedPaed">Hospitalized Paed</label>
+                    <Field name="hospitalizedPaed" type="text" class="form-control" />
+                    <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
+                </div>
+
+
+
+
                 <div class="form-group">
                     <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
                     <Field name="dischargedAlive" type="text" class="form-control" value=0 />
@@ -80,11 +93,7 @@
             </div>
         </div>
     </Form>
-    <div
-    v-if="message"
-    class="alert alert-danger"
-    :class="successful ? 'alert-success' : 'alert-danger'"
-    >
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
     </div>
 </template>
@@ -95,7 +104,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
-    name: "MSPP",
+    name: "Rehab_Data",
     components: {
         Form,
         Field,
@@ -123,6 +132,18 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            hospitalizedNICU: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            hospitalizedPaed: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+
+
             dischargedAlive: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -173,20 +194,29 @@ export default defineComponent({
             successful: false,
             loading: false,
             message: "",
+            hospitalizedMor: false,
             dataSchema,
         };
     },
     methods: {
+        checkHospitalized() {
+            let number: number = (document as any).getElementById("hospitalized").value;
+            if (number > 0) {
+                this.hospitalizedMor = true;
+            } else {
+                this.hospitalizedMor = false;
+            }
+        },
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
-                entry.department = token.roles[0].authority;
+                entry.department = "rehab";
                 this.$axios.post("/api/datainput", entry, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`
                     }
                 }).then(response => {
-                        this.message = "test";
+                        this.message = response.data;
                         this.successful = true;
                         this.loading = false;
                         if(response != null) {
@@ -208,7 +238,6 @@ export default defineComponent({
                 });
             }
         },
-
     }
 });
 </script>
@@ -240,6 +269,6 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
 </style>

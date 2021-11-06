@@ -19,10 +19,17 @@
                     <Field name="password" type="password" class="form-control" />
                     <ErrorMessage name="password" class="error-feedback" />
                 </div>
+
                 <div class="form-group">
-                    <label for="role">{{ $t('registerPage.role') }}</label>
-                    <Field name="role" type="text" class="form-control" />
-                    <ErrorMessage name="role" class="error-feedback" />
+                    <label for="departments">Select A Department: </label>
+                    <Field v-slot="{ value }" name="departments" as="select">
+                      <option v-for="d in departments" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
+                    </Field>
+
+                </div>
+                <div class="form-group" v-if="isAdmin()">
+                    <Field name="head" type="checkbox" :value="true"/>
+                    <label for="head"> Department Head/Medical Director?</label>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
@@ -35,20 +42,17 @@
         </div>
     </Form>
 
-        <div
-        v-if="message"
-        class="alert alert-danger"
-        :class="successful ? 'alert-success' : 'alert-danger'"
-        >
-            {{ message }}
-        </div>
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
+        {{ message }}
+    </div>
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+import axios from 'axios';
+import router from '../router';
 export default defineComponent({
     name: "Register",
     components: {
@@ -56,34 +60,58 @@ export default defineComponent({
         Field,
         ErrorMessage,
     },
-    data() {
+    data: function() {
         const userSchema = yup.object().shape({ //need translation handling for err messages
             username: yup
                 .string()
                 .required("Username is required!")
                 .min(4, "Must be at least 4 characters!")
                 .max(20, "Must be maximum 20 characters!"),
-            role: yup
-                .string()
-                .required("Role is required!")
-                .lowercase()
-                .notOneOf(['admin']),
             password: yup
                 .string()
                 .required("Password is required!")
                 .min(6, "Must be at least 6 characters!")
                 .max(40, "Must be maximum 40 characters!"),
+            departments: yup
+                .string()
+                .required("Must select a department for the user."),
+            head: yup
+                .boolean()
         });
 
         return {
             successful: false,
             loading: false,
             message: "",
+            departments: [],
+            d: null,
             userSchema,
         };
 
     },
+    mounted() {
+        this.getDepartments();
+    },
     methods: {
+        isAdmin(): boolean {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            if(token.roles[0].authority == 'ROLE_ADMIN') {
+                return true;
+            }
+            return false;
+        },
+
+        getDepartments(): void {
+            const token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/departments", {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+            }).then(response => {
+                this.departments = response.data;
+            });
+        },
+
         handleRegister(user) {
             this.message = "";
             this.successful = false;
@@ -125,7 +153,7 @@ export default defineComponent({
         position: fixed;
         /* background-size: 100% 100%; */
         height: 100%;
-        position: relative;
+        position: absolute;
         background-position: center;
         background-repeat: no-repeat;
         background-size:cover;
@@ -160,6 +188,6 @@ export default defineComponent({
         text-align: center;
     }
     .signup-form .form-group{
-        margin-bottm: 20px;
+        margin-bottom: 20px;
     }
 </style>

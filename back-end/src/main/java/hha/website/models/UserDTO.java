@@ -4,6 +4,7 @@ public class UserDTO {
     private String username;
     private String password;
     private String role;
+    private String department;
 
     public String getUsername() {
         return username;
@@ -27,5 +28,13 @@ public class UserDTO {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }

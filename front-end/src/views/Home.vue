@@ -193,7 +193,7 @@
     <div class="row justify-content-center">
       <div class="row" >
         <div class="col" v-if="showNICU">
-          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" > 
+          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" >
             <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.nicuPaed') }}</h1>
           </button>
         </div>
@@ -246,7 +246,7 @@ export default defineComponent({
       showComHealth: false,
       showMaternity: false,
       showRehab: false,
-      
+
     }
   },
   methods: {
@@ -287,3 +287,5 @@ export default defineComponent({
   }
 });
 </script>
+
+
