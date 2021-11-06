@@ -13,8 +13,9 @@ import Maternity_Data from "@/views/Maternity/Maternity_Data.vue";
 import Rehab from "@/views/Rehab/Rehab_Dep.vue";
 import Rehab_Data from "@/views/Rehab/Rehab_Data.vue";
 
-import Community_Health from "@/views/Com_Heal/Community_Dep.vue";
-import Community_Health_Data from "@/views/Com_Heal/Community_Health_Data.vue";
+import Community_Health from "@/views/Community_Health/Community_Dep.vue";
+import Community_Health_Data from "@/views/Community_Health/Community_Health_Data.vue";
+
 
 const routes: Array<RouteRecordRaw> = [
   // Basic components
