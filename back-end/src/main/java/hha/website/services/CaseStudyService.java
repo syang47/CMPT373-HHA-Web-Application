@@ -6,11 +6,6 @@ import hha.website.models.CaseStudyDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import javax.transaction.Transactional;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 
