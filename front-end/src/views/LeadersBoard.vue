@@ -1,4 +1,4 @@
-<template xmlns:th="https://www.thymeleaf.org">
+<template>
 <div class = "background">
     <div class="container-fluid">
         <h1 class="display-2 text-center text-dark">Leaders Board</h1>

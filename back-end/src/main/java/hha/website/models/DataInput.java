@@ -1,7 +1,23 @@
 package hha.website.models;
 
+import javax.annotation.Generated;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.*;
+
+@Entity
+@Table(name="datainput")
 public class DataInput{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    
+    @Column
     private String monthly;
+
+    @Column 
     private String annual;
 
     public String getMonthly(){
