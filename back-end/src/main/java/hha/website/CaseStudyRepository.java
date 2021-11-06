@@ -8,20 +8,20 @@ import java.util.List;
 
 @Repository
 public interface CaseStudyRepository extends JpaRepository<CaseStudy, Integer> {
-    CaseStudy findByTitle(String casestudytitle);
-    
-    @Query("SELECT DISTINCT title FROM CaseStudy")
-    Collection<String> queryDistinctField();
-
-    @Query("SELECT MAX(d.points) FROM CaseStudy d")
-    Collection<Integer> queryBestCasestudy();
-    
-    @Query("SELECT DISTINCT d.status FROM CaseStudy d")
-    Collection<Boolean> querySubmissionStatus();
-
-    @Query("SELECT COUNT(d.title) FROM CaseStudy d")
-    Collection<Integer> queryTotalReportsField();
+//    @Query("SELECT DISTINCT title FROM CaseStudy")
+//    Collection<String> queryDistinctField();
 
     @Query("SELECT DISTINCT caseStudyType FROM CaseStudy")
     List<String> queryCaseStudyTypes();
+
+//    @Query("SELECT MAX(d.points) FROM CaseStudy d")
+//    Collection<Integer> queryBestCasestudy();
+    
+//    @Query("SELECT DISTINCT d.status FROM CaseStudy d")
+//    Collection<Boolean> querySubmissionStatus();
+
+//    @Query("SELECT COUNT(d.title) FROM CaseStudy d")
+//    Collection<Integer> queryTotalReportsField();
+
+
 }

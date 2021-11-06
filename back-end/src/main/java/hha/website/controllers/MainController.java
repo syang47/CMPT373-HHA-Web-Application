@@ -73,7 +73,7 @@ public class MainController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(authenticationRequest.getUsername());
         final String jwt = jwtToken.generateToken(userDetails);
 
-        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartments().getDepartmentname()));
+        return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment().getDepartmentname()));
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
@@ -106,8 +106,6 @@ public class MainController {
         final String authorizationHeader = request.getHeader("Authorization");
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
         final User user = userDetailsService.findByUsername(username);
-
-
         return ResponseEntity.ok(caseStudyService.save(user, data));
     }
 
@@ -117,9 +115,8 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
-
     @GetMapping("/api/departments")
-    public ResponseEntity<?> getDepartments(){
+    public ResponseEntity<?> getAllDepartments(){
         System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
@@ -127,11 +124,6 @@ public class MainController {
     @GetMapping("/api/mspp/data")
     public ResponseEntity<?> getAllMSPPData(){
         return ResponseEntity.ok(msppRepositoryService.listAllData());
-    }
-
-    @GetMapping("/api/departments/nicu_users")
-    public ResponseEntity<?> getNICUUsers(){
-        return ResponseEntity.ok(HHADepartmentService.listUsersInNICU());
     }
 
     @GetMapping("/api/mspp/{documentId}")
@@ -142,7 +134,6 @@ public class MainController {
         HashMap<String, Object> result = new HashMap<>();
         result.put("main required data: ", requiredData);
         result.put("additional data: ", additionalData);
-
         return ResponseEntity.ok(result);
     }
 
@@ -151,47 +142,20 @@ public class MainController {
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
 
-    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
-    public String getCaseStudySubStatusField() {
-        System.out.println("casestudysubmission status");
-        System.out.println(Arrays.toString(caseStudyRepositoryService.listSubmissionStatusInField().toArray()));
-        return Arrays.toString(caseStudyRepositoryService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
 
-    }
 
-    @RequestMapping(value = "/api/casestudy/totalreports", method = RequestMethod.GET)
-    public String getCaseStudyTotReportField() {
-        System.out.println("total casestudy submitted");
-        System.out.println(Arrays.toString(caseStudyRepositoryService.listTotalReportsSubmittedField().toArray()));
-        return Arrays.toString(caseStudyRepositoryService.listTotalReportsSubmittedField().toArray()).replace("[", "").replace("]","");
-    }
 
-    @GetMapping("/datainput")
-    public ResponseEntity<?> getAwardDetails() {
-        System.out.println(Arrays.toString(dataInputService.listAllItem().toArray()));
-        return ResponseEntity.ok(dataInputService.listAllItem());
-    }
+//    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
+//    public String getCaseStudySubStatusField() {
+//        System.out.println("casestudysubmission status");
+//        System.out.println(Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()));
+//        return Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
+//    }
 
-    @RequestMapping(value = "/datainput", method = RequestMethod.POST)
-    public ResponseEntity<DataInput> saveAwardDetails(@RequestBody DataInputDTO awards) {
-       System.out.println("posting to award input");
-       System.out.println("award data modified: " + awards.getAnnual() + " " + awards.getMonthly());
-       return ResponseEntity.ok(dataInputService.save(awards));
-    }
-
-    @GetMapping("/datainput/monthly")
-    public String datainputSubmitMonthly() {
-        System.out.println("grabbing monthly award data");
-        Object[] oldArray = dataInputService.listMonthlyItem().toArray();
-        Object[] newArray = Arrays.copyOfRange(oldArray, oldArray.length-1, oldArray.length);
-        return Arrays.toString(newArray).replace("[", "").replace("]","");
-    }
-
-    @GetMapping("/datainput/annual")
-    public String datainputSubmitAnnual() {
-        System.out.println("grabbing annual award data");
-        Object[] oldArray = dataInputService.listAnnualItem().toArray();
-        Object[] newArray = Arrays.copyOfRange(oldArray, oldArray.length-1, oldArray.length);
-        return Arrays.toString(newArray).replace("[", "").replace("]","");
+    @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
+    public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
+        System.out.println("total casestudy submitted for " +  department);
+        System.out.println(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
+        return ResponseEntity.ok(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
     }
 }

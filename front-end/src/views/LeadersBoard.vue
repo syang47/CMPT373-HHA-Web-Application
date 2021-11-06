@@ -104,7 +104,7 @@ import axios from 'axios';
 export default defineComponent({
     name: "LeadersBoard",
     mounted() {
-        this.getSumbittedReports();
+        this.getSubmittedReports();
         this.getBestReportPoints();
         this.getReportSubmissionStatus();
         this.getMonthlyPrize();
@@ -116,8 +116,8 @@ export default defineComponent({
             bestReportPoints: 0,
             reportSubmissionStatus: false,
             departments: [],
-            MonthlyPrize: false,
-            AnnualPrize: false
+            MonthlyPrize: "",
+            AnnualPrize: ""
         }
     },
     methods: {
@@ -139,16 +139,20 @@ export default defineComponent({
             return false;
         },
 
-        getSumbittedReports(): void {
+        getSubmittedReports(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
-            this.$axios.get("/api/casestudy/totalreports", {
+            this.$axios.get("/api/departments/totalreports", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    department: token.department
                 }
             }).then(response => {
+                console.log(response.data);
                 this.submittedReports = response.data;
             }).catch((error: any) => {
-                      alert("could not get submitted reports");
+                alert("could not get submitted reports");
             });
         },
 
@@ -173,7 +177,7 @@ export default defineComponent({
             }).then(response => {
                 this.reportSubmissionStatus = response.data;
             }).catch((error: any) => {
-                      alert("could not get submission status");
+                alert("could not get submission status");
             });
         }
     }

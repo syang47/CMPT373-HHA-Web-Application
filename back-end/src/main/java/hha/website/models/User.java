@@ -1,6 +1,7 @@
 package hha.website.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -19,20 +20,26 @@ public class User {
     private String role;
 
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private Department department;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<MSPPRequirement> folder;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<CaseStudy> caseStudies;
 
+    @Column
+    private Integer reportsSubmitted;
 
+    @Column
+    private Integer points;
 
     public Integer getId() {
         return id;
@@ -88,5 +95,37 @@ public class User {
 
     public void setFolder(Set<MSPPRequirement> folder) {
         this.folder = folder;
+    }
+
+    public Department getDepartment() {
+        return department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
+
+    public Set<CaseStudy> getCaseStudies() {
+        return caseStudies;
+    }
+
+    public void setCaseStudies(Set<CaseStudy> caseStudies) {
+        this.caseStudies = caseStudies;
+    }
+
+    public Integer getReportsSubmitted() {
+        return reportsSubmitted;
+    }
+
+    public void setReportsSubmitted(Integer reportsSubmitted) {
+        this.reportsSubmitted = reportsSubmitted;
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
     }
 }

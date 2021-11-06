@@ -9,18 +9,14 @@
         <span class="navbar-toggler-icon" />
       </button>
       <div class="text-end" style="margin-left:auto; margin-left: 0;">
-        <button class="btn btn-light" @click="changeToFrench">Français</button>
         <button class="btn btn-light" @click="changeToEnglish">English</button>
+        <button class="btn btn-light" @click="changeToFrench">Français</button>
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
             <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
             </button>
             <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
-            </button>
-            <button class="btn btn-light" @click="getData">Show Data
-            </button>
-            <button class="btn btn-light" @click="getUsersInNICU">NICU Users
             </button>
           </div>
       </div>
@@ -48,19 +44,6 @@ export default class App extends Vue{
     tempThis.$router.push('/register');
   }
 
-  getUsersInNICU(): void {
-      let tempThis = this;
-      let token = JSON.parse(localStorage.getItem('user')!);
-      tempThis.$axios.get("/api/departments/nicu_users", {
-          headers: {
-              'Authorization': `Bearer ${token.jwt}`
-          }
-      }).then(response => {
-            console.log(response.data);
-            return JSON.stringify(response.data);
-      });
-  }
-
   getData(): void {
       let tempThis = this;
       let token = JSON.parse(localStorage.getItem('user')!);
@@ -73,25 +56,25 @@ export default class App extends Vue{
             return JSON.stringify(response.data);
       });
   }
+  
+  changeToEnglish(): void {
+    i18n.global.locale = 'en';
+  }
   changeToFrench(): void {
     i18n.global.locale = 'fr';
   }
 
-  changeToEnglish(): void {
-    i18n.global.locale = 'en';
+  // force push 3 case studies to test leadersboard implementation
+  getLeadersboard(): void {
+      let tempThis = this;
+      let token = JSON.parse(localStorage.getItem('user')!);
+      tempThis.$axios.get("/api/casestudy", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+            console.log(response.data);
+      });
   }
-
-    // force push 3 case studies to test leadersboard implementation
-    getLeadersboard(): void {
-        let tempThis = this;
-        let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/casestudy", {
-            headers: {
-                'Authorization': `Bearer ${token.jwt}`
-            }
-        }).then(response => {
-              console.log(response.data);
-        });
-    }
 };
 </script>

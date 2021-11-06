@@ -186,11 +186,8 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button">  
+      <button class="button" @click.prevent="goToLeadersBoard">  
         <h1 class="rectangle-leader-board">{{ $t('homePage.leaderBoard') }}</h1>
-      </button>
-      <button class="button" @click.prevent="goToLeadersBoard">
-        <h1 class="rectangle-leader-board">LEADER BOARD</h1>
       </button>
 
     </div>
