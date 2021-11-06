@@ -73,7 +73,7 @@ public class HHADepartmentService {
     }
 
     public List<Department> listAllDepartments() {
-        return departmentRepository.findAll(Sort.by(Sort.Direction.DESC, "points"));
+        return departmentRepository.findAll();
     }
 
     public Collection<String> listDepartmentNames() {

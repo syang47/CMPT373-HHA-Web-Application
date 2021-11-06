@@ -5,7 +5,7 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                        <div class="card rounded text-center text-white mb-3 mt-3" style="background: lightblue;">
+                        <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
                             <div class="card-body">
                                 <h2 style="color:#000000;" class="card-title w-70">Monthly Award</h2>
                                 <ul>
@@ -18,7 +18,7 @@
 
                 </div>
                 <div class="col" >
-                    <div class="card w-100 text-center text-white mb-3 mt-3" style="background:#C0C0C0;">
+                    <div class="card w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                         <div class="card-body">
                             <h2 style="color:#000000;" class="card-title w-40">Annual Award</h2>
                             <ul>
@@ -103,7 +103,7 @@ export default defineComponent({
                     field: "monthly"
                 }
             }).then(response=> {
-                this.MonthlyPrize = response.data;
+                this.MonthlyPrize = response.data.filter(message => message);
             });
         },
         getAnnualPrize(): void{
@@ -112,17 +112,18 @@ export default defineComponent({
                     field: "annual"
                 }
             }).then(response=> {
-                this.AnnualPrize = response.data;
+                this.AnnualPrize = response.data.filter(message => message);
             });
         },
         getDepartmentPoints(): void {
             axios.get("/api/departments/points").then(response=> {
                 var departmentPointsData = response.data;
                 
+                //https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
                 this.departmentPoints = Object.keys(departmentPointsData).sort().reduce(function (result, key) {
-                                            result[key] = departmentPointsData[key];
-                                            return result;
-                                        }, {});
+                                result[key] = departmentPointsData[key];
+                                return result;
+                            }, {});
             });
         }
     }
