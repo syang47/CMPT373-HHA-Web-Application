@@ -10,7 +10,7 @@
             <Field name="annual" type="text" class="form-control" />
         </div>
         <div class="form-group">
-            <button type="submit" value="Submit">Submit</button>
+            <button class="btn btn-secondary" type="submit" value="Submit">Submit</button>
         </div>
     </Form>
 </template>
@@ -21,7 +21,7 @@ import axios from 'axios';
 import * as yup from "yup";
 import {Form, Field} from "vee-validate";
 export default defineComponent({
-    name: "LeadersBoard",
+    name: "DataInput",
     components: {
         Form,
         Field
@@ -48,7 +48,7 @@ export default defineComponent({
                 this.message = response.data;
                 if(response != null) {
                     console.log("entry success");
-                    self.$router.push("/leadersboard");                    
+                    this.$router.push("/leadersboard");                    
                 } else {
                     alert("entry is empty");
                 }
@@ -57,9 +57,6 @@ export default defineComponent({
                 this.message = (error.response && error.response.data && error.response.data.message) || error.message;
                 alert("couldn't save")
             });
-        },
-        goToLeadersBoard() {
-            this.$router.push("/leadersboard");
         }
     }
 });

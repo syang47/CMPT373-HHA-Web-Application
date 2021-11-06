@@ -1,8 +1,6 @@
 package hha.website.controllers;
 
 import hha.website.UserRepository;
-import hha.website.MSPPRepository;
-import hha.website.DataInputRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
 import hha.website.services.DataInputService;
@@ -10,8 +8,6 @@ import hha.website.services.HHAUserDetailsService;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
 import hha.website.services.MSPPRepositoryService;
-import hha.website.CaseStudyRepository;
-import hha.website.models.CaseStudy;
 import hha.website.services.CaseStudyService;
 
 
@@ -22,14 +18,10 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.ui.Model;
-
 
 import java.util.Arrays;
-import java.util.Collection;
+
 
 @RestController
 @CrossOrigin
@@ -125,27 +117,28 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/casestudy/points", method = RequestMethod.GET)
-    public ResponseEntity<?> getCaseStudyPointsField() {
+    public String getCaseStudyPointsField() {
         System.out.println("casestudypoints");
         System.out.println(Arrays.toString(caseStudyRepositoryService.listPointsInField().toArray()));
-        return ResponseEntity.ok(caseStudyRepositoryService.listPointsInField());
+        return Arrays.toString(caseStudyRepositoryService.listPointsInField().toArray()).replace("[", "").replace("]","");
+
 
     }
     @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
-    public ResponseEntity<?> getCaseStudySubStatusField() {
+    public String getCaseStudySubStatusField() {
         System.out.println("casestudysubmission status");
         System.out.println(Arrays.toString(caseStudyRepositoryService.listSubmissionStatusInField().toArray()));
-        return ResponseEntity.ok(caseStudyRepositoryService.listSubmissionStatusInField());
+        return Arrays.toString(caseStudyRepositoryService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
 
     }
 
     @RequestMapping(value = "/api/casestudy/totalreports", method = RequestMethod.GET)
-    public ResponseEntity<?> getCaseStudyTotReportField() {
+    public String getCaseStudyTotReportField() {
         System.out.println("total casestudy submitted");
         System.out.println(Arrays.toString(caseStudyRepositoryService.listTotalReportsSubmittedField().toArray()));
-        return ResponseEntity.ok(caseStudyRepositoryService.listTotalReportsSubmittedField());
-
+        return Arrays.toString(caseStudyRepositoryService.listTotalReportsSubmittedField().toArray()).replace("[", "").replace("]","");
     }
+
     @GetMapping("/datainput")
     public ResponseEntity<?> getAwardDetails() {
         System.out.println(Arrays.toString(dataInputService.listAllItem().toArray()));
@@ -162,11 +155,16 @@ public class MainController {
     @GetMapping("/datainput/monthly")
     public String datainputSubmitMonthly() {
         System.out.println("grabbing monthly award data");
-        return Arrays.toString(dataInputService.listMonthlyItem().toArray()).replace("[", "").replace("]","");
+        Object[] oldArray = dataInputService.listMonthlyItem().toArray();
+        Object[] newArray = Arrays.copyOfRange(oldArray, oldArray.length-1, oldArray.length);
+        return Arrays.toString(newArray).replace("[", "").replace("]","");
     }
+
     @GetMapping("/datainput/annual")
     public String datainputSubmitAnnual() {
         System.out.println("grabbing annual award data");
-        return Arrays.toString(dataInputService.listAnnualItem().toArray()).replace("[", "").replace("]","");
+        Object[] oldArray = dataInputService.listAnnualItem().toArray();
+        Object[] newArray = Arrays.copyOfRange(oldArray, oldArray.length-1, oldArray.length);
+        return Arrays.toString(newArray).replace("[", "").replace("]","");
     }
 }

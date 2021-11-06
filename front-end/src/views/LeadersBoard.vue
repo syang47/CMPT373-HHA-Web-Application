@@ -86,7 +86,7 @@
                     <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                         <div class="card-body">
                             <h2 style="color:#000000;">Case Study of the Month</h2>
-                            <p class="card-text">...</p>
+                            
                         </div>
                     </div>
                 </div>
@@ -164,7 +164,6 @@ export default defineComponent({
                       alert("could not get best report points");
             });
         },
-
         getReportSubmissionStatus(): void {
             const token = JSON.parse(localStorage.getItem('user')!);
             axios.get("/api/casestudy/submissionstatus", {
@@ -178,7 +177,6 @@ export default defineComponent({
             });
         }
     }
-
 });
 </script>
 
