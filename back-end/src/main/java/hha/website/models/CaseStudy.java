@@ -16,7 +16,8 @@ public class CaseStudy {
     @Column(nullable = false)
     private Calendar dateSubmitted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
@@ -28,6 +29,8 @@ public class CaseStudy {
     @Column
     private String caseStudyType;
 
+    @Column
+    private Integer reportPoints;
 
     //patient story
     @Column
@@ -297,4 +300,13 @@ public class CaseStudy {
     public void setStory(String story) {
         this.story = story;
     }
+
+    public Integer getReportPoints() {
+        return reportPoints;
+    }
+
+    public void setReportPoints(Integer reportPoints) {
+        this.reportPoints = reportPoints;
+    }
 }
+

@@ -46,9 +46,9 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setUsername(user.getUsername());
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
-        System.out.println(user.getDepartment());
-        System.out.println(HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment()));
-        newUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment()));
+        Optional<Department> userDepartment = HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment());
+        userDepartment.ifPresent(d -> newUser.setDepartments(d));
+        newUser.setPoints(0);
         return userRepository.save(newUser);
     }
 
@@ -69,7 +69,9 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setUsername("admin");
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole("ROLE_ADMIN");
-        admin.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
+        admin.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
+        admin.setReportsSubmitted(0);
+        admin.setPoints(0);
         userRepository.save(admin);
 
         User randomHead = new User();
@@ -77,7 +79,8 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomHead.setUsername("head");
         randomHead.setPassword(passwordEncoder.encode("head"));
         randomHead.setRole("ROLE_HEAD");
-        randomHead.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED"));
+        randomHead.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
+        randomHead.setPoints(0);
         userRepository.save(randomHead);
 
         User randomUser = new User();
@@ -85,7 +88,12 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomUser.setUsername("user");
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
-        randomUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("maternity"));
+        randomUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("maternity").get());
+        randomUser.setPoints(0);
         userRepository.save(randomUser);
+    }
+
+    public void addASubmittedReportForUser(User user) {
+        userRepository.updateUserReportsSubmitted(user.getId());
     }
 }

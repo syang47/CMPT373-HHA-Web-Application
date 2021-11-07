@@ -10,19 +10,29 @@ import java.util.Set;
 @Entity
 @Table(name="departments")
 public class Department {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Integer id;
 
-    @NotNull
+    @Id
     @Column(unique = true)
     private String departmentname;
 
-    @OneToMany(mappedBy = "department")
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<User> users;
 
-    /*@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+    @Column
+    private Integer points;
+
+    @Column
+    private Integer reportsSubmitted;
+
+
+    /*
+    for if one user can belong to many departments
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
     @JoinTable(name = "department_users",
             joinColumns = {
                 @JoinColumn(name = "department_id")
@@ -31,14 +41,14 @@ public class Department {
     })
     private Set<User> users;*/
 
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
+//
+//    public Integer getId() {
+//        return id;
+//    }
+//
+//    public void setId(Integer id) {
+//        this.id = id;
+//    }
 
     public String getDepartmentname() {
         return departmentname;
@@ -58,5 +68,21 @@ public class Department {
 
     public void addUsers(Set<User> newUsers) {
         users.addAll(newUsers);
+    }
+
+    public Integer getPoints() {
+        return points;
+    }
+
+    public void setPoints(Integer points) {
+        this.points = points;
+    }
+
+    public Integer getReportsSubmitted() {
+        return reportsSubmitted;
+    }
+
+    public void setReportsSubmitted(Integer reportsSubmitted) {
+        this.reportsSubmitted = reportsSubmitted;
     }
 }
