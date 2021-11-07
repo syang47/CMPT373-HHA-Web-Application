@@ -29,6 +29,10 @@ public class Department {
     @Column
     private Integer reportsSubmitted;
 
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<MessageBoard> messages;
 
     /*
     for if one user can belong to many departments
@@ -84,5 +88,13 @@ public class Department {
 
     public void setReportsSubmitted(Integer reportsSubmitted) {
         this.reportsSubmitted = reportsSubmitted;
+    }
+
+    public Set<MessageBoard> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(Set<MessageBoard> messages) {
+        this.messages = messages;
     }
 }

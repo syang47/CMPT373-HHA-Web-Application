@@ -55,6 +55,9 @@ public class MainController {
     private AnnouncementService announcementService;
 
     @Autowired
+    private MessageBoardService messageBoardService;
+
+    @Autowired
     private JwtUtil jwtToken;
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
@@ -176,6 +179,12 @@ public class MainController {
     @GetMapping("/api/announcements")
     public ResponseEntity<?> getAnnouncements(@RequestParam("field") String field){
         return ResponseEntity.ok(announcementService.listAField(field));
+    }
+
+
+    @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> saveAnnouncement(HttpServletRequest request, @RequestBody MessageBoardDTO data) {
+        return ResponseEntity.ok(messageBoardService.save(data));
     }
 //    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
 //    public String getCaseStudySubStatusField() {

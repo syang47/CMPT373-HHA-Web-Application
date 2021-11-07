@@ -14,11 +14,14 @@
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
+            
+            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
+            </button>
+            <button class="btn btn-light" @click="addTestMessage">Add message
+            </button>
             <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
             </button>
             <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
-            </button>
-            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
             </button>
           </div>
       </div>
@@ -49,6 +52,29 @@ export default class App extends Vue{
   goToAddAnnouncement(): void {
     let tempThis = this;
     tempThis.$router.push('/announcement');
+  }
+
+  addTestMessage(): void {
+    let tempThis = this;
+    let token = JSON.parse(localStorage.getItem('user')!);
+    type Entry = {
+      title: string,
+      message: string,
+      departmentname: string
+    }
+    var entry:Entry = {
+        title: "TEST TITLE",
+        message: "TEST MESSAGE",
+        departmentname: token.department
+    };
+    tempThis.$axios.post("/api/messageboard/submit", entry, {
+        headers: {
+            'Authorization': `Bearer ${token.jwt}`
+        }
+    }).then(response => {
+          console.log(response.data);
+          return JSON.stringify(response.data);
+    });
   }
 
   getData(): void {
