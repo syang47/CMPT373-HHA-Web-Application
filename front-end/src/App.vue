@@ -8,18 +8,19 @@
       <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon" />
       </button>
-
+      <div class="text-end" style="margin-left:auto; margin-left: 0;">
+        <button class="btn btn-light" @click="changeToEnglish">English</button>
+        <button class="btn btn-light" @click="changeToFrench">Français</button>
+      </div>
       <div class="navbar-collapse offcanvas-collapse" >
-
-        <div class="text-end" style="margin-left:auto; margin-right: 0;">
-          <button class="btn btn-light" @click="loginOrLogout">Log In/Log Out
-          </button>
-          <button class="btn btn-light" @click="goToRegister">Register
-          </button>
-          <button class="btn btn-light" @click="getDepartments">Show Departments
-          </button>
-        </div>
-
+          <div class="text-end" style="margin-left:auto; margin-right: 0;">
+            <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
+            </button>
+            <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
+            </button>
+            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
+            </button>
+          </div>
       </div>
     </nav>
   </div>
@@ -28,31 +29,59 @@
 
 <script lang="ts">
 import { Vue } from "vue-class-component";
+import i18n from "./i18n";
+
 export default class App extends Vue{
 
-    loginOrLogout(): void {
-        let tempThis = this;
-        if(tempThis.$store.state.auth.status.loggedIn) {
-            tempThis.$store.dispatch('auth/logout');
-        }
-        tempThis.$router.push('/login');
+  loginOrLogout(): void {
+    let tempThis = this;
+    if(tempThis.$store.state.auth.status.loggedIn) {
+        tempThis.$store.dispatch('auth/logout');
     }
+    tempThis.$router.push('/login');
+  }
 
-    goToRegister(): void {
-        let tempThis = this;
-        tempThis.$router.push('/register');
-    };
+  goToRegister(): void {
+    let tempThis = this;
+    tempThis.$router.push('/register');
+  }
 
-    getDepartments(): void {
-        let tempThis = this;
-        let token = JSON.parse(localStorage.getItem('user')!);
-        tempThis.$axios.get("/api/mspp/department", {
-            headers: {
-                'Authorization': `Bearer ${token.jwt}`
-            }
-        }).then(response => {
-              console.log(response.data);
-        });
-    }
+  goToAddAnnouncement(): void {
+    let tempThis = this;
+    tempThis.$router.push('/announcement');
+  }
+
+  getData(): void {
+      let tempThis = this;
+      let token = JSON.parse(localStorage.getItem('user')!);
+      tempThis.$axios.get("/api/mspp/data", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+            console.log(response.data);
+            return JSON.stringify(response.data);
+      });
+  }
+  
+  changeToEnglish(): void {
+    i18n.global.locale = 'en';
+  }
+  changeToFrench(): void {
+    i18n.global.locale = 'fr';
+  }
+
+  // force push 3 case studies to test leadersboard implementation
+  getLeadersboard(): void {
+      let tempThis = this;
+      let token = JSON.parse(localStorage.getItem('user')!);
+      tempThis.$axios.get("/api/casestudy", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+            console.log(response.data);
+      });
+  }
 };
 </script>

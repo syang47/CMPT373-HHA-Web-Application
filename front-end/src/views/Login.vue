@@ -91,27 +91,19 @@
 
         <div class="page">
             <div class="box">
-                <h2>Login</h2>
+                <!-- Todo: modifiy each hard-code html element for "$t" templete -->
+                <h2>{{ $t('loginPage.login') }}</h2>
                 <div class="item">
                     <input v-model="username" type="text" required>
-                    <label for="">UserName</label>
+                    <label for="">{{ $t('loginPage.username') }}</label>
                 </div>
                 <div class="item">
                     <input v-model="password" type="password" required>
-                    <label for="">PassWord</label>
+                    <label for="">{{ $t('loginPage.password') }}</label>
                 </div>
                 <div class="row">
                     <div class="col">
-                        <button class="btn btn-light" @click="login">submit
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        &nbsp;&nbsp;&nbsp;
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary" @click="goToRegister">Register
+                        <button class="btn btn-light" @click="login">{{ $t('loginPage.submit') }}
                         </button>
                     </div>
                 </div>
@@ -156,10 +148,6 @@
                     alert("invalid credentials");
                 }
             );
-        }
-
-        goToRegister(): void {
-            this.$router.push('/register');
         }
     }
 

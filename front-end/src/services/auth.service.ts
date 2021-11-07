@@ -1,7 +1,6 @@
 import axios from "axios";
 
 const API_URL = "http://localhost:8080/api/";
-import router from '../router';
 
 class AuthService {
     login(user) {
@@ -34,6 +33,9 @@ class AuthService {
                'Authorization': `Bearer ${token.jwt}`
            }
         });
+    }
+    getCurrentUser() {
+        return JSON.parse(localStorage.getItem('user')!);
     }
 }
 

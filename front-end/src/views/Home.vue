@@ -186,44 +186,45 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button">  
-        <h1 class="rectangle-leader-board">LEADER BOARD</h1>
+      <button class="button" @click.prevent="goToLeadersBoard">
+        <h1 class="rectangle-leader-board">{{ $t('homePage.leaderBoard') }}</h1>
       </button>
+
     </div>
     <div class="row justify-content-center">
       <div class="row" >
         <div class="col" v-if="showNICU">
-          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" > 
-            <h1 class="rectangle-sky-blue-buttons">NICU/PAED</h1>
+          <button style="display:inline-block;" class="button" @click.prevent="goToNICUPAED" >
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.nicuPaed') }}</h1>
           </button>
         </div>
         <div class="col" v-if="showMaternity">
           <button style="display:inline-block;" class="button" @click.prevent="goToMaternity">
-            <h1 class="rectangle-sky-blue-buttons">MATERNITY</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.maternity') }}</h1>
           </button>
         </div>
       </div>
       <div class="row">
         <div class="col" v-if="showRehab">
           <button style="display:inline-block;" class="button" @click.prevent="goToRehab">
-            <h1 class="rectangle-sky-blue-buttons">REHAB</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.rehab') }}</h1>
           </button>
         </div>
         <div class="col" v-if="showComHealth">
           <button style="display:inline-block;" class="button" @click.prevent="goToCommunityHealth">
-            <h1 class="rectangle-sky-blue-buttons">COMMUNITY HEALTH</h1>
+            <h1 class="rectangle-sky-blue-buttons">{{ $t('homePage.communityHealth') }}</h1>
           </button>
         </div>
       </div>
     </div>
     <div class="row justify-content-center">
-      <button style="display:inline-block;" class="button" @click.prevent="goToMessageBoard">
-        <h1 class="rectangle-msg-board">MESSAGE BOARD</h1>
+      <button class="button" style="display:inline-block;" @click.prevent="goToMessageBoard">
+        <h1 class="rectangle-msg-board">{{ $t('homePage.messageBoard') }}</h1>
       </button>
     </div>
     <div class="row justify-content-center">
       <button class="button">
-        <h1 class="rectangle-case-studies">CASE STUDY</h1>
+        <h1 class="rectangle-case-studies">{{ $t('homePage.caseStudy') }}</h1>
       </button>
     </div>
   </div>
@@ -246,7 +247,7 @@ export default defineComponent({
       showComHealth: false,
       showMaternity: false,
       showRehab: false,
-      
+
     }
   },
   methods: {
@@ -271,6 +272,10 @@ export default defineComponent({
         this.showRehab = true;
       }
     },
+
+    goToLeadersBoard(){
+      this.$router.push('/leadersboard');
+    },
     goToNICUPAED() {
       this.$router.push('/nicu_paed');
     },
@@ -288,7 +293,6 @@ export default defineComponent({
     }
 
   }
-  
 });
 </script>
 

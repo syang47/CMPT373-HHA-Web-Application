@@ -1,8 +1,9 @@
 package hha.website.services;
 
-import hha.website.dataInterface.NICUPAEDDataRepository;
-import hha.website.models.datainput.NICUPAEDData;
-import hha.website.models.datainput.NICUPAEDDataDTO;
+import hha.website.AdditionalMSPPRepository;
+import hha.website.models.AdditionalMSPP;
+import hha.website.models.AdditionalMSPPDTO;
+import hha.website.models.MSPPRequirement;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,37 +11,28 @@ import javax.transaction.Transactional;
 
 @Service
 @Transactional
-public class NICUPAEDDataRepositoryService {
+public class AdditionalMSPPRepositoryService {
     @Autowired
-    private NICUPAEDDataRepository nicupaedDataRepository;
+    private AdditionalMSPPRepository additionalMSPPRepository;
 
-    public NICUPAEDData save(NICUPAEDDataDTO dataEntry) {
-        NICUPAEDData entry = new NICUPAEDData();
-        entry.setDepartment(dataEntry.getDepartment());
-        entry.setBedDays(dataEntry.getBedDays());
-        entry.setPatientDays(dataEntry.getPatientDays());
-        entry.setHospitalized(dataEntry.getHospitalized());
+    public AdditionalMSPP loadAdditionalMSPPDataByMSPPData(MSPPRequirement msppRequirementData) {
+        return additionalMSPPRepository.findBymsppRequirementData(msppRequirementData);
+    }
+
+    public AdditionalMSPP save(AdditionalMSPPDTO dataEntry) {
+        AdditionalMSPP entry = new AdditionalMSPP();
         entry.setHospitalizedNICU(dataEntry.getHospitalizedNICU());
         entry.setHospitalizedPaed(dataEntry.getHospitalizedPaed());
-        entry.setDischargedAlive(dataEntry.getDischargedAlive());
         entry.setNICUDischarged(dataEntry.getNICUDischarged());
-        entry.setDiedBefore48h(dataEntry.getDiedBefore48h());
         entry.setDiedInNICUBefore48(dataEntry.getDiedInNICUBefore48());
         entry.setDiedInPaedBefore48(dataEntry.getDiedInPaedBefore48());
-        entry.setDiedAfter48h(dataEntry.getDiedAfter48h());
         entry.setDiedInNICUAfter48(dataEntry.getDiedInNICUAfter48());
         entry.setDiedInPaedAfter48(dataEntry.getDiedInPaedAfter48());
-        entry.setDaysHospitalised(dataEntry.getDaysHospitalised());
-        entry.setReferrals(dataEntry.getReferrals());
-        entry.setTransfers(dataEntry.getTransfers());
-        entry.setSelfDischarged(dataEntry.getSelfDischarged());
         entry.setFinanceCannotAfford(dataEntry.getFinanceCannotAfford());
         entry.setFinanceAvoidPay(dataEntry.getFinanceAvoidPay());
         entry.setReasonCultural(dataEntry.getReasonCultural());
         entry.setReasonPersonal(dataEntry.getReasonPersonal());
         entry.setOtherReason(dataEntry.getOtherReason());
-        entry.setStayedInTheWard(dataEntry.getStayedInTheWard());
-        entry.setAdmissions(dataEntry.getAdmissions());
         entry.setFromQuarterMorin(dataEntry.getFromQuarterMorin());
         entry.setFromCapHaitian(dataEntry.getFromCapHaitian());
         entry.setFromDepartmentNord(dataEntry.getFromDepartmentNord());
@@ -104,7 +96,11 @@ public class NICUPAEDDataRepositoryService {
         entry.setNumberOfOutpatientsOtherMedical(dataEntry.getNumberOfOutpatientsOtherMedical());
         entry.setBoy(dataEntry.getBoy());
         entry.setGirl(dataEntry.getGirl());
-        System.out.println("entry saved - NICUPAED");
-        return nicupaedDataRepository.save(entry);
+        System.out.println("entry saved - additional data");
+        return additionalMSPPRepository.save(entry);
+    }
+
+    public AdditionalMSPP getAdditionalData(MSPPRequirement requiredData) {
+        return additionalMSPPRepository.findBymsppRequirementData(requiredData);
     }
 }
