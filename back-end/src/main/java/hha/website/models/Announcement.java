@@ -11,7 +11,7 @@ import java.util.Calendar;
 @Table(name="announcements")
 public class Announcement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Temporal(value = TemporalType.TIMESTAMP)

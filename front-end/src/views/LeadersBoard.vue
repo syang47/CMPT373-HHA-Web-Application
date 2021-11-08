@@ -5,16 +5,16 @@
         <div class="container">
             <div class="row">
                 <div class="col">
-                        <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
-                            <div class="card-body">
-                                <h2 style="color:#000000;" class="card-title w-70">Monthly Award</h2>
-                                <ul>
-                                    <li v-for="prize in MonthlyPrize" :key="prize">
-                                        {{ prize }}
-                                    </li>
-                                </ul>
-                            </div>
+                    <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
+                        <div class="card-body">
+                            <h2 style="color:#000000;" class="card-title w-70">Monthly Award</h2>
+                            <ul>
+                                <li v-for="prize in MonthlyPrize" :key="prize">
+                                    {{ prize }}
+                                </li>
+                            </ul>
                         </div>
+                    </div>
 
                 </div>
                 <div class="col" >
@@ -142,19 +142,19 @@ export default defineComponent({
   box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
     0 0 100px 0 #c6fafe;
 }
-    .background {
-        background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
-        /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
-        /* -moz-background-size:100% 100%; */
-        position: absolute;
-        /* background-size: 100% 100%; */
-        height: 100%;
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size:cover;
-    }
+.background {
+    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
+    /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
+    /* -moz-background-size:100% 100%; */
+    position: absolute;
+    /* background-size: 100% 100%; */
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
 
-@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+
 
 * {
   box-sizing: border-box;

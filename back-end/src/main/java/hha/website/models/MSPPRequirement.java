@@ -11,7 +11,7 @@ import java.util.Calendar;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MSPPRequirement {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Temporal(value = TemporalType.TIMESTAMP)

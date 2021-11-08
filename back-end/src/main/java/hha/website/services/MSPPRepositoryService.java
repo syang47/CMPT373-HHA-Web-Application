@@ -13,6 +13,7 @@ import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 @Transactional
@@ -25,7 +26,8 @@ public class MSPPRepositoryService {
     public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
         entry.setUser(user);
-        entry.setDateSubmitted(Calendar.getInstance());
+        TimeZone timeZone = TimeZone.getTimeZone("GMT");
+        entry.setDateSubmitted(Calendar.getInstance(timeZone));
 
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());
