@@ -3,8 +3,12 @@ package hha.website.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 
-import javax.persistence.*;
+import net.bytebuddy.asm.Advice.Local;
+
+import java.time.LocalDate;
 import java.util.Calendar;
+
+import javax.persistence.*;
 
 @Entity
 @Table(name="MSPPData")
@@ -14,9 +18,9 @@ public class MSPPRequirement {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @Temporal(value = TemporalType.TIMESTAMP)
+    // @Temporal(value = TemporalType.TIMESTAMP)
     @Column(nullable = false)
-    private Calendar dateSubmitted;
+    private LocalDate dateSubmitted;
 
     @ManyToOne(fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
@@ -228,7 +232,7 @@ public class MSPPRequirement {
         return id;
     }
 
-    public Calendar getDateSubmitted() {
+    public LocalDate getDateSubmitted() {
         return dateSubmitted;
     }
 
@@ -616,7 +620,7 @@ public class MSPPRequirement {
         return labor_instrumentalse;
     }
 
-    public void setDateSubmitted(Calendar dateSubmitted) {
+    public void setDateSubmitted(LocalDate dateSubmitted) {
         this.dateSubmitted = dateSubmitted;
     }
 

@@ -7,12 +7,17 @@ import hha.website.models.CaseStudyDTO;
 import hha.website.models.Department;
 import hha.website.models.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.*;
 
 @Service

@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 import java.util.TimeZone;
@@ -26,8 +29,9 @@ public class MSPPRepositoryService {
     public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
         entry.setUser(user);
-        TimeZone timeZone = TimeZone.getTimeZone("GMT");
-        entry.setDateSubmitted(Calendar.getInstance(timeZone));
+        entry.setDateSubmitted(LocalDate.now());
+        // TimeZone timeZone = TimeZone.getTimeZone("GMT");
+        // entry.setDateSubmitted(Calendar.getInstance(timeZone));
 
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());
@@ -140,6 +144,10 @@ public class MSPPRepositoryService {
         return msppRepository.findByid(documentId);
     }
 
+    public List<MSPPRequirement> listByIdAndDate(Integer id, LocalDate date) {
+        return msppRepository.findByidAndDateSubmitted(id, date);
+    }
+    
     /*
     public Collection<String> listDistinctItemsInField() {
         return msppRepository.queryDistinctField();
