@@ -2,6 +2,7 @@ package hha.website;
 
 import hha.website.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -13,4 +14,8 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT DISTINCT role FROM User")
     Collection<String> queryDistinctField();
+
+    @Modifying
+    @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
+    void updateUserReportsSubmitted(Integer id);
 }

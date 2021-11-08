@@ -104,15 +104,6 @@
                 <div class="row">
                     <div class="col">
                         <button class="btn btn-light" @click="login">{{ $t('loginPage.submit') }}
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                            <span></span>
-                        </button>
-                        &nbsp;&nbsp;&nbsp;
-                    </div>
-                    <div class="col">
-                        <button class="btn btn-secondary" @click="goToRegister">{{ $t('loginPage.register') }}
                         </button>
                     </div>
                 </div>
@@ -157,10 +148,6 @@
                     alert("invalid credentials");
                 }
             );
-        }
-
-        goToRegister(): void {
-            this.$router.push('/register');
         }
     }
 

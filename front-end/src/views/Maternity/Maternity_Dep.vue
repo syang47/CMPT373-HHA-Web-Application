@@ -47,19 +47,6 @@
             </div>
           </div>      
         </div>
-        <div class="row">
-          <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #8C8C8C">
-              <h2 class="card-title p-3">{{ $t('departmentPage.departmentPoints') }}</h2>
-              <div class="row p-3" >
-                <div class="col-sm-6 p-3" style="border-radius:5px;">
-                  {{ $t('departmentPage.monthly') }} 
-                </div>
-                <div class="col-sm-6 p-3" style="border-radius:5px;">
-                  <span> {{ $t('departmentPage.annually') }} </span>
-                </div>          
-              </div>             
-          </div>      
-        </div>
     </div>
   </div>
 </template>

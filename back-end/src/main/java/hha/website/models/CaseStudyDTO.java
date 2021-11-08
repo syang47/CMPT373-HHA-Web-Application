@@ -38,7 +38,7 @@ public class CaseStudyDTO {
     private String equipmentOrigin;
     private String equipmentUsage;
 
-    
+
     private String story;
 
     public MultipartFile getPhoto() {
