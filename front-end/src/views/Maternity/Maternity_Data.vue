@@ -51,7 +51,7 @@
                                 v-for="(field, idx) in fields"
                                 :key="field.key"
                             >
-                            <legend>Patient {{ idx+1 }}</legend>
+                            <legend style="color:green">Patient {{ idx+1 }}</legend>
                             <label :for="`diedBefore48hAge_${idx}`">Age</label>
                             <Field class="form-control"
                                    :id="`diedBefore48hAge_${idx}`" 
@@ -88,7 +88,7 @@
                                 v-for="(field, idx) in fields"
                                 :key="field.key"
                             >
-                            <legend>Patient {{ idx+1 }}</legend>
+                            <legend style="color:green">Patient {{ idx+1 }}</legend>
                             <label :for="`diedAfter48hAge_${idx}`">Age</label>
                             <Field class="form-control"
                                    :id="`diedAfter48hAge_${idx}`" 
@@ -139,7 +139,7 @@
                         <ErrorMessage name="selfDischarged" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <h4>{{ $t('msppData.reasonSelfDischarge') }}</h4>
+                        <h4 style="color:green">{{ $t('msppData.reasonSelfDischarge') }}</h4>
                         <label for="financeCannotAfford">{{ $t('msppData.financeCare') }}</label>
                         <Field name="financeCannotAfford" type="text" class="form-control" value=0 />
                         <ErrorMessage name="financeCannotAfford" class="error-feedback" />
@@ -182,7 +182,7 @@
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>{{ $t('msppData.wherePatientsComeFrom') }}</h4>
+                            <h4 style="color:green">{{ $t('msppData.wherePatientsComeFrom') }}</h4>
                             <label for="fromQuarterMorin">{{ $t('msppData.quMo') }}</label>
                             <Field name="fromQuarterMorin" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromQuarterMorin" class="error-feedback" />
@@ -873,7 +873,7 @@
 
                 <!-- Todo: this additional form need to be translated -->
                 <div>
-                    <h4>Main Condition of Patient</h4>
+                    <h4 style="color:green">Main Condition of Patient</h4>
                     <div class="form-group">
                         <label for="uncomplicatedLabour">Uncomplicated Labour/ C-section</label>
                         <Field name="uncomplicatedLabour" type="text" class="form-control" value=0 />

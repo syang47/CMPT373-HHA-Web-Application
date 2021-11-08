@@ -29,12 +29,12 @@
                         <ErrorMessage name="hospitalized" class="error-feedback" />
                     </div>
                     <div v-if="hospitalizedMor" class="form-group">
-                        <label for="hospitalizedNICU">{{ $t('msppData.hospitalisedNICU') }}</label>
+                        <label style="color:green" for="hospitalizedNICU">{{ $t('msppData.hospitalisedNICU') }}</label>
                         <Field name="hospitalizedNICU" type="text" class="form-control" value=0 />
                         <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
                     </div>
                     <div v-if="hospitalizedMor" class="form-group">
-                        <label for="hospitalizedPaed">{{ $t('msppData.hospitalisedPAED') }}</label>
+                        <label style="color:green" for="hospitalizedPaed">{{ $t('msppData.hospitalisedPAED') }}</label>
                         <Field name="hospitalizedPaed" type="text" class="form-control" value=0 />
                         <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
                     </div>
@@ -48,7 +48,7 @@
                         <ErrorMessage name="dischargedAlive" class="error-feedback" />
                     </div>
                     <div v-if="dischargedAliveMor" class="form-group">
-                        <label for="NICUDischarged">{{ $t('msppData.ofTotalDischargedNICU') }}</label>
+                        <label style="color:green" for="NICUDischarged">{{ $t('msppData.ofTotalDischargedNICU') }}</label>
                         <Field name="NICUDischarged" type="text" class="form-control" value=0 />
                         <ErrorMessage name="NICUDischarged" class="error-feedback" />
                     </div>
@@ -62,12 +62,12 @@
                         <ErrorMessage name="diedBefore48h" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInNICUBefore48">{{ $t('msppData.diedNICUBefore48h') }}</label>
+                        <label style="color:green" for="diedInNICUBefore48">{{ $t('msppData.diedNICUBefore48h') }}</label>
                         <Field name="diedInNICUBefore48" type="text" class="form-control" value=0 />
                         <ErrorMessage name="diedInNICUBefore48" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInPaedBefore48">{{ $t('msppData.diedPAEDBefore48h') }}</label>
+                        <label style="color:green" for="diedInPaedBefore48">{{ $t('msppData.diedPAEDBefore48h') }}</label>
                         <Field name="diedInPaedBefore48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInPaedBefore48" class="error-feedback" />
                     </div>
@@ -81,12 +81,12 @@
                         <ErrorMessage name="diedAfter48h" class="error-feedback" />
                     </div>
                     <div v-if="diedAfter48hMor" class="form-group">
-                        <label for="diedInNICUAfter48">{{ $t('msppData.diedNICUAfter48h') }}</label>
+                        <label style="color:green" for="diedInNICUAfter48">{{ $t('msppData.diedNICUAfter48h') }}</label>
                         <Field name="diedInNICUAfter48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInNICUAfter48" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInPaedAfter48">{{ $t('msppData.diedPAEDAfter48h') }}</label>
+                        <label style="color:green" for="diedInPaedAfter48">{{ $t('msppData.diedPAEDAfter48h') }}</label>
                         <Field name="diedInPaedAfter48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInPaedAfter48" class="error-feedback" />
                     </div>
@@ -120,7 +120,7 @@
                         <ErrorMessage name="selfDischarged" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <h4>{{ $t('msppData.reasonSelfDischarge') }}</h4>
+                        <h4 style="color:green">{{ $t('msppData.reasonSelfDischarge') }}</h4>
                         <label for="financeCannotAfford">{{ $t('msppData.financeCare') }}</label>
                         <Field name="financeCannotAfford" type="text" class="form-control" value=0 />
                         <ErrorMessage name="financeCannotAfford" class="error-feedback" />
@@ -162,7 +162,7 @@
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>{{ $t('msppData.wherePatientsComeFrom') }}</h4>
+                            <h4 style="color:green">{{ $t('msppData.wherePatientsComeFrom') }}</h4>
                             <label for="fromQuarterMorin">{{ $t('msppData.quMo') }}</label>
                             <Field name="fromQuarterMorin" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromQuarterMorin" class="error-feedback" />
@@ -185,7 +185,7 @@
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>{{ $t('msppData.ageOfInfant') }}</h4>
+                            <h4 style="color:green">{{ $t('msppData.ageOfInfant') }}</h4>
                             <label for="admissionsExtremelyPreterm">{{ $t('msppData.extremePreterm') }}</label>
                             <Field name="admissionsExtremelyPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsExtremelyPreterm" class="error-feedback" />
@@ -228,7 +228,7 @@
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>{{ $t('msppData.gender') }}</h4>
+                            <h4 style="color:green">{{ $t('msppData.gender') }}</h4>
                             <label for="admissionsMale">{{ $t('msppData.male') }}</label>
                             <Field name="admissionsMale" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsMale" class="error-feedback" />
@@ -342,13 +342,13 @@
 
                 <div>
                     <div class="form-group">
-                        <label for="numberOfOutpatients">{{ $t('msppData.numberOfOutPatients') }}</label>
+                        <label style="color:green" for="numberOfOutpatients">{{ $t('msppData.numberOfOutPatients') }}</label>
                         <Field name="numberOfOutpatients" type="text" class="form-control" id="numberOfOutpatients" v-on:keyup="checkNumberOfOutpatients()" value=0 />
                         <ErrorMessage name="numberOfOutpatients" class="error-feedback" />
                     </div>
                     <div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <h4>{{ $t('msppData.age') }}</h4>
+                            <h4 style="color:green">{{ $t('msppData.age') }}</h4>
                             <label for="numberOfOutpatientsExtremelyPreterm">{{ $t('msppData.extremePreterm') }}</label>
                             <Field name="numberOfOutpatientsExtremelyPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsExtremelyPreterm" class="error-feedback" />
@@ -390,7 +390,7 @@
                         </div>
                     </div>
                     <div>
-                        <div v-if="numberOfOutpatientsMor" class="form-group">
+                        <div style="color:green" v-if="numberOfOutpatientsMor" class="form-group">
                             <h4>Main Condition</h4>
                             <label for="numberOfOutpatientsRespiratoryArrest">{{ $t('msppData.respiratoryArrest') }}</label>
                             <Field name="numberOfOutpatientsRespiratoryArrest" type="text" class="form-control" value=0 />
@@ -488,7 +488,7 @@
                         </div>
                     </div>
                     <div>
-                        <div v-if="numberOfOutpatientsMor" class="form-group">
+                        <div style="color:green" v-if="numberOfOutpatientsMor" class="form-group">
                             <h4>{{ $t('msppData.gender') }}</h4>
                             <label for="boy">{{ $t('msppData.boy') }}</label>
                             <Field name="admissionsMale" type="text" class="form-control" value=0 />
