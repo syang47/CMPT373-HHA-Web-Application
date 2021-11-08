@@ -15,8 +15,10 @@
         <span class="navbar-toggler-icon" />
       </button>
       <div class="text-end" style="margin-left:auto; margin-left: 0;">
-        <select v-model="l" name="languages" as="select" @change="changeLang(l)">
-          <option v-for="language in languages" :key="language" :value="language"> {{ language }} </option>
+        <select class="btn btn-light dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+            <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+              {{ language }}
+            </option>
         </select>
         <!-- <button class="btn btn-light" @click="changeToFrench">
           <p class="text-dark">Français</p>
@@ -24,11 +26,14 @@
         <button class="btn btn-light" @click="changeToEnglish">
           <p class="text-dark">English</p>
         </button> -->
-        <button class="btn btn-secondary" @click="goToDataDisplay">Data Display</button>
+        
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
-
+            <!-- test button for data query -->
+            <button class="btn btn-light" @click="goToDataDisplay">
+              <p class="text-dark">Data Display</p>
+            </button>
             <button class="btn btn-light" @click="goToAddAnnouncement">
               <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
             </button>
