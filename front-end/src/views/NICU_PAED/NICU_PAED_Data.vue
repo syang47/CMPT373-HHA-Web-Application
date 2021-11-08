@@ -2,7 +2,7 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Rehab MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">

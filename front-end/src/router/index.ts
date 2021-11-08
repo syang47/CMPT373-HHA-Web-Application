@@ -22,6 +22,8 @@ import DataInput from "@/views/DataInput.vue";
 
 import Announcement from "@/views/Announcement.vue";
 
+import Message_Board from "@/views/Message_Board/Message_Board.vue";
+
 const routes: Array<RouteRecordRaw> = [
   // Basic components
   {
@@ -117,6 +119,12 @@ const routes: Array<RouteRecordRaw> = [
       component: DataInput,
     },
 
+
+  {
+    path: "/message_board",
+    name: "Message_Board",
+    component: Message_Board,
+  },
 
   // Other components
 

@@ -14,11 +14,12 @@
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
+            
+            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
+            </button>
             <button class="btn btn-light" @click="loginOrLogout">{{ $t('header.loginOut') }}
             </button>
             <button class="btn btn-light" @click="goToRegister">{{ $t('header.register') }}
-            </button>
-            <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
             </button>
           </div>
       </div>

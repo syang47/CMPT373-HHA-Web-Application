@@ -13,10 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @Transactional
@@ -38,8 +35,8 @@ public class CaseStudyService {
 //            System.out.println(e);
 //        }
 
-
-        entry.setDateSubmitted(Calendar.getInstance());
+        TimeZone timeZone = TimeZone.getTimeZone("GMT");
+        entry.setDateSubmitted(Calendar.getInstance(timeZone));
         entry.setUser(user);
         entry.setCaseStudyType(data.getCaseStudyType());
 
