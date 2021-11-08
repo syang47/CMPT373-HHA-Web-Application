@@ -45,10 +45,8 @@
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
-import { LOCALES } from "./i18n/locales";
 
 export default defineComponent({
   name: "App",
@@ -79,19 +77,6 @@ export default defineComponent({
       tempThis.$router.push('/announcement');
     },
 
-    getData(): void {
-      let tempThis = this;
-      let token = JSON.parse(localStorage.getItem('user')!);
-      tempThis.$axios.get("/api/mspp/data", {
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        }
-      }).then(response => {
-          console.log(response.data);
-          return JSON.stringify(response.data);
-      });
-    },
-
     changeLang(choice: string): void {
       if(choice == "Français"){
         i18n.global.locale = 'fr';
@@ -99,19 +84,6 @@ export default defineComponent({
       else if(choice == "English"){
         i18n.global.locale = 'en';
       }
-    },
-
-    // force push 3 case studies to test leadersboard implementation
-    getLeadersboard(): void {
-      let tempThis = this;
-      let token = JSON.parse(localStorage.getItem('user')!);
-      tempThis.$axios.get("/api/casestudy", {
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        }
-      }).then(response => {
-        console.log(response.data);
-      });
     }
   }
 })
