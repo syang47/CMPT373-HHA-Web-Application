@@ -1,20 +1,20 @@
 <template>
-    <div class="box">
+    <!-- <div class="box"> -->
         <Form class="background" @submit="handleData" :validation-schema="dataSchema">
             <div class="signup-form text-monospace">
                 <div class="text-center">
-                    <h2 class="font-weight-bold display-5 text-dark text-monospace">Community Health MSPP Data Entry Form</h2>
+                    <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.communityHealthForm') }}</h2>
                 </div>
                 <div v-if="!successful">
                     <div class="form-group">
-                        <label for="bedsAvailable">Beds Available</label>
+                        <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
                         <Field name="bedsAvailable" type="text" class="form-control" value=0 />
                         <ErrorMessage name="bedsAvailable" class="error-feedback" />
                     </div>
                     <div class="form-group">
                         <button class="btn btn-outline-light btn-block" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                            Submit
+                            {{ $t('msppData.submit') }}
                         </button>
                     </div>
                 </div>
@@ -23,7 +23,7 @@
         <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
             {{ message }}
         </div>
-    </div>
+    <!-- </div> -->
 </template>
 
 <script lang="ts" type="text/typescript">

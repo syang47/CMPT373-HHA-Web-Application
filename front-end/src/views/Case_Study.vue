@@ -3,139 +3,139 @@
     <Form @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Case Study Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('caseStudyForm.caseStudyForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="caseStudyType">Select A Case Study Type: </label>
+                    <label for="caseStudyType">{{ $t('caseStudyForm.selectCSType') }}</label>
                     <Field v-model="caseStudySelected" v-slot="{ value }" name="caseStudyType" as="select">
                         <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
                     </Field>
                 </div>
                 <div v-if="caseStudySelected == 'patient_story'">
-                    <h4 style="color:red; text-align:center">Patient Story</h4>
+                    <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.pStory') }}</h4>
                     <div class="form-group text-center">
-                        <label for="patientName">Patient's Name</label>
+                        <label for="patientName">{{ $t('caseStudyForm.pName') }}</label>
                         <Field name="patientName" type="text" class="form-control" />
                         <ErrorMessage name="patientName" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="patientAge">Patient's Age</label>
+                        <label for="patientAge">{{ $t('caseStudyForm.pAge') }}</label>
                         <Field name="patientAge" type="text" class="form-control" />
                         <ErrorMessage name="patientAge" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="patientOrigin">Where is the patient from?</label>
+                        <label for="patientOrigin">{{ $t('caseStudyForm.pFrom') }}</label>
                         <Field name="patientOrigin" type="text" class="form-control" />
                         <ErrorMessage name="patientOrigin" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="patientReasoning">Why did the patient choose to come to HCBH?</label>
+                        <label for="patientReasoning">{{ $t('caseStudyForm.pChoose') }}</label>
                         <Field name="patientReasoning" type="text" class="form-control" />
                         <ErrorMessage name="patientReasoning" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="patientDuration">How long were they at HCBH?</label>
+                        <label for="patientDuration">{{ $t('caseStudyForm.pHowLongHCBH') }}</label>
                         <Field name="patientDuration" type="text" class="form-control" />
                         <ErrorMessage name="patientDuration" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="patientDiagnosis">What was their diagnosis?</label>
+                        <label for="patientDiagnosis">{{ $t('caseStudyForm.diagnosis') }}</label>
                         <Field name="patientDiagnosis" type="text" class="form-control" />
                         <ErrorMessage name="patientDiagnosis" class="error-feedback" />
                     </div>
-                    <p style="text-align:center">Add more personal elements to the story, quote from the patient/family member, etc.</p>
+                    <p style="text-align:center">{{ $t('caseStudyForm.morePersonalElements') }}</p>
                 </div>
                 <div v-if="caseStudySelected == 'staff_recognition'">
-                    <h4 style="color:red; text-align:center">Staff Recognition</h4>
+                    <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.sRecognition') }}</h4>
                     <div class="form-group text-center">
-                        <label for="staffName">Staff Name</label>
+                        <label for="staffName">{{ $t('caseStudyForm.sName') }}</label>
                         <Field name="staffName" type="text" class="form-control" />
                         <ErrorMessage name="staffName" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="staffTitle">Role/Job Title</label>
+                        <label for="staffTitle">{{ $t('caseStudyForm.roleJob') }}</label>
                         <Field name="staffTitle" type="text" class="form-control" />
                         <ErrorMessage name="staffTitle" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="staffDepartment">What department does this staff member work in?</label>
+                        <label for="staffDepartment">{{ $t('caseStudyForm.whatDept') }}</label>
                         <Field name="staffDepartment" type="text" class="form-control" />
                         <ErrorMessage name="staffDepartment" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="staffEmploymentDuration">How long have they been working at HCBH?</label>
+                        <label for="staffEmploymentDuration">{{ $t('caseStudyForm.sHowLongHCBH') }}</label>
                         <Field name="staffEmploymentDuration" type="text" class="form-control" />
                         <ErrorMessage name="staffEmploymentDuration" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="staffEnjoymentPoints">What do they enjoy most about working at HCBH?</label>
+                        <label for="staffEnjoymentPoints">{{ $t('caseStudyForm.enjoyHCBH') }}</label>
                         <Field name="staffEnjoymentPoints" type="text" class="form-control" />
                         <ErrorMessage name="staffEnjoymentPoints" class="error-feedback" />
                     </div>
-                    <p style="text-align:center">Why is this person being recognized? Act of kindness? Anniversary? etc.</p>
+                    <p style="text-align:center">{{ $t('caseStudyForm.sRecognise') }}</p>
                 </div>
                 <div v-if="caseStudySelected == 'training_session'">
-                    <h4 style="color:red; text-align:center">Training Session</h4>
+                    <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.tSession') }}</h4>
                     <div class="form-group text-center">
-                        <label for="trainingDate">Training Date</label>
+                        <label for="trainingDate">{{ $t('caseStudyForm.tDate') }}</label>
                         <Field name="trainingDate" type="text" class="form-control" />
                         <ErrorMessage name="trainingDate" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="trainingSubject">What was the training on?</label>
+                        <label for="trainingSubject">{{ $t('caseStudyForm.tAbout') }}</label>
                         <Field name="trainingSubject" type="text" class="form-control" />
                         <ErrorMessage name="trainingSubject" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="trainingConductor">Who conducted the training?</label>
+                        <label for="trainingConductor">{{ $t('caseStudyForm.tConducted') }}</label>
                         <Field name="trainingConductor" type="text" class="form-control" />
                         <ErrorMessage name="trainingConductor" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="trainingAttendees">Who attended the training?</label>
+                        <label for="trainingAttendees">{{ $t('caseStudyForm.tAttend') }}</label>
                         <Field name="trainingAttendees" type="text" class="form-control" />
                         <ErrorMessage name="trainingAttendees" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="trainingBenefits">How will the training benefit HCBH and its staff?</label>
+                        <label for="trainingBenefits">{{ $t('caseStudyForm.tBenefit') }}</label>
                         <Field name="trainingBenefits" type="text" class="form-control" />
                         <ErrorMessage name="trainingBenefits" class="error-feedback" />
                     </div>
-                    <p style="text-align:center">Include a general summary of the training, its success, etc.</p>
+                    <p style="text-align:center">{{ $t('caseStudyForm.generalSummary') }}</p>
                 </div>
                 <div v-if="caseStudySelected == 'equipment_received'">
-                    <h4 style="color:red; text-align:center">Equipment Received</h4>
+                    <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.eReceived') }}</h4>
                     <div class="form-group text-center">
-                        <label for="equipmentReceived">What equipment was received? </label>
+                        <label for="equipmentReceived">{{ $t('caseStudyForm.eWhat') }} </label>
                         <Field name="equipmentReceived" type="text" class="form-control" />
                         <ErrorMessage name="equipmentReceived" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="equipmentDepartmentTo">What department received the equipment?</label>
+                        <label for="equipmentDepartmentTo">{{ $t('caseStudyForm.eDept') }}</label>
                         <Field name="equipmentDepartmentTo" type="text" class="form-control" />
                         <ErrorMessage name="equipmentDepartmentTo" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="equipmentFrom">Who was the equipment from?</label>
+                        <label for="equipmentFrom">{{ $t('caseStudyForm.eFrom') }}</label>
                         <Field name="equipmentFrom" type="text" class="form-control" />
                         <ErrorMessage name="equipmentFrom" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="equipmentOrigin">Was the equipment donated or purchased?</label>
+                        <label for="equipmentOrigin">{{ $t('caseStudyForm.eDonatePurchase') }}</label>
                         <Field name="equipmentOrigin" type="text" class="form-control" />
                         <ErrorMessage name="equipmentOrigin" class="error-feedback" />
                     </div>
                     <div class="form-group text-center">
-                        <label for="equipmentUsage">What does this new equipment do? </label>
+                        <label for="equipmentUsage">{{ $t('caseStudyForm.eDo') }}</label>
                         <Field name="equipmentUsage" type="text" class="form-control" />
                         <ErrorMessage name="equipmentUsage" class="error-feedback" />
                     </div>
-                    <p style="text-align:center">Include who will benefit from this equipment, what value it adds to HCBH, etc.</p>
+                    <p style="text-align:center">{{ $t('caseStudyForm.eBenefit') }}</p>
                 </div>
                 <div v-if="caseStudySelected == 'other'">
-                    <h4 style="color:red; text-align:center">Other</h4>
-                    <p style="text-align:center">Include anything that does not fit into any of the categories.</p>
+                    <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.other') }}</h4>
+                    <p style="text-align:center">{{ $t('caseStudyForm.eExtra') }}</p>
                 </div>
 
                 <div class="form-group text-center" v-if="caseStudySelected != null">
@@ -146,11 +146,11 @@
 
                 <div class="form-group text-center">
                     <Field name="permission" type="checkbox" :value="true"/>
-                    <label for="permission">This person has given permission to share their story and photo in HHA communications, including online platforms.</label>
+                    <label for="permission">{{ $t('caseStudyForm.disclaimer') }}</label>
                     <ErrorMessage name="permission" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="photo"> Add a photo: </label>
+                    <label for="photo">{{ $t('caseStudyForm.addPhoto') }}</label>
                     <Field name="photo" type="file" rules="image" />
                     <ErrorMessage name="photo" class="error-feedback" />
                 </div>
@@ -158,7 +158,7 @@
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('caseStudyForm.submit') }}
                     </button>
                 </div>
             </div>
