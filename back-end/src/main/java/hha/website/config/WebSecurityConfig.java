@@ -23,6 +23,8 @@ import org.springframework.security.web.access.expression.DefaultWebSecurityExpr
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Calendar;
+
 @Configuration
 @EnableWebSecurity
 @EnableTransactionManagement

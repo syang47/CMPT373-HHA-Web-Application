@@ -186,7 +186,7 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button" @click.prevent="goToLeadersBoard">  
+      <button class="button" @click.prevent="goToLeadersBoard">
         <h1 class="rectangle-leader-board">{{ $t('homePage.leaderBoard') }}</h1>
       </button>
 
@@ -218,7 +218,7 @@
       </div>
     </div>
     <div class="row justify-content-center">
-      <button class="button">
+      <button class="button" style="display:inline-block;" @click.prevent="goToMessageBoard">
         <h1 class="rectangle-msg-board">{{ $t('homePage.messageBoard') }}</h1>
       </button>
     </div>
@@ -288,6 +288,9 @@ export default defineComponent({
     goToCommunityHealth() {
       this.$router.push('/community_health');
     },
+    goToMessageBoard() {
+      this.$router.push('/message_board');
+    }
 
   }
 });

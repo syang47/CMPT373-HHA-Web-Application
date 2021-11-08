@@ -9,7 +9,7 @@ import java.util.Calendar;
 @Table(name = "casestudies")
 public class CaseStudy {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Temporal(value = TemporalType.TIMESTAMP)

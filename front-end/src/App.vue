@@ -27,17 +27,15 @@
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
+
+            <button class="btn btn-light" @click="goToAddAnnouncement">
+              <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
+            </button>
             <button class="btn btn-light" @click="loginOrLogout">
               <p class="text-dark">{{ $t('header.loginOut') }}</p>
             </button>
             <button class="btn btn-light" @click="goToRegister">
               <p class="text-dark">{{ $t('header.register') }}</p>
-            </button>
-            <button class="btn btn-light" @click="getData">
-              <p class="text-dark">{{ $t('header.showData') }}</p>
-            </button>
-            <button class="btn btn-light" @click="goToAddAnnouncement">
-              <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
             </button>
           </div>
       </div>
@@ -53,7 +51,7 @@ import i18n from "./i18n";
 import { LOCALES } from "./i18n/locales";
 
 export default defineComponent({
-  name: "App",  
+  name: "App",
   data: function() {
 
 
