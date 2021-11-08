@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
+import java.util.TimeZone;
 
 @Service
 @Transactional
@@ -29,6 +30,8 @@ public class MSPPRepositoryService {
         MSPPRequirement entry = new MSPPRequirement();
         entry.setUser(user);
         entry.setDateSubmitted(LocalDate.now());
+        // TimeZone timeZone = TimeZone.getTimeZone("GMT");
+        // entry.setDateSubmitted(Calendar.getInstance(timeZone));
 
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());

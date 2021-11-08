@@ -1,6 +1,8 @@
 <template>
     
-    <Form class="background" @submit="handleRegister" :validation-schema="userSchema">
+    <!-- <Form class="background" @submit="handleRegister" :validation-schema="userSchema"> -->
+    <Form @submit="handleRegister" :validation-schema="userSchema">
+
     <div class="box">
         <div class="signup-form text-monospace">
             <div class="text-center">
@@ -21,7 +23,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="departments">Select A Department: </label>
+                    <label for="departments">{{ $t('registerPage.selectDept') }}</label>
                     <Field v-slot="{ value }" name="departments" as="select">
                       <option v-for="d in departments" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
                     </Field>
@@ -29,7 +31,7 @@
                 </div>
                 <div class="form-group" v-if="isAdmin()">
                     <Field name="head" type="checkbox" :value="true"/>
-                    <label for="head"> Department Head/Medical Director?</label>
+                    <label for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">

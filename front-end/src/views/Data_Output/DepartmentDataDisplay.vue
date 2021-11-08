@@ -4,10 +4,10 @@
             <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
             <div class="row">
                 <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAll">All Department Data</button>
+                    <button class="btn btn-secondary" v-on:click="switch_msppAll">All Department's MSPP Data</button>
                 </div>
                 <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAllDate">All MSPP Department Data's dates</button>
+                    <button class="btn btn-secondary" v-on:click="switch_msppAllDate">MSPP Data List By Dates</button>
                 </div>
             </div>
             <div>{{ message }}</div>

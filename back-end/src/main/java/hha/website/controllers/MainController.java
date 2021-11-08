@@ -61,6 +61,9 @@ public class MainController {
     private AnnouncementService announcementService;
 
     @Autowired
+    private MessageBoardService messageBoardService;
+
+    @Autowired
     private JwtUtil jwtToken;
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
@@ -109,7 +112,6 @@ public class MainController {
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
     public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
-        System.out.println(data);
         final String authorizationHeader = request.getHeader("Authorization");
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
         final User user = userDetailsService.findByUsername(username);
@@ -170,13 +172,14 @@ public class MainController {
 
 
     @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
+    @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
         System.out.println("total casestudy submitted for " +  department);
         System.out.println(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
         return ResponseEntity.ok(HHADepartmentService.listTotalReportsSubmittedForDepartment(department));
     }
 
-    @RequestMapping(value = "/api/departments/points", method = RequestMethod.GET)
+    @GetMapping(value = "/api/departments/points")
     public ResponseEntity<?> getAllDepartmentPoints() {
         List<Department> departments = HHADepartmentService.listAllDepartments();
         HashMap<String, Integer> departmentPoints = new HashMap<>();
@@ -198,6 +201,21 @@ public class MainController {
     @GetMapping("/api/announcements")
     public ResponseEntity<?> getAnnouncements(@RequestParam("field") String field){
         return ResponseEntity.ok(announcementService.listAField(field));
+    }
+
+
+    @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> saveMessage(HttpServletRequest request, @RequestBody MessageBoardDTO data) {
+        final String authorizationHeader = request.getHeader("Authorization");
+        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
+        final User user = userDetailsService.findByUsername(username);
+        return ResponseEntity.ok(messageBoardService.save(user, data));
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/messages")
+    public ResponseEntity<?> getMessages(){
+        return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
 //    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
 //    public String getCaseStudySubStatusField() {
