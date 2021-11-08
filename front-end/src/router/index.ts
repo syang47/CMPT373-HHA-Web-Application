@@ -4,6 +4,7 @@ import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
 import Case_Study from "@/views/Case_Study.vue";
 
+import LeadersBoard from "@/views/LeadersBoard.vue"
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
 import NICU_PAED_Data from "@/views/NICU_PAED/NICU_PAED_Data.vue"
 
@@ -16,6 +17,10 @@ import Rehab_Data from "@/views/Rehab/Rehab_Data.vue";
 import Community_Health from "@/views/Community_Health/Community_Dep.vue";
 import Community_Health_Data from "@/views/Community_Health/Community_Health_Data.vue";
 
+
+import DataInput from "@/views/DataInput.vue";
+
+import Announcement from "@/views/Announcement.vue";
 
 const routes: Array<RouteRecordRaw> = [
   // Basic components
@@ -40,10 +45,21 @@ const routes: Array<RouteRecordRaw> = [
     path: "/",
     component: Home,
   },
+  //leaders board
+  {
+    path: "/leadersboard",
+    name: "LeadersBoard",
+    component: LeadersBoard,
+  },
 
   {
     path: "/casestudy",
     component: Case_Study,
+  },
+
+  {
+    path: "/announcement",
+    component: Announcement,
   },
 
   // NICU/PAED
@@ -95,6 +111,12 @@ const routes: Array<RouteRecordRaw> = [
     name: "Community_Health_Data",
     component: Community_Health_Data,
   },
+    {
+      path: "/datainput",
+      name: "DataInput",
+      component: DataInput,
+    },
+
 
   // Other components
 

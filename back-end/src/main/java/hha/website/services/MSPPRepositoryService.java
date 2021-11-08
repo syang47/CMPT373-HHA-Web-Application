@@ -19,6 +19,8 @@ import java.util.List;
 public class MSPPRepositoryService {
     @Autowired
     private MSPPRepository msppRepository;
+    @Autowired
+    private HHADepartmentService hhaDepartmentService;
 
     public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
@@ -123,6 +125,7 @@ public class MSPPRepositoryService {
         entry.setLabor_cesarienne(data.getLabor_cesarienne());
         entry.setLabor_instrumentalse(data.getLabor_instrumentalse());
 
+        hhaDepartmentService.addASubmittedReport(user);
         System.out.println("entry saved");
         return msppRepository.save(entry);
     }

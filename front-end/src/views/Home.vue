@@ -186,9 +186,10 @@
 <template>
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
-      <button class="button">  
+      <button class="button" @click.prevent="goToLeadersBoard">  
         <h1 class="rectangle-leader-board">{{ $t('homePage.leaderBoard') }}</h1>
       </button>
+
     </div>
     <div class="row justify-content-center">
       <div class="row" >
@@ -270,6 +271,10 @@ export default defineComponent({
       if(token.department == "rehab")  {
         this.showRehab = true;
       }
+    },
+
+    goToLeadersBoard(){
+      this.$router.push('/leadersboard');
     },
     goToNICUPAED() {
       this.$router.push('/nicu_paed');

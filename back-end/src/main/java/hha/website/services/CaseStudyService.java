@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import java.io.File;
 import java.io.IOException;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,6 +24,8 @@ public class CaseStudyService {
 
     @Autowired
     private CaseStudyRepository caseStudyRepository;
+    @Autowired
+    private HHADepartmentService hhaDepartmentService;
 
     public CaseStudy save(User user, CaseStudyDTO data) {
         CaseStudy entry = new CaseStudy();
@@ -76,6 +79,8 @@ public class CaseStudyService {
         entry.setEquipmentUsage(data.getEquipmentUsage());
 
         entry.setStory(data.getStory());
+
+        hhaDepartmentService.addASubmittedReport(user);
         System.out.println("case study saved");
         return caseStudyRepository.save(entry);
     }
@@ -88,4 +93,19 @@ public class CaseStudyService {
         return caseStudyRepository.queryCaseStudyTypes();
     }
 
+//    public Collection<String> listDistinctItemsInField() {
+//        return caseStudyRepository.queryDistinctField();
+//    }
+//
+//    public Collection<Integer> listPointsInField() {
+//        return caseStudyRepository.queryBestCasestudy();
+//    }
+//
+//    public Collection<Boolean> listSubmissionStatusInField() {
+//        return caseStudyRepository.querySubmissionStatus();
+//    }
+//
+//    public Collection<Integer> listTotalReportsSubmittedField() {
+//        return caseStudyRepository.queryTotalReportsField();
+//    }
 }

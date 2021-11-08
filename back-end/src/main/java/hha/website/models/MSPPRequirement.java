@@ -18,12 +18,13 @@ public class MSPPRequirement {
     @Column(nullable = false)
     private Calendar dateSubmitted;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "additionaldata_id", referencedColumnName = "id")
     @JsonIgnore
     private AdditionalMSPP additionalData;

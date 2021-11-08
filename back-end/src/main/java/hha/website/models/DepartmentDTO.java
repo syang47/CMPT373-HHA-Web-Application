@@ -4,7 +4,6 @@ import java.util.Set;
 
 public class DepartmentDTO {
     private Set<User> users;
-
     private String departmentname;
 
     public Set<User> getUsers() {

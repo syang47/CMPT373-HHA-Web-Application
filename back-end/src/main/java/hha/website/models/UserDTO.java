@@ -29,7 +29,7 @@ public class UserDTO {
     public void setRole(String role) {
         this.role = role;
     }
-
+    
     public String getDepartment() {
         return department;
     }
