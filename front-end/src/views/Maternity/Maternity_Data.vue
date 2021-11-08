@@ -36,23 +36,81 @@
                     <Field name="dischargedAlive" type="text" class="form-control" value=0 />
                     <ErrorMessage name="dischargedAlive" class="error-feedback" />
                 </div>
+
+
                 <div>
                     <div class="form-group">
                         <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
-                        <Field name="diedBefore48h" type="text" class="form-control" value=0 />
+                        <Field name="diedBefore48h" type="text" class="form-control"  id="diedBefore48h" v-on:keyup="checkDiedBefore48h()" value=0 />
                         <ErrorMessage name="diedBefore48h" class="error-feedback" />
                     </div>
-                    <!-- Todo: add dynamic drop down boxes depending on the input number  -->
+                    <div v-if="diedBefore48hMor">
+                        <FieldArray name="diedBefore48hPatient" v-slot="{ fields, push, remove }">
+                            <fieldset
+                                class="form-group"
+                                v-for="(field, idx) in fields"
+                                :key="field.key"
+                            >
+                            <legend>Patient {{ idx+1 }}</legend>
+                            <label :for="`diedBefore48hAge_${idx}`">Age</label>
+                            <Field class="form-control"
+                                   :id="`diedBefore48hAge_${idx}`" 
+                                   :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
+                            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+
+                            <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
+                            <Field class="form-control"
+                                   :id="`diedBefore48hCause_${idx}`"
+                                   :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
+                            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+                            </fieldset>
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
+                            New Patient + 
+                            </button>
+                        </FieldArray>
+                    </div>
                 </div>
+
 
                 <div>
                     <div class="form-group">
                         <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
-                        <Field name="diedAfter48h" type="text" class="form-control" value=0 />
+                        <Field name="diedAfter48h" type="text" class="form-control" id="diedAfter48h" v-on:keyup="checkDiedAfter48h()" value=0 />
                         <ErrorMessage name="diedAfter48h" class="error-feedback" />
                     </div>
-                    <!-- Todo: add dynamic drop down boxes depending on the input number  -->
+                    <div v-if="diedAfter48hMor">
+                        <FieldArray name="diedAfter48hPatient" v-slot="{ fields, push, remove }">
+                            <fieldset
+                                class="form-group"
+                                v-for="(field, idx) in fields"
+                                :key="field.key"
+                            >
+                            <legend>Patient {{ idx+1 }}</legend>
+                            <label :for="`diedAfter48hAge_${idx}`">Age</label>
+                            <Field class="form-control"
+                                   :id="`diedAfter48hAge_${idx}`" 
+                                   :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
+                            <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
+
+                            <label :for="`diedAfter48hCause_${idx}`">Cause of Death</label>
+                            <Field class="form-control"
+                                   :id="`diedAfter48hCause_${idx}`"
+                                   :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" />
+                            <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" class="error-feedback" />
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+                            </fieldset>
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
+                            New Patient + 
+                            </button>
+                        </FieldArray>
+                    </div>
                 </div>
+
 
                 <div class="form-group">
                     <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
@@ -870,7 +928,7 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue'
-import { Form, Field, ErrorMessage } from "vee-validate";
+import { Form, Field, ErrorMessage, FieldArray } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
     name: "Maternity_Data",
@@ -878,8 +936,45 @@ export default defineComponent({
         Form,
         Field,
         ErrorMessage,
+        FieldArray,
     },
     data() {
+        const diedBefore48hSchema = yup.object().shape({
+            diedBefore48hPatient: yup
+                .array()
+                .of(
+                yup.object().shape({
+                    diedBefore48hAge: yup
+                        .number()
+                        .min(0, "Cannot be negative.")
+                        .required("Required.")
+                        .default(0),
+                    diedBefore48hCause: yup
+                        .string()
+                        .required("Required.")
+                        .default(""),
+                })
+            )
+            .strict(),
+        });
+        const diedAfter48hSchema= yup.object().shape({
+            diedAfter48hPatient: yup
+                .array()
+                .of(
+                yup.object().shape({
+                    diedAfter48hAge: yup
+                        .number()
+                        .min(0, "Cannot be negative.")
+                        .required("Required.")
+                        .default(0),
+                    diedAfter48hCause: yup
+                        .string()
+                        .required("Required.")
+                        .default(""),
+                })
+            )
+            .strict(),
+        });
         const dataSchema = yup.object().shape({
             bedsAvailable: yup
                 .number()
@@ -1459,10 +1554,30 @@ export default defineComponent({
             message: "",
             selfDischargedMor: false,
             admissionsMor: false,
+            diedBefore48hMor: false,
+            diedAfter48hMor: false,
+            diedBefore48hSchema,
+            diedAfter48hSchema,
             dataSchema,
         };
     },
     methods: {
+        checkDiedBefore48h() {
+            let number: number = (document as any).getElementById("diedBefore48h").value;
+            if (number > 0) {
+                this.diedBefore48hMor = true;
+            } else {
+                this.diedBefore48hMor = false;
+            }
+        },
+        checkDiedAfter48h() {
+            let number: number = (document as any).getElementById("diedAfter48h").value;
+            if (number > 0) {
+                this.diedAfter48hMor = true;
+            } else {
+                this.diedAfter48hMor = false;
+            }
+        },
         checkSelfDischarged() {
             let number: number = (document as any).getElementById("selfDischarged").value;
             if (number > 0) {
