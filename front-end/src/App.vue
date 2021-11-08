@@ -33,8 +33,7 @@
             <button class="btn btn-light" @click="getData">
               <p class="text-dark">Show Data</p>
             </button>
-            <button class="btn btn-light" @click="getUsersInNICU">
-              <p class="text-dark">NICU Users</p>
+
             <button class="btn btn-light" @click="goToAddAnnouncement">Add announcement
             </button>
           </div>
