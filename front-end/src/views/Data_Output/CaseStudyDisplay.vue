@@ -10,7 +10,6 @@
                     <button class="btn btn-secondary" v-on:click="showAllCaseStudies">All Case Studies</button>
                 </div>
             </div>
-            <div>{{ message }}</div>
             <div v-if="showComponentOne"> 
                 <ul class="text-left" style="list-style-type:none;">
                     <li v-for="(value) in caseStudyTypes" :key="value">
@@ -68,8 +67,6 @@ export default defineComponent({
             }).then(response => {
                 // this.caseStudyTypes = JSON.stringify(response.data);
                 this.caseStudyTypes = response.data;
-                console.log(typeof this.caseStudyTypes);
-
                 if(response != null) {
                     console.log("getting casestudy types successful");
                 } else {
@@ -104,11 +101,7 @@ export default defineComponent({
                 
                 if(response != null) {
                     console.log("getting casestudy data successful");
-                    
-                    //regex didn't really work
-
-                    
-
+                        
                 } else {
                     alert("no data in case study can be fetched...");
                 }

@@ -10,10 +10,9 @@
                     <button class="btn btn-secondary" v-on:click="switch_msppAllDate">MSPP Data List By Dates</button>
                 </div>
             </div>
-            <div>{{ message }}</div>
             <div v-if="showAllMspp"> 
                 <ul class="text-left">
-                    <li v-for="(name) in msppAllData" :key="name"> {{name}}</li>
+                    <li v-for="(name) in msppAllData" :key="name"> {{ name }}</li>
                 </ul>
             </div>
             <div v-else-if="showAllMsppDate">
@@ -134,7 +133,7 @@ export default defineComponent({
         },
         showAllMsppData() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing case study data types";
+            this.message = "Displaying existing mspp only data";
             
             this.$axios.get("/api/mspp/data", {
                 headers: {
@@ -142,12 +141,10 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.msppAllData = response.data;
-                console.log(typeof this.msppAllData);
-
                 if(response != null) {
                     console.log("getting department data successful");
                 } else {
-                    alert("no data in case study can be fetched...");
+                    alert("no data in mspp data can be fetched...");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -161,10 +158,8 @@ export default defineComponent({
         },
         querySelectedDate(id, datedate) {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing case study data types";
+            this.message = "Displaying existing mspp only data by date";
             this.showSelectedMsppByDate = true;
-            console.log(datedate);
-            console.log(typeof datedate);
             this.$axios.get(`/api/mspp/data/${datedate}/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
@@ -176,13 +171,11 @@ export default defineComponent({
                 // let dataToArray = temp.split(',').map(item=>item.trim());
                 // console.log(dataToArray);
                 // this.selectedMsppDataByDate=dataToArray.join("\n");
-                console.log(typeof this.selectedMsppDataByDate);
 
-                if(response != null) {
-                    
+                if(response != null) {                    
                     console.log("getting deparment data by date successful");
                 } else {
-                    alert("no data in case study can be fetched...");
+                    alert("no data in mspp can be fetched...");
                 }
             }).catch((error: any) => {
                 this.message =
