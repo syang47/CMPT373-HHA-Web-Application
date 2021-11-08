@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Calendar;
 import java.util.List;
 
@@ -25,7 +28,7 @@ public class MSPPRepositoryService {
     public MSPPRequirement save(User user, MSPPRequirementDTO data) {
         MSPPRequirement entry = new MSPPRequirement();
         entry.setUser(user);
-        entry.setDateSubmitted(Calendar.getInstance());
+        entry.setDateSubmitted(LocalDate.now());
 
         entry.setBedDays(data.getBedDays());
         entry.setPatientDays(data.getPatientDays());
@@ -138,6 +141,10 @@ public class MSPPRepositoryService {
         return msppRepository.findByid(documentId);
     }
 
+    public List<MSPPRequirement> listByIdAndDate(Integer id, LocalDate date) {
+        return msppRepository.findByidAndDateSubmitted(id, date);
+    }
+    
     /*
     public Collection<String> listDistinctItemsInField() {
         return msppRepository.queryDistinctField();

@@ -14,6 +14,8 @@ public interface CaseStudyRepository extends JpaRepository<CaseStudy, Integer> {
     @Query("SELECT DISTINCT caseStudyType FROM CaseStudy")
     List<String> queryCaseStudyTypes();
 
+    List<CaseStudy> findAll();
+
 //    @Query("SELECT MAX(d.points) FROM CaseStudy d")
 //    Collection<Integer> queryBestCasestudy();
     

@@ -17,7 +17,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.persistence.SqlResultSetMapping;
+import javax.persistence.SqlResultSetMappings;
 import javax.servlet.http.HttpServletRequest;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 
 
@@ -141,11 +147,27 @@ public class MainController {
         return ResponseEntity.ok(result);
     }
 
+    @GetMapping("/api/mspp/data/{date}/{id}")
+    public ResponseEntity<?> getMsppByFirstname(@PathVariable("id") String id, @PathVariable("date") String date) throws ParseException {
+        LocalDate parsedDate = LocalDate.parse(date);
+        int finalId = Integer.parseInt(id);
+        System.out.println(parsedDate);
+
+        return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, parsedDate));
+    }
+
     @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
+
+    @CrossOrigin
+    @GetMapping("/api/casestudy/entry")
+    public ResponseEntity<?> getCaseStudyEntry(){
+        return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
+    }
+
 
     @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {

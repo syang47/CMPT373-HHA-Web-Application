@@ -11,6 +11,7 @@
       <div class="text-end" style="margin-left:auto; margin-left: 0;">
         <button class="btn btn-light" @click="changeToEnglish">English</button>
         <button class="btn btn-light" @click="changeToFrench">Français</button>
+        <button class="btn btn-secondary" @click="goToDataDisplay">Data Display</button>
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
@@ -71,6 +72,10 @@ export default class App extends Vue{
     i18n.global.locale = 'fr';
   }
 
+  goToDataDisplay(): void {
+    let tempThis = this;
+    tempThis.$router.push('/dataDisplay');
+  }
   // force push 3 case studies to test leadersboard implementation
   getLeadersboard(): void {
       let tempThis = this;
