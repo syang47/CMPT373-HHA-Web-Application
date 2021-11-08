@@ -1,28 +1,26 @@
 <template>
-    <div class="box">
-        <Form class="background" @submit="handleData" :validation-schema="dataSchema">
-            <div class="signup-form text-monospace">
-                <div class="text-center">
-                    <h2 class="font-weight-bold display-5 text-dark text-monospace">Community Health MSPP Data Entry Form</h2>
+    <Form class="background" @submit="handleData" :validation-schema="dataSchema">
+        <div class="signup-form text-monospace">
+            <div class="text-center">
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.communityHealthForm') }}</h2>
+            </div>
+            <div v-if="!successful">
+                <div class="form-group">
+                    <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
+                    <Field name="bedsAvailable" type="text" class="form-control" value=0 />
+                    <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
-                <div v-if="!successful">
-                    <div class="form-group">
-                        <label for="bedsAvailable">Beds Available</label>
-                        <Field name="bedsAvailable" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="bedsAvailable" class="error-feedback" />
-                    </div>
-                    <div class="form-group">
-                        <button class="btn btn-outline-light btn-block" :disabled="loading">
-                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                            Submit
-                        </button>
-                    </div>
+                <div class="form-group">
+                    <button class="btn btn-outline-light btn-block" :disabled="loading">
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                        {{ $t('msppData.submit') }}
+                    </button>
                 </div>
             </div>
-        </Form>
-        <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
-            {{ message }}
         </div>
+    </Form>
+    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
+        {{ message }}
     </div>
 </template>
 
@@ -90,7 +88,7 @@ export default defineComponent({
 </script>
 
 <style>
-    .background {
+   .background {
         height: 100%;
         position: relative;
         width: 100%;

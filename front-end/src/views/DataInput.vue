@@ -1,16 +1,16 @@
 <template>
-    <h1 style="color:#000000;">Awards</h1>
+    <h1 style="color:#000000;">{{ $t('dataInput.awards') }}</h1>
     <Form @submit="handleData" :validation-schema="datainputSchema">
         <div class="form-group">
-            <label for="monthly">Monthly</label>
+            <label for="monthly">{{ $t('dataInput.monthly') }}</label>
             <Field name="monthly" type="text" class="form-control" />
         </div>
         <div class="form-group">
-            <label for="annual">Annual</label>
+            <label for="annual">{{ $t('dataInput.annual') }}</label>
             <Field name="annual" type="text" class="form-control" />
         </div>
         <div class="form-group">
-            <button class="btn btn-secondary" type="submit" value="Submit">Submit</button>
+            <button class="btn btn-secondary" type="submit" value="Submit">{{ $t('dataInput.submit') }}</button>
         </div>
     </Form>
 </template>
