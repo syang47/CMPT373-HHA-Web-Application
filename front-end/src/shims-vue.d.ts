@@ -12,15 +12,13 @@ declare global {
     }
 }
 
-/* eslint-disable */
-declare module "*.vue"{
-  import { ComponentOptions} from "vue";
-  const Component: ReturnType<typeof defineComponent>;
-  export default Component;
-}
-
 declare module 'vue/types/vue' {
   interface Vue {
-    $router: VueRouter
+      $router: VueRouter;
+      $route: Route;
+      $store: Store<any>;
+      $api: any;
+      $mock: any;
+      $configs: any;
   }
 }
