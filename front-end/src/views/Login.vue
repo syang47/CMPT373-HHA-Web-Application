@@ -45,7 +45,7 @@
     .item input {
         width:100%;
         height: 100%;
-        color: #fff;
+        color: black;
         padding-top: 20px;
         box-sizing: border-box;
     }
@@ -70,7 +70,7 @@
         /* background: floralwhite; */
         /* border: 1px solid #fff; */
         margin-top: 30px;
-        color: #c6fafe;
+        color: black;
         position:relative;
         overflow: hidden;
         text-transform: uppercase;
@@ -79,10 +79,10 @@
     .btn:hover{
         border-radius: 5px;
         color: #fff;
-        box-shadow: 0 0 5px 0 #c6fafe,
-        0 0 25px 0 #c6fafe,
-        0 0 50px 0 #c6fafe,
-        0 0 100px 0 #c6fafe;
+        box-shadow: 0 0 5px 0 black,
+        0 0 25px 0 black,
+        0 0 50px 0 black,
+        0 0 100px 0 black;
     }
 </style>
 
