@@ -3,32 +3,32 @@
     <Form @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">Add an Announcement</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="monthly">Monthly Award</label>
+                    <label for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
                     <Field name="monthly" type="text" class="form-control" />
                     <ErrorMessage name="monthly" class="error-feedback" />
 
-                    <label for="monthlyPhoto"> Add a photo: </label>
+                    <label for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
                     <Field name="monthlyPhoto" type="file" rules="image" />
                     <ErrorMessage name="monthlyPhoto" class="error-feedback" />
                 </div>
                 <div class="form-group">
-                    <label for="annual">Annual Award</label>
+                    <label for="annual">{{ $t('announcementPage.annualAward') }}</label>
                     <Field name="annual" type="text" class="form-control" />
                     <ErrorMessage name="annual" class="error-feedback" />
 
                     <div class="form-group">
-                    <label for="annualPhoto"> Add a photo: </label>
+                    <label for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
                     <Field name="annualPhoto" type="file" rules="image" />
                     <ErrorMessage name="annualPhoto" class="error-feedback" />
                 </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('announcementPage.submit') }}
                     </button>
                 </div>
             </div>

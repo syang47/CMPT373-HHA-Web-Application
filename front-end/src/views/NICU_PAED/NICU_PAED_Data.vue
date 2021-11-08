@@ -2,43 +2,39 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">MSPP Data Entry Form</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.nicupaedForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
-                    <label for="bedsAvailable">Beds Available</label>
+                    <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
                     <Field name="bedsAvailable" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedsAvailable" class="error-feedback" />
                 </div>
 
-
                 <div class="form-group">
-                    <label for="bedDays">Bed Days</label>
+                    <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
                     <Field name="bedDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedDays" class="error-feedback" />
                 </div>
-
-
                 <div class="form-group">
-                    <label for="patientDays">Patient Days</label>
-                    <Field name="patientDays" type="text" class="form-control" value=0 /> 
+                    <label for="patientDays">{{ $t('msppData.patientDays') }}</label>
+                    <Field name="patientDays" type="text" class="form-control" value=0 />
                     <ErrorMessage name="patientDays" class="error-feedback" />
                 </div>
 
-
                 <div>
                     <div class="form-group">
-                        <label for="hospitalized">Hospitalized</label>
+                        <label for="hospitalized">{{ $t('msppData.hospitalised') }}</label>
                         <Field name="hospitalized" id="hospitalized" type="text" class="form-control" v-on:keyup="checkHospitalized()" value=0 />
                         <ErrorMessage name="hospitalized" class="error-feedback" />
                     </div>
                     <div v-if="hospitalizedMor" class="form-group">
-                        <label for="hospitalizedNICU">Hospitalized NICU</label>
+                        <label for="hospitalizedNICU">{{ $t('msppData.hospitalisedNICU') }}</label>
                         <Field name="hospitalizedNICU" type="text" class="form-control" value=0 />
                         <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
                     </div>
                     <div v-if="hospitalizedMor" class="form-group">
-                        <label for="hospitalizedPaed">Hospitalized Paed</label>
+                        <label for="hospitalizedPaed">{{ $t('msppData.hospitalisedPAED') }}</label>
                         <Field name="hospitalizedPaed" type="text" class="form-control" value=0 />
                         <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
                     </div>
@@ -47,12 +43,12 @@
 
                 <div>
                     <div class="form-group">
-                        <label for="dischargedAlive">Discharged Alive</label>
+                        <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
                         <Field name="dischargedAlive" id="dischargedAlive" type="text" class="form-control" v-on:keyup="checkDischargedAlive()" value=0 />
                         <ErrorMessage name="dischargedAlive" class="error-feedback" />
                     </div>
                     <div v-if="dischargedAliveMor" class="form-group">
-                        <label for="NICUDischarged">OF Total discharged no: NICU discharged</label>
+                        <label for="NICUDischarged">{{ $t('msppData.ofTotalDischargedNICU') }}</label>
                         <Field name="NICUDischarged" type="text" class="form-control" value=0 />
                         <ErrorMessage name="NICUDischarged" class="error-feedback" />
                     </div>
@@ -61,17 +57,17 @@
 
                 <div>
                     <div class="form-group">
-                        <label for="diedBefore48h">Died Before 48h</label>
+                        <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                         <Field name="diedBefore48h" id="diedBefore48h" type="text" class="form-control" v-on:keyup="checkDiedBefore48h()" value=0 />
                         <ErrorMessage name="diedBefore48h" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInNICUBefore48">Died in NICU before 48h</label>
+                        <label for="diedInNICUBefore48">{{ $t('msppData.diedNICUBefore48h') }}</label>
                         <Field name="diedInNICUBefore48" type="text" class="form-control" value=0 />
                         <ErrorMessage name="diedInNICUBefore48" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInPaedBefore48">Died in Paed before 48h</label>
+                        <label for="diedInPaedBefore48">{{ $t('msppData.diedPAEDBefore48h') }}</label>
                         <Field name="diedInPaedBefore48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInPaedBefore48" class="error-feedback" />
                     </div>
@@ -80,17 +76,17 @@
 
                 <div>
                     <div class="form-group">
-                        <label for="diedAfter48h">Died After 48h</label>
+                        <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                         <Field name="diedAfter48h" type="text" class="form-control" id="diedAfter48h" v-on:keyup="checkDiedAfter48h()" value=0 />
                         <ErrorMessage name="diedAfter48h" class="error-feedback" />
                     </div>
                     <div v-if="diedAfter48hMor" class="form-group">
-                        <label for="diedInNICUAfter48">Died in NICU after 48h</label>
+                        <label for="diedInNICUAfter48">{{ $t('msppData.diedNICUAfter48h') }}</label>
                         <Field name="diedInNICUAfter48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInNICUAfter48" class="error-feedback" />
                     </div>
                     <div v-if="diedBefore48hMor" class="form-group">
-                        <label for="diedInPaedAfter48">Died in Paed after 48h</label>
+                        <label for="diedInPaedAfter48">{{ $t('msppData.diedPAEDAfter48h') }}</label>
                         <Field name="diedInPaedAfter48" type="text" class="form-control"  value=0 />
                         <ErrorMessage name="diedInPaedAfter48" class="error-feedback" />
                     </div>
@@ -98,54 +94,54 @@
 
 
                 <div class="form-group">
-                    <label for="daysHospitalised">Days Hospitalised</label>
+                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
                     <Field name="daysHospitalised" type="text" class="form-control" value=0 />
                     <ErrorMessage name="daysHospitalised" class="error-feedback" />
                 </div>
 
 
                 <div class="form-group">
-                    <label for="referrals">Referrals</label>
+                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
                     <Field name="referrals" type="text" class="form-control" value=0 />
                     <ErrorMessage name="referrals" class="error-feedback" />
                 </div>
 
 
                 <div class="form-group">
-                    <label for="transfers">Transfers</label>
+                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
                     <Field name="transfers" type="text" class="form-control" value=0 />
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
 
                 <div>
                     <div class="form-group">
-                        <label for="selfDischarged">Self Discharged</label>
+                        <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
                         <Field name="selfDischarged" type="text" class="form-control" id="selfDischarged" v-on:keyup="checkSelfDischarged()" value=0 />
                         <ErrorMessage name="selfDischarged" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <h4>Reason for self-discharge</h4>
-                        <label for="financeCannotAfford">Finance: Leave as cannot afford care</label>
+                        <h4>{{ $t('msppData.reasonSelfDischarge') }}</h4>
+                        <label for="financeCannotAfford">{{ $t('msppData.financeCare') }}</label>
                         <Field name="financeCannotAfford" type="text" class="form-control" value=0 />
                         <ErrorMessage name="financeCannotAfford" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <label for="financeAvoidPay">Finance: Left to avoid paying</label>
+                        <label for="financeAvoidPay">{{ $t('msppData.financeAvoidPay') }}</label>
                         <Field name="financeAvoidPay" type="text" class="form-control" value=0 />
                         <ErrorMessage name="financeAvoidPay" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <label for="reasonCultural">Religious / Cultural</label>
+                        <label for="reasonCultural">{{ $t('msppData.religiousCultural') }}</label>
                         <Field name="reasonCultural" type="text" class="form-control" value=0 />
                         <ErrorMessage name="reasonCultural" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <label for="reasonPersonal">Personal / Family</label>
+                        <label for="reasonPersonal">{{ $t('msppData.personalFamily') }}</label>
                         <Field name="reasonPersonal" type="text" class="form-control" value=0 />
                         <ErrorMessage name="reasonPersonal" class="error-feedback" />
                     </div>
                     <div v-if="selfDischargedMor" class="form-group">
-                        <label for="otherReason">Other</label>
+                        <label for="otherReason">{{ $t('msppData.other') }}</label>
                         <Field name="otherReason" type="text" class="form-control" value=0 />
                         <ErrorMessage name="otherReason" class="error-feedback" />
                     </div>
@@ -153,190 +149,190 @@
 
 
                 <div class="form-group">
-                    <label for="stayedInTheWard">Stayed In The Ward</label>
+                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
                     <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
                     <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                 </div>
 
                 <div>
                     <div class="form-group">
-                        <label for="admissions">Admissions</label>
+                        <label for="admissions">{{ $t('msppData.admissions') }}</label>
                         <Field name="admissions" type="text" class="form-control" id="admissions" v-on:keyup="checkAdmissions()" value=0 />
                         <ErrorMessage name="admissions" class="error-feedback" />
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>Where do patients come from?</h4>
-                            <label for="fromQuarterMorin">Quarter Morin</label>
+                            <h4>{{ $t('msppData.wherePatientsComeFrom') }}</h4>
+                            <label for="fromQuarterMorin">{{ $t('msppData.quMo') }}</label>
                             <Field name="fromQuarterMorin" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromQuarterMorin" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="fromCapHaitian">Cap Haitian</label>
+                            <label for="fromCapHaitian">{{ $t('msppData.capHai') }}</label>
                             <Field name="fromCapHaitian" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromCapHaitian" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="fromDepartmentNord">Department Nord</label>
+                            <label for="fromDepartmentNord">{{ $t('msppData.deptNord') }}</label>
                             <Field name="fromDepartmentNord" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromDepartmentNord" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="fromOther">Other departments: </label>
+                            <label for="fromOther">{{ $t('msppData.otherDept') }}</label>
                             <Field name="fromOther" type="text" class="form-control" value=0 />
                             <ErrorMessage name="fromOther" class="error-feedback" />
                         </div>
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>Age of infant admitted</h4>
-                            <label for="admissionsExtremelyPreterm">extremely preterm (less than 28 weeks)</label>
+                            <h4>{{ $t('msppData.ageOfInfant') }}</h4>
+                            <label for="admissionsExtremelyPreterm">{{ $t('msppData.extremePreterm') }}</label>
                             <Field name="admissionsExtremelyPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsExtremelyPreterm" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsVeryPreterm">very preterm (28 to 32 weeks)</label>
+                            <label for="admissionsVeryPreterm">{{ $t('msppData.veryPreterm') }}</label>
                             <Field name="admissionsVeryPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsVeryPreterm" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsModerateToLatePreterm">moderate to late preterm (32 to 37 weeks)</label>
+                            <label for="admissionsModerateToLatePreterm">{{ $t('msppData.modToLatePreterm') }}</label>
                             <Field name="admissionsModerateToLatePreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsModerateToLatePreterm" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsFullTerm">Full term (37 weeks plus)</label>
+                            <label for="admissionsFullTerm">{{ $t('msppData.fullTerm') }}</label>
                             <Field name="admissionsFullTerm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsFullTerm" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsOlderThanNeonate">Older than neonate (>4 weeks old)</label>
+                            <label for="admissionsOlderThanNeonate">{{ $t('msppData.olderThanNeonate') }}</label>
                             <Field name="admissionsOlderThanNeonate" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsOlderThanNeonate" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsAge4WeeksTo5">Age 4 weeks -5</label>
+                            <label for="admissionsAge4WeeksTo5">{{ $t('msppData.age4w_5y') }}</label>
                             <Field name="admissionsAge4WeeksTo5" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsAge4WeeksTo5" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsAge6To11">Age 6-11</label>
+                            <label for="admissionsAge6To11">{{ $t('msppData.age6_11') }}</label>
                             <Field name="admissionsAge6To11" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsAge6To11" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsAge12To18">Age 12-18</label>
+                            <label for="admissionsAge12To18">{{ $t('msppData.age12_18') }}</label>
                             <Field name="admissionsAge12To18" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsAge12To18" class="error-feedback" />
                         </div>
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>Gendre</h4>
-                            <label for="admissionsMale">Male</label>
+                            <h4>{{ $t('msppData.gender') }}</h4>
+                            <label for="admissionsMale">{{ $t('msppData.male') }}</label>
                             <Field name="admissionsMale" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsMale" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsFemale">Female</label>
+                            <label for="admissionsFemale">{{ $t('msppData.female') }}</label>
                             <Field name="admissionsFemale" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsFemale" class="error-feedback" />
                         </div>
                     </div>
                     <div>
                         <div v-if="admissionsMor" class="form-group">
-                            <h4>Main Condition</h4>
-                            <label for="admissionsRespiratoryArrest">Respiratory arrest</label>
+                            <h4>{{ $t('msppData.mainCond') }}</h4>
+                            <label for="admissionsRespiratoryArrest">{{ $t('msppData.respiratoryArrest') }}</label>
                             <Field name="admissionsRespiratoryArrest" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsRespiratoryArrest" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsTraumaticInjury">Traumatic injury</label>
+                            <label for="admissionsTraumaticInjury">{{ $t('msppData.traumaticInjury') }}</label>
                             <Field name="admissionsTraumaticInjury" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsTraumaticInjury" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsSepticShock">Septic Shock</label>
+                            <label for="admissionsSepticShock">{{ $t('msppData.septicShock') }}</label>
                             <Field name="admissionsSepticShock" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsSepticShock" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsHypovolemicShock">Hypovolemic shock</label>
+                            <label for="admissionsHypovolemicShock">{{ $t('msppData.hypoShock') }}</label>
                             <Field name="admissionsHypovolemicShock" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsHypovolemicShock" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsSeizures">Seizures/convulsions</label>
+                            <label for="admissionsSeizures">{{ $t('msppData.seizureConvulsion') }}</label>
                             <Field name="admissionsSeizures" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsSeizures" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsPoisoning">Poisoning</label>
+                            <label for="admissionsPoisoning">{{ $t('msppData.poisoning') }}</label>
                             <Field name="admissionsPoisoning" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsPoisoning" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsAlteredMentalStatus">Altered mental status</label>
+                            <label for="admissionsAlteredMentalStatus">{{ $t('msppData.altMentalStatus') }}</label>
                             <Field name="admissionsAlteredMentalStatus" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsAlteredMentalStatus" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsGastroenteritis">Gastroenteritis</label>
+                            <label for="admissionsGastroenteritis">{{ $t('msppData.gastro') }}</label>
                             <Field name="admissionsGastroenteritis" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsGastroenteritis" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsHemorrhage">Hemorrhage</label>
+                            <label for="admissionsHemorrhage">{{ $t('msppData.hemorrhage') }}</label>
                             <Field name="admissionsHemorrhage" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsHemorrhage" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsHypothermia">Hypothermia</label>
+                            <label for="admissionsHypothermia">{{ $t('msppData.hypothermia') }}</label>
                             <Field name="admissionsHypothermia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsHypothermia" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsCardiacCongenitalAnomaly">Cardiac congenital anomaly</label>
+                            <label for="admissionsCardiacCongenitalAnomaly">{{ $t('msppData.cardiacAnomaly') }}</label>
                             <Field name="admissionsCardiacCongenitalAnomaly" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsCardiacCongenitalAnomaly" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsOtherCongenitalAnomaly">Other congenital anomaly</label>
+                            <label for="admissionsOtherCongenitalAnomaly">{{ $t('msppData.otherAnomaly') }}</label>
                             <Field name="admissionsOtherCongenitalAnomaly" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsOtherCongenitalAnomaly" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsMalnutrition">Malnutrition</label>
+                            <label for="admissionsMalnutrition">{{ $t('msppData.malnutrition') }}</label>
                             <Field name="admissionsMalnutrition" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsMalnutrition" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsMeningitis">Meningitis</label>
+                            <label for="admissionsMeningitis">{{ $t('msppData.meningitis') }}</label>
                             <Field name="admissionsMeningitis" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsMeningitis" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsCommunityAcquiredPneumonia">Community acquired pneumonia</label>
+                            <label for="admissionsCommunityAcquiredPneumonia">{{ $t('msppData.communityPneum') }}</label>
                             <Field name="admissionsCommunityAcquiredPneumonia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsCommunityAcquiredPneumonia" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsAspirationPneumonia">Aspiration pneumonia</label>
+                            <label for="admissionsAspirationPneumonia">{{ $t('msppData.aspirationPneum') }}</label>
                             <Field name="admissionsAspirationPneumonia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsAspirationPneumonia" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsModeratePrematurity">Moderate prematurity (32-36 weeks gestation)</label>
+                            <label for="admissionsModeratePrematurity">{{ $t('msppData.modPrematurity') }}</label>
                             <Field name="admissionsModeratePrematurity" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsModeratePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsSeverePrematurity">Severe prematurity (less than 32 weeks)</label>
+                            <label for="admissionsSeverePrematurity">{{ $t('msppData.severePrematurity') }}</label>
                             <Field name="admissionsSeverePrematurity" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsSeverePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="admissionsMor" class="form-group">
-                            <label for="admissionsOtherMedical">Other medical: </label>
+                            <label for="admissionsOtherMedical">{{ $t('msppData.otherMedical') }}</label>
                             <Field name="admissionsOtherMedical" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsOtherMedical" class="error-feedback" />
                         </div>
@@ -346,49 +342,49 @@
 
                 <div>
                     <div class="form-group">
-                        <label for="numberOfOutpatients">Number of outpatients</label>
+                        <label for="numberOfOutpatients">{{ $t('msppData.numberOfOutPatients') }}</label>
                         <Field name="numberOfOutpatients" type="text" class="form-control" id="numberOfOutpatients" v-on:keyup="checkNumberOfOutpatients()" value=0 />
                         <ErrorMessage name="numberOfOutpatients" class="error-feedback" />
                     </div>
                     <div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <h4>Age</h4>
-                            <label for="numberOfOutpatientsExtremelyPreterm">extremely preterm (less than 28 weeks)</label>
+                            <h4>{{ $t('msppData.age') }}</h4>
+                            <label for="numberOfOutpatientsExtremelyPreterm">{{ $t('msppData.extremePreterm') }}</label>
                             <Field name="numberOfOutpatientsExtremelyPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsExtremelyPreterm" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsVeryPreterm">very preterm (28 to 32 weeks)</label>
+                            <label for="numberOfOutpatientsVeryPreterm">{{ $t('msppData.veryPreterm') }}</label>
                             <Field name="numberOfOutpatientsVeryPreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsVeryPreterm" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsModerateToLatePreterm">moderate to late preterm (32 to 37 weeks)</label>
+                            <label for="numberOfOutpatientsModerateToLatePreterm">{{ $t('msppData.modToLatePreterm') }}</label>
                             <Field name="numberOfOutpatientsModerateToLatePreterm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsModerateToLatePreterm" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsFullTerm">Full term (37 weeks plus)</label>
+                            <label for="numberOfOutpatientsFullTerm">{{ $t('msppData.fullTerm') }}</label>
                             <Field name="numberOfOutpatientsFullTerm" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsFullTerm" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsOlderThanNeonate">Older than neonate (>4 weeks old)</label>
+                            <label for="numberOfOutpatientsOlderThanNeonate">{{ $t('msppData.olderThanNeonate') }}</label>
                             <Field name="numberOfOutpatientsOlderThanNeonate" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsOlderThanNeonate" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsAge4WeeksTo5">Age 4 weeks -5</label>
+                            <label for="numberOfOutpatientsAge4WeeksTo5">{{ $t('msppData.age4w_5y') }}</label>
                             <Field name="numberOfOutpatientsAge4WeeksTo5" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsAge4WeeksTo5" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsAge6To11">Age 6-11</label>
+                            <label for="numberOfOutpatientsAge6To11">{{ $t('msppData.age6_11') }}</label>
                             <Field name="numberOfOutpatientsAge6To11" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsAge6To11" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsAge12To18">Age 12-18</label>
+                            <label for="numberOfOutpatientsAge12To18">{{ $t('msppData.age12_18') }}</label>
                             <Field name="numberOfOutpatientsAge12To18" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsAge12To18" class="error-feedback" />
                         </div>
@@ -396,110 +392,110 @@
                     <div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
                             <h4>Main Condition</h4>
-                            <label for="numberOfOutpatientsRespiratoryArrest">Respiratory arrest</label>
+                            <label for="numberOfOutpatientsRespiratoryArrest">{{ $t('msppData.respiratoryArrest') }}</label>
                             <Field name="numberOfOutpatientsRespiratoryArrest" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsRespiratoryArrest" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsTraumaticInjury">Traumatic injury</label>
+                            <label for="numberOfOutpatientsTraumaticInjury">{{ $t('msppData.traumaticInjury') }}</label>
                             <Field name="numberOfOutpatientsTraumaticInjury" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsTraumaticInjury" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsSepticShock">Septic Shock</label>
+                            <label for="numberOfOutpatientsSepticShock">{{ $t('msppData.septicShock') }}</label>
                             <Field name="numberOfOutpatientsSepticShock" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsSepticShock" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsHypovolemicShock">Hypovolemic shock</label>
+                            <label for="numberOfOutpatientsHypovolemicShock">{{ $t('msppData.hypoShock') }}</label>
                             <Field name="numberOfOutpatientsHypovolemicShock" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsHypovolemicShock" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsSeizures">Seizures/convulsions</label>
+                            <label for="numberOfOutpatientsSeizures">{{ $t('msppData.seizureConvulsion') }}</label>
                             <Field name="numberOfOutpatientsSeizures" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsSeizures" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsPoisoning">Poisoning</label>
+                            <label for="numberOfOutpatientsPoisoning">{{ $t('msppData.poisoning') }}</label>
                             <Field name="numberOfOutpatientsPoisoning" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsPoisoning" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsAlteredMentalStatus">Altered mental status</label>
+                            <label for="numberOfOutpatientsAlteredMentalStatus">{{ $t('msppData.altMentalStatus') }}</label>
                             <Field name="numberOfOutpatientsAlteredMentalStatus" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsAlteredMentalStatus" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsGastroenteritis">Gastroenteritis</label>
+                            <label for="numberOfOutpatientsGastroenteritis">{{ $t('msppData.gastro') }}</label>
                             <Field name="numberOfOutpatientsGastroenteritis" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsGastroenteritis" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsHemorrhage">Hemorrhage</label>
+                            <label for="numberOfOutpatientsHemorrhage">{{ $t('msppData.hemorrhage') }}</label>
                             <Field name="numberOfOutpatientsHemorrhage" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsHemorrhage" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsHypothermia">Hypothermia</label>
+                            <label for="numberOfOutpatientsHypothermia">{{ $t('msppData.hypothermia') }}</label>
                             <Field name="numberOfOutpatientsHypothermia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsHypothermia" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsCardiacCongenitalAnomaly">Cardiac congenital anomaly</label>
+                            <label for="numberOfOutpatientsCardiacCongenitalAnomaly">{{ $t('msppData.cardiacAnomaly') }}</label>
                             <Field name="numberOfOutpatientsCardiacCongenitalAnomaly" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsCardiacCongenitalAnomaly" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsOtherCongenitalAnomaly">Other congenital anomaly</label>
+                            <label for="numberOfOutpatientsOtherCongenitalAnomaly">{{ $t('msppData.otherAnomaly') }}</label>
                             <Field name="numberOfOutpatientsOtherCongenitalAnomaly" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsOtherCongenitalAnomaly" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsMalnutrition">Malnutrition</label>
+                            <label for="numberOfOutpatientsMalnutrition">{{ $t('msppData.malnutrition') }}</label>
                             <Field name="numberOfOutpatientsMalnutrition" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsMalnutrition" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsMeningitis">Meningitis</label>
+                            <label for="numberOfOutpatientsMeningitis">{{ $t('msppData.meningitis') }}</label>
                             <Field name="numberOfOutpatientsMeningitis" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsMeningitis" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsCommunityAcquiredPneumonia">Community acquired pneumonia</label>
+                            <label for="numberOfOutpatientsCommunityAcquiredPneumonia">{{ $t('msppData.communityPneum') }}</label>
                             <Field name="numberOfOutpatientsCommunityAcquiredPneumonia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsCommunityAcquiredPneumonia" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsAspirationPneumonia">Aspiration pneumonia</label>
+                            <label for="numberOfOutpatientsAspirationPneumonia">{{ $t('msppData.aspirationPneum') }}</label>
                             <Field name="numberOfOutpatientsAspirationPneumonia" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsAspirationPneumonia" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsModeratePrematurity">Moderate prematurity (32-36 weeks gestation)</label>
+                            <label for="numberOfOutpatientsModeratePrematurity">{{ $t('msppData.modPrematurity') }}</label>
                             <Field name="numberOfOutpatientsModeratePrematurity" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsModeratePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsSeverePrematurity">Severe prematurity (less than 32 weeks)</label>
+                            <label for="numberOfOutpatientsSeverePrematurity">{{ $t('msppData.severePrematurity') }}</label>
                             <Field name="numberOfOutpatientsSeverePrematurity" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsSeverePrematurity" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="numberOfOutpatientsOtherMedical">Other medical: </label>
+                            <label for="numberOfOutpatientsOtherMedical">{{ $t('msppData.otherMedical') }}</label>
                             <Field name="numberOfOutpatientsOtherMedical" type="text" class="form-control" value=0 />
                             <ErrorMessage name="numberOfOutpatientsOtherMedical" class="error-feedback" />
                         </div>
                     </div>
                     <div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <h4>Gendre</h4>
-                            <label for="boy">Boy</label>
+                            <h4>{{ $t('msppData.gender') }}</h4>
+                            <label for="boy">{{ $t('msppData.boy') }}</label>
                             <Field name="admissionsMale" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsMale" class="error-feedback" />
                         </div>
                         <div v-if="numberOfOutpatientsMor" class="form-group">
-                            <label for="girl">Girl</label>
+                            <label for="girl">{{ $t('msppData.girl') }}</label>
                             <Field name="admissionsFemale" type="text" class="form-control" value=0 />
                             <ErrorMessage name="admissionsFemale" class="error-feedback" />
                         </div>
@@ -510,7 +506,7 @@
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        Submit
+                        {{ $t('msppData.submit') }}
                     </button>
                 </div>
             </div>

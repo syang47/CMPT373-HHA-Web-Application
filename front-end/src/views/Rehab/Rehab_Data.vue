@@ -2,7 +2,7 @@
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
+                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.rehabForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">

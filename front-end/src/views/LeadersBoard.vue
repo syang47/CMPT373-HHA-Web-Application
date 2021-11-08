@@ -1,26 +1,26 @@
 <template>
 <div class = "background">
     <div class="container-fluid">
-        <h1 class="display-2 text-center text-dark">Leaders Board</h1>
+        <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
         <div class="container">
             <div class="row">
                 <div class="col">
-                    <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
-                        <div class="card-body">
-                            <h2 style="color:#000000;" class="card-title w-70">Monthly Award</h2>
-                            <ul>
-                                <li v-for="prize in MonthlyPrize" :key="prize">
-                                    {{ prize }}
-                                </li>
-                            </ul>
+                        <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
+                            <div class="card-body">
+                                <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
+                                <ul>
+                                    <li v-for="prize in MonthlyPrize" :key="prize">
+                                        {{ prize }}
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
 
                 </div>
                 <div class="col" >
                     <div class="card w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                         <div class="card-body">
-                            <h2 style="color:#000000;" class="card-title w-40">Annual Award</h2>
+                            <h2 style="color:#000000;" class="card-title w-40">{{ $t('leaderBoard.annualAward') }}</h2>
                             <ul>
                                 <li v-for="prize in AnnualPrize" :key="prize">
                                     {{ prize }}
@@ -38,9 +38,9 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th>Pos</th>
-                                            <th>Department</th>
-                                            <th>Points</th>
+                                            <th>{{ $t('leaderBoard.position') }}</th>
+                                            <th>{{ $t('leaderBoard.department') }}</th>
+                                            <th>{{ $t('leaderBoard.points') }}</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -58,7 +58,7 @@
                 <div class="col rounded mb-3 mt-3" style="background: #F59A23">
                     <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                         <div class="card-body">
-                            <h2 style="color:#000000;">Case Study of the Month</h2>
+                            <h2 style="color:#000000;">{{ $t('leaderBoard.caseStudyOTM') }}</h2>
                             
                         </div>
                     </div>
@@ -154,7 +154,7 @@ export default defineComponent({
     background-size:cover;
 }
 
-
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
 * {
   box-sizing: border-box;
