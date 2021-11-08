@@ -1,53 +1,127 @@
-<style>
-* {
-  margin: 0;
-  padding: 0;
+<style scoped>
+.box {
+  width: 100%;
+  height: 100%;
+  background: #00000060;
+  box-sizing: border-box;
+  display: block;
+  padding: 40px;
 }
-
-.btn:hover {
-  border-radius: 10px;
-  color: #fff;
-  box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
-    0 0 100px 0 #c6fafe;
-}
-
-.rectangle-leader-board {
-      width: 1210px;
-      height: 110px;
-      padding: 2px 2px 2px 2px;
-      border-radius: 10px;
-      border: 1px solid #797979;
-      background-color: #7a4183;
-      box-sizing: border-box;
-      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
 
 </style>
 
 <template>
-  <div class="container-fluid"> 
-    <button class="button">  
-    <h1 class="rectangle-leader-board">Add Message</h1> 
-    </button>
+  <div class="box">
+    <div class="text-center">
+      <h2 class="font-weight-bold display-5 text-dark text-monospace">Message Board</h2>
+    </div>
+    <div>
+      
+      <button class="btn btn-light" @click="show = !show">Add message</button>
+        <Form v-if="show" @submit="handleData" :validation-schema="dataSchema">
+          <div class="form-group">
+            <label for="title">Title</label>
+            <Field name="title" type="text" class="form-control" />
+            <ErrorMessage name="title" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <label for="messageToPost">Message</label>
+            <Field name="messageToPost" type="text" class="form-control" />
+            <ErrorMessage name="messageToPost" class="error-feedback" />
+          </div>
+          <div class="form-group">
+            <button class="btn btn-outline-light btn-block" :disabled="loading">
+                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                {{ $t('msppData.submit') }}
+            </button>
+          </div>
+        </Form>
+      
+    </div>
+    <div :key="rerender">
+      <div class="btn btn-light" v-for="m in messages" :key="m" @click="showMessage(m)">
+        <h1 style="text-align:left">{{ m.title }}</h1>
+        <div>
+          {{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}}
+        </div>
+        <div v-if="m.show">
+          <div>
+            {{ m.message }}
+          </div>
+        </div>
+        
+      </div>
+    </div>
   </div>
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
+import axios from 'axios';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
-
-export default class Message_Board extends Vue {
-    goToDataInput(): void {
-        this.$router.push('/message_board/submit');
+export default defineComponent({
+  name: "Message_Board",
+  components: {
+    Form,
+    Field,
+  },
+  data() {
+    type Message = {
+      title: string,
+      messageToPost: string,
+      dateSubmitted: string,
+      username: string,
+      show: boolean
     };
-}
+    const dataSchema = yup.object().shape({
+      title: yup
+        .string(),
+      messageToPost: yup
+        .string()
+    });
+    return {
+      messages: [{title: "", message: "", dateSubmitted: "", username: "", show: false}],
+      rerender: 0,
+      show: false,
+      successful: false,
+      loading: false,
+      dataSchema,
+    };
+  },
+  mounted() {
+    this.getMessages();
+  },
+  methods: {
+    getMessages(): void {
+      axios.get("/api/messages").then(response=> {
+        this.messages = response.data;
+        this.rerender += 1;
+        console.log(response.data);
+      });
+    },
 
+    showMessage(message): void {
+      message.show = !message.show;
+    },
+    handleData(entry): void {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      if(token != null) {
+        entry.departmentname = "NICU_PAED";
+        this.$axios.post("/api/messageboard/submit", entry, {
+            headers: {
+                'Authorization': `Bearer ${token.jwt}`
+            }
+        }).then(response => {
+                this.successful = true;
+                this.loading = false;
+                this.getMessages();
+            }
+        )
+      }
+    }
+  }
+});
 </script>
 
 
