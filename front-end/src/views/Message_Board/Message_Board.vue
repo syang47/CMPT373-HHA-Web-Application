@@ -40,7 +40,9 @@
     </div>
     <div :key="rerender">
       <div class="btn btn-light" v-for="m in messages" :key="m" @click="showMessage(m)">
-        <h1 style="text-align:left">{{ m.title }}</h1>
+        <h1 style="text-align:left">
+        <p class="text-dark">{{ m.title }}</p>
+        </h1>
         <div>
           {{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}}
         </div>

@@ -222,11 +222,11 @@
         <h1 class="rectangle-msg-board">{{ $t('homePage.messageBoard') }}</h1>
       </button>
     </div>
-    <div class="row justify-content-center">
+    <!-- <div class="row justify-content-center">
       <button class="button">
         <h1 class="rectangle-case-studies">{{ $t('homePage.caseStudy') }}</h1>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 

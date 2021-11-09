@@ -1,5 +1,5 @@
 <template>
-    <Form class="background" @submit="handleData" :validation-schema="dataSchema">
+    <Form @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.nicupaedForm') }}</h2>
