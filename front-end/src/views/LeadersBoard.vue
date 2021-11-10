@@ -1,8 +1,8 @@
 <template>
-<div class = "background">
-    <div class="container-fluid">
+<div class="background d-flex justify-content-center align-items-top" style="height: 100vh; ">
+    <div class="container-fluid ">
         <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
                 <div class="col">
                         <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
@@ -71,7 +71,6 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue';
-import authHeader from '../services/auth-header';
 import axios from 'axios';
 
 export default defineComponent({
@@ -146,9 +145,9 @@ export default defineComponent({
     background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
     /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
     /* -moz-background-size:100% 100%; */
-    position: absolute;
     /* background-size: 100% 100%; */
     height: 100%;
+    position: relative;
     background-position: center;
     background-repeat: no-repeat;
     background-size:cover;

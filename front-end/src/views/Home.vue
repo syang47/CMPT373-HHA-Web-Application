@@ -1,11 +1,14 @@
-<style>
 
-    .background {
-        background-color: rgb(253, 253, 253);
-        height: 100%;
-        position: fixed;
-        width: 100%;    
-    } 
+<style scoped>
+  .background {
+    background: url('../assets/project_photos/BidiBidi health centre zone 1 where we are building disability centre.jpeg') no-repeat;
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute;
+  } 
     *{
         margin: 0;
         padding: 0;
@@ -112,8 +115,6 @@
     .rectangle-sky-blue-buttons {
       width: 550px;
       height: 85px;
-      /* width: 590px;
-      height: 95px; */
       padding: 2px 2px 2px 2px;
       border-radius: 10px;
       border: 1px solid #797979;
@@ -164,26 +165,10 @@
       align-items: center;
       justify-content: center;
     }
-
-    .button {
-      /* width: 550px; */
-      /* height: 85px; */
-      padding: 2px 2px 2px 2px;
-      /* border-radius: 10px;
-      border: 1px solid #797979;
-      background-color: #008eaa;
-      box-sizing: border-box;
-      box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.35); */
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: end;
-    }
-
-
 </style>
 
 <template>
+<div class="background">
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
       <button class="button" @click.prevent="goToLeadersBoard">
@@ -222,12 +207,13 @@
         <h1 class="rectangle-msg-board">{{ $t('homePage.messageBoard') }}</h1>
       </button>
     </div>
-    <!-- <div class="row justify-content-center">
+    <div class="row justify-content-center">
       <button class="button">
         <h1 class="rectangle-case-studies">{{ $t('homePage.caseStudy') }}</h1>
       </button>
-    </div> -->
+    </div>
   </div>
+</div>
 </template>
 
 <script lang="ts" type="text/typescript">
@@ -295,5 +281,3 @@ export default defineComponent({
   }
 });
 </script>
-
-

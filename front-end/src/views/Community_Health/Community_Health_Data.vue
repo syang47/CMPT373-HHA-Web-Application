@@ -1,8 +1,8 @@
 <template>
     <Form @submit="handleData" :validation-schema="dataSchema">
-        <div class="signup-form text-monospace">
+        <div class="signup-form">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.communityHealthForm') }}</h2>
+                <h2>{{ $t('msppData.communityHealthForm') }}</h2>
             </div>
             <div v-if="!successful">
                 <div class="form-group">
@@ -87,7 +87,7 @@ export default defineComponent({
 });
 </script>
 
-<style>
+<style scoped>
    .background {
         height: 100%;
         position: relative;

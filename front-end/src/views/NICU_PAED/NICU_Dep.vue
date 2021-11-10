@@ -67,7 +67,7 @@ export default class NICU_PAED extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

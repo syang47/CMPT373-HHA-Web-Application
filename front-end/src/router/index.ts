@@ -115,11 +115,6 @@ const routes: Array<RouteRecordRaw> = [
     component: Community_Health_Data,
   },
   {
-    path: "/datainput",
-    name: "DataInput",
-    component: DataInput,
-  },
-  {
     path: "/dataDisplay",
     name: "DataDisplay",
     component: DataDisplay,

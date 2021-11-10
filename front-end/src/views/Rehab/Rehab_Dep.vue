@@ -66,7 +66,7 @@ export default class Rehab extends Vue {
 }
 </script>
 
-<style>
+<style scoped>
 * {
   margin: 0;
   padding: 0;

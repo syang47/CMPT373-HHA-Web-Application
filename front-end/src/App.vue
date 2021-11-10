@@ -1,36 +1,67 @@
 <style>
-  .button{
-    color:black;
+  h1, h2, label, p {
+    font-family: "Arial";
+    font-weight: bold;
+    
+  }
+  .btn{
+    font-family: "Arial";
+    font-weight: bold;
+    border: 1px solid black;
+    color: black;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .btn:hover{
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 5px 0 black,
+    0 0 25px 0 black,
+    0 0 50px 0 black,
+    0 0 100px 0 black;
   }
 </style>
 
 <template>
-   <div class="container-fluid">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <a class="navbar-brand" href="/">
+      <img src="@/assets/logo.png" width="140" alt=""/>
+    </a>
     
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <router-link to="/" class="navbar-brand active">
-        <img src="@/assets/logo.png" width="140" alt=""/>
-      </router-link>
-      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div class="text-end" style="margin-left:auto; margin-left: 0;">
-        <select class="btn btn-light dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-            <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
-              {{ language }}
-            </option>
-        </select>
-        <!-- <button class="btn btn-light" @click="changeToFrench">
-          <p class="text-dark">Français</p>
+    <select class="dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+        <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+          {{ language }}
+        </option>
+    </select>
+    <ul class="navbar-nav ml-auto">
+      
+      <li class="nav-item">
+        <button class="btn btn-secondary" @click="goToDataDisplay">
+          Data Display
         </button>
-        <button class="btn btn-light" @click="changeToEnglish">
-          <p class="text-dark">English</p>
-        </button> -->
-        
-      </div>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-secondary" @click="goToAddAnnouncement">
+          {{ $t('header.addAnnouncement') }}
+        </button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-secondary" @click="loginOrLogout">
+          {{ $t('header.loginOut') }}
+        </button>
+      </li>
+    </ul>
+        <!--
+          <li class="nav-item">
+        <button class="btn btn-light" @click="goToRegister">
+          <p class="text-dark">{{ $t('header.register') }}</p>
+        </button>
+      </li>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
-            <!-- test button for data query -->
+             test button for data query 
             <button class="btn btn-light" @click="goToDataDisplay">
               <p class="text-dark">Data Display</p>
             </button>
@@ -44,9 +75,8 @@
               <p class="text-dark">{{ $t('header.register') }}</p>
             </button>
           </div>
-      </div>
+      </div> -->
     </nav>
-  </div>
   <router-view />
 </template>
 
