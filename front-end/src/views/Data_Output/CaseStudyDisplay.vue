@@ -24,6 +24,9 @@
                     </li>
                 </ul>
                 <p>{{ caseStudyAllData }}</p> -->
+                <div v-for="(p) in photos" :key="p">
+                    <img :src="p" />
+                </div>
                 <ul class="text-left">
                     <li v-for="(name) in caseStudyAllData" :key="name"> {{name}}</li>
                 </ul>
@@ -37,6 +40,7 @@ import { defineComponent } from 'vue'
 import axios from 'axios';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
+import { string } from 'yup/lib/locale';
 
 export default defineComponent({
     name: "CaseStudyDisplay",
@@ -46,6 +50,7 @@ export default defineComponent({
             message: "",
             caseStudyTypes: [],
             caseStudyAllData: [],
+            photos: [""],
             showComponentOne: false,
             showComponentTwo: false,
             
@@ -92,13 +97,15 @@ export default defineComponent({
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                // var temp = JSON.stringify(response.data);
                 this.caseStudyAllData=response.data;
-                // temp = temp.replace("[","").replace("{","").replace("}","").replace("}","");
-                // let dataToArray = temp.split(',').map(item=>item.trim());
-                // console.log(dataToArray);
-                // this.caseStudyAllData=dataToArray.join("\n");
-                
+                var d: any;
+                for(d in response.data){
+                    const obj = response.data[d];
+                    if(obj.photo) {
+                        this.photos.push("data:" + obj.photoType + ";base64," + obj.photo);
+                    }
+                }
+                console.log(this.photos);
                 if(response != null) {
                     console.log("getting casestudy data successful");
                         
@@ -122,8 +129,6 @@ export default defineComponent({
 </script>
 
 <style scoped>
-    .btn {
-    }
     .box {
         width: 100%;
         height: 100%;
