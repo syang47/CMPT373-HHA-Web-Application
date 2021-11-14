@@ -29,7 +29,7 @@ public class CaseStudyService {
     @Autowired
     private HHADepartmentService hhaDepartmentService;
 
-    public CaseStudy save(User user, CaseStudyDTO data) {
+    public CaseStudy save(User user, CaseStudyDTO data, MultipartFile file) {
         CaseStudy entry = new CaseStudy();
 
 //        CaseStudyDTO data = new CaseStudyDTO();
@@ -45,7 +45,7 @@ public class CaseStudyService {
         entry.setUser(user);
         entry.setCaseStudyType(data.getCaseStudyType());
 
-        Optional<MultipartFile> photoBytes = Optional.ofNullable(data.getPhoto());
+        Optional<MultipartFile> photoBytes = Optional.ofNullable(file);
         photoBytes.ifPresent(p -> {
             try{
                 entry.setPhoto(p.getBytes());
@@ -53,7 +53,6 @@ public class CaseStudyService {
                 System.out.println(e);
             }
         });
-
 
         entry.setPatientName(data.getPatientName());
         entry.setPatientAge(data.getPatientAge());

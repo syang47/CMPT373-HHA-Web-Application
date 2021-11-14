@@ -1,5 +1,7 @@
 package hha.website.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
@@ -16,6 +18,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
@@ -111,11 +114,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
+    public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestPart("file") MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {//@RequestBody CaseStudyDTO data) {
         final String authorizationHeader = request.getHeader("Authorization");
         final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
         final User user = userDetailsService.findByUsername(username);
-        return ResponseEntity.ok(caseStudyService.save(user, data));
+        ObjectMapper objectMapper = new ObjectMapper();
+        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
+        return ResponseEntity.ok(caseStudyService.save(user, data, file));
     }
 
     @CrossOrigin
