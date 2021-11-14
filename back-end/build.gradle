@@ -44,12 +44,10 @@ dependencies {
     implementation 'com.h2database:h2:1.4.200'
     //implementation 'com.microsoft.sqlserver:mssql-jdbc'
     implementation 'io.jsonwebtoken:jjwt:0.9.1'
-    implementation 'javax.xml.bind:jaxb-api:2.3.0'
+    implementation 'javax.xml.bind:jaxb-api:2.4.0-b180830.0359'
     implementation 'javax.persistence:javax.persistence-api:2.2'
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.6'
     compileOnly 'org.projectlombok:lombok:1.18.22'
-    implementation 'commons-io:commons-io:20030203.000550'
-    implementation 'commons-fileupload:commons-fileupload:1.4'
     annotationProcessor 'org.projectlombok:lombok:1.18.22'
 }
 

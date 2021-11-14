@@ -32,14 +32,6 @@ public class CaseStudyService {
     public CaseStudy save(User user, CaseStudyDTO data, MultipartFile file) {
         CaseStudy entry = new CaseStudy();
 
-//        CaseStudyDTO data = new CaseStudyDTO();
-//        try {
-//            ObjectMapper objMapper = new ObjectMapper();
-//            data = objMapper.readValue(dataString, CaseStudyDTO.class);
-//        } catch(IOException e) {
-//            System.out.println(e);
-//        }
-
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
         entry.setUser(user);
@@ -49,8 +41,9 @@ public class CaseStudyService {
         photoBytes.ifPresent(p -> {
             try{
                 entry.setPhoto(p.getBytes());
+                entry.setPhotoType(p.getContentType());
             } catch(IOException e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         });
 

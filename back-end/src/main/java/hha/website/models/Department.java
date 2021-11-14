@@ -9,10 +9,8 @@ import java.util.Set;
 
 @Entity
 @Table(name="departments")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Department {
-//    @Id
-//    @GeneratedValue(strategy = GenerationType.IDENTITY)
-//    private Integer id;
 
     @Id
     @Column(unique = true)

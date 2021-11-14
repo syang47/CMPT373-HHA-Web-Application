@@ -219,9 +219,12 @@ export default defineComponent({
                 entry.caseStudyType = this.caseStudySelected;
 
                 let formData = new FormData();
-                for(let p of entry.photo){
-                    formData.append("file", p);
+                if(entry.photo){
+                    for(let p of entry.photo){
+                        formData.append("file", p);
+                    }
                 }
+                
                 delete entry["permission"];
                 delete entry["photo"];
                 formData.append("data", new Blob([JSON.stringify(entry)], {
