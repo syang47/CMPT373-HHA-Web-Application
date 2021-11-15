@@ -66,26 +66,22 @@ export default defineComponent({
   },
   methods: {
     loginOrLogout(): void {
-      let tempThis = this;
-      if(tempThis.$store.state.auth.status.loggedIn) {
-        tempThis.$store.dispatch('auth/logout');
+      if(this.$store.state.auth.status.loggedIn) {
+        this.$store.dispatch('auth/logout');
       }
-      tempThis.$router.push('/login');
+      this.$router.push('/login');
     },
 
     goToRegister(): void {
-      let tempThis = this;
-      tempThis.$router.push('/register');
+      this.$router.push('/register');
     },
 
     goToDataDisplay(): void {
-      let tempThis = this;
-      tempThis.$router.push('/dataDisplay');
+      this.$router.push('/dataDisplay');
     },
   // force push 3 case studies to test leadersboard implementation
     goToAddAnnouncement(): void {
-      let tempThis = this;
-      tempThis.$router.push('/announcement');
+      this.$router.push('/announcement');
     },
 
     changeLang(choice: string): void {

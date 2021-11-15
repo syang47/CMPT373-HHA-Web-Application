@@ -6,7 +6,9 @@ import hha.website.auth.AuthenticationResponse;
 import hha.website.services.*;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -84,6 +86,22 @@ public class MainController {
         final String jwt = jwtToken.generateToken(userDetails);
 
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment().getDepartmentname()));
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/api/checktoken", method = RequestMethod.GET)
+    public ResponseEntity<?> checkToken(@RequestHeader("Authorization") String jwt) throws Exception {
+        try {
+            final String tok = jwt.substring(7);
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtToken.extractUserName(tok));
+            if(jwtToken.validateToken(tok, userDetails)){
+                return ResponseEntity.accepted().body("Token is valid.");
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+        }
     }
 
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
