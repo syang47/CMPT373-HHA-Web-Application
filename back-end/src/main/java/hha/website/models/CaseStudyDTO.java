@@ -1,12 +1,12 @@
 package hha.website.models;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.Part;
-
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CaseStudyDTO {
 
-    private MultipartFile photo;
     private String caseStudyType;
 
     //patient story
@@ -40,10 +40,6 @@ public class CaseStudyDTO {
 
 
     private String story;
-
-    public MultipartFile getPhoto() {
-        return photo;
-    }
 
     public String getCaseStudyType() {
         return caseStudyType;
@@ -135,10 +131,6 @@ public class CaseStudyDTO {
 
     public String getStory() {
         return story;
-    }
-
-    public void setPhoto(MultipartFile photo) {
-        this.photo = photo;
     }
 
     public void setCaseStudyType(String caseStudyType) {

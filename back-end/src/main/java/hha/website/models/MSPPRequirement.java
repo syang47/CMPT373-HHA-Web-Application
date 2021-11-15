@@ -15,7 +15,7 @@ import javax.persistence.*;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class MSPPRequirement {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     // @Temporal(value = TemporalType.TIMESTAMP)

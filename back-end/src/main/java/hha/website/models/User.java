@@ -1,6 +1,7 @@
 package hha.website.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -8,9 +9,10 @@ import java.util.Set;
 
 @Entity
 @Table(name="users")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false, unique = true)
     private String username;

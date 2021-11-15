@@ -2,15 +2,17 @@ package hha.website.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
 @Table(name="messages")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class MessageBoard {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
