@@ -235,13 +235,6 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
   mounted() {
-    // this.$store.dispatch("auth/isTokenValid").then(response => {
-    //   if(!this.$store.state.auth.status.loggedIn) {
-    //     this.$router.push('/login');
-    //   } else {
-        
-    //   }
-    // });
     this.showDepartments();
   },
   data: function() {

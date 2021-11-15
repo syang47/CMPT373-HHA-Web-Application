@@ -147,9 +147,4 @@ public class MSPPRepositoryService {
     public List<MSPPRequirement> listByIdAndDate(Integer id, LocalDate date) {
         return msppRepository.findByidAndDateSubmitted(id, date);
     }
-    
-    /*
-    public Collection<String> listDistinctItemsInField() {
-        return msppRepository.queryDistinctField();
-    }*/
 }

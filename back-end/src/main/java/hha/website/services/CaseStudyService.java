@@ -32,14 +32,6 @@ public class CaseStudyService {
     public CaseStudy save(User user, CaseStudyDTO data) {
         CaseStudy entry = new CaseStudy();
 
-//        CaseStudyDTO data = new CaseStudyDTO();
-//        try {
-//            ObjectMapper objMapper = new ObjectMapper();
-//            data = objMapper.readValue(dataString, CaseStudyDTO.class);
-//        } catch(IOException e) {
-//            System.out.println(e);
-//        }
-
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
         entry.setUser(user);
@@ -50,7 +42,7 @@ public class CaseStudyService {
             try{
                 entry.setPhoto(p.getBytes());
             } catch(IOException e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         });
 
@@ -94,20 +86,4 @@ public class CaseStudyService {
     public List<String> listCaseStudyTypes() {
         return caseStudyRepository.queryCaseStudyTypes();
     }
-
-//    public Collection<String> listDistinctItemsInField() {
-//        return caseStudyRepository.queryDistinctField();
-//    }
-//
-//    public Collection<Integer> listPointsInField() {
-//        return caseStudyRepository.queryBestCasestudy();
-//    }
-//
-//    public Collection<Boolean> listSubmissionStatusInField() {
-//        return caseStudyRepository.querySubmissionStatus();
-//    }
-//
-//    public Collection<Integer> listTotalReportsSubmittedField() {
-//        return caseStudyRepository.queryTotalReportsField();
-//    }
 }

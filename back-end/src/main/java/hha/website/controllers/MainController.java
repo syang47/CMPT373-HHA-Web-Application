@@ -69,15 +69,13 @@ public class MainController {
     private JwtUtil jwtToken;
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        System.out.println(authenticationRequest.getUsername());
-        System.out.println(authenticationRequest.getPassword());
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Wrong username/password", e);
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
         }
 
         final User u = userRepository.findByUsername(authenticationRequest.getUsername());
@@ -109,10 +107,8 @@ public class MainController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         final String role = user.getRole().trim().toLowerCase();
         if(role.contains("admin")){
-            System.out.println("Cannot make admin account");
             return ResponseEntity.badRequest().body("Cannot make admin account");
         } else if(userDetails != null){
-            System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
             System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole() + " " + user.getDepartment());
@@ -121,18 +117,14 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody MSPPRequirementDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(msppRepositoryService.save(user, data));
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestBody CaseStudyDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(caseStudyService.save(user, data));
     }
 
@@ -172,7 +164,6 @@ public class MainController {
         LocalDate parsedDate = LocalDate.parse(date);
         int finalId = Integer.parseInt(id);
         System.out.println(parsedDate);
-
         return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, parsedDate));
     }
 
@@ -208,10 +199,8 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveAnnouncement(HttpServletRequest request, @RequestBody AnnouncementDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestBody AnnouncementDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(announcementService.save(data));
     }
 
@@ -223,10 +212,8 @@ public class MainController {
 
 
     @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveMessage(HttpServletRequest request, @RequestBody MessageBoardDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveMessage(@RequestHeader("Authorization") String jwt, @RequestBody MessageBoardDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(messageBoardService.save(user, data));
     }
 
@@ -235,12 +222,5 @@ public class MainController {
     public ResponseEntity<?> getMessages(){
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
-//    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
-//    public String getCaseStudySubStatusField() {
-//        System.out.println("casestudysubmission status");
-//        System.out.println(Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()));
-//        return Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
-//    }
-
 
 }

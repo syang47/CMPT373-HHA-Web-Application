@@ -63,9 +63,6 @@ public class HHADepartmentService {
         departmentRepository.save(community_health);
     }
 
-
-
-
     public void addASubmittedReport(User user) {
         userDetailsService.addASubmittedReportForUser(user);
         departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
