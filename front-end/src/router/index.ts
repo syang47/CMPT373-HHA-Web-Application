@@ -183,20 +183,20 @@ const router = createRouter({
   routes,
 });
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requiresAuth)) {
-//     newStore.dispatch("auth/isTokenValid").then(response => {
-//       const s: any = newStore.state;
-//       if(!s.auth.status.loggedIn) {
-//         next('/login');
-//       } else {
-//         next();
-//       }
-//     });
-//   } else {
-//     next();
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    newStore.dispatch("auth/isTokenValid").then(response => {
+      const s: any = newStore.state;
+      if(!s.auth.status.loggedIn) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+})
 
 
 export default router;
