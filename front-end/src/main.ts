@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Equal from "equal-vue";
 import 'equal-vue/dist/style.css';
-
+import naive from "naive-ui";
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -22,7 +22,7 @@ app.provide("$store", store);
 app.use(store);
 app.use(router);
 app.use(i18n);
-
+app.use(naive);
 app.config.globalProperties.$axios = axios;
 axios.defaults.baseURL = "http://localhost:8080";
 app.use(Equal);

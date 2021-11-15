@@ -3,6 +3,7 @@ import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
 import Case_Study from "@/views/Case_Study.vue";
+import Home_fe from "@/views/Home_fe.vue";
 
 import LeadersBoard from "@/views/LeadersBoard.vue"
 import NICU_PAED from "@/views/NICU_PAED/NICU_Dep.vue";
@@ -127,6 +128,11 @@ const routes: Array<RouteRecordRaw> = [
   },
 
   // Other components
+  {
+    path: "/Home_fe",
+    name: "/Home_fe",
+    component: Home_fe,
+  },
 
 ];
 

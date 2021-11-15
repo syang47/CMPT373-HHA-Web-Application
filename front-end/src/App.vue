@@ -76,7 +76,7 @@
             </button>
           </div>
       </div> -->
-    </nav>
+  </nav>
   <router-view />
 </template>
 
