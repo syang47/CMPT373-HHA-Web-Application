@@ -99,7 +99,6 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
 import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";

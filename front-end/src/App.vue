@@ -20,17 +20,10 @@
               {{ language }}
             </option>
         </select>
-        <!-- <button class="btn btn-light" @click="changeToFrench">
-          <p class="text-dark">Français</p>
-        </button>
-        <button class="btn btn-light" @click="changeToEnglish">
-          <p class="text-dark">English</p>
-        </button> -->
         
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
-            <!-- test button for data query -->
             <button class="btn btn-light" @click="goToDataDisplay">
               <p class="text-dark">Data Display</p>
             </button>
@@ -57,8 +50,6 @@ import i18n from "./i18n";
 export default defineComponent({
   name: "App",
   data: function() {
-
-
     return{
       languages: ["Français", "English"],
       l: "Français",
@@ -79,7 +70,7 @@ export default defineComponent({
     goToDataDisplay(): void {
       this.$router.push('/dataDisplay');
     },
-  // force push 3 case studies to test leadersboard implementation
+    
     goToAddAnnouncement(): void {
       this.$router.push('/announcement');
     },

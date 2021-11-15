@@ -51,19 +51,23 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
+import { defineComponent } from 'vue';
 
-export default class Rehab extends Vue {
+export default defineComponent({
+  name: "Rehab",
+  methods: {
     goToDataInput(): void {
-        this.$router.push('/rehab/submit');
-    };
-  goToCaseStudy(): void {
-    this.$router.push('/casestudy');
-  };
+      this.$router.push('/rehab/submit');
+    },
+    goToCaseStudy(): void {
+      this.$router.push('/casestudy');
+    }
   // gotoBiomech(): void {
   //   this.$router.push('/biomech');
   // }
-}
+  }
+  
+});
 </script>
 
 <style>

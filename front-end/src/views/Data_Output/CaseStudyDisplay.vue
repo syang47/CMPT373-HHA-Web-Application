@@ -18,12 +18,6 @@
                 </ul>
             </div>
             <div v-else-if="showComponentTwo">
-                <!--<ul>
-                    <li v-for="(value, name) in returning" :key="name">
-                        {{ name }} : {{ value }}
-                    </li>
-                </ul>
-                <p>{{ caseStudyAllData }}</p> -->
                 <div v-for="(p) in photos" :key="p">
                     <img :src="p" />
                 </div>
@@ -37,14 +31,9 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue'
-import axios from 'axios';
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
-import { string } from 'yup/lib/locale';
 
 export default defineComponent({
     name: "CaseStudyDisplay",
-    
     data: function() {
         return {
             message: "",

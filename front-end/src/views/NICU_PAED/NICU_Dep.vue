@@ -52,19 +52,23 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Vue } from "vue-class-component";
+import { defineComponent } from 'vue';
 
-export default class NICU_PAED extends Vue {
+export default defineComponent({
+  name: "NICU_PAED",
+  methods: {
   goToDataInput(): void {
     this.$router.push('/nicu_paed/submit');
-  };
+  },
   goToCaseStudy(): void {
     this.$router.push('/casestudy');
-  };
+  },
   // gotoBiomech(): void {
   //   this.$router.push('/biomech');
   // }
-}
+  }
+  
+});
 </script>
 
 <style>

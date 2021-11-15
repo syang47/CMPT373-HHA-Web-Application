@@ -149,14 +149,6 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/datainput",
-    name: "DataInput",
-    component: DataInput,
-    meta: {
-      requiresAuth: true,
-    },
-  },
-  {
     path: "/dataDisplay",
     name: "DataDisplay",
     component: DataDisplay,

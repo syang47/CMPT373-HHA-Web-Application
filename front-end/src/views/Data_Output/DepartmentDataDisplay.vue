@@ -96,9 +96,6 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue'
-import axios from 'axios';
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
 
 export default defineComponent({
     name: "DepartmentDataDisplay",

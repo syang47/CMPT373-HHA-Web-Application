@@ -71,7 +71,6 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue';
-import authHeader from '../services/auth-header';
 import axios from 'axios';
 
 export default defineComponent({
