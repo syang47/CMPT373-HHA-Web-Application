@@ -1,15 +1,17 @@
 package hha.website.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
 
 import javax.persistence.*;
 import java.util.Calendar;
 
 @Entity
 @Table(name = "casestudies")
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CaseStudy {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Temporal(value = TemporalType.TIMESTAMP)
@@ -25,6 +27,9 @@ public class CaseStudy {
     @Lob
     @Column
     private byte[] photo;
+
+    @Column
+    private String photoType;
 
     @Column
     private String caseStudyType;
@@ -307,6 +312,14 @@ public class CaseStudy {
 
     public void setReportPoints(Integer reportPoints) {
         this.reportPoints = reportPoints;
+    }
+
+    public String getPhotoType() {
+        return photoType;
+    }
+
+    public void setPhotoType(String photoType) {
+        this.photoType = photoType;
     }
 }
 

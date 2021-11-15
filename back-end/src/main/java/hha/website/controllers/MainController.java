@@ -1,5 +1,7 @@
 package hha.website.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
@@ -18,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
@@ -123,9 +126,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestBody CaseStudyDTO data) {
+    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        return ResponseEntity.ok(caseStudyService.save(user, data));
+        ObjectMapper objectMapper = new ObjectMapper();
+        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
+        return ResponseEntity.ok(caseStudyService.save(user, data, file));
     }
 
     @CrossOrigin
@@ -179,8 +184,6 @@ public class MainController {
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
     }
 
-
-    @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
     @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
         System.out.println("total casestudy submitted for " +  department);
@@ -199,9 +202,11 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestBody AnnouncementDTO data) {
+    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestPart(value = "monthlyPhoto", required = false) MultipartFile monthlyPhoto, @RequestPart(value = "annualPhoto", required = false) MultipartFile annualPhoto, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        return ResponseEntity.ok(announcementService.save(data));
+        ObjectMapper objectMapper = new ObjectMapper();
+        AnnouncementDTO data = objectMapper.readValue(json, AnnouncementDTO.class);
+        return ResponseEntity.ok(announcementService.save(data, monthlyPhoto, annualPhoto));
     }
 
     @CrossOrigin

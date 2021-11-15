@@ -28,10 +28,6 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue'
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
-import Case_Study from "./Case_Study.vue";
-import Announcement from "./Announcement.vue";
 import CaseStudyDisplay from "./Data_Output/CaseStudyDisplay.vue";
 import DepartmentDataDisplay from "./Data_Output/DepartmentDataDisplay.vue";
 export default defineComponent({

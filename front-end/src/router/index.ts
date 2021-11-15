@@ -17,8 +17,6 @@ import Rehab_Data from "@/views/Rehab/Rehab_Data.vue";
 import Community_Health from "@/views/Community_Health/Community_Dep.vue";
 import Community_Health_Data from "@/views/Community_Health/Community_Health_Data.vue";
 
-import DataInput from "@/views/DataInput.vue";
-
 import Announcement from "@/views/Announcement.vue";
 
 import DataDisplay from "@/views/DataDisplay.vue";
