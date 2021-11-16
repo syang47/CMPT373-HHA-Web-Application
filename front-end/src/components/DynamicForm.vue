@@ -6,18 +6,25 @@
     >
       <div class="form-group">
         <label :for="name">{{ $t('msppData.'+ label) }}</label>
-        <Field :as="as" :id="name" :name="name" v-bind="attrs" class="form-control">
-          <template v-if="children && children.length">
-            <component v-for="({ tag, text, ...childAttrs }, idx) in children"
-              :key="idx"
-              :is="tag"
-              v-bind="childAttrs"
-            >
-              {{ text }}
-            </component>
-          </template>
-        </Field>
+        <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
         <ErrorMessage :name="name" class="error-feedback" />
+        <template v-if="children && children.length && s[name] > 0">
+          <!-- <component v-for="({ tag, text, ...childAttrs }, idx) in children"
+            :key="idx"
+            :is="tag"
+            v-bind="childAttrs"
+          >
+            {{ text }}
+          </component> -->
+          <div class="signup-form"
+            v-for="{ as, name, label, ...attrs } in children"
+            :key="name"
+          >
+            <label style="color:green" :for="name">{{ $t('msppData.'+ label) }}</label>
+            <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
+            <ErrorMessage :name="name" class="error-feedback" />
+          </div>
+        </template>
       </div>
     </div>
     <div class="form-group">
@@ -44,6 +51,7 @@ export default defineComponent({
       successful: false,
       loading: false,
       message: "",
+      s: this.schema.fields
     }
   },
   props: {
@@ -94,7 +102,7 @@ export default defineComponent({
 <style scoped>
     .background {
         height: 100%;
-        position: relative;
+        position: absolute;
         width: 100%;
         overflow: auto;
     }
