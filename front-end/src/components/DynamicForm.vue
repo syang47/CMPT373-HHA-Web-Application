@@ -31,8 +31,8 @@
 
 <script lang="ts" type="text/typescript">
 import { Form, Field, ErrorMessage } from 'vee-validate';
-
-export default {
+import { defineComponent } from 'vue';
+export default defineComponent({
   name: 'DynamicForm',
   components: {
     Form,
@@ -88,13 +88,13 @@ export default {
       }
     },
   }
-};
+});;
 </script>
 
 <style scoped>
     .background {
         height: 100%;
-        position: absolute;
+        position: relative;
         width: 100%;
         overflow: auto;
     }

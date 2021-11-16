@@ -55,7 +55,7 @@ public class JwtUtil {
         return Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60)) //one minute
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) //one hour
                 .signWith(SignatureAlgorithm.HS256, secret).compact();
     }
 
