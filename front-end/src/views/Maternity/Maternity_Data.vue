@@ -55,9 +55,12 @@
                             <legend style="color:green">Patient {{ idx+1 }}</legend>
                             <label :for="`diedBefore48hAge_${idx}`">Age</label>
                             <Field class="form-control"
+                                   type="number"
                                    :id="`diedBefore48hAge_${idx}`" 
                                    :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
                             <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+
+                            <br>
 
                             <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
                             <Field class="form-control"
@@ -94,6 +97,7 @@
                             <label :for="`diedAfter48hAge_${idx}`">Age</label>
                             <Field class="form-control"
                                    :id="`diedAfter48hAge_${idx}`" 
+                                   type="number"
                                    :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
                             <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
 
@@ -947,10 +951,9 @@ export default defineComponent({
                 .of(
                 yup.object().shape({
                     diedBefore48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedBefore48hCause: yup
                         .string()
                         .required("Required.")
@@ -964,10 +967,9 @@ export default defineComponent({
                 .of(
                 yup.object().shape({
                     diedAfter48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedAfter48hCause: yup
                         .string()
                         .required("Required.")
