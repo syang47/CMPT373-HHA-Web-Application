@@ -39,6 +39,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                         <Field name="diedBefore48h" type="text" class="form-control"  id="diedBefore48h" v-on:keyup="checkDiedBefore48h()" value=0 />
@@ -76,6 +77,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                         <Field name="diedAfter48h" type="text" class="form-control" id="diedAfter48h" v-on:keyup="checkDiedAfter48h()" value=0 />
@@ -939,7 +941,7 @@ export default defineComponent({
         FieldArray,
     },
     data() {
-        const diedBefore48hSchema = yup.object().shape({
+        const dataSchema = yup.object().shape({
             diedBefore48hPatient: yup
                 .array()
                 .of(
@@ -956,8 +958,7 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const diedAfter48hSchema= yup.object().shape({
+
             diedAfter48hPatient: yup
                 .array()
                 .of(
@@ -974,8 +975,7 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const dataSchema = yup.object().shape({
+
             bedsAvailable: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -1556,8 +1556,6 @@ export default defineComponent({
             admissionsMor: false,
             diedBefore48hMor: false,
             diedAfter48hMor: false,
-            diedBefore48hSchema,
-            diedAfter48hSchema,
             dataSchema,
         };
     },
