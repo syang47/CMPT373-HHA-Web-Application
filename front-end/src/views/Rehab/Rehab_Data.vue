@@ -32,6 +32,7 @@
                 </div>
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
                         <Field name="dischargedAlive" type="text" class="form-control" value=0 id="dischargedAlive" v-on:keyup="checkDischargedAlive()"/>
@@ -44,12 +45,30 @@
                                 v-for="(field, idx) in fields"
                                 :key="field.key" 
                             >
-                            <legend style="color:green">Patient {{ idx+1 }}</legend>
-                            <select class="btn btn-light dropdown-toggle" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" as="select">
+                            <legend style="color:green"><strong>Patient {{ idx+1 }} Discharged Diagnosis: </strong></legend>
+                            <!-- Drop box -->
+                            <!-- <legend style="color:green">Patient {{ idx+1 }}</legend>
+                            <select class="btn btn-light dropdown-toggle" v-model="init" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" as="select" @change="checkOption(init)">
                                 <option class="dropdown-item" v-for="option in options" :key="option" :value="option"> 
                                 {{ option }}
                                 </option>
-                            </select>
+                            </select> -->
+
+                            <!-- Radio buttons -->
+                            <div class="form-check">
+                                <Field class="form-check-input" id="option1" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
+                                <label class="form-check-label" for="option1"> SCI</label>
+                            </div>
+                            <div class="form-check">
+                                <Field class="form-check-input" id="option2" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
+                                <label class="form-check-label" for="option2"> Stroke</label>
+                            </div>
+                            <div class="form-check">
+                                <Field class="form-check-input" id="option3" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
+                                <label class="form-check-label" for="option3"> Other</label>
+                            </div>
+                            <br>
+                            <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" class="error-feedback" />
 
                             <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
                             </fieldset>
@@ -440,10 +459,14 @@ export default defineComponent({
             diedAfter48hMor: false,
             dischargedAliveMor: false,
             options: ["SCI", "Stroke", "Other"],
+            init: "",
             dataSchema,
         };
     },
     methods: {
+        checkOption (value) {
+            console.log(value);
+        },
         checkDischargedAlive() {
             let number: number = (document as any).getElementById("dischargedAlive").value;
             if (number > 0) {
