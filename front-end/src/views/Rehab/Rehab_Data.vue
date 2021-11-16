@@ -31,10 +31,34 @@
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
 
-                <div class="form-group">
-                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
-                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="dischargedAlive" class="error-feedback" />
+                <div>
+                    <div class="form-group">
+                        <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
+                        <Field name="dischargedAlive" type="text" class="form-control" value=0 id="dischargedAlive" v-on:keyup="checkDischargedAlive()"/>
+                        <ErrorMessage name="dischargedAlive" class="error-feedback" />
+                    </div>
+                    <div v-if="dischargedAliveMor">
+                        <FieldArray name="dischargedAlivePatient" v-slot="{ fields, push, remove }">
+                            <fieldset
+                                class="form-group"
+                                v-for="(field, idx) in fields"
+                                :key="field.key" 
+                            >
+                            <legend style="color:green">Patient {{ idx+1 }}</legend>
+                            <select class="btn btn-light dropdown-toggle" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" as="select">
+                                <option class="dropdown-item" v-for="option in options" :key="option" :value="option"> 
+                                {{ option }}
+                                </option>
+                            </select>
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+                            </fieldset>
+
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ dischargedAliveOption: ''})">
+                            New Patient + 
+                            </button>
+                        </FieldArray>
+                    </div>    
                 </div>
 
 
@@ -271,6 +295,18 @@ export default defineComponent({
             )
             .strict(),
 
+            dischargedAlivePatient: yup
+                .array()
+                .of(
+                yup.object().shape({
+                    dischargedAliveOption: yup
+                        .string()
+                        .required("Must choose an option.")
+                        .default(""),
+                })
+            )
+            .strict(),
+
             bedsAvailable: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -402,10 +438,20 @@ export default defineComponent({
             admissionsMor: false,
             diedBefore48hMor: false,
             diedAfter48hMor: false,
+            dischargedAliveMor: false,
+            options: ["SCI", "Stroke", "Other"],
             dataSchema,
         };
     },
     methods: {
+        checkDischargedAlive() {
+            let number: number = (document as any).getElementById("dischargedAlive").value;
+            if (number > 0) {
+                this.dischargedAliveMor = true;
+            } else {
+                this.dischargedAliveMor = false;
+            }
+        },
         checkDiedBefore48h() {
             let number: number = (document as any).getElementById("diedBefore48h").value;
             if (number > 0) {
