@@ -25,65 +25,10 @@
                     <Field name="hospitalized" type="text" class="form-control" value=0 />
                     <ErrorMessage name="hospitalized" class="error-feedback" />
                 </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedNICU">Hospitalized NICU</label>
-                    <Field name="hospitalizedNICU" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
-                </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedPaed">Hospitalized Paed</label>
-                    <Field name="hospitalizedPaed" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
-                </div>
 
 
 
 
-                <div class="form-group">
-                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
-                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="dischargedAlive" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
-                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="diedBefore48h" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
-                    <Field name="diedAfter48h" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="diedAfter48h" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
-                    <Field name="daysHospitalised" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="daysHospitalised" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
-                    <Field name="referrals" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="referrals" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
-                    <Field name="transfers" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="transfers" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
-                    <Field name="selfDischarged" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="selfDischarged" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
-                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="stayedInTheWard" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="admissions">{{ $t('msppData.admissions') }}</label>
-                    <Field name="admissions" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="admissions" class="error-feedback" />
-                </div>
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -141,71 +86,15 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-
-
-            dischargedAlive: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            diedBefore48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            diedAfter48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            daysHospitalized: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            referrals: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            transfers: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            selfDischarged: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            stayedInTheWard: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            admissions: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
         });
         return {
             successful: false,
             loading: false,
             message: "",
-            hospitalizedMor: false,
             dataSchema,
         };
     },
     methods: {
-        checkHospitalized() {
-            let number: number = (document as any).getElementById("hospitalized").value;
-            if (number > 0) {
-                this.hospitalizedMor = true;
-            } else {
-                this.hospitalizedMor = false;
-            }
-        },
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
             if(token != null) {
