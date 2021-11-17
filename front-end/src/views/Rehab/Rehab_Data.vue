@@ -69,6 +69,7 @@
                             <!-- Input boxed list -->
                             <div>
                                 <legend :for="`dischargedAlivePatientNo_${idx}`" style="color:green"><strong>Patient {{ idx+1 }}: No. Days in Rehab Unit from admission to discharge: </strong></legend>
+                                <br>
                                 <Field class="form-control"
                                     type="number"
                                     :id="`dischargedAlivePatientNo_${idx}`" 
@@ -77,6 +78,7 @@
 
                                 <br>
                                 <label style="color:green"><strong>Discharge Reason</strong></label>
+                                <br>
                                 <label :for="`dischargedAliveAllGoals_${idx}`">All goals met</label>
                                 <Field class="form-control"
                                     :id="`dischargedAliveAllGoals_${idx}`"
@@ -100,54 +102,107 @@
 
                                 <br>
                                 <label style="color:green"><strong>Discharge Outcome (ADLs/Self-Care)</strong></label>
-                                <label :for="`dischargedAliveIndependent_${idx}`">Independent </label>
-                                <Field class="form-control"
-                                    :id="`dischargedAliveIndependent_${idx}`"
-                                    type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveIndependent`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveIndependent`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveModifiedIndependent_${idx}`">Modified Independent</label>
+                                <label :for="`dischargedAliveADLsIndependent_${idx}`">Independent </label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveModifiedIndependent_${idx}`"
+                                    :id="`dischargedAliveADLsIndependent_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveModifiedIndependent`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveModifiedIndependent`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsIndependent`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveSupervision_${idx}`">Supervision</label>
+                                <label :for="`dischargedAliveADLsModifiedIndependent_${idx}`">Modified Independent</label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveSupervision_${idx}`"
+                                    :id="`dischargedAliveADLsModifiedIndependent_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveSupervision`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveSupervision`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModifiedIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModifiedIndependent`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveMinimumAssistance_${idx}`">Minimum Assistance</label>
+                                <label :for="`dischargedAliveADLsSupervision_${idx}`">Supervision</label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveMinimumAssistance_${idx}`"
+                                    :id="`dischargedAliveADLsSupervision_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveMinimumAssistance`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveMinimumAssistance`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsSupervision`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsSupervision`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveModerateAssistance_${idx}`">Moderate Assistance</label>
+                                <label :for="`dischargedAliveADLsMinimumAssistance_${idx}`">Minimum Assistance</label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveModerateAssistance_${idx}`"
+                                    :id="`dischargedAliveADLsMinimumAssistance_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveModerateAssistance`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveModerateAssistance`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMinimumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMinimumAssistance`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveMaximumAssistance_${idx}`">Maximum Assistance</label>
+                                <label :for="`dischargedAliveADLsModerateAssistance_${idx}`">Moderate Assistance</label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveMaximumAssistance_${idx}`"
+                                    :id="`dischargedAliveADLsModerateAssistance_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveMaximumAssistance`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveMaximumAssistance`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModerateAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModerateAssistance`" class="error-feedback" />
                                 <br>
-                                <label :for="`dischargedAliveDependent_${idx}`">Dependent</label>
+                                <label :for="`dischargedAliveADLsMaximumAssistance_${idx}`">Maximum Assistance</label>
                                 <Field class="form-control"
-                                    :id="`dischargedAliveDependent_${idx}`"
+                                    :id="`dischargedAliveADLsMaximumAssistance_${idx}`"
                                     type="number"
-                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveDependent`" />
-                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveDependent`" class="error-feedback" />
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMaximumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMaximumAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveADLsDependent_${idx}`">Dependent</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveADLsDependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" class="error-feedback" />
+
+                                <br>
+                                <label style="color:green"><strong>Discharge Outcome (Transfers and Mobility)</strong></label>
+                                <br>
+                                <label :for="`dischargedAliveTransfersIndependent_${idx}`">Independent </label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersIndependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersIndependent`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersModifiedIndependent_${idx}`">Modified Independent</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersModifiedIndependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModifiedIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModifiedIndependent`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersSupervision_${idx}`">Supervision</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersSupervision_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersSupervision`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersSupervision`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersMinimumAssistance_${idx}`">Minimum Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersMinimumAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMinimumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMinimumAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersModerateAssistance_${idx}`">Moderate Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersModerateAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModerateAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModerateAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersMaximumAssistance_${idx}`">Maximum Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersMaximumAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMaximumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMaximumAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveTransfersDependent_${idx}`">Dependent</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveTransfersDependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" class="error-feedback" />
                             </div>
 
                             
@@ -161,13 +216,20 @@
                                 dischargedAliveAllGoals: '',
                                 dischargedAliveGoalsPartially: '',
                                 dischargedAliveNoGoals: '',
-                                dischargedAliveIndependent: '',
-                                dischargedAliveModifiedIndependent: '',
-                                dischargedAliveSupervision: '',
-                                dischargedAliveMinimumAssistance: '',
-                                dischargedAliveModerateAssistance: '',
-                                dischargedAliveMaximumAssistance: '',
-                                dischargedAliveDependent: '',
+                                dischargedAliveADLsIndependent: '',
+                                dischargedAliveADLsModifiedIndependent: '',
+                                dischargedAliveADLsSupervision: '',
+                                dischargedAliveADLsMinimumAssistance: '',
+                                dischargedAliveADLsModerateAssistance: '',
+                                dischargedAliveADLsMaximumAssistance: '',
+                                dischargedAliveADLsDependent: '',
+                                dischargedAliveTransfersIndependent: '',
+                                dischargedAliveTransfersModifiedIndependent: '',
+                                dischargedAliveTransfersSupervision: '',
+                                dischargedAliveTransfersMinimumAssistance: '',
+                                dischargedAliveTransfersModerateAssistance: '',
+                                dischargedAliveTransfersMaximumAssistance: '',
+                                dischargedAliveTransfersDependent: '',
                                 })">
                             New Patient + 
                             </button>
@@ -434,31 +496,60 @@ export default defineComponent({
                         .required("Required.")
                         .default("0"),
                     
-                    dischargedAliveIndependent: yup
+                    dischargedAliveADLsIndependent: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveModifiedIndependent: yup
+                    dischargedAliveADLsModifiedIndependent: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveSupervision: yup
+                    dischargedAliveADLsSupervision: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveMinimumAssistance: yup
+                    dischargedAliveADLsMinimumAssistance: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveModerateAssistance: yup
+                    dischargedAliveADLsModerateAssistance: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveMaximumAssistance: yup
+                    dischargedAliveADLsMaximumAssistance: yup
                         .string()
                         .required("Required.")
                         .default("0"),
-                    dischargedAliveDependent: yup
+                    dischargedAliveADLsDependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
+                    dischargedAliveTransfersIndependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersModifiedIndependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersSupervision: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersMinimumAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersModerateAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersMaximumAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveTransfersDependent: yup
                         .string()
                         .required("Required.")
                         .default("0"),
