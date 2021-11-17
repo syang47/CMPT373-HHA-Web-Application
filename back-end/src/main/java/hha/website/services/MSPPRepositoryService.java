@@ -41,8 +41,7 @@ public class MSPPRepositoryService {
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
 
         hhaDepartmentService.addASubmittedReport(user);
-        System.out.println("required entry saved");
-        msppRepository.save(entry);
+
 
 
         AdditionalMSPP additionalData = new AdditionalMSPP();
@@ -56,6 +55,11 @@ public class MSPPRepositoryService {
         }
         System.out.println("additional entry saved");
         additionalMSPPRepository.save(additionalData);
+
+
+        entry.setAdditionalData(additionalData);
+        System.out.println("required entry saved");
+        msppRepository.save(entry);
         return "saved";
     }
 

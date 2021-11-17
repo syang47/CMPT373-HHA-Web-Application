@@ -1,5 +1,5 @@
 <template>
-  <Form class="background" @submit="handleData" >
+  <Form class="background" @submit="handleData" v-slot="{ validate }" >
     <div class="signup-form"
       v-for="{ as, name, label, header, children, ...attrs } in schema.fields"
       :key="name"
@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button class="btn btn-outline-light btn-block" :disabled="loading">
+      <button class="btn btn-outline-light btn-block" :disabled="loading" @click="validate">
         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
         {{ $t('msppData.submit') }}
       </button>
@@ -67,8 +67,21 @@ export default defineComponent({
     handleData(entry) {
       let token = JSON.parse(localStorage.getItem('user')!);
       if(token != null) {
-        entry.department = this.department;
-        let d = [JSON.stringify(entry), "{}"];
+
+        var requiredKeys:string[] = [];
+        for(let i in this.schema.fields) {
+          if(this.schema.fields[i].rules != undefined){
+            if(this.schema.fields[i].rules.exclusiveTests.required){
+              requiredKeys.push(this.schema.fields[i].name);
+            }
+          }
+        }
+        var requiredMSPPData = Object.fromEntries(Object.entries(entry).filter(([key, value]) => requiredKeys.includes(key)));
+        var additionalData = Object.fromEntries(Object.entries(entry).filter(([key, value]) => !requiredKeys.includes(key)));
+
+        requiredMSPPData.department = this.department;
+
+        let d = [JSON.stringify(requiredMSPPData), JSON.stringify(additionalData)];
         this.$axios.post("/api/datainput", d, {
           headers: {
             'Authorization': `Bearer ${token.jwt}`

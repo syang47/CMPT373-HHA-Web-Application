@@ -15,8 +15,8 @@ export default defineComponent({
         DynamicForm
     },
     data() {
-        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.").default(0);
-        const a: any = yup.number().min(0, "Cannot be negative.").default(0);
+        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.");
+        const a: any = yup.number().min(0, "Cannot be negative.");
         const formSchema = {
             fields: [
                 {
