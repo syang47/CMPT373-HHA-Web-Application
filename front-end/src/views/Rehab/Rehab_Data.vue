@@ -46,34 +46,129 @@
                                 :key="field.key" 
                             >
                             <legend style="color:green"><strong>Patient {{ idx+1 }} Discharged Diagnosis: </strong></legend>
-                            <!-- Drop box -->
-                            <!-- <legend style="color:green">Patient {{ idx+1 }}</legend>
-                            <select class="btn btn-light dropdown-toggle" v-model="init" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" as="select" @change="checkOption(init)">
-                                <option class="dropdown-item" v-for="option in options" :key="option" :value="option"> 
-                                {{ option }}
-                                </option>
-                            </select> -->
 
                             <!-- Radio buttons -->
-                            <div class="form-check">
-                                <Field class="form-check-input" id="option1" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
-                                <label class="form-check-label" for="option1"> SCI</label>
+                            <div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option1" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
+                                    <label class="form-check-label" for="option1"> SCI</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option2" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
+                                    <label class="form-check-label" for="option2"> Stroke</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option3" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
+                                    <label class="form-check-label" for="option3"> Other</label>
+                                </div>
+                                <br>
+                                <br>
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" class="error-feedback" />
                             </div>
-                            <div class="form-check">
-                                <Field class="form-check-input" id="option2" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
-                                <label class="form-check-label" for="option2"> Stroke</label>
+
+                            <!-- Input boxed list -->
+                            <div>
+                                <legend :for="`dischargedAlivePatientNo_${idx}`" style="color:green"><strong>Patient {{ idx+1 }}: No. Days in Rehab Unit from admission to discharge: </strong></legend>
+                                <Field class="form-control"
+                                    type="number"
+                                    :id="`dischargedAlivePatientNo_${idx}`" 
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" class="error-feedback" />
+
+                                <br>
+                                <label style="color:green"><strong>Discharge Reason</strong></label>
+                                <label :for="`dischargedAliveAllGoals_${idx}`">All goals met</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveAllGoals_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveAllGoals`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveAllGoals`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveGoalsPartially_${idx}`">Goals partially met, sufficient for discharge</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveGoalsPartially_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveNoGoals_${idx}`">Goals not met, discharged for alternate reason</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveNoGoals_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" class="error-feedback" />
+
+                                <br>
+                                <label style="color:green"><strong>Discharge Outcome (ADLs/Self-Care)</strong></label>
+                                <label :for="`dischargedAliveIndependent_${idx}`">Independent </label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveIndependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveIndependent`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveModifiedIndependent_${idx}`">Modified Independent</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveModifiedIndependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveModifiedIndependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveModifiedIndependent`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveSupervision_${idx}`">Supervision</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveSupervision_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveSupervision`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveSupervision`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveMinimumAssistance_${idx}`">Minimum Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveMinimumAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveMinimumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveMinimumAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveModerateAssistance_${idx}`">Moderate Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveModerateAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveModerateAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveModerateAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveMaximumAssistance_${idx}`">Maximum Assistance</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveMaximumAssistance_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveMaximumAssistance`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveMaximumAssistance`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveDependent_${idx}`">Dependent</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveDependent_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveDependent`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveDependent`" class="error-feedback" />
                             </div>
-                            <div class="form-check">
-                                <Field class="form-check-input" id="option3" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
-                                <label class="form-check-label" for="option3"> Other</label>
-                            </div>
-                            <br>
-                            <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" class="error-feedback" />
+
+                            
 
                             <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
                             </fieldset>
 
-                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ dischargedAliveOption: ''})">
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ 
+                                dischargedAliveOption: '',
+                                dischargedAlivePatientNo: '',
+                                dischargedAliveAllGoals: '',
+                                dischargedAliveGoalsPartially: '',
+                                dischargedAliveNoGoals: '',
+                                dischargedAliveIndependent: '',
+                                dischargedAliveModifiedIndependent: '',
+                                dischargedAliveSupervision: '',
+                                dischargedAliveMinimumAssistance: '',
+                                dischargedAliveModerateAssistance: '',
+                                dischargedAliveMaximumAssistance: '',
+                                dischargedAliveDependent: '',
+                                })">
                             New Patient + 
                             </button>
                         </FieldArray>
@@ -285,10 +380,9 @@ export default defineComponent({
                 .of(
                 yup.object().shape({
                     diedBefore48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedBefore48hCause: yup
                         .string()
                         .required("Required.")
@@ -302,10 +396,9 @@ export default defineComponent({
                 .of(
                 yup.object().shape({
                     diedAfter48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedAfter48hCause: yup
                         .string()
                         .required("Required.")
@@ -322,6 +415,54 @@ export default defineComponent({
                         .string()
                         .required("Must choose an option.")
                         .default(""),
+
+                    dischargedAlivePatientNo: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
+                    dischargedAliveAllGoals: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveGoalsPartially: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveNoGoals: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    
+                    dischargedAliveIndependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveModifiedIndependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveSupervision: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveMinimumAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveModerateAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveMaximumAssistance: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveDependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
                 })
             )
             .strict(),
@@ -458,8 +599,6 @@ export default defineComponent({
             diedBefore48hMor: false,
             diedAfter48hMor: false,
             dischargedAliveMor: false,
-            options: ["SCI", "Stroke", "Other"],
-            init: "",
             dataSchema,
         };
     },
