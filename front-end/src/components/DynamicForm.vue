@@ -68,7 +68,8 @@ export default defineComponent({
       let token = JSON.parse(localStorage.getItem('user')!);
       if(token != null) {
         entry.department = this.department;
-        this.$axios.post("/api/datainput", entry, {
+        let d = [JSON.stringify(entry), "{}"];
+        this.$axios.post("/api/datainput", d, {
           headers: {
             'Authorization': `Bearer ${token.jwt}`
           }

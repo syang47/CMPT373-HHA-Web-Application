@@ -32,6 +32,11 @@ public class Department {
     @JsonIgnore
     private Set<MessageBoard> messages;
 
+    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY,
+            cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Set<MSPPRequirement> msppRequirements;
+
     /*
     for if one user can belong to many departments
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
@@ -94,5 +99,13 @@ public class Department {
 
     public void setMessages(Set<MessageBoard> messages) {
         this.messages = messages;
+    }
+
+    public Set<MSPPRequirement> getMsppRequirements() {
+        return msppRequirements;
+    }
+
+    public void setMsppRequirements(Set<MSPPRequirement> msppRequirements) {
+        this.msppRequirements = msppRequirements;
     }
 }

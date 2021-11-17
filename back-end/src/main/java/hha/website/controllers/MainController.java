@@ -26,6 +26,7 @@ import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
 import javax.servlet.http.HttpServletRequest;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -55,9 +56,6 @@ public class MainController {
 
     @Autowired
     private MSPPRepositoryService msppRepositoryService;
-
-    @Autowired
-    private AdditionalMSPPRepositoryService additionalMSPPRepositoryService;
 
     @Autowired
     private CaseStudyService caseStudyService;
@@ -120,9 +118,13 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody MSPPRequirementDTO data) {
+    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        return ResponseEntity.ok(msppRepositoryService.save(user, data));
+        try{
+            return ResponseEntity.ok(msppRepositoryService.save(user, MSPPDataJson[0], MSPPDataJson[1]));
+        } catch (IOException e){
+            return new ResponseEntity<>("Failed to save data", HttpStatus.SERVICE_UNAVAILABLE);
+        }
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
@@ -156,20 +158,18 @@ public class MainController {
     @GetMapping("/api/mspp/{documentId}")
     public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
         MSPPRequirement requiredData = msppRepositoryService.getAForm(documentId);
-        AdditionalMSPP additionalData = additionalMSPPRepositoryService.getAdditionalData(requiredData);
-
-        HashMap<String, Object> result = new HashMap<>();
-        result.put("main required data: ", requiredData);
-        result.put("additional data: ", additionalData);
-        return ResponseEntity.ok(result);
+        return ResponseEntity.ok(requiredData);
     }
 
     @GetMapping("/api/mspp/data/{date}/{id}")
     public ResponseEntity<?> getMsppByFirstname(@PathVariable("id") String id, @PathVariable("date") String date) throws ParseException {
-        LocalDate parsedDate = LocalDate.parse(date);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date d = format.parse(date);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(d);
         int finalId = Integer.parseInt(id);
-        System.out.println(parsedDate);
-        return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, parsedDate));
+        System.out.println(cal);
+        return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, cal));
     }
 
     @CrossOrigin
