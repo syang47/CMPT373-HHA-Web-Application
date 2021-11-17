@@ -180,6 +180,9 @@ export default defineComponent({
                     rules: r,
                     children: [
                         {
+                            header: 'wherePatientsComeFrom'
+                        },
+                        {
                             label: 'fromQuarterMorin',
                             name: 'fromQuarterMorin',
                             as: 'input',
@@ -202,6 +205,9 @@ export default defineComponent({
                             name: 'fromOther',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'ageOfInfant'
                         },
                         {
                             label: 'admissionsExtremelyPreterm',
@@ -252,6 +258,9 @@ export default defineComponent({
                             rules: a
                         },
                         {
+                            header: 'gender'
+                        },
+                        {
                             label: 'admissionsMale',
                             name: 'admissionsMale',
                             as: 'input',
@@ -262,6 +271,9 @@ export default defineComponent({
                             name: 'admissionsFemale',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'mainCond'
                         },
                         {
                             label: 'admissionsRespiratoryArrest',
@@ -379,11 +391,15 @@ export default defineComponent({
                         },
                     ]
                 },
+                
                 {
                     label: 'numberOfOutpatients',
                     name: 'numberOfOutpatients',
                     as: 'input',
                     children: [
+                        {
+                            header: 'age'
+                        },
                         {
                             label: 'numberOfOutpatientsExtremelyPreterm',
                             name: 'numberOfOutpatientsExtremelyPreterm',
@@ -431,6 +447,9 @@ export default defineComponent({
                             name: 'numberOfOutpatientsAge12To18',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'mainCond'
                         },
                         {
                             label: 'numberOfOutpatientsRespiratoryArrest',
@@ -545,6 +564,9 @@ export default defineComponent({
                             name: 'numberOfOutpatientsOtherMedical',
                             as: 'input',
                             rules: yup.string()
+                        },
+                        {
+                            header: 'gender'
                         },
                         {
                             label: 'admissionsMale',

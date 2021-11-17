@@ -1,30 +1,29 @@
 <template>
   <Form class="background" @submit="handleData" >
     <div class="signup-form"
-      v-for="{ as, name, label, children, ...attrs } in schema.fields"
+      v-for="{ as, name, label, header, children, ...attrs } in schema.fields"
       :key="name"
     >
       <div class="form-group">
-        <label :for="name">{{ $t('msppData.'+ label) }}</label>
-        <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
-        <ErrorMessage :name="name" class="error-feedback" />
-        <template v-if="children && children.length && s[name] > 0">
-          <!-- <component v-for="({ tag, text, ...childAttrs }, idx) in children"
-            :key="idx"
-            :is="tag"
-            v-bind="childAttrs"
-          >
-            {{ text }}
-          </component> -->
-          <div class="signup-form"
-            v-for="{ as, name, label, ...attrs } in children"
-            :key="name"
-          >
-            <label style="color:green" :for="name">{{ $t('msppData.'+ label) }}</label>
-            <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
-            <ErrorMessage :name="name" class="error-feedback" />
-          </div>
-        </template>
+        <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
+        <div v-else>
+          <label :for="name">{{ $t('msppData.'+ label) }}</label>
+          <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
+          <ErrorMessage :name="name" class="error-feedback" />
+          <template v-if="children && children.length && s[name] > 0">
+            <div class="signup-form"
+              v-for="{ as, name, label, header, ...attrs } in children"
+              :key="name"
+            >
+              <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
+              <div v-else>
+                <label style="color:green" :for="name">{{ $t('msppData.'+ label) }}</label>
+                <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
+                <ErrorMessage :name="name" class="error-feedback" />
+              </div>
+            </div>
+          </template>
+        </div>
       </div>
     </div>
     <div class="form-group">
