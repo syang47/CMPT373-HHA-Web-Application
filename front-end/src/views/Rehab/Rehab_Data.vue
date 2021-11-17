@@ -47,6 +47,7 @@
                             >
                             <legend style="color:green"><strong>Patient {{ idx+1 }} Discharged Diagnosis: </strong></legend>
 
+
                             <!-- Radio buttons -->
                             <div>
                                 <div class="form-check">
@@ -66,6 +67,7 @@
                                 <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" class="error-feedback" />
                             </div>
 
+
                             <!-- Input boxed list -->
                             <div>
                                 <legend :for="`dischargedAlivePatientNo_${idx}`" style="color:green"><strong>Patient {{ idx+1 }}: No. Days in Rehab Unit from admission to discharge: </strong></legend>
@@ -75,6 +77,7 @@
                                     :id="`dischargedAlivePatientNo_${idx}`" 
                                     :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" />
                                 <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" class="error-feedback" />
+
 
                                 <br>
                                 <label style="color:green"><strong>Discharge Reason</strong></label>
@@ -99,6 +102,7 @@
                                     type="number"
                                     :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" />
                                 <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" class="error-feedback" />
+
 
                                 <br>
                                 <label style="color:green"><strong>Discharge Outcome (ADLs/Self-Care)</strong></label>
@@ -152,6 +156,7 @@
                                     :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" />
                                 <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" class="error-feedback" />
 
+
                                 <br>
                                 <label style="color:green"><strong>Discharge Outcome (Transfers and Mobility)</strong></label>
                                 <br>
@@ -203,6 +208,95 @@
                                     type="number"
                                     :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" />
                                 <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" class="error-feedback" />
+
+
+                                <br>
+                                <label style="color:green"><strong>Mobility Aid/Assistive Device Given?</strong></label>
+                                <br>
+                                <label :for="`dischargedAliveWheelchair_${idx}`">Wheelchair</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveWheelchair_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveWheelchair`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveWheelchair`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveWalker_${idx}`">Walker</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveWalker_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveWalker`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveWalker`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveCane_${idx}`">Cane</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveCane_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveCane`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveCane`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveCrutches_${idx}`">Crutches</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveCrutches_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveCrutches`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveCrutches`" class="error-feedback" />
+
+
+                                <br>
+                                <label style="color:green"><strong>Discharge Location</strong></label>
+                                <br>
+                                <label :for="`dischargedAliveHomeAlone_${idx}`">Return home, alone</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveHomeAlone_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeAlone`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeAlone`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveHomeWithOther_${idx}`">Return home, with family/caregiver(s)</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveHomeWithOther_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeWithOther`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeWithOther`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveHospital_${idx}`">Admitted to hospital</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveHospital_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveHospital`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHospital`" class="error-feedback" />
+
+
+                                <br>
+                                <label style="color:green"><strong>Discharge Employment Status</strong></label>
+                                <br>
+                                <label :for="`dischargedAliveEmployed_${idx}`">Employed</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveEmployed_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveEmployed`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveEmployed`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveUnableToFindWork_${idx}`">Unemployed, unable to find work</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveUnableToFindWork_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveUnableToFindWork`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveUnableToFindWork`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveDueToCondition_${idx}`">Unemployed, due to condition</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveDueToCondition_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveDueToCondition`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveDueToCondition`" class="error-feedback" />
+                                <br>
+                                <label :for="`dischargedAliveRetired_${idx}`">Retired, not working due to age</label>
+                                <Field class="form-control"
+                                    :id="`dischargedAliveRetired_${idx}`"
+                                    type="number"
+                                    :name="`dischargedAlivePatient[${idx}].dischargedAliveRetired`" />
+                                <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveRetired`" class="error-feedback" />
                             </div>
 
                             
@@ -212,10 +306,13 @@
 
                             <button class="btn btn-outline-light btn-block" type="button" @click="push({ 
                                 dischargedAliveOption: '',
+
                                 dischargedAlivePatientNo: '',
+
                                 dischargedAliveAllGoals: '',
                                 dischargedAliveGoalsPartially: '',
                                 dischargedAliveNoGoals: '',
+
                                 dischargedAliveADLsIndependent: '',
                                 dischargedAliveADLsModifiedIndependent: '',
                                 dischargedAliveADLsSupervision: '',
@@ -223,6 +320,7 @@
                                 dischargedAliveADLsModerateAssistance: '',
                                 dischargedAliveADLsMaximumAssistance: '',
                                 dischargedAliveADLsDependent: '',
+
                                 dischargedAliveTransfersIndependent: '',
                                 dischargedAliveTransfersModifiedIndependent: '',
                                 dischargedAliveTransfersSupervision: '',
@@ -230,6 +328,20 @@
                                 dischargedAliveTransfersModerateAssistance: '',
                                 dischargedAliveTransfersMaximumAssistance: '',
                                 dischargedAliveTransfersDependent: '',
+
+                                dischargedAliveWheelchair: '',
+                                dischargedAliveWalker: '',
+                                dischargedAliveCane: '',
+                                dischargedAliveCrutches: '',
+
+                                dischargedAliveHomeAlone: '',
+                                dischargedAliveHomeWithOther: '',
+                                dischargedAliveHospital: '',
+
+                                dischargedAliveEmployed: '',
+                                dischargedAliveUnableToFindWork: '',
+                                dischargedAliveDueToCondition: '',
+                                dischargedAliveRetired: '',
                                 })">
                             New Patient + 
                             </button>
@@ -550,6 +662,53 @@ export default defineComponent({
                         .required("Required.")
                         .default("0"),
                     dischargedAliveTransfersDependent: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
+                    dischargedAliveWheelchair: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveWalker: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveCane: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveCrutches: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
+                    dischargedAliveHomeAlone: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveHomeWithOther: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveHospital: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+
+                    dischargedAliveEmployed: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveUnableToFindWork: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveDueToCondition: yup
+                        .string()
+                        .required("Required.")
+                        .default("0"),
+                    dischargedAliveRetired: yup
                         .string()
                         .required("Required.")
                         .default("0"),
