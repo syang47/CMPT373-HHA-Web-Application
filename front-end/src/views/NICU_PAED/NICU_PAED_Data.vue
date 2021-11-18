@@ -1,8 +1,5 @@
 <template>
-    <div>
-        <h2 class="font-weight-bold display-5 text-dark">{{ $t('msppData.nicupaedForm') }}</h2>
-        <DynamicForm :schema="formSchema" :department="department"/>
-    </div>
+    <DynamicForm :schema="formSchema" :department="department" :formTitle="formTitle"/>
 </template>
 
 <script lang="ts" type="text/typescript">
@@ -587,6 +584,7 @@ export default defineComponent({
         return {
             formSchema,
             department: "NICU_PAED",
+            formTitle: 'msppData.nicupaedForm'
         };
     },
 });

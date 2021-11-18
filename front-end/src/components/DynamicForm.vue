@@ -1,34 +1,41 @@
 <template>
+
   <Form class="background" @submit="handleData" v-slot="{ validate }" >
-    <div class="signup-form"
-      v-for="field in schema.fields"
-      :key="field"
-    >
-      <div class="form-group">
-        <!-- HEADER -->
-        <h4 v-if="field.header" style="color:green">{{ $t('msppData.'+ field.header) }}</h4>
-        <!-- REGULAR INPUTS -->
-        <div v-else>
-          <RegularInput :field="field" v-model="s[field.name]"/>
-        </div>
-        <template v-if="field.children && field.children.length && s[field.name] > 0">
-          <div class="signup-form"
-            v-for="cField in field.children"
-            :key="cField"
-          >
-            <h4 v-if="cField.header" style="color:green">{{ $t('msppData.'+ cField.header) }}</h4>
-            <div v-else>
-              <RegularInput :c="cColor" :field="cField" v-model="s[cField.name]" />
-            </div>
+    <div class="signup-form">
+      <h2 class="font-weight-bold display-5 text-light">{{ $t(formTitle) }}</h2>
+      <div
+        v-for="field in schema.fields"
+        :key="field"
+      >
+        <div class="form-group">
+          <!-- HEADER -->
+          <h4 v-if="field.header" style="color:green">{{ $t('msppData.'+ field.header) }}</h4>
+          <!-- REGULAR INPUTS -->
+          <div v-else-if="field.table">
+            
           </div>
-        </template>
+          <div v-else>
+            <RegularInput :field="field" v-model="s[field.name]"/>
+          </div>
+          <template v-if="field.children && field.children.length && s[field.name] > 0">
+            <div class="signup-form"
+              v-for="cField in field.children"
+              :key="cField"
+            >
+              <h4 v-if="cField.header" style="color:green">{{ $t('msppData.'+ cField.header) }}</h4>
+              <div v-else>
+                <RegularInput :c="cColor" :field="cField" v-model="s[cField.name]" />
+              </div>
+            </div>
+          </template>
+        </div>
       </div>
-    </div>
-    <div class="form-group">
-      <button class="btn btn-outline-light btn-block" :disabled="loading" @click="validate">
-        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-        {{ $t('msppData.submit') }}
-      </button>
+      <div class="form-group">
+        <button class="btn btn-outline-light btn-block" :disabled="loading" @click="validate">
+          <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+          {{ $t('msppData.submit') }}
+        </button>
+      </div>
     </div>
   </Form>
 </template>
@@ -61,6 +68,10 @@ export default defineComponent({
       type: String,
       required: true,
     },
+    formTitle: {
+      type: String,
+      required: true
+    }
   },
   methods: {
     handleData(entry) {
