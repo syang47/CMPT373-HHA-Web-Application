@@ -609,9 +609,9 @@
                 <div>
                     <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
-                            <label for="admissions">{{ $t('msppData.admissions') }}</label>
-                            <Field name="admissions" type="text" class="form-control" id="admissions" v-on:keyup="checkAdmissions()" value=0 />
-                            <ErrorMessage name="admissions" class="error-feedback" />
+                        <label for="admissions">{{ $t('msppData.admissions') }}</label>
+                        <Field name="admissions" type="text" class="form-control" id="admissions" v-on:keyup="checkAdmissions()" value=0 />
+                        <ErrorMessage name="admissions" class="error-feedback" />
                     </div>
 
                     <div>
@@ -829,7 +829,185 @@
                             <ErrorMessage name="mainCoditionS5" class="error-feedback" />
                         </div>
                     </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:blue">Cause of SCI</h4>
+                            <label for="SCITransportAccident">Transport Accident</label>
+                            <Field name="SCITransportAccident" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCITransportAccident" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIFall">Fall</label>
+                            <Field name="SCIFall" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIFall" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAssault">Assault</label>
+                            <Field name="SCIAssault" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAssault" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCISports">Sports</label>
+                            <Field name="SCISports" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCISports" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCINonTraumaticSpinalCordDysfunction">Non-traumatic spinal cord dysfunction</label>
+                            <Field name="SCINonTraumaticSpinalCordDysfunction" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCINonTraumaticSpinalCordDysfunction" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIMedical">Medical/surgical complication</label>
+                            <Field name="SCIMedical" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIMedical" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIOtherTraumaticReason">Other traumatic reason</label>
+                            <Field name="SCIOtherTraumaticReason" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIOtherTraumaticReason" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:blue">Age</h4>
+                            <label for="SCIAge0_5">Age 0-5</label>
+                            <Field name="SCIAge0_5" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge0_5" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge6_11">Age 6-11</label>
+                            <Field name="SCIAge6_11" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge6_11" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge12_18">Age 12-18</label>
+                            <Field name="SCIAge12_18" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge12_18" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge18_30">Age 18-30</label>
+                            <Field name="SCIAge18_30" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge18_30" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge31_50">Age 31-50</label>
+                            <Field name="SCIAge31_50" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge31_50" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge51_70">Age 51-70</label>
+                            <Field name="SCIAge51_70" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge51_70" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIAge70">Age 70+</label>
+                            <Field name="SCIAge70" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIAge70" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:blue">Gender</h4>
+                            <label for="SCIMale">Male</label>
+                            <Field name="SCIMale" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIMale" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="SCIFemale">Female</label>
+                            <Field name="SCIFemale" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="SCIFemale" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:green">Main Condition - Cont.</h4>
+                            <label for="mainCoditionStroke">Stroke/ CVA</label>
+                            <Field name="mainCoditionStroke" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionStroke" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionFracturedHip">Fractured hip</label>
+                            <Field name="mainCoditionFracturedHip" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionFracturedHip" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionFracturedLongBones">Fractured long bones</label>
+                            <Field name="mainCoditionFracturedLongBones" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionFracturedLongBones" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionNeurodegenerativeDisease">Neurodegenerative Disease</label>
+                            <Field name="mainCoditionNeurodegenerativeDisease" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionNeurodegenerativeDisease" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionHeadInjury">Head injury</label>
+                            <Field name="mainCoditionHeadInjury" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionHeadInjury" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionWoundCare">Wound Care</label>
+                            <Field name="mainCoditionWoundCare" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionWoundCare" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionOtherMedical">Other medical</label>
+                            <Field name="mainCoditionOtherMedical" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionOtherMedical" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionOtherTrauma">Other trauma</label>
+                            <Field name="mainCoditionOtherTrauma" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionOtherTrauma" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:green">Time from Injury until Admitted to Rehab</h4>
+                            <label for="timeLessThan1m">Less than 1 month</label>
+                            <Field name="timeLessThan1m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="timeLessThan1m" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="time1_2m">1-2 months</label>
+                            <Field name="time1_2m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="time1_2m" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="time3m">3 months</label>
+                            <Field name="time3m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="time3m" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="time6m">6 months </label>
+                            <Field name="time6m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="time6m" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="time1y">1 year</label>
+                            <Field name="time1y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="time1y" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="time2y">2 years</label>
+                            <Field name="time2y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="time2y" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="timeMoreThan3y">3+ years</label>
+                            <Field name="timeMoreThan3y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="timeMoreThan3y" class="error-feedback" />
+                        </div>
+                    </div>
+
                 </div>
+
+                
 
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
@@ -1389,6 +1567,164 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            SCITransportAccident: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIFall: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAssault: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCISports: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCINonTraumaticSpinalCordDysfunction: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIMedical: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIOtherTraumaticReason: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge0_5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge6_11: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge12_18: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge18_30: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge31_50: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge51_70: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIAge70: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIMale: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            SCIFemale: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionStroke: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionFracturedHip: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionFracturedLongBones: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionNeurodegenerativeDisease: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionHeadInjury: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionWoundCare: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionOtherMedical: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionOtherTrauma: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            timeLessThan1m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            time1_2m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            time3m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            time6m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            time1y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            time2y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            timeMoreThan3y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            
+            
+            
             
         });
         return {
