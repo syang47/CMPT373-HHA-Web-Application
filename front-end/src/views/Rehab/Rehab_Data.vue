@@ -1007,7 +1007,147 @@
 
                 </div>
 
-                
+                <div>
+                     <!-- Todo: this additional form need to be translated -->
+                    <div class="form-group">
+                        <label for="numberOfOutpatients">Number of outpatients</label>
+                        <Field name="numberOfOutpatients" type="text" class="form-control" value=0 id="numberOfOutpatients" v-on:keyup="checkNumberOfOutpatients()"/>
+                        <ErrorMessage name="numberOfOutpatients" class="error-feedback" />
+                    </div>
+
+                    <div>
+                        <div v-if="numberOfOutpatientsMor" class="form-group">
+                            <label for="returningOutpatients">Returning outpatients</label>
+                            <Field name="returningOutpatients" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="returningOutpatients" class="error-feedback" />
+                        </div>
+
+                        <div>
+                            <div v-if="numberOfOutpatientsMor" class="form-group">
+                                <label for="newOutpatient">New outpatient initial evaluations</label>
+                                <Field name="newOutpatient" type="text" class="form-control" value=0 id="newOutpatient" v-on:keyup="checkNewOutpatient()"/>
+                                <ErrorMessage name="newOutpatient" class="error-feedback" />
+                            </div>
+
+                            <div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <h4 style="color:green">Main Condition of New Patients</h4>
+                                    <label for="newSCIParaplegia">SCI - paraplegia</label>
+                                    <Field name="newSCIParaplegia" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newSCIParaplegia" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newSCITetraplegia">SCI - tetraplegia</label>
+                                    <Field name="newSCITetraplegia" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newSCITetraplegia" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newStroke">Stroke/ CVA</label>
+                                    <Field name="newStroke" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newStroke" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newFracturedHip">Fractured hip</label>
+                                    <Field name="newFracturedHip" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newFracturedHip" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newFracturedLongBones">Fractured long bones</label>
+                                    <Field name="newFracturedLongBones" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newFracturedLongBones" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newNeurodegenerativeDisease">Neurodegenerative Disease</label>
+                                    <Field name="newNeurodegenerativeDisease" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newNeurodegenerativeDisease" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newHeadInjury">Head injury</label>
+                                    <Field name="newHeadInjury" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newHeadInjury" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newWoundCare">Wound Care</label>
+                                    <Field name="newWoundCare" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newWoundCare" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newCerebralPalsy">Cerebral Palsy</label>
+                                    <Field name="newCerebralPalsy" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newCerebralPalsy" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newDownSyndromel">Down Syndrome</label>
+                                    <Field name="newDownSyndromel" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newDownSyndromel" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newOther">Other</label>
+                                    <Field name="newOther" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newOther" class="error-feedback" />
+                                </div>
+                            </div>
+                            
+                            <div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <h4 style="color:green">Age of New patients</h4>
+                                    <label for="newAge0_5">Age 0-5</label>
+                                    <Field name="newAge0_5" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge0_5" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge6_11">Age 6-11</label>
+                                    <Field name="newAge6_11" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge6_11" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge12_18">Age 12-18</label>
+                                    <Field name="newAge12_18" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge12_18" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge18_30">Age 18-30</label>
+                                    <Field name="newAge18_30" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge18_30" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge31_50">Age 31-50</label>
+                                    <Field name="newAge31_50" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge31_50" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge51_70">Age 51-70</label>
+                                    <Field name="newAge51_70" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge51_70" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newAge70">Age 70+</label>
+                                    <Field name="newAge70" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newAge70" class="error-feedback" />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <h4 style="color:green">Gender of New patients</h4>
+                                    <label for="newMale">Male</label>
+                                    <Field name="newMale" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newMale" class="error-feedback" />
+                                </div>
+                                <div v-if="newOutpatientMor" class="form-group">
+                                    <label for="newFemale">Female</label>
+                                    <Field name="newFemale" type="text" class="form-control" value=0 />
+                                    <ErrorMessage name="newFemale" class="error-feedback" />
+                                </div>
+                            </div>
+
+                            
+                        </div>
+                        
+                    </div>
+                        
+
+                </div>
 
                 <div class="form-group">
                     <button class="btn btn-outline-light btn-block" :disabled="loading">
@@ -1030,7 +1170,7 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage, FieldArray } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
-    name: "Maternity_Data",
+    name: "Rehab_Data",
     components: {
         Form,
         Field,
@@ -1722,10 +1862,123 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
-            
-            
-            
-            
+
+            numberOfOutpatients: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            returningOutpatients: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newOutpatient: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newSCIParaplegia: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newSCITetraplegia: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newStroke: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newFracturedHip: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newFracturedLongBones: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newNeurodegenerativeDisease: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newHeadInjury: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newWoundCare: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newCerebralPalsy: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newDownSyndromel: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newOther: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge0_5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge6_11: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge12_18: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge18_30: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge31_50: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge51_70: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newAge70: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newMale: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            newFemale: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+  
         });
         return {
             successful: false,
@@ -1737,6 +1990,8 @@ export default defineComponent({
             diedAfter48hMor: false,
             dischargedAliveMor: false,
             stayedInTheWardMor: false,
+            numberOfOutpatientsMor: false,
+            newOutpatientMor: false,
             dataSchema,
         };
     },
@@ -1787,6 +2042,22 @@ export default defineComponent({
                 this.admissionsMor = true;
             } else {
                 this.admissionsMor = false;
+            }
+        },
+        checkNumberOfOutpatients() {
+            let number: number = (document as any).getElementById("numberOfOutpatients").value;
+            if (number > 0) {
+                this.numberOfOutpatientsMor = true;
+            } else {
+                this.numberOfOutpatientsMor = false;
+            }
+        },
+        checkNewOutpatient() {
+            let number: number = (document as any).getElementById("newOutpatient").value;
+            if (number > 0) {
+                this.newOutpatientMor = true;
+            } else {
+                this.newOutpatientMor = false;
             }
         },
         handleData(entry) {
