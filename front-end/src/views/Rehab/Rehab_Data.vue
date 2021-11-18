@@ -6,13 +6,12 @@
                 <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
             </div>
             <div v-if="!successful">
-
                 <div class="form-group">
                     <label for="bedAvailable">{{ $t('msppData.bedsAvailable') }}</label>
                     <Field name="bedAvailable" type="text" class="form-control" value=0 />
                     <ErrorMessage name="bedAvailable" class="error-feedback" />
                 </div>
-
+                
                 <div class="form-group">
                     <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
                     <Field name="bedDays" type="text" class="form-control" value=0 />
@@ -364,23 +363,53 @@
                                 v-for="(field, idx) in fields"
                                 :key="field.key"
                             >
-                            <legend style="color:green">Patient {{ idx+1 }}</legend>
-                            <label :for="`diedBefore48hAge_${idx}`">Age</label>
-                            <Field class="form-control"
-                                   :id="`diedBefore48hAge_${idx}`" 
-                                   :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
-                            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+                            <legend style="color:green"><strong> Patient {{ idx+1 }}: </strong></legend>
 
-                            <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
-                            <Field class="form-control"
-                                   :id="`diedBefore48hCause_${idx}`"
-                                   :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
-                            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+                            <!-- Radio buttons -->
+                            <div>
+                                <legend>Patient {{ idx+1 }} Diagnosis: </legend>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option1" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="SCI"></Field>
+                                    <label class="form-check-label" for="option1"> SCI</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option2" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="CVA"></Field>
+                                    <label class="form-check-label" for="option2"> CVA</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option3" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="Other"></Field>
+                                    <label class="form-check-label" for="option3"> Other</label>
+                                </div>
+                                <br>
+                                <br>
+                                <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" class="error-feedback" />
+                            </div>
+
+                            <!-- Input boxed list -->
+                            <div>
+                                <br>
+                                <label :for="`diedBefore48hAge_${idx}`">Age</label>
+                                <Field class="form-control"
+                                    :id="`diedBefore48hAge_${idx}`" 
+                                    type="numbere"
+                                    :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
+                                <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+                                <br>
+                                <legend :for="`diedBefore48hCause_${idx}`">Patient {{ idx+1 }} Cause of Death</legend>
+                                <Field class="form-control"
+                                    :id="`diedBefore48hCause_${idx}`"
+                                    :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
+                                <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+                            </div>
 
                             <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
                             </fieldset>
 
-                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ 
+                                diedBefore48hOption: '', 
+                                diedBefore48hAge: '', 
+                                diedBefore48hCause: '', 
+                                })">
                             New Patient + 
                             </button>
                         </FieldArray>
@@ -402,23 +431,51 @@
                                 v-for="(field, idx) in fields"
                                 :key="field.key"
                             >
-                            <legend style="color:green">Patient {{ idx+1 }}</legend>
-                            <label :for="`diedAfter48hAge_${idx}`">Age</label>
-                            <Field class="form-control"
-                                   :id="`diedAfter48hAge_${idx}`" 
-                                   :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
-                            <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
+                            <!-- Radio buttons -->
+                            <div>
+                                <legend>Patient {{ idx+1 }} Diagnosis: </legend>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option1" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="SCI"></Field>
+                                    <label class="form-check-label" for="option1"> SCI</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option2" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="CVA"></Field>
+                                    <label class="form-check-label" for="option2"> CVA</label>
+                                </div>
+                                <div class="form-check">
+                                    <Field class="form-check-input" id="option3" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="Other"></Field>
+                                    <label class="form-check-label" for="option3"> Other</label>
+                                </div>
+                                <br>
+                                <br>
+                                <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" class="error-feedback" />
+                            </div>
 
-                            <label :for="`diedAfter48hCause_${idx}`">Cause of Death</label>
-                            <Field class="form-control"
-                                   :id="`diedAfter48hCause_${idx}`"
-                                   :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" />
-                            <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" class="error-feedback" />
+                            <!-- Input boxed list -->
+                            <div>
+                                <br>
+                                <label :for="`diedAfter48hAge_${idx}`">Age</label>
+                                <Field class="form-control"
+                                    :id="`diedAfter48hAge_${idx}`" 
+                                    type="numbere"
+                                    :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
+                                <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
+                                <br>
+                                <legend :for="`diedAfter48hCause_${idx}`">Patient {{ idx+1 }} Cause of Death</legend>
+                                <Field class="form-control"
+                                    :id="`diedAfter48hCause_${idx}`"
+                                    :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" />
+                                <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hCause`" class="error-feedback" />
+                            </div>
 
                             <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
                             </fieldset>
 
-                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
+                            <button class="btn btn-outline-light btn-block" type="button" @click="push({ 
+                                diedAfter48hOption: '', 
+                                diedAfter48hAge: '', 
+                                diedAfter48hCause: '', 
+                                })">
                             New Patient + 
                             </button>
                         </FieldArray>
@@ -443,7 +500,6 @@
                     <Field name="transfers" type="text" class="form-control" value=0 />
                     <ErrorMessage name="transfers" class="error-feedback" />
                 </div>
-
 
 
                 <div>
@@ -480,11 +536,68 @@
                     </div>
                 </div>
 
-                
-                <div class="form-group">
-                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
-                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="stayedInTheWard" class="error-feedback" />
+                <div>
+                     <!-- Todo: this additional form need to be translated -->
+                    <div class="form-group">
+                        <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
+                        <Field name="stayedInTheWard" type="text" class="form-control" value=0 id="stayedInTheWard" v-on:keyup="checkStayedInTheWard()"/>
+                        <ErrorMessage name="stayedInTheWard" class="error-feedback" />
+                    </div>
+
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <h4 style="color:green">Reason Not Yet Discharged </h4>
+                        <label for="reasonNotReady">Not ready from therapy standpoint</label>
+                        <Field name="reasonNotReady" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="reasonNotReady" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="reasonWoundCare">Wound Care</label>
+                        <Field name="reasonWoundCare" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="reasonWoundCare" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="otherMedicalReason">Other medical reason (such as IV medication)</label>
+                        <Field name="otherMedicalReason" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="otherMedicalReason" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="reasonFinancial">Financial/no place to discharge to</label>
+                        <Field name="reasonFinancial" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="reasonFinancial" class="error-feedback" />
+                    </div>
+
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <h4 style="color:green">Length of Stay of Current Inpatients </h4>
+                        <label for="length1_3m">1-3 months</label>
+                        <Field name="length1_3m" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length1_3m" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="length3_6m">3-6 months</label>
+                        <Field name="length3_6m" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length3_6m" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="length6m_1y">6 months - 1 year</label>
+                        <Field name="length6m_1y" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length6m_1y" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="length1_2y">1-2 years</label>
+                        <Field name="length1_2y" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length1_2y" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="length2_3y">2-3 years</label>
+                        <Field name="length2_3y" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length2_3y" class="error-feedback" />
+                    </div>
+                    <div v-if="stayedInTheWardMor" class="form-group">
+                        <label for="length3_y">3+ years</label>
+                        <Field name="length3_y" type="text" class="form-control" value=0 />
+                        <ErrorMessage name="length3_y" class="error-feedback" />
+                    </div>
+
                 </div>
 
 
@@ -553,6 +666,10 @@ export default defineComponent({
                 .array()
                 .of(
                 yup.object().shape({
+                    diedBefore48hOption: yup
+                        .string()
+                        .required("Must choose an option.")
+                        .default(""),
                     diedBefore48hAge: yup
                         .string()
                         .required("Required.")
@@ -569,6 +686,10 @@ export default defineComponent({
                 .array()
                 .of(
                 yup.object().shape({
+                    diedAfter48hOption: yup
+                        .string()
+                        .required("Must choose an option.")
+                        .default(""),
                     diedAfter48hAge: yup
                         .string()
                         .required("Required.")
@@ -814,6 +935,57 @@ export default defineComponent({
                 .min(0, "Cannot be negative.")
                 .required("Required.")
                 .default(0),
+            reasonNotReady: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            reasonWoundCare: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            otherMedicalReason: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            reasonFinancial: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length1_3m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length3_6m: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length6m_1y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length1_2y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length2_3y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            length3_y: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+
 
             admissions: yup
                 .number()
@@ -849,13 +1021,11 @@ export default defineComponent({
             diedBefore48hMor: false,
             diedAfter48hMor: false,
             dischargedAliveMor: false,
+            stayedInTheWardMor: false,
             dataSchema,
         };
     },
     methods: {
-        checkOption (value) {
-            console.log(value);
-        },
         checkDischargedAlive() {
             let number: number = (document as any).getElementById("dischargedAlive").value;
             if (number > 0) {
@@ -886,6 +1056,14 @@ export default defineComponent({
                 this.selfDischargedMor = true;
             } else {
                 this.selfDischargedMor = false;
+            }
+        },
+        checkStayedInTheWard() {
+            let number: number = (document as any).getElementById("stayedInTheWard").value;
+            if (number > 0) {
+                this.stayedInTheWardMor = true;
+            } else {
+                this.stayedInTheWardMor = false;
             }
         },
         checkAdmissions() {
