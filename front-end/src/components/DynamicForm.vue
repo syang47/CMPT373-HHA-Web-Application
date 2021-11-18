@@ -9,11 +9,27 @@
       >
         <div class="form-group">
           <!-- HEADER -->
-          <h4 v-if="field.header" style="color:green">{{ $t('msppData.'+ field.header) }}</h4>
-          <!-- REGULAR INPUTS -->
-          <div v-else-if="field.table">
-            
+          <h4 v-if="field.header" style="color:red; text-align:center">{{ $t('msppData.'+ field.header) }}</h4>
+          <div v-else-if="field.th">
+            <table>
+              <thead>
+                <tr>
+                  <th v-for="(column, index) in field.th" :key="index"> {{ $t('msppData.'+ column) }} </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="(column, colIndex) in field.rows" :key="colIndex">
+                  <td v-for="(data, i) in column" :key="i">
+                    <div v-if="data.rowName"> {{ $t('msppData.' + data.rowName) }}</div>
+                    <div v-else>
+                      <RegularInput :field="data" />
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
+          <!-- REGULAR INPUTS -->
           <div v-else>
             <RegularInput :field="field" v-model="s[field.name]"/>
           </div>
@@ -22,7 +38,7 @@
               v-for="cField in field.children"
               :key="cField"
             >
-              <h4 v-if="cField.header" style="color:green">{{ $t('msppData.'+ cField.header) }}</h4>
+              <h4 v-if="cField.header" style="color:green; text-align:center">{{ $t('msppData.'+ cField.header) }}</h4>
               <div v-else>
                 <RegularInput :c="cColor" :field="cField" v-model="s[cField.name]" />
               </div>
@@ -55,8 +71,8 @@ export default defineComponent({
       successful: false,
       loading: false,
       message: "",
-      s: this.schema,
-      cColor: "color:green"
+      s: this.schema.fields,
+      cColor: "color:green",
     }
   },
   props: {
@@ -151,4 +167,8 @@ export default defineComponent({
     .signup-form .form-group{
         margin-bottom: 20px;
     }
+    table, th, td {
+      border:1px solid black;
+    }
+
 </style>
