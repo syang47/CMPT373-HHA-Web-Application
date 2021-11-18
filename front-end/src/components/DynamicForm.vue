@@ -1,29 +1,27 @@
 <template>
   <Form class="background" @submit="handleData" v-slot="{ validate }" >
     <div class="signup-form"
-      v-for="{ as, name, label, header, children, ...attrs } in schema.fields"
-      :key="name"
+      v-for="field in schema.fields"
+      :key="field"
     >
       <div class="form-group">
-        <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
+        <!-- HEADER -->
+        <h4 v-if="field.header" style="color:green">{{ $t('msppData.'+ field.header) }}</h4>
+        <!-- REGULAR INPUTS -->
         <div v-else>
-          <label :for="name">{{ $t('msppData.'+ label) }}</label>
-          <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
-          <ErrorMessage :name="name" class="error-feedback" />
-          <template v-if="children && children.length && s[name] > 0">
-            <div class="signup-form"
-              v-for="{ as, name, label, header, ...attrs } in children"
-              :key="name"
-            >
-              <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
-              <div v-else>
-                <label style="color:green" :for="name">{{ $t('msppData.'+ label) }}</label>
-                <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
-                <ErrorMessage :name="name" class="error-feedback" />
-              </div>
-            </div>
-          </template>
+          <RegularInput :field="field" v-model="s[field.name]"/>
         </div>
+        <template v-if="field.children && field.children.length && s[field.name] > 0">
+          <div class="signup-form"
+            v-for="cField in field.children"
+            :key="cField"
+          >
+            <h4 v-if="cField.header" style="color:green">{{ $t('msppData.'+ cField.header) }}</h4>
+            <div v-else>
+              <RegularInput :c="cColor" :field="cField" v-model="s[cField.name]" />
+            </div>
+          </div>
+        </template>
       </div>
     </div>
     <div class="form-group">
@@ -37,20 +35,21 @@
 
 <script lang="ts" type="text/typescript">
 import { Form, Field, ErrorMessage } from 'vee-validate';
+import RegularInput from './RegularInput.vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'DynamicForm',
   components: {
     Form,
-    Field,
-    ErrorMessage
+    RegularInput
   },
   data() {
     return {
       successful: false,
       loading: false,
       message: "",
-      s: this.schema.fields
+      s: this.schema,
+      cColor: "color:green"
     }
   },
   props: {
