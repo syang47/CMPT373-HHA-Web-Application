@@ -503,6 +503,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
                         <Field name="selfDischarged" type="text" class="form-control" id="selfDischarged" v-on:keyup="checkSelfDischarged()" value=0 />
@@ -544,69 +545,75 @@
                         <ErrorMessage name="stayedInTheWard" class="error-feedback" />
                     </div>
 
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <h4 style="color:green">Reason Not Yet Discharged </h4>
-                        <label for="reasonNotReady">Not ready from therapy standpoint</label>
-                        <Field name="reasonNotReady" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="reasonNotReady" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="reasonWoundCare">Wound Care</label>
-                        <Field name="reasonWoundCare" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="reasonWoundCare" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="otherMedicalReason">Other medical reason (such as IV medication)</label>
-                        <Field name="otherMedicalReason" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="otherMedicalReason" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="reasonFinancial">Financial/no place to discharge to</label>
-                        <Field name="reasonFinancial" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="reasonFinancial" class="error-feedback" />
+                    <div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <h4 style="color:green">Reason Not Yet Discharged </h4>
+                            <label for="reasonNotReady">Not ready from therapy standpoint</label>
+                            <Field name="reasonNotReady" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="reasonNotReady" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="reasonWoundCare">Wound Care</label>
+                            <Field name="reasonWoundCare" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="reasonWoundCare" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="otherMedicalReason">Other medical reason (such as IV medication)</label>
+                            <Field name="otherMedicalReason" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="otherMedicalReason" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="reasonFinancial">Financial/no place to discharge to</label>
+                            <Field name="reasonFinancial" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="reasonFinancial" class="error-feedback" />
+                        </div>
                     </div>
 
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <h4 style="color:green">Length of Stay of Current Inpatients </h4>
-                        <label for="length1_3m">1-3 months</label>
-                        <Field name="length1_3m" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length1_3m" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="length3_6m">3-6 months</label>
-                        <Field name="length3_6m" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length3_6m" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="length6m_1y">6 months - 1 year</label>
-                        <Field name="length6m_1y" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length6m_1y" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="length1_2y">1-2 years</label>
-                        <Field name="length1_2y" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length1_2y" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="length2_3y">2-3 years</label>
-                        <Field name="length2_3y" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length2_3y" class="error-feedback" />
-                    </div>
-                    <div v-if="stayedInTheWardMor" class="form-group">
-                        <label for="length3_y">3+ years</label>
-                        <Field name="length3_y" type="text" class="form-control" value=0 />
-                        <ErrorMessage name="length3_y" class="error-feedback" />
+                    <div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <h4 style="color:green">Length of Stay of Current Inpatients </h4>
+                            <label for="length1_3m">1-3 months</label>
+                            <Field name="length1_3m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length1_3m" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="length3_6m">3-6 months</label>
+                            <Field name="length3_6m" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length3_6m" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="length6m_1y">6 months - 1 year</label>
+                            <Field name="length6m_1y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length6m_1y" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="length1_2y">1-2 years</label>
+                            <Field name="length1_2y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length1_2y" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="length2_3y">2-3 years</label>
+                            <Field name="length2_3y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length2_3y" class="error-feedback" />
+                        </div>
+                        <div v-if="stayedInTheWardMor" class="form-group">
+                            <label for="length3_y">3+ years</label>
+                            <Field name="length3_y" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="length3_y" class="error-feedback" />
+                        </div>
                     </div>
 
                 </div>
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                             <label for="admissions">{{ $t('msppData.admissions') }}</label>
                             <Field name="admissions" type="text" class="form-control" id="admissions" v-on:keyup="checkAdmissions()" value=0 />
                             <ErrorMessage name="admissions" class="error-feedback" />
                     </div>
+
                     <div>
                         <div v-if="admissionsMor" class="form-group">
                             <h4 style="color:green">{{ $t('msppData.wherePatientsComeFrom') }}</h4>
@@ -626,8 +633,200 @@
                         </div>
                         <div v-if="admissionsMor" class="form-group">
                             <label for="fromOther">{{ $t('msppData.otherDept') }}</label>
-                            <Field name="fromOther" type="text" class="form-control" value=0 />
+                            <Field name="fromOther" type="text" class="form-control" />
                             <ErrorMessage name="fromOther" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <h4 style="color:green">Main Condition</h4>
+                            <label for="mainCoditionTetraplegia">SCI - tetraplegia</label>
+                            <Field name="mainCoditionTetraplegia" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionTetraplegia" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionComplete">Complete</label>
+                            <Field name="mainCoditionComplete" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionComplete" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionIncomplete">Incomplete</label>
+                            <Field name="mainCoditionIncomplete" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionIncomplete" class="error-feedback" />
+                        </div>
+                        <!-- Injury: C -->
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC1">Level of Injury: C1</label>
+                            <Field name="mainCoditionC1" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC1" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC2">Level of Injury: C2</label>
+                            <Field name="mainCoditionC2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC2" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC3">Level of Injury: C3</label>
+                            <Field name="mainCoditionC3" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC3" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC4">Level of Injury: C4</label>
+                            <Field name="mainCoditionC4" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC4" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC5">Level of Injury: C5</label>
+                            <Field name="mainCoditionC5" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC5" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC6">Level of Injury: C6</label>
+                            <Field name="mainCoditionC6" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC6" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC7">Level of Injury: C7</label>
+                            <Field name="mainCoditionC7" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC7" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionC8">Level of Injury: C8</label>
+                            <Field name="mainCoditionC8" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionC8" class="error-feedback" />
+                        </div>
+                        <!-- Injury: T1 -->
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT1">Level of Injury: T1</label>
+                            <Field name="mainCoditionT1" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT1" class="error-feedback" />
+                        </div>
+                    </div>
+
+                    <div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionParaplegia">SCI - paraplegia</label>
+                            <Field name="mainCoditionParaplegia" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionParaplegia" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionComplete2">Complete</label>
+                            <Field name="mainCoditionComplete2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionComplete2" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionIncomplete2">Incomplete</label>
+                            <Field name="mainCoditionIncomplete2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionIncomplete2" class="error-feedback" />
+                        </div>
+                        <!-- Injury: T -->
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT2">Level of Injury: T2</label>
+                            <Field name="mainCoditionT2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT2" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT3">Level of Injury: T3</label>
+                            <Field name="mainCoditionT3" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT3" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT4">Level of Injury: T4</label>
+                            <Field name="mainCoditionT4" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT4" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT5">Level of Injury: T5</label>
+                            <Field name="mainCoditionT5" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT5" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT6">Level of Injury: T6</label>
+                            <Field name="mainCoditionT6" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT6" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT7">Level of Injury: T7</label>
+                            <Field name="mainCoditionT7" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT7" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT8">Level of Injury: T8</label>
+                            <Field name="mainCoditionT8" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT8" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT9">Level of Injury: T9</label>
+                            <Field name="mainCoditionT9" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT9" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT10">Level of Injury: T10</label>
+                            <Field name="mainCoditionT10" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT10" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT11">Level of Injury: T11</label>
+                            <Field name="mainCoditionT11" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT11" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionT12">Level of Injury: T12</label>
+                            <Field name="mainCoditionT12" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionT12" class="error-feedback" />
+                        </div>
+                        <!-- Injury: L -->
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionL1">Level of Injury: L1</label>
+                            <Field name="mainCoditionL1" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionTL1" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionL2">Level of Injury: L2</label>
+                            <Field name="mainCoditionL2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionL2" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionL3">Level of Injury: L3</label>
+                            <Field name="mainCoditionL3" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionL3" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionL4">Level of Injury: L4</label>
+                            <Field name="mainCoditionL4" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionL4" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionL5">Level of Injury: L5</label>
+                            <Field name="mainCoditionL5" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionL5" class="error-feedback" />
+                        </div>
+                        <!-- Injury: S -->
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionS1">Level of Injury: S1</label>
+                            <Field name="mainCoditionS1" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionS1" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionS2">Level of Injury: S2</label>
+                            <Field name="mainCoditionS2" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionS2" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionS3">Level of Injury: S3</label>
+                            <Field name="mainCoditionS3" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionS3" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionS4">Level of Injury: S4</label>
+                            <Field name="mainCoditionS4" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionS4" class="error-feedback" />
+                        </div>
+                        <div v-if="admissionsMor" class="form-group">
+                            <label for="mainCoditionS5">Level of Injury: S5</label>
+                            <Field name="mainCoditionS5" type="text" class="form-control" value=0 />
+                            <ErrorMessage name="mainCoditionS5" class="error-feedback" />
                         </div>
                     </div>
                 </div>
@@ -1010,6 +1209,186 @@ export default defineComponent({
             fromOther: yup
                 .string()
                 .default(""),
+            mainCoditionTetraplegia: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionComplete: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionIncomplete: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC1: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC3: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC4: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC6: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC7: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionC8: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT1: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionParaplegia: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionComplete2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionIncomplete2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT3: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT4: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT6: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT7: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT8: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT9: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT10: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT11: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionT12: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionL1: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionL2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionL3: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionL4: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionL5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionS1: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionS2: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionS3: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionS4: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
+            mainCoditionS5: yup
+                .number()
+                .min(0, "Cannot be negative.")
+                .required("Required.")
+                .default(0),
             
         });
         return {
