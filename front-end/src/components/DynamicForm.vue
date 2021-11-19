@@ -67,12 +67,14 @@ export default defineComponent({
     RegularInput
   },
   data() {
+    console.log(this.schema.fields[0]);
     return {
       successful: false,
       loading: false,
       message: "",
       s: this.schema.fields,
       cColor: "color:green",
+      field: {} as any
     }
   },
   props: {
