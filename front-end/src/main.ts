@@ -5,7 +5,6 @@ import router from "./router";
 import store from "./store";
 import axios, { AxiosInstance } from "axios";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Equal from "equal-vue";
 import 'equal-vue/dist/style.css';
 import naive from "naive-ui";

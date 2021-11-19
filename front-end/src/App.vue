@@ -26,56 +26,60 @@
 
 <template>
   <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <a class="navbar-brand" href="/">
-      <img src="@/assets/logo.png" width="140" alt=""/>
-    </a>
-    
-    <select class="dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-        <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
-          {{ language }}
-        </option>
-    </select>
-    <ul class="navbar-nav ml-auto">
-      
-      <li class="nav-item">
-        <button class="btn btn-secondary" @click="goToDataDisplay">
-          Data Display
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-secondary" @click="goToAddAnnouncement">
-          {{ $t('header.addAnnouncement') }}
-        </button>
-      </li>
-      <li class="nav-item">
-        <button class="btn btn-secondary" @click="loginOrLogout">
-          {{ $t('header.loginOut') }}
-        </button>
-      </li>
-    </ul>
-        <!--
-          <li class="nav-item">
-        <button class="btn btn-light" @click="goToRegister">
-          <p class="text-dark">{{ $t('header.register') }}</p>
-        </button>
-      </li>
-      <div class="navbar-collapse offcanvas-collapse" >
-          <div class="text-end" style="margin-left:auto; margin-right: 0;">
-             test button for data query 
-            <button class="btn btn-light" @click="goToDataDisplay">
-              <p class="text-dark">Data Display</p>
-            </button>
-            <button class="btn btn-light" @click="goToAddAnnouncement">
-              <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
-            </button>
-            <button class="btn btn-light" @click="loginOrLogout">
-              <p class="text-dark">{{ $t('header.loginOut') }}</p>
-            </button>
-            <button class="btn btn-light" @click="goToRegister">
-              <p class="text-dark">{{ $t('header.register') }}</p>
-            </button>
-          </div>
-      </div> -->
+    <div class="container-fluid">
+      <div class="d-flex justify-content-start">
+        <a class="navbar-brand" href="/">
+          <img src="@/assets/logo.png" width="140" alt=""/>
+        </a>
+
+        <select class="btn btn-sm btn-outline-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+            <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+              {{ language }}
+            </option>
+        </select>
+      </div>
+      <ul class="d-flex justify-content-end navbar-nav ml-auto">
+        
+        <li class="nav-item">
+          <button class="btn btn-secondary" @click="goToDataDisplay">
+            Data Display
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-secondary" @click="goToAddAnnouncement">
+            {{ $t('header.addAnnouncement') }}
+          </button>
+        </li>
+        <li class="nav-item">
+          <button class="btn btn-secondary" @click="loginOrLogout">
+            {{ $t('header.loginOut') }}
+          </button>
+        </li>
+      </ul>
+          <!--
+            <li class="nav-item">
+          <button class="btn btn-light" @click="goToRegister">
+            <p class="text-dark">{{ $t('header.register') }}</p>
+          </button>
+        </li>
+        <div class="navbar-collapse offcanvas-collapse" >
+            <div class="text-end" style="margin-left:auto; margin-right: 0;">
+              test button for data query 
+              <button class="btn btn-light" @click="goToDataDisplay">
+                <p class="text-dark">Data Display</p>
+              </button>
+              <button class="btn btn-light" @click="goToAddAnnouncement">
+                <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
+              </button>
+              <button class="btn btn-light" @click="loginOrLogout">
+                <p class="text-dark">{{ $t('header.loginOut') }}</p>
+              </button>
+              <button class="btn btn-light" @click="goToRegister">
+                <p class="text-dark">{{ $t('header.register') }}</p>
+              </button>
+            </div>
+        </div> -->
+      </div>
   </nav>
   <router-view />
 </template>
