@@ -20,17 +20,10 @@
               {{ language }}
             </option>
         </select>
-        <!-- <button class="btn btn-light" @click="changeToFrench">
-          <p class="text-dark">Français</p>
-        </button>
-        <button class="btn btn-light" @click="changeToEnglish">
-          <p class="text-dark">English</p>
-        </button> -->
         
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
-            <!-- test button for data query -->
             <button class="btn btn-light" @click="goToDataDisplay">
               <p class="text-dark">Data Display</p>
             </button>
@@ -57,8 +50,6 @@ import i18n from "./i18n";
 export default defineComponent({
   name: "App",
   data: function() {
-
-
     return{
       languages: ["Français", "English"],
       l: "Français",
@@ -66,26 +57,22 @@ export default defineComponent({
   },
   methods: {
     loginOrLogout(): void {
-      let tempThis = this;
-      if(tempThis.$store.state.auth.status.loggedIn) {
-        tempThis.$store.dispatch('auth/logout');
+      if(this.$store.state.auth.status.loggedIn) {
+        this.$store.dispatch('auth/logout');
       }
-      tempThis.$router.push('/login');
+      this.$router.push('/login');
     },
 
     goToRegister(): void {
-      let tempThis = this;
-      tempThis.$router.push('/register');
+      this.$router.push('/register');
     },
 
     goToDataDisplay(): void {
-      let tempThis = this;
-      tempThis.$router.push('/dataDisplay');
+      this.$router.push('/dataDisplay');
     },
-  // force push 3 case studies to test leadersboard implementation
+    
     goToAddAnnouncement(): void {
-      let tempThis = this;
-      tempThis.$router.push('/announcement');
+      this.$router.push('/announcement');
     },
 
     changeLang(choice: string): void {

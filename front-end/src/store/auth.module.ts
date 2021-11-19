@@ -36,7 +36,7 @@ export const auth = {
             AuthService.logout();
             commit('logout');
         },
-        register({ commit }, user) {
+        register(user) {
             return AuthService.register(user).then(
                 response => {
                     return Promise.resolve(response.data);
@@ -45,16 +45,32 @@ export const auth = {
                     return Promise.reject(error);
                 }
             );
+        },
+        isTokenValid({ commit }){
+            return AuthService.isTokenValid().then(
+                response => {
+                    if(response.status == 202){
+                        commit('loginSuccess', user);
+                    } else {
+                        commit('loginFailure');
+                    }
+                    return Promise.resolve(response);
+                },
+                error => {
+                    commit('loginFailure');
+                    return Promise.reject(error);
+                }
+            );
         }
     },
     mutations: {
         loginSuccess(state, user) {
-             state.status.loggedIn = true;
-             state.user = user;
+            state.status.loggedIn = true;
+            state.user = user;
         },
         loginFailure(state) {
-             state.status.loggedIn = false;
-             state.user = null;
+            state.status.loggedIn = false;
+            state.user = null;
         },
         logout(state) {
             state.status.loggedIn = false;

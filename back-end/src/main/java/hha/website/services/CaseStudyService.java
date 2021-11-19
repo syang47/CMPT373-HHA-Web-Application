@@ -86,20 +86,4 @@ public class CaseStudyService {
     public List<String> listCaseStudyTypes() {
         return caseStudyRepository.queryCaseStudyTypes();
     }
-
-//    public Collection<String> listDistinctItemsInField() {
-//        return caseStudyRepository.queryDistinctField();
-//    }
-//
-//    public Collection<Integer> listPointsInField() {
-//        return caseStudyRepository.queryBestCasestudy();
-//    }
-//
-//    public Collection<Boolean> listSubmissionStatusInField() {
-//        return caseStudyRepository.querySubmissionStatus();
-//    }
-//
-//    public Collection<Integer> listTotalReportsSubmittedField() {
-//        return caseStudyRepository.queryTotalReportsField();
-//    }
 }

@@ -23,44 +23,56 @@ import DataDisplay from "@/views/DataDisplay.vue";
 
 import Message_Board from "@/views/Message_Board/Message_Board.vue";
 
+import newStore from "@/store";
+
 const routes: Array<RouteRecordRaw> = [
   // Basic components
   {
     path: "/login",
     name: "Login",
     component: Login,
+    meta: {
+      requiresAuth: false,
+    },
   },
   {
     path: "/register",
     component: Register,
-    beforeEnter: (to, from, next) => {
-      const token = JSON.parse(localStorage.getItem('user')!);
-      if (token.roles[0].authority == 'ROLE_USER') {
-        next(false);
-      } else {
-        next();
-      }
+    meta: {
+      requiresAuth: true,
     },
   },
   {
     path: "/",
     component: Home,
+    meta: {
+      requiresAuth: true,
+    },
   },
   //leaders board
   {
     path: "/leadersboard",
     name: "LeadersBoard",
     component: LeadersBoard,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/casestudy",
     component: Case_Study,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/announcement",
     component: Announcement,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   // NICU/PAED
@@ -68,11 +80,17 @@ const routes: Array<RouteRecordRaw> = [
     path: "/nicu_paed",
     name: "NICU_PAED",
     component: NICU_PAED,
+    meta: {
+      requiresAuth: true,
+    },
   },
   { 
     path: "/nicu_paed/submit",
     name: "NICU_PAED_Data",
     component: NICU_PAED_Data,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   // Maternity
@@ -80,12 +98,18 @@ const routes: Array<RouteRecordRaw> = [
     path: "/maternity",
     name: "Maternity",
     component: Maternity,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/maternity/submit",
     name: "Maternity_Data",
     component: Maternity_Data,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   // Rehab
@@ -93,11 +117,17 @@ const routes: Array<RouteRecordRaw> = [
     path: "/rehab",
     name: "Rehab",
     component: Rehab,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/rehab/submit",
     name: "Rehab_Data",
     component: Rehab_Data,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
 
@@ -106,26 +136,35 @@ const routes: Array<RouteRecordRaw> = [
     path: "/community_health",
     name: "Community_Health",
     component: Community_Health,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/community_health/submit",
     name: "Community_Health_Data",
     component: Community_Health_Data,
+    meta: {
+      requiresAuth: true,
+    },
   },
   {
     path: "/dataDisplay",
     name: "DataDisplay",
     component: DataDisplay,
+    meta: {
+      requiresAuth: true,
+    },
   },
 
   {
     path: "/message_board",
     name: "Message_Board",
     component: Message_Board,
+    meta: {
+      requiresAuth: true,
+    },
   },
-
-  // Other components
-
 ];
 
 
@@ -133,6 +172,21 @@ const router = createRouter({
   history: createWebHistory(),
   routes,
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    newStore.dispatch("auth/isTokenValid").then(response => {
+      const s: any = newStore.state;
+      if(!s.auth.status.loggedIn) {
+        next('/login');
+      } else {
+        next();
+      }
+    });
+  } else {
+    next();
+  }
+})
 
 
 export default router;

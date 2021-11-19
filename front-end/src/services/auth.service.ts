@@ -14,6 +14,22 @@ class AuthService {
             console.log(failResponse.status);
         });
     }
+    isTokenValid() {
+        const token = JSON.parse(localStorage.getItem('user')!);
+        const t = token == null ? "" : token.jwt;
+        return axios.get(API_URL + 'checktoken', {
+            headers: {
+                'Authorization': `Bearer ${t}`
+            }
+        }).then(response => {
+            return response;
+        },
+        error => {
+            return error;
+        }).catch((failResponse: any) => {
+            console.log(failResponse);
+        });
+    }
     logout() {
         localStorage.removeItem('user');
     }
