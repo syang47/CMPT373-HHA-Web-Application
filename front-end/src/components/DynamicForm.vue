@@ -10,6 +10,7 @@
         <div class="form-group">
           <!-- HEADER -->
           <h4 v-if="field.header" style="color:red; text-align:center">{{ $t('msppData.'+ field.header) }}</h4>
+          <!-- TABLE -->
           <div v-else-if="field.th">
             <table>
               <thead>
@@ -29,10 +30,19 @@
               </tbody>
             </table>
           </div>
+          <!-- PATIENTS -->
+          <div v-else-if="field.patient">
+            <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
+            <p> {{s[field.name]}} </p>
+            <Patient v-model="s[field.name]" />
+            
+          </div>
+
           <!-- REGULAR INPUTS -->
           <div v-else>
-            <RegularInput :field="field" v-model="s[field.name]"/>
+            <RegularInput :field="field" v-model="s[field.name]" />
           </div>
+          <!-- ADDITIONAL REGULAR INPUTS -->
           <template v-if="field.children && field.children.length && s[field.name] > 0">
             <div class="signup-form"
               v-for="cField in field.children"
@@ -44,6 +54,7 @@
               </div>
             </div>
           </template>
+          
         </div>
       </div>
       <div class="form-group">
@@ -57,14 +68,16 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { Form, Field, ErrorMessage } from 'vee-validate';
+import { Form } from 'vee-validate';
 import RegularInput from './RegularInput.vue';
+import Patient from './Patient.vue';
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'DynamicForm',
   components: {
     Form,
-    RegularInput
+    RegularInput,
+    Patient
   },
   data() {
     console.log(this.schema.fields[0]);
@@ -74,7 +87,7 @@ export default defineComponent({
       message: "",
       s: this.schema.fields,
       cColor: "color:green",
-      field: {} as any
+      field: {} as any,
     }
   },
   props: {

@@ -1,6 +1,6 @@
 <template>
-    <label v-if="field.label" :style="c" :for="field.name">{{ $t('msppData.'+ field.label) }}</label>
-    <Field :as="field.as" :id="field.name" :name="field.name" :rules="field.rules" :value="modelValue"
+    <label v-if="field.label" :style="c" :for="field.name">{{ $t('msppData.'+ field.label) }} </label>
+    <Field :as="field.as" :id="field.name" :name="field.name" :rules="field.rules" :value="modelValue" :placeholder="modelValue"
       @input="$emit('update:modelValue', $event.target.value)" class="form-control" />
     <ErrorMessage :name="field.name" class="error-feedback" />
 </template>
@@ -20,7 +20,6 @@ export default defineComponent({
       required: true,
     },
     modelValue: {
-
     },
     c: {
       type:String

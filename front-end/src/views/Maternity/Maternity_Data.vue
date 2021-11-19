@@ -52,12 +52,14 @@ export default defineComponent({
                     name: 'diedBefore48h',
                     as: 'input',
                     rules: r,
+                    patient: 1
                 },
                 {
                     label: 'diedAfter48h',
                     name: 'diedAfter48h',
                     as: 'input',
                     rules: r,
+                    patient: 1
                 },
                 {
                     label: 'daysHospitalized',
