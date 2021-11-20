@@ -1,4 +1,42 @@
+<style scoped>
+
+    .box {
+        width: 100%;
+        height: 100%;
+        background: #00000060;
+        position: absolute;
+        box-sizing: border-box;
+        padding: 40px;
+    }
+    .form-control{
+        height: 40px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .form-control:focus{
+        border-color: #5cb85c;
+    }
+    .signup-form{
+        width: 1000px;
+        margin: 0 auto;
+        padding: 50px 0;
+        position: relative;
+        overflow-y: auto;
+    }
+    .signup-form h2{
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+    .signup-form .form-group{
+        margin-bottom: 20px;
+    }
+
+</style>
+
 <template>
+
     <div class="signup-form text-monospace">
         <div class="text-center container-fluid">
             <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
@@ -27,11 +65,12 @@
             </div>
         </div>
     </div>
+
 </template>
 
 <script lang="ts" type="text/typescript">
-import { defineComponent } from 'vue'
 
+import { defineComponent } from 'vue'
 export default defineComponent({
     name: "CaseStudyDisplay",
     data: function() {
@@ -117,37 +156,3 @@ export default defineComponent({
 
 </script>
 
-<style scoped>
-    .box {
-        width: 100%;
-        height: 100%;
-        background: #00000060;
-        position: absolute;
-        box-sizing: border-box;
-        padding: 40px;
-    }
-    .form-control{
-        height: 40px;
-        box-shadow: none;
-        color: #969fa4;
-    }
-    .form-control:focus{
-        border-color: #5cb85c;
-    }
-    .signup-form{
-        width: 1000px;
-        margin: 0 auto;
-        padding: 50px 0;
-        position: relative;
-        overflow-y: auto;
-    }
-    .signup-form h2{
-        color: #636363;
-        margin: 0 0 15px;
-        position: relative;
-        text-align: center;
-    }
-    .signup-form .form-group{
-        margin-bottom: 20px;
-    }
-</style>

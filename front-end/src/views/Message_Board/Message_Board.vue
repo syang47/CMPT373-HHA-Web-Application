@@ -1,4 +1,5 @@
 <style scoped>
+
 .box {
   width: 100%;
   height: 100%;
@@ -11,6 +12,7 @@
 </style>
 
 <template>
+
   <div class="box">
     <div class="text-center">
       <h2 class="font-weight-bold display-5 text-dark text-monospace">Message Board</h2>
@@ -53,9 +55,11 @@
       </div>
     </div>
   </div>
+
 </template>
 
 <script lang="ts" type="text/typescript">
+
 import { defineComponent } from 'vue'
 import axios from 'axios';
 import { Form, Field, ErrorMessage } from "vee-validate";
@@ -122,6 +126,7 @@ export default defineComponent({
     }
   }
 });
+
 </script>
 
 

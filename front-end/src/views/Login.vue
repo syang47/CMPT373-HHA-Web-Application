@@ -1,4 +1,5 @@
 <style>
+
     .background {
         background: url('../assets/IsaacCBRManager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
