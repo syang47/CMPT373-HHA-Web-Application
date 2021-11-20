@@ -52,6 +52,7 @@ const i18n = createI18n({
         caseStudy: "ÉTUDE DE CAS",
       },
       msppData: {
+        blank: "",
         msppForm: "Formulaire de saisie de données MSPP",
         rehabForm: "Formulaire de saisie de données de réadaptation",
         nicupaedForm: "Formulaire de saisie de données USIN/PAED",
@@ -185,8 +186,8 @@ const i18n = createI18n({
         aspirationPneum: "Pneumonie par aspiration",
         modPrematurity: "Prématurité modérée (32-36 semaines de gestation)",
         severePrematurity: "Prématurité sévère (moins de 32 semaines)",
-        otherMedical: "Autre médical: ",
-        numberOfOutPatients: "Nombre de patients externes",
+        otherMedical: "Autre médical",
+        numberOfOutpatients: "Nombre de patients externes",
         age: "Âge",
         boy: "Garçon",
         girl: "Fille",
@@ -221,6 +222,12 @@ const i18n = createI18n({
         vaginalRingPiece: "Collier Pièces",
         femaleCondomPiece: "morceaux de préservatif féminin",
         maleCondomPiece: "morceaux de préservatif masculin",
+        uncomplicatedLabour: "Travail sans complication/Césarienne",
+        heartFailure: "Insuffisance cardiaque",
+        preEclampsia: "Pré-éclampsie",
+        respiratoryProblems: "Problèmes respiratoires",
+        cSectionSiteInfection: "Infection du site de césarienne",
+        trauma: "Trauma"
       },
       departmentPage: {
         nicupaed: "USIN/PAED",
@@ -341,6 +348,7 @@ const i18n = createI18n({
         caseStudy: "CASE STUDY",
       },
       msppData: {
+        blank: "",
         msppForm: "MSPP Data Entry Form",
         rehabForm: "Rehab Data Entry Form",
         nicupaedForm: "NICU/PAED Data Entry Form",
@@ -474,8 +482,8 @@ const i18n = createI18n({
         aspirationPneum: "Aspiration pneumonia",
         modPrematurity: "Moderate prematurity (32-36 weeks gestation)",
         severePrematurity: "Severe prematurity (less than 32 weeks)",
-        otherMedical: "Other medical: ",
-        numberOfOutPatients: "Number of outpatients",
+        otherMedical: "Other medical",
+        numberOfOutpatients: "Number of outpatients",
         age: "Age",
         boy: "Boy",
         girl: "Girl",
@@ -510,6 +518,12 @@ const i18n = createI18n({
         vaginalRingPiece: "Vaginal ring Pieces",
         femaleCondomPiece: "Female condom Pieces",
         maleCondomPiece: "Male condom Pieces",
+        uncomplicatedLabour: "Uncomplicated Labour/ C-section",
+        heartFailure: "Heart failure",
+        preEclampsia: "Pre-eclampsia",
+        respiratoryProblems: "Respiratory problems",
+        cSectionSiteInfection: "C-section site infection",
+        trauma: "Trauma"
       },
       departmentPage: {
         nicupaed: "NICU/PAED",

@@ -10,12 +10,7 @@
 </style>
 
 <template>
-
-    <div>
-        <h2 class="font-weight-bold display-5 text-dark">{{ $t('msppData.nicupaedForm') }}</h2>
-        <DynamicForm :schema="formSchema" :department="department"/>
-    </div>
-
+    <DynamicForm :schema="formSchema" :department="department" :formTitle="formTitle"/>
 </template>
 
 <script lang="ts" type="text/typescript">
@@ -29,42 +24,42 @@ export default defineComponent({
         DynamicForm
     },
     data() {
-        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.").default(0);
-        const a: any = yup.number().min(0, "Cannot be negative.").default(0);
+        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.");
+        const a: any = yup.number().min(0, "Cannot be negative.");
         const formSchema = {
             fields: [
                 {
-                    label: 'bedsAvailable',
+                    label: 'msppData.bedsAvailable',
                     name: 'bedsAvailable',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'bedDays',
+                    label: 'msppData.bedDays',
                     name: 'bedDays',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'patientDays',
+                    label: 'msppData.patientDays',
                     name: 'patientDays',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'hospitalised',
+                    label: 'msppData.hospitalised',
                     name: 'hospitalised',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'hospitalisedNICU',
+                            label: 'msppData.hospitalisedNICU',
                             name: 'hospitalisedNICU',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'hospitalisedPAED',
+                            label: 'msppData.hospitalisedPAED',
                             name: 'hospitalisedPAED',
                             as: 'input',
                             rules: a
@@ -72,13 +67,13 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'dischargedAlive',
+                    label: 'msppData.dischargedAlive',
                     name: 'dischargedAlive',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'NICUDischarged',
+                            label: 'msppData.ofTotalDischargedNICU',
                             name: 'NICUDischarged',
                             as: 'input',
                             rules: a
@@ -86,19 +81,19 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'diedBefore48h',
+                    label: 'msppData.diedBefore48h',
                     name: 'diedBefore48h',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'diedInNICUBefore48',
+                            label: 'msppData.diedNICUBefore48h',
                             name: 'diedInNICUBefore48',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'diedInPaedBefore48',
+                            label: 'msppData.diedPAEDBefore48h',
                             name: 'diedInPaedBefore48',
                             as: 'input',
                             rules: a
@@ -106,19 +101,19 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'diedAfter48h',
+                    label: 'msppData.diedAfter48h',
                     name: 'diedAfter48h',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'diedInNICUAfter48',
+                            label: 'msppData.diedNICUAfter48h',
                             name: 'diedInNICUAfter48',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'diedInPaedAfter48',
+                            label: 'msppData.diedNICUAfter48h',
                             name: 'diedInPaedAfter48',
                             as: 'input',
                             rules: a
@@ -126,55 +121,58 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'daysHospitalised',
+                    label: 'msppData.daysHospitalised',
                     name: 'daysHospitalised',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'referrals',
+                    label: 'msppData.referrals',
                     name: 'referrals',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'transfers',
+                    label: 'msppData.transfers',
                     name: 'transfers',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'selfDischarged',
+                    label: 'msppData.selfDischarged',
                     name: 'selfDischarged',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'financeCannotAfford',
+                            header: 'msppData.reasonSelfDischarge'
+                        },
+                        {
+                            label: 'msppData.financeCare',
                             name: 'financeCannotAfford',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'financeAvoidPay',
+                            label: 'msppData.financeAvoidPay',
                             name: 'financeAvoidPay',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'reasonCultural',
+                            label: 'msppData.religiousCultural',
                             name: 'reasonCultural',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'reasonPersonal',
+                            label: 'msppData.personalFamily',
                             name: 'reasonPersonal',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'otherReason',
+                            label: 'msppData.other',
                             name: 'otherReason',
                             as: 'input',
                             rules: a
@@ -182,223 +180,223 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'stayedInTheWard',
+                    label: 'msppData.stayedInTheWard',
                     name: 'stayedInTheWard',
                     as: 'input',
                     rules: r
                 },
                 {
-                    label: 'admissions',
+                    label: 'msppData.admissions',
                     name: 'admissions',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            header: 'wherePatientsComeFrom'
+                            header: 'msppData.wherePatientsComeFrom'
                         },
                         {
-                            label: 'fromQuarterMorin',
+                            label: 'msppData.quMo',
                             name: 'fromQuarterMorin',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromCapHaitian',
+                            label: 'msppData.capHai',
                             name: 'fromCapHaitian',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromDepartmentNord',
+                            label: 'msppData.deptNord',
                             name: 'fromDepartmentNord',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromOther',
+                            label: 'msppData.otherDept',
                             name: 'fromOther',
                             as: 'input',
                             rules: a
                         },
                         {
-                            header: 'ageOfInfant'
+                            header: 'msppData.ageOfInfant'
                         },
                         {
-                            label: 'admissionsExtremelyPreterm',
+                            label: 'msppData.extremePreterm',
                             name: 'admissionsExtremelyPreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsVeryPreterm',
+                            label: 'msppData.veryPreterm',
                             name: 'admissionsVeryPreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsModerateToLatePreterm',
+                            label: 'msppData.modToLatePreterm',
                             name: 'admissionsModerateToLatePreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsFullTerm',
+                            label: 'msppData.fullTerm',
                             name: 'admissionsFullTerm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsOlderThanNeonate',
+                            label: 'msppData.olderThanNeonate',
                             name: 'admissionsOlderThanNeonate',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsAge4WeeksTo5',
+                            label: 'msppData.age4w_5y',
                             name: 'admissionsAge4WeeksTo5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsAge6To11',
+                            label: 'msppData.age6_11',
                             name: 'admissionsAge6To11',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsAge12To18',
+                            label: 'msppData.age12_18',
                             name: 'admissionsAge12To18',
                             as: 'input',
                             rules: a
                         },
                         {
-                            header: 'gender'
+                            header: 'msppData.gender'
                         },
                         {
-                            label: 'admissionsMale',
+                            label: 'msppData.male',
                             name: 'admissionsMale',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsFemale',
+                            label: 'msppData.female',
                             name: 'admissionsFemale',
                             as: 'input',
                             rules: a
                         },
                         {
-                            header: 'mainCond'
+                            header: 'msppData.mainCond'
                         },
                         {
-                            label: 'admissionsRespiratoryArrest',
+                            label: 'msppData.respiratoryArrest',
                             name: 'admissionsRespiratoryArrest',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsTraumaticInjury',
+                            label: 'msppData.traumaticInjury',
                             name: 'admissionsTraumaticInjury',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsSepticShock',
+                            label: 'msppData.septicShock',
                             name: 'admissionsSepticShock',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsHypovolemicShock',
+                            label: 'msppData.hypoShock',
                             name: 'admissionsHypovolemicShock',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsSeizures',
+                            label: 'msppData.seizureConvulsion',
                             name: 'admissionsSeizures',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsPoisoning',
+                            label: 'msppData.poisoning',
                             name: 'admissionsPoisoning',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsAlteredMentalStatus',
+                            label: 'msppData.altMentalStatus',
                             name: 'admissionsAlteredMentalStatus',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsGastroenteritis',
+                            label: 'msppData.gastro',
                             name: 'admissionsGastroenteritis',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsHemorrhage',
+                            label: 'msppData.hemorrhage',
                             name: 'admissionsHemorrhage',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsHypothermia',
+                            label: 'msppData.hypothermia',
                             name: 'admissionsHypothermia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsCardiacCongenitalAnomaly',
+                            label: 'msppData.cardiacAnomaly',
                             name: 'admissionsCardiacCongenitalAnomaly',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsOtherCongenitalAnomaly',
+                            label: 'msppData.otherAnomaly',
                             name: 'admissionsOtherCongenitalAnomaly',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsMalnutrition',
+                            label: 'msppData.malnutrition',
                             name: 'admissionsMalnutrition',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsMeningitis',
+                            label: 'msppData.meningitis',
                             name: 'admissionsMeningitis',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsCommunityAcquiredPneumonia',
+                            label: 'msppData.communityPneum',
                             name: 'admissionsCommunityAcquiredPneumonia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsAspirationPneumonia',
+                            label: 'msppData.aspirationPneum',
                             name: 'admissionsAspirationPneumonia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsModeratePrematurity',
+                            label: 'msppData.modPrematurity',
                             name: 'admissionsModeratePrematurity',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsSeverePrematurity',
+                            label: 'msppData.severePrematurity',
                             name: 'admissionsSeverePrematurity',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsOtherMedical',
+                            label: 'msppData.otherMedical',
                             name: 'admissionsOtherMedical',
                             as: 'input',
                             rules: yup.string()
@@ -407,7 +405,7 @@ export default defineComponent({
                 },
                 
                 {
-                    label: 'numberOfOutpatients',
+                    label: 'msppData.numberOfOutpatients',
                     name: 'numberOfOutpatients',
                     as: 'input',
                     children: [
@@ -415,181 +413,181 @@ export default defineComponent({
                             header: 'age'
                         },
                         {
-                            label: 'numberOfOutpatientsExtremelyPreterm',
+                            label: 'msppData.extremePreterm',
                             name: 'numberOfOutpatientsExtremelyPreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsVeryPreterm',
+                            label: 'msppData.veryPreterm',
                             name: 'numberOfOutpatientsVeryPreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsModerateToLatePreterm',
+                            label: 'msppData.modToLatePreterm',
                             name: 'numberOfOutpatientsModerateToLatePreterm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsFullTerm',
+                            label: 'msppData.fullTerm',
                             name: 'numberOfOutpatientsFullTerm',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsOlderThanNeonate',
+                            label: 'msppData.olderThanNeonate',
                             name: 'numberOfOutpatientsOlderThanNeonate',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsAge4WeeksTo5',
+                            label: 'msppData.age4w_5y',
                             name: 'numberOfOutpatientsAge4WeeksTo5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsAge6To11',
+                            label: 'msppData.age6_11',
                             name: 'numberOfOutpatientsAge6To11',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsAge12To18',
+                            label: 'msppData.age12_18',
                             name: 'numberOfOutpatientsAge12To18',
                             as: 'input',
                             rules: a
                         },
                         {
-                            header: 'mainCond'
+                            header: 'msppData.mainCond'
                         },
                         {
-                            label: 'numberOfOutpatientsRespiratoryArrest',
+                            label: 'msppData.respiratoryArrest',
                             name: 'numberOfOutpatientsRespiratoryArrest',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsTraumaticInjury',
+                            label: 'msppData.traumaticInjury',
                             name: 'numberOfOutpatientsTraumaticInjury',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsSepticShock',
+                            label: 'msppData.septicShock',
                             name: 'numberOfOutpatientsSepticShock',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsHypovolemicShock',
+                            label: 'msppData.hypoShock',
                             name: 'numberOfOutpatientsHypovolemicShock',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsSeizures',
+                            label: 'msppData.seizureConvulsion',
                             name: 'numberOfOutpatientsSeizures',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsPoisoning',
+                            label: 'msppData.poisoning',
                             name: 'numberOfOutpatientsPoisoning',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsAlteredMentalStatus',
+                            label: 'msppData.altMentalStatus',
                             name: 'numberOfOutpatientsAlteredMentalStatus',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsGastroenteritis',
+                            label: 'msppData.gastro',
                             name: 'numberOfOutpatientsGastroenteritis',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsHemorrhage',
+                            label: 'msppData.hemorrhage',
                             name: 'numberOfOutpatientsHemorrhage',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsHypothermia',
+                            label: 'msppData.hypothermia',
                             name: 'numberOfOutpatientsHypothermia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsCardiacCongenitalAnomaly',
+                            label: 'msppData.cardiacAnomaly',
                             name: 'numberOfOutpatientsCardiacCongenitalAnomaly',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsOtherCongenitalAnomaly',
+                            label: 'msppData.otherAnomaly',
                             name: 'numberOfOutpatientsOtherCongenitalAnomaly',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsMalnutrition',
+                            label: 'msppData.malnutrition',
                             name: 'numberOfOutpatientsMalnutrition',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsMeningitis',
+                            label: 'msppData.meningitis',
                             name: 'numberOfOutpatientsMeningitis',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsCommunityAcquiredPneumonia',
+                            label: 'msppData.communityPneum',
                             name: 'numberOfOutpatientsCommunityAcquiredPneumonia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsAspirationPneumonia',
+                            label: 'msppData.aspirationPneum',
                             name: 'numberOfOutpatientsAspirationPneumonia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsModeratePrematurity',
+                            label: 'msppData.modPrematurity',
                             name: 'numberOfOutpatientsModeratePrematurity',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsSeverePrematurity',
+                            label: 'msppData.severePrematurity',
                             name: 'numberOfOutpatientsSeverePrematurity',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'numberOfOutpatientsOtherMedical',
+                            label: 'msppData.otherMedical',
                             name: 'numberOfOutpatientsOtherMedical',
                             as: 'input',
                             rules: yup.string()
                         },
                         {
-                            header: 'gender'
+                            header: 'msppData.gender'
                         },
                         {
-                            label: 'admissionsMale',
+                            label: 'msppData.boy',
                             name: 'admissionsMale',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'admissionsFemale',
+                            label: 'msppData.girl',
                             name: 'admissionsFemale',
                             as: 'input',
                             rules: a
@@ -601,6 +599,7 @@ export default defineComponent({
         return {
             formSchema,
             department: "NICU_PAED",
+            formTitle: 'msppData.nicupaedForm'
         };
     },
 });
