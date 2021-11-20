@@ -1,10 +1,13 @@
 <style>
+
   .button{
     color:black;
   }
+
 </style>
 
 <template>
+
    <div class="container-fluid">
     
     <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -41,12 +44,13 @@
     </nav>
   </div>
   <router-view />
+
 </template>
 
 <script lang="ts">
+
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
-
 export default defineComponent({
   name: "App",
   data: function() {
