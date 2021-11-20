@@ -18,99 +18,99 @@ export default defineComponent({
         const formSchema: any = {
             fields: [
                 {
-                    label: 'bedsAvailable',
+                    label: 'msppData.bedsAvailable',
                     name: 'bedsAvailable',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'bedDays',
+                    label: 'msppData.bedDays',
                     name: 'bedDays',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'patientDays',
+                    label: 'msppData.patientDays',
                     name: 'patientDays',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'hospitalized',
-                    name: 'hospitalized',
+                    label: 'msppData.hospitalised',
+                    name: 'hospitalised',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'dischargedAlive',
+                    label: 'msppData.dischargedAlive',
                     name: 'dischargedAlive',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'diedBefore48h',
+                    label: 'msppData.diedBefore48h',
                     name: 'diedBefore48h',
                     as: 'input',
                     rules: r,
                     patient: 1
                 },
                 {
-                    label: 'diedAfter48h',
+                    label: 'msppData.diedAfter48h',
                     name: 'diedAfter48h',
                     as: 'input',
                     rules: r,
                     patient: 1
                 },
                 {
-                    label: 'daysHospitalized',
+                    label: 'msppData.daysHospitalised',
                     name: 'daysHospitalized',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'referrals',
+                    label: 'msppData.referrals',
                     name: 'referrals',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'transfers',
+                    label: 'msppData.transfers',
                     name: 'transfers',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'selfDischarged',
+                    label: 'msppData.reasonSelfDischarge',
                     name: 'selfDischarged',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            label: 'financeCannotAfford',
+                            label: 'msppData.financeCare',
                             name: 'financeCannotAfford',
                             as: 'input',
                             rules: a,
                         },
                         {
-                            label: 'financeAvoidPay',
+                            label: 'msppData.financeAvoidPay',
                             name: 'financeAvoidPay',
                             as: 'input',
                             rules: a,
                         },
                         {
-                            label: 'reasonCultural',
+                            label: 'msppData.religiousCultural',
                             name: 'reasonCultural',
                             as: 'input',
                             rules: a,
                         },
                         {
-                            label: 'reasonPersonal',
+                            label: 'msppData.personalFamily',
                             name: 'reasonPersonal',
                             as: 'input',
                             rules: a,
                         },
                         {
-                            label: 'otherReason',
+                            label: 'msppData.other',
                             name: 'otherReason',
                             as: 'input',
                             rules: a,
@@ -118,40 +118,40 @@ export default defineComponent({
                     ]
                 },
                 {
-                    label: 'stayedInTheWard',
+                    label: 'msppData.stayedInTheWard',
                     name: 'stayedInTheWard',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'admissions',
+                    label: 'msppData.admissions',
                     name: 'admissions',
                     as: 'input',
                     rules: r,
                     children: [
                         {
-                            header: 'wherePatientsComeFrom'
+                            header: 'msppData.wherePatientsComeFrom'
                         },
                         {
-                            label: 'fromQuarterMorin',
+                            label: 'msppData.quMo',
                             name: 'fromQuarterMorin',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromCapHaitian',
+                            label: 'msppData.capHai',
                             name: 'fromCapHaitian',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromDepartmentNord',
+                            label: 'msppData.deptNord',
                             name: 'fromDepartmentNord',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'fromOther',
+                            label: 'msppData.otherDept',
                             name: 'fromOther',
                             as: 'input',
                             rules: yup.string()
@@ -159,14 +159,14 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header: "births",
+                    header: "msppData.births",
                 },
                 {
-                    th: ["births", "normal", "cesarean", "instruments"],
+                    th: ["msppData.births", "msppData.normal", "msppData.cesarean", "msppData.instruments"],
                     rows: [
                         [
                             {
-                                rowName: "weight1_5",
+                                rowName: "msppData.weight1_5",
                             },
                             {
                                 name: 'weight_less_normal',
@@ -186,7 +186,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "weight1_5To2_5",
+                                rowName: "msppData.weight1_5To2_5",
                             },
                             {
                                 name: 'weight_within_normal',
@@ -206,7 +206,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "weight2_5Up",
+                                rowName: "msppData.weight2_5Up",
                             },
                             {
                                 name: 'weight_more_normal',
@@ -226,7 +226,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "notWeighted",
+                                rowName: "msppData.notWeighted",
                             },
                             {
                                 name: 'not_weighted_normal',
@@ -246,7 +246,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "immediatelyBreastfed",
+                                rowName: "msppData.immediatelyBreastfed",
                             },
                             {
                                 name: 'immediately_breastfed_normal',
@@ -266,7 +266,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "skinToSkinTherapy",
+                                rowName: "msppData.skinToSkinTherapy",
                             },
                             {
                                 name: 'skin_therapy_normal',
@@ -287,38 +287,38 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header: "postNatal",
+                    header: "msppData.postNatal",
                 },
                 {
-                    label: 'bFWomenVitA',
+                    label: 'msppData.bFWomenVitA',
                     name: 'bFWomenVitA',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'bFWomenMUAC',
+                    label: 'msppData.bFWomenMUAC',
                     name: 'bFWomenMUAC',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'bFWomenMalnutrition',
+                    label: 'msppData.bFWomenMalnutrition',
                     name: 'bFWomenMalnutrition',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'domesticVisits',
+                    label: 'msppData.domesticVisits',
                     name: 'domesticVisits',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    th: ["", "hours0_6", "hoursDays7_6", "days7_42"],
+                    th: ["msppData.blank", "msppData.hours0_6", "msppData.hoursDays7_6", "msppData.days7_42"],
                     rows: [
                         [
                             {
-                                rowName: "postNatalConsultations",
+                                rowName: "msppData.postNatalConsultations",
                             },
                             {
                                 name: 'post_natal_first',
@@ -339,59 +339,59 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header: 'complications'
+                    header: 'msppData.complications'
                 },
                 {
-                    label: 'compRec',
-                    name: 'compRec',
+                    label: 'msppData.compRec',
+                    name: 'complications_recorded',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'compRef',
-                    name: 'compRef',
+                    label: 'msppData.compRef',
+                    name: 'complications_referred',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    header: 'numberOfStillborns'
+                    header: 'msppData.numberOfStillborns'
                 },
                 {
-                    label: 'macerated',
-                    name: 'macerated',
+                    label: 'msppData.macerated',
+                    name: 'stillborns_maceres',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'notMacerated',
-                    name: 'notMacerated',
+                    label: 'msppData.notMacerated',
+                    name: 'stillborns_non_maceres',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    header: 'maternalDeathInTheHospital'
+                    header: 'msppData.maternalDeathInTheHospital'
                 },
                 {
-                    label: 'inHospital',
+                    label: 'msppData.inHospital',
                     name: 'inHospital',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'inTheCommunity',
+                    label: 'msppData.inTheCommunity',
                     name: 'inTheCommunity',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    header: 'supportForWifeAndMother'
+                    header: 'msppData.supportForWifeAndMother'
                 },
                 {
-                    th: ["periodOfPregnancy", "visit1", "visit2", "visit3", "visit4", "visit5Up", "total"],
+                    th: ["msppData.periodOfPregnancy", "msppData.visit1", "msppData.visit2", "msppData.visit3", "msppData.visit4", "msppData.visit5Up", "msppData.total"],
                     rows: [
                         [
                             {
-                                rowName: "months0_3",
+                                rowName: "msppData.months0_3",
                             },
                             {
                                 name: 'first_quarter_first_visit',
@@ -426,7 +426,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "months4_6",
+                                rowName: "msppData.months4_6",
                             },
                             {
                                 name: 'second_quarter_first_visit',
@@ -461,7 +461,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "months7_9",
+                                rowName: "msppData.months7_9",
                             },
                             {
                                 name: 'third_quarter_first_visit',
@@ -496,7 +496,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "totalVisits",
+                                rowName: "msppData.totalVisits",
                             },
                             {
                                 name: 'total_first_visit',
@@ -532,98 +532,98 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header: 'supportForWomenHospital'
+                    header: 'msppData.supportForWomenHospital'
                 },
                 {
-                    label: 'numberOfPregnanciesAtRisk',
-                    name: 'numberOfPregnanciesAtRisk',
+                    label: 'msppData.numberOfPregnanciesAtRisk',
+                    name: 'pregnancies_at_risk',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'caseAnemia',
-                    name: 'caseAnemia',
+                    label: 'msppData.caseAnemia',
+                    name: 'anemia_pregnant',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWIronFolate',
-                    name: 'pWIronFolate',
+                    label: 'msppData.pWIronFolate',
+                    name: 'pregnant_iron_folates',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWIronDef',
-                    name: 'pWIronDef',
+                    label: 'msppData.pWIronDef',
+                    name: 'pregnant_iron_deficiency_anemia',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWBirthPlan',
-                    name: 'pWBirthPlan',
+                    label: 'msppData.pWBirthPlan',
+                    name: 'pregnant_birth_plan',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWMalaria',
-                    name: 'pWMalaria',
+                    label: 'msppData.pWMalaria',
+                    name: 'pregnant_malaria_chloroquine',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWMosquito',
-                    name: 'pWMosquito',
+                    label: 'msppData.pWMosquito',
+                    name: 'pregnant_mosquito_net',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'pWMUAC',
-                    name: 'pWMUAC',
+                    label: 'msppData.pWMuac',
+                    name: 'pregnant_MUAC',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    header: 'otherServices'
+                    header: 'msppData.otherServices'
                 },
                 {
-                    label: 'wIronFolate',
-                    name: 'wIronFolate',
+                    label: 'msppData.wIronFolate',
+                    name: 'women_iron_folate',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'wAceticAcid',
-                    name: 'wAceticAcid',
+                    label: 'msppData.wAceticAcid',
+                    name: 'women_acetic_inspection',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'wSmearTest',
-                    name: 'wSmearTest',
+                    label: 'msppData.wSmearTest',
+                    name: 'women_smear_test',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'wSmearTakenCare',
-                    name: 'wSmearTakenCare',
+                    label: 'msppData.wSmearTakenCare',
+                    name: 'women_smear_take_care',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    label: 'wPostabortion',
-                    name: 'wPostabortion',
+                    label: 'msppData.wPostabortion',
+                    name: 'women_postabortion',
                     as: 'input',
                     rules: r,
                 },
                 {
-                    header:'deliveries'
+                    header:'msppData.deliveries'
                 },
                 {
-                    th: ["ageOfMothers", "normal", "cesarean", "instruments"],
+                    th: ["msppData.ageOfMothers", "msppData.normal", "msppData.cesarean", "msppData.instruments"],
                     rows: [
                         [
                             {
-                                rowName: "years15",
+                                rowName: "msppData.years15",
                             },
                             {
                                 name: 'mother_age_less_than_fifteen_normal',
@@ -643,7 +643,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "years15_19",
+                                rowName: "msppData.years15_19",
                             },
                             {
                                 name: 'mother_age_fifteen_to_nineteen_normal',
@@ -663,7 +663,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "years20_24",
+                                rowName: "msppData.years20_24",
                             },
                             {
                                 name: 'mother_age_twenty_to_twenty_four_normal',
@@ -683,7 +683,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "years25_29",
+                                rowName: "msppData.years25_29",
                             },
                             {
                                 name: 'mother_age_twenty_five_to_twenty_nine_normal',
@@ -703,7 +703,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "years30Up",
+                                rowName: "msppData.years30Up",
                             },
                             {
                                 name: 'mother_age_thirty_plus_normal',
@@ -723,7 +723,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "unknown",
+                                rowName: "msppData.unknown",
                             },
                             {
                                 name: 'mother_age_unknown_normal',
@@ -744,14 +744,14 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header:'deliveries'
+                    header:'msppData.deliveries'
                 },
                 {
-                    th: ["labourManagement", "normal", "cesarean", "instruments"],
+                    th: ["msppData.labourManagement", "msppData.normal", "msppData.cesarean", "msppData.instruments"],
                     rows: [
                         [
                             {
-                                rowName: "useOfPartograph",
+                                rowName: "msppData.useOfPartograph",
                             },
                             {
                                 name: 'partograph_normal',
@@ -771,7 +771,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "managementLabour3rdYear",
+                                rowName: "msppData.managementLabour3rdYear",
                             },
                             {
                                 name: 'labor_normal',
@@ -792,46 +792,46 @@ export default defineComponent({
                     ]
                 },
                 {
-                    header: 'Main Condition of Patient'
+                    header: 'msppData.mainCond'
                 },
                 {
-                    label: 'uncomplicatedLabour',
+                    label: 'msppData.uncomplicatedLabour',
                     name: 'uncomplicatedLabour',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'heartFailure',
+                    label: 'msppData.heartFailure',
                     name: 'heartFailure',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'preEclampsia',
+                    label: 'msppData.preEclampsia',
                     name: 'preEclampsia',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'respiratoryProblems',
+                    label: 'msppData.respiratoryProblems',
                     name: 'respiratoryProblems',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'cSectionSiteInfection',
+                    label: 'msppData.cSectionSiteInfection',
                     name: 'cSectionSiteInfection',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'otherMedical',
+                    label: 'msppData.otherMedical',
                     name: 'otherMedical',
                     as: 'input',
                     rules: a,
                 },
                 {
-                    label: 'trauma',
+                    label: 'msppData.trauma',
                     name: 'trauma',
                     as: 'input',
                     rules: a,

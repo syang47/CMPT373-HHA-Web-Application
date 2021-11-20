@@ -1,5 +1,7 @@
 <template>
-    <label v-if="field.label" :style="c" :for="field.name">{{ $t('msppData.'+ field.label) }} </label>
+    <div v-if="field.label">
+      <label :style="c" :for="field.name">{{ $t(field.label) }} </label>
+    </div>
     <Field :as="field.as" :id="field.name" :name="field.name" :rules="field.rules" :value="modelValue" :placeholder="modelValue"
       @input="$emit('update:modelValue', $event.target.value)" class="form-control" />
     <ErrorMessage :name="field.name" class="error-feedback" />
