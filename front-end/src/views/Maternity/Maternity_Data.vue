@@ -1,3 +1,43 @@
+
+<style>
+
+    .background {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+    }
+    .form-control{
+        height: 40px;
+        box-shadow: none;
+        color: #969fa4;
+    }
+    .form-control:focus{
+        border-color: #5cb85c;
+    }
+    .signup-form{
+        width: 600px;
+        margin: 0 auto;
+        padding: 30px 0;
+    }
+    .signup-form h2{
+        color: #636363;
+        margin: 0 0 15px;
+        position: relative;
+        text-align: center;
+    }
+    .signup-form .form-group{
+        margin-bottom: 20px;
+    }
+    .category-heading{
+        font-size:20px;
+    }
+    table, th, td {
+      border:1px solid black;
+    }
+
+</style>
+
 <template>
 
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
@@ -39,6 +79,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                         <Field name="diedBefore48h" type="text" class="form-control"  id="diedBefore48h" v-on:keyup="checkDiedBefore48h()" value=0 />
@@ -54,9 +95,12 @@
                             <legend style="color:green">Patient {{ idx+1 }}</legend>
                             <label :for="`diedBefore48hAge_${idx}`">Age</label>
                             <Field class="form-control"
+                                   type="number"
                                    :id="`diedBefore48hAge_${idx}`" 
                                    :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
                             <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+
+                            <br>
 
                             <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
                             <Field class="form-control"
@@ -76,6 +120,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                         <Field name="diedAfter48h" type="text" class="form-control" id="diedAfter48h" v-on:keyup="checkDiedAfter48h()" value=0 />
@@ -92,6 +137,7 @@
                             <label :for="`diedAfter48hAge_${idx}`">Age</label>
                             <Field class="form-control"
                                    :id="`diedAfter48hAge_${idx}`" 
+                                   type="number"
                                    :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
                             <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
 
@@ -927,6 +973,7 @@
 </template>
 
 <script lang="ts" type="text/typescript">
+
 import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage, FieldArray } from "vee-validate";
 import * as yup from "yup";
@@ -939,16 +986,15 @@ export default defineComponent({
         FieldArray,
     },
     data() {
-        const diedBefore48hSchema = yup.object().shape({
+        const dataSchema = yup.object().shape({
             diedBefore48hPatient: yup
                 .array()
                 .of(
                 yup.object().shape({
                     diedBefore48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedBefore48hCause: yup
                         .string()
                         .required("Required.")
@@ -956,17 +1002,15 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const diedAfter48hSchema= yup.object().shape({
+
             diedAfter48hPatient: yup
                 .array()
                 .of(
                 yup.object().shape({
                     diedAfter48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedAfter48hCause: yup
                         .string()
                         .required("Required.")
@@ -974,8 +1018,7 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const dataSchema = yup.object().shape({
+
             bedsAvailable: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -1556,8 +1599,6 @@ export default defineComponent({
             admissionsMor: false,
             diedBefore48hMor: false,
             diedAfter48hMor: false,
-            diedBefore48hSchema,
-            diedAfter48hSchema,
             dataSchema,
         };
     },
@@ -1628,41 +1669,6 @@ export default defineComponent({
 
     }
 });
+
 </script>
 
-<style>
-    .background {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        overflow: auto;
-    }
-    .form-control{
-        height: 40px;
-        box-shadow: none;
-        color: #969fa4;
-    }
-    .form-control:focus{
-        border-color: #5cb85c;
-    }
-    .signup-form{
-        width: 600px;
-        margin: 0 auto;
-        padding: 30px 0;
-    }
-    .signup-form h2{
-        color: #636363;
-        margin: 0 0 15px;
-        position: relative;
-        text-align: center;
-    }
-    .signup-form .form-group{
-        margin-bottom: 20px;
-    }
-    .category-heading{
-        font-size:20px;
-    }
-    table, th, td {
-      border:1px solid black;
-    }
-</style>

@@ -1,11 +1,25 @@
+<style>
+
+    .background {
+        height: 100%;
+        position: absolute;
+        width: 100%;
+        overflow: auto;
+    }
+
+</style>
+
 <template>
+
     <div>
         <h2 class="font-weight-bold display-5 text-dark">{{ $t('msppData.nicupaedForm') }}</h2>
         <DynamicForm :schema="formSchema" :department="department"/>
     </div>
+
 </template>
 
 <script lang="ts" type="text/typescript">
+
 import { defineComponent } from 'vue'
 import * as yup from "yup";
 import DynamicForm from '@/components/DynamicForm.vue';
@@ -180,6 +194,9 @@ export default defineComponent({
                     rules: r,
                     children: [
                         {
+                            header: 'wherePatientsComeFrom'
+                        },
+                        {
                             label: 'fromQuarterMorin',
                             name: 'fromQuarterMorin',
                             as: 'input',
@@ -202,6 +219,9 @@ export default defineComponent({
                             name: 'fromOther',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'ageOfInfant'
                         },
                         {
                             label: 'admissionsExtremelyPreterm',
@@ -252,6 +272,9 @@ export default defineComponent({
                             rules: a
                         },
                         {
+                            header: 'gender'
+                        },
+                        {
                             label: 'admissionsMale',
                             name: 'admissionsMale',
                             as: 'input',
@@ -262,6 +285,9 @@ export default defineComponent({
                             name: 'admissionsFemale',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'mainCond'
                         },
                         {
                             label: 'admissionsRespiratoryArrest',
@@ -379,11 +405,15 @@ export default defineComponent({
                         },
                     ]
                 },
+                
                 {
                     label: 'numberOfOutpatients',
                     name: 'numberOfOutpatients',
                     as: 'input',
                     children: [
+                        {
+                            header: 'age'
+                        },
                         {
                             label: 'numberOfOutpatientsExtremelyPreterm',
                             name: 'numberOfOutpatientsExtremelyPreterm',
@@ -431,6 +461,9 @@ export default defineComponent({
                             name: 'numberOfOutpatientsAge12To18',
                             as: 'input',
                             rules: a
+                        },
+                        {
+                            header: 'mainCond'
                         },
                         {
                             label: 'numberOfOutpatientsRespiratoryArrest',
@@ -547,6 +580,9 @@ export default defineComponent({
                             rules: yup.string()
                         },
                         {
+                            header: 'gender'
+                        },
+                        {
                             label: 'admissionsMale',
                             name: 'admissionsMale',
                             as: 'input',
@@ -568,4 +604,5 @@ export default defineComponent({
         };
     },
 });
+
 </script>

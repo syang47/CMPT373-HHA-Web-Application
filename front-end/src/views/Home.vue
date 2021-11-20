@@ -180,10 +180,10 @@
       justify-content: end;
     }
 
-
 </style>
 
 <template>
+
   <div class="home container-fluid justify-content-center">
     <div class="row justify-content-center">
       <button class="button" @click.prevent="goToLeadersBoard">
@@ -228,9 +228,11 @@
       </button>
     </div>
   </div>
+
 </template>
 
 <script lang="ts" type="text/typescript">
+
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
@@ -291,6 +293,7 @@ export default defineComponent({
 
   }
 });
+
 </script>
 
 
