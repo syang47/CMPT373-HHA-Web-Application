@@ -24,6 +24,9 @@
       </div>
       <div class="navbar-collapse offcanvas-collapse" >
           <div class="text-end" style="margin-left:auto; margin-right: 0;">
+            <button class="btn btn-light" @click="testDelete">
+              TestDelete
+            </button>
             <button class="btn btn-light" @click="goToDataDisplay">
               <p class="text-dark">Data Display</p>
             </button>
@@ -74,7 +77,6 @@ export default defineComponent({
     goToAddAnnouncement(): void {
       this.$router.push('/announcement');
     },
-
     changeLang(choice: string): void {
       if(choice == "Français"){
         i18n.global.locale = 'fr';
@@ -82,7 +84,22 @@ export default defineComponent({
       else if(choice == "English"){
         i18n.global.locale = 'en';
       }
-    }
+    },
+
+    testDelete() {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      this.$axios.delete("/api/mspp/delete",{
+        headers: {
+          'Authorization': `Bearer ${token.jwt}`
+        },
+        params: {
+          documentId: 1
+        }
+      }).then(response => {
+        console.log(response);
+      });
+    },
+    
   }
 })
 

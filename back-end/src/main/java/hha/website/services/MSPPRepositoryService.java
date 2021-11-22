@@ -74,4 +74,8 @@ public class MSPPRepositoryService {
     public List<MSPPRequirement> listByIdAndDate(Integer id, Calendar date) {
         return msppRepository.findByidAndDateSubmitted(id, date);
     }
+
+    public void deleteForm(Integer documentId){
+        msppRepository.deleteById(documentId);
+    }
 }

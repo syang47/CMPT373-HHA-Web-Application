@@ -117,8 +117,15 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
+    @CrossOrigin
+    @GetMapping("/api/user/role")
+    public ResponseEntity<?> getUserField() {
+        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
+    }
+
+    @RequestMapping(value = "/api/mspp/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> submitMSPPForm(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         try{
             return ResponseEntity.ok(msppRepositoryService.save(user, MSPPDataJson[0], MSPPDataJson[1]));
@@ -127,26 +134,15 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
-        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        ObjectMapper objectMapper = new ObjectMapper();
-        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
-        return ResponseEntity.ok(caseStudyService.save(user, data, file));
-    }
-
     @CrossOrigin
-    @GetMapping("/api/user/role")
-    public ResponseEntity<?> getUserField() {
-        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
-        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
-    }
-
-    @CrossOrigin
-    @GetMapping("/api/departments")
-    public ResponseEntity<?> getAllDepartments(){
-        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
-        return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
+    @RequestMapping(value = "/api/mspp/delete", method = RequestMethod.DELETE)
+    public ResponseEntity<?> deleteMSPPForm(@RequestParam Integer documentId) {
+        try{
+            msppRepositoryService.deleteForm(documentId);
+            return new ResponseEntity<>("Deleted form with id " + documentId, HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>("Failed to delete form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     @CrossOrigin
@@ -172,6 +168,14 @@ public class MainController {
         return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, cal));
     }
 
+    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
+    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        ObjectMapper objectMapper = new ObjectMapper();
+        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
+        return ResponseEntity.ok(caseStudyService.save(user, data, file));
+    }
+
     @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
@@ -182,6 +186,13 @@ public class MainController {
     @GetMapping("/api/casestudy/entry")
     public ResponseEntity<?> getCaseStudyEntry(){
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/departments")
+    public ResponseEntity<?> getAllDepartments(){
+        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
+        return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
     @GetMapping(value = "/api/departments/totalreports")
