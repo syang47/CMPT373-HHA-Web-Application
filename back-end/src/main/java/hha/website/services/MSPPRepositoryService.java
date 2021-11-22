@@ -68,7 +68,7 @@ public class MSPPRepositoryService {
     }
 
     public MSPPRequirement getAForm(Integer documentId) {
-        return msppRepository.findByid(documentId);
+        return msppRepository.findById(documentId).get();
     }
 
     public List<MSPPRequirement> listByIdAndDate(Integer id, Calendar date) {
@@ -77,5 +77,19 @@ public class MSPPRepositoryService {
 
     public void deleteForm(Integer documentId){
         msppRepository.deleteById(documentId);
+    }
+
+    public MSPPRequirement editRequiredForm(Integer documentId, String requiredMSPPDataJson) throws JsonProcessingException{
+        Optional<MSPPRequirement> requiredFormToUpdate = msppRepository.findById(documentId);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> data;
+        try {
+            data = objectMapper.readValue(requiredMSPPDataJson, Map.class);
+            requiredFormToUpdate.get().setRequiredMSPPData(data);
+            return requiredFormToUpdate.get();
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 }

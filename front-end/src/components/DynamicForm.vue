@@ -121,7 +121,7 @@ export default defineComponent({
         requiredMSPPData.department = this.department;
 
         let d = [JSON.stringify(requiredMSPPData), JSON.stringify(additionalData)];
-        this.$axios.post("/api/datainput", d, {
+        this.$axios.post("/api/mspp/submit", d, {
           headers: {
             'Authorization': `Bearer ${token.jwt}`
           }

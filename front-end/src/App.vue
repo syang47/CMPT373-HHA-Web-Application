@@ -27,6 +27,9 @@
             <button class="btn btn-light" @click="testDelete">
               TestDelete
             </button>
+            <button class="btn btn-light" @click="testEdit">
+              TestEdit
+            </button>
             <button class="btn btn-light" @click="goToDataDisplay">
               <p class="text-dark">Data Display</p>
             </button>
@@ -93,13 +96,27 @@ export default defineComponent({
           'Authorization': `Bearer ${token.jwt}`
         },
         params: {
+          documentId: 3
+        }
+      }).then(response => {
+        console.log(response);
+      });
+    },
+    testEdit() {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      let testObj = {bedAvailable: "testReq"};
+      let te = JSON.stringify(testObj);
+      this.$axios.patch("/api/mspp/edit", {MSPPDataJson: te},{
+        headers: {
+          'Authorization': `Bearer ${token.jwt}`
+        },
+        params: {
           documentId: 1
         }
       }).then(response => {
         console.log(response);
       });
     },
-    
   }
 })
 

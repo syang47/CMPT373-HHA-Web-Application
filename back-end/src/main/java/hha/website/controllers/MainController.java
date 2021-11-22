@@ -145,6 +145,16 @@ public class MainController {
         }
     }
 
+
+    @CrossOrigin
+    @RequestMapping(value = "/api/mspp/edit", method = RequestMethod.PATCH)
+    public ResponseEntity<?> editMSPPForm(@RequestParam Integer documentId, @RequestBody String MSPPDataJson) {
+        try{
+            return ResponseEntity.ok(msppRepositoryService.editRequiredForm(documentId, MSPPDataJson));
+        } catch (Exception e){
+            return new ResponseEntity<>("Failed to delete form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
     @CrossOrigin
     @GetMapping("/api/mspp/data")
     public ResponseEntity<?> getAllMSPPData(){
