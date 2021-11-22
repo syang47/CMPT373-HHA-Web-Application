@@ -1,6 +1,7 @@
 package hha.website.auth;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
@@ -35,7 +36,7 @@ public class JwtUtil {
         return claimsResolver.apply(claims);
     }
 
-    public Claims extractAllClaims(String token) {
+    public Claims extractAllClaims(String token) throws ExpiredJwtException {
         return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
     }
 

@@ -29,31 +29,23 @@ public class CaseStudyService {
     @Autowired
     private HHADepartmentService hhaDepartmentService;
 
-    public CaseStudy save(User user, CaseStudyDTO data) {
+    public CaseStudy save(User user, CaseStudyDTO data, MultipartFile file) {
         CaseStudy entry = new CaseStudy();
-
-//        CaseStudyDTO data = new CaseStudyDTO();
-//        try {
-//            ObjectMapper objMapper = new ObjectMapper();
-//            data = objMapper.readValue(dataString, CaseStudyDTO.class);
-//        } catch(IOException e) {
-//            System.out.println(e);
-//        }
 
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
         entry.setUser(user);
         entry.setCaseStudyType(data.getCaseStudyType());
 
-        Optional<MultipartFile> photoBytes = Optional.ofNullable(data.getPhoto());
+        Optional<MultipartFile> photoBytes = Optional.ofNullable(file);
         photoBytes.ifPresent(p -> {
             try{
                 entry.setPhoto(p.getBytes());
+                entry.setPhotoType(p.getContentType());
             } catch(IOException e) {
-                System.out.println(e);
+                e.printStackTrace();
             }
         });
-
 
         entry.setPatientName(data.getPatientName());
         entry.setPatientAge(data.getPatientAge());
@@ -94,20 +86,4 @@ public class CaseStudyService {
     public List<String> listCaseStudyTypes() {
         return caseStudyRepository.queryCaseStudyTypes();
     }
-
-//    public Collection<String> listDistinctItemsInField() {
-//        return caseStudyRepository.queryDistinctField();
-//    }
-//
-//    public Collection<Integer> listPointsInField() {
-//        return caseStudyRepository.queryBestCasestudy();
-//    }
-//
-//    public Collection<Boolean> listSubmissionStatusInField() {
-//        return caseStudyRepository.querySubmissionStatus();
-//    }
-//
-//    public Collection<Integer> listTotalReportsSubmittedField() {
-//        return caseStudyRepository.queryTotalReportsField();
-//    }
 }

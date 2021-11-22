@@ -1,4 +1,17 @@
 <style>
+  body {
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .container-fluid {height:inherit;}
+  .pad {
+    padding-left: 25px;
+    padding-left: 25px;
+  }
   h1, h2, label, p {
     font-family: "Arial";
     font-weight: bold;
@@ -25,22 +38,9 @@
 </style>
 
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-light">
-    <div class="container-fluid">
-      <div class="d-flex justify-content-start">
-        <a class="navbar-brand" href="/">
-          <img src="@/assets/logo.png" width="140" alt=""/>
-        </a>
-
-        <select class="btn btn-sm btn-outline-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-            <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
-              {{ language }}
-            </option>
-        </select>
-      </div>
+  <header class="w-100 navbar navbar-expand-md navbar-light bg-light sticky-top flex-wrap flex-sm-nowrap">
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
-        
-        <li class="nav-item">
+        <!--<li class="nav-item">
           <button class="btn btn-secondary" @click="goToDataDisplay">
             Data Display
           </button>
@@ -49,78 +49,80 @@
           <button class="btn btn-secondary" @click="goToAddAnnouncement">
             {{ $t('header.addAnnouncement') }}
           </button>
+        </li>-->
+        <li class="my-auto nav-item pad">
+          <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+                {{ language }}
+              </option>
+          </select>
         </li>
-        <li class="nav-item">
-          <button class="btn btn-secondary" @click="loginOrLogout">
+        <li class="my-auto nav-item pad">
+          <button class="btn btn-sm btn-outline-secondary" @click="loginOrLogout">
             {{ $t('header.loginOut') }}
           </button>
         </li>
+        
       </ul>
-          <!--
-            <li class="nav-item">
-          <button class="btn btn-light" @click="goToRegister">
-            <p class="text-dark">{{ $t('header.register') }}</p>
-          </button>
-        </li>
-        <div class="navbar-collapse offcanvas-collapse" >
-            <div class="text-end" style="margin-left:auto; margin-right: 0;">
-              test button for data query 
-              <button class="btn btn-light" @click="goToDataDisplay">
-                <p class="text-dark">Data Display</p>
-              </button>
-              <button class="btn btn-light" @click="goToAddAnnouncement">
-                <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
-              </button>
-              <button class="btn btn-light" @click="loginOrLogout">
-                <p class="text-dark">{{ $t('header.loginOut') }}</p>
-              </button>
-              <button class="btn btn-light" @click="goToRegister">
-                <p class="text-dark">{{ $t('header.register') }}</p>
-              </button>
-            </div>
-        </div> -->
+      <a class="my-auto navbar-brand justify-content-end pad" href="/">
+        <img src="@/assets/logo.png" width="140" alt=""/>
+      </a>
+  </header>
+  
+  <div class="container-fixed">
+      <div class="col min-vh-100">
+        <router-view />
       </div>
-  </nav>
-  <router-view />
+  </div>
+  <SideMenu v-if="showSideBar"/>
+
+  
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
+import SideMenu from "@/views/sidebar/SideMenu.vue";
 
 export default defineComponent({
   name: "App",
+  components: {
+    SideMenu,
+  },
+  
   data: function() {
-
-
     return{
       languages: ["Français", "English"],
       l: "Français",
+      showSideBar: false,
     };
+  },
+  mounted() {
+    if(this.$store.state.auth.status.loggedIn) {
+        this.showSideBar = true;
+    }
   },
   methods: {
     loginOrLogout(): void {
-      let tempThis = this;
-      if(tempThis.$store.state.auth.status.loggedIn) {
-        tempThis.$store.dispatch('auth/logout');
+      if(this.$store.state.auth.status.loggedIn) {
+        this.$store.dispatch('auth/logout');
+        this.showSideBar = true;
       }
-      tempThis.$router.push('/login');
+      this.$router.push('/login');
+      this.showSideBar = false;
     },
 
-    goToRegister(): void {
-      let tempThis = this;
-      tempThis.$router.push('/register');
-    },
+    // goToRegister(): void {
+    //   this.$router.push('/register');
+    // },
 
-    goToDataDisplay(): void {
-      let tempThis = this;
-      tempThis.$router.push('/dataDisplay');
-    },
-  // force push 3 case studies to test leadersboard implementation
-    goToAddAnnouncement(): void {
-      let tempThis = this;
-      tempThis.$router.push('/announcement');
-    },
+    // goToDataDisplay(): void {
+    //   this.$router.push('/dataDisplay');
+    // },
+    
+    // goToAddAnnouncement(): void {
+    //   this.$router.push('/announcement');
+    // },
 
     changeLang(choice: string): void {
       if(choice == "Français"){
@@ -130,7 +132,8 @@ export default defineComponent({
         i18n.global.locale = 'en';
       }
     }
-  }
-})
+  },
+ 
+});
 
 </script>

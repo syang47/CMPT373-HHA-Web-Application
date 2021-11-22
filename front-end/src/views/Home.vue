@@ -221,10 +221,7 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
   mounted() {
-      if(!this.$store.state.auth.status.loggedIn) {
-          this.$router.push('/login');
-      }
-      this.showDepartments();
+    this.showDepartments();
   },
   data: function() {
 

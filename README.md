@@ -28,6 +28,17 @@ We will also implement a leaders board as a fun way for staff between department
 - **[Brandon Ong](mailto:bong@sfu.ca)** *as the Scrum Manager*
 - **[ZiYang Jiang](mailto:zyjiang@sfu.ca)** *as the Repo Manager*
 
+## Team Members + Roles (for Project Iteration 3)
+- **[Dr. Brian Fraser](mailto:bfraser@sfu.ca)** *as the Instructor*
+- **[Navid Rahimi](mailto:navidr@sfu.ca)** *as Teaching Assistant*
+- **[Aliasghar Khani](mailto:aka225@sfu.ca)** *as Teaching Assistant*
+- **[Pranjal Keshari](mailto:pkeshari@sfu.ca)** *as the Repo Manager*
+- **[Justin Gregg](mailto:jmgregg@sfu.ca)** *as the Team Member*
+- **[Li Liang](mailto:lianglil@sfu.ca)** *as a Scrum Manager*
+- **[Shan Ying Yang](mailto:syy7@sfu.ca)** *as the Team Member*
+- **[Brandon Ong](mailto:bong@sfu.ca)** *as the Team Member*
+- **[ZiYang Jiang](mailto:zyjiang@sfu.ca)** *as the Product Owner*
+
 ## Directory Structure
 
 This project is split into two main parts: the front-end and back-end.

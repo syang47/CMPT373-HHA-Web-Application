@@ -1,6 +1,5 @@
 <template>
     
-    <!-- <Form class="background" @submit="handleRegister" :validation-schema="userSchema"> -->
     <Form @submit="handleRegister" :validation-schema="userSchema">
 
     <div class="box">
@@ -54,7 +53,6 @@ import { defineComponent } from 'vue'
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 import axios from 'axios';
-import router from '../router';
 export default defineComponent({
     name: "Register",
     components: {

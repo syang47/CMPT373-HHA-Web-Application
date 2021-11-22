@@ -171,7 +171,7 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 import { Form, Field, ErrorMessage } from "vee-validate";
 import * as yup from "yup";
 export default defineComponent({
@@ -219,11 +219,22 @@ export default defineComponent({
                 entry.caseStudyType = this.caseStudySelected;
 
                 let formData = new FormData();
-                formData.append("data", entry);
-                formData.append('file', entry.photo);
-                console.log(entry);
+                if(entry.photo){
+                    for(let p of entry.photo){
+                        formData.append("file", p);
+                    }
+                }
+                
+                delete entry["permission"];
+                delete entry["photo"];
+                formData.append("data", new Blob([JSON.stringify(entry)], {
+                                type: "application/json"
+                            }));
 
-                this.$axios.post("/api/casestudyinput", entry, {
+                // for (var key of formData.entries()) {
+                //     console.log(key[0] + ', ' + key[1]);
+                // }
+                this.$axios.post("/api/casestudyinput", formData, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`,
                     }

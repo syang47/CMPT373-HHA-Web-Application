@@ -1,12 +1,16 @@
 package hha.website.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.UserRepository;
 import hha.website.auth.AuthenticationRequest;
 import hha.website.auth.AuthenticationResponse;
 import hha.website.services.*;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
+import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -16,6 +20,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import javax.persistence.SqlResultSetMapping;
 import javax.persistence.SqlResultSetMappings;
@@ -67,15 +72,13 @@ public class MainController {
     private JwtUtil jwtToken;
 
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
-    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
-        System.out.println(authenticationRequest.getUsername());
-        System.out.println(authenticationRequest.getPassword());
+    public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(), authenticationRequest.getPassword())
             );
         } catch (BadCredentialsException e) {
-            throw new Exception("Wrong username/password", e);
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
         }
 
         final User u = userRepository.findByUsername(authenticationRequest.getUsername());
@@ -86,15 +89,29 @@ public class MainController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment().getDepartmentname()));
     }
 
+    @CrossOrigin
+    @RequestMapping(value = "/api/checktoken", method = RequestMethod.GET)
+    public ResponseEntity<?> checkToken(@RequestHeader("Authorization") String jwt) throws Exception {
+        try {
+            final String tok = jwt.substring(7);
+            final UserDetails userDetails = userDetailsService.loadUserByUsername(jwtToken.extractUserName(tok));
+            if(jwtToken.validateToken(tok, userDetails)){
+                return ResponseEntity.accepted().body("Token is valid.");
+            } else {
+                throw new Exception();
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Unauthorized", HttpStatus.UNAUTHORIZED);
+        }
+    }
+
     @RequestMapping(value = "/api/register", method = RequestMethod.POST)
     public ResponseEntity<?> saveUser(@RequestBody UserDTO user) {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUsername());
         final String role = user.getRole().trim().toLowerCase();
         if(role.contains("admin")){
-            System.out.println("Cannot make admin account");
             return ResponseEntity.badRequest().body("Cannot make admin account");
         } else if(userDetails != null){
-            System.out.println("User already exists.");
             return ResponseEntity.badRequest().body("User already exists.");
         } else {
             System.out.println("user registered: " +  user.getUsername() + " " + user.getPassword() + " " + user.getRole() + " " + user.getDepartment());
@@ -103,19 +120,17 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveData(HttpServletRequest request, @RequestBody MSPPRequirementDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody MSPPRequirementDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(msppRepositoryService.save(user, data));
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(HttpServletRequest request, @RequestBody CaseStudyDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
-        return ResponseEntity.ok(caseStudyService.save(user, data));
+    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        ObjectMapper objectMapper = new ObjectMapper();
+        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
+        return ResponseEntity.ok(caseStudyService.save(user, data, file));
     }
 
     @CrossOrigin
@@ -154,7 +169,6 @@ public class MainController {
         LocalDate parsedDate = LocalDate.parse(date);
         int finalId = Integer.parseInt(id);
         System.out.println(parsedDate);
-
         return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, parsedDate));
     }
 
@@ -170,8 +184,6 @@ public class MainController {
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
     }
 
-
-    @RequestMapping(value = "/api/departments/totalreports", method = RequestMethod.GET)
     @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
         System.out.println("total casestudy submitted for " +  department);
@@ -190,11 +202,10 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveAnnouncement(HttpServletRequest request, @RequestBody AnnouncementDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
-        return ResponseEntity.ok(announcementService.save(data));
+    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestPart(value = "monthlyPhoto", required = false) MultipartFile monthlyPhoto, @RequestPart(value = "annualPhoto", required = false) MultipartFile annualPhoto, @RequestPart("data") String json) throws JsonProcessingException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        AnnouncementDTO data = objectMapper.readValue(json, AnnouncementDTO.class);
+        return ResponseEntity.ok(announcementService.save(data, monthlyPhoto, annualPhoto));
     }
 
     @CrossOrigin
@@ -205,10 +216,8 @@ public class MainController {
 
 
     @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveMessage(HttpServletRequest request, @RequestBody MessageBoardDTO data) {
-        final String authorizationHeader = request.getHeader("Authorization");
-        final String username = jwtToken.extractUserName(authorizationHeader.substring(7));
-        final User user = userDetailsService.findByUsername(username);
+    public ResponseEntity<?> saveMessage(@RequestHeader("Authorization") String jwt, @RequestBody MessageBoardDTO data) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(messageBoardService.save(user, data));
     }
 
@@ -217,12 +226,5 @@ public class MainController {
     public ResponseEntity<?> getMessages(){
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
-//    @RequestMapping(value = "/api/casestudy/submissionstatus", method = RequestMethod.GET)
-//    public String getCaseStudySubStatusField() {
-//        System.out.println("casestudysubmission status");
-//        System.out.println(Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()));
-//        return Arrays.toString(caseStudyService.listSubmissionStatusInField().toArray()).replace("[", "").replace("]","");
-//    }
-
 
 }

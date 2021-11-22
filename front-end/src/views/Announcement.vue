@@ -97,11 +97,23 @@ export default defineComponent({
             if(token != null) {
 
                 let formData = new FormData();
-                formData.append("data", entry);
-                formData.append('file', entry.photo);
-                console.log(entry);
+                if(entry.monthlyPhoto){
+                    for(let p of entry.monthlyPhoto){
+                        formData.append("monthlyPhoto", p);
+                    }
+                }
+                if(entry.annualPhoto){
+                    for(let p of entry.annualPhoto){
+                        formData.append("annualPhoto", p);
+                    }
+                }
+                delete entry["monthlyPhoto"];
+                delete entry["annualPhoto"];
+                formData.append("data", new Blob([JSON.stringify(entry)], {
+                                type: "application/json"
+                            }));
 
-                this.$axios.post("/api/announcements/submit", entry, {
+                this.$axios.post("/api/announcements/submit", formData, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`,
                     }

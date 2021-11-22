@@ -39,6 +39,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
                         <Field name="diedBefore48h" type="text" class="form-control"  id="diedBefore48h" v-on:keyup="checkDiedBefore48h()" value=0 />
@@ -54,9 +55,12 @@
                             <legend style="color:green">Patient {{ idx+1 }}</legend>
                             <label :for="`diedBefore48hAge_${idx}`">Age</label>
                             <Field class="form-control"
+                                   type="number"
                                    :id="`diedBefore48hAge_${idx}`" 
                                    :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
                             <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+
+                            <br>
 
                             <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
                             <Field class="form-control"
@@ -76,6 +80,7 @@
 
 
                 <div>
+                    <!-- Todo: this additional form need to be translated -->
                     <div class="form-group">
                         <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
                         <Field name="diedAfter48h" type="text" class="form-control" id="diedAfter48h" v-on:keyup="checkDiedAfter48h()" value=0 />
@@ -92,6 +97,7 @@
                             <label :for="`diedAfter48hAge_${idx}`">Age</label>
                             <Field class="form-control"
                                    :id="`diedAfter48hAge_${idx}`" 
+                                   type="number"
                                    :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" />
                             <ErrorMessage :name="`diedAfter48hPatient[${idx}].diedAfter48hAge`" class="error-feedback" />
 
@@ -939,16 +945,15 @@ export default defineComponent({
         FieldArray,
     },
     data() {
-        const diedBefore48hSchema = yup.object().shape({
+        const dataSchema = yup.object().shape({
             diedBefore48hPatient: yup
                 .array()
                 .of(
                 yup.object().shape({
                     diedBefore48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedBefore48hCause: yup
                         .string()
                         .required("Required.")
@@ -956,17 +961,15 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const diedAfter48hSchema= yup.object().shape({
+
             diedAfter48hPatient: yup
                 .array()
                 .of(
                 yup.object().shape({
                     diedAfter48hAge: yup
-                        .number()
-                        .min(0, "Cannot be negative.")
+                        .string()
                         .required("Required.")
-                        .default(0),
+                        .default("0"),
                     diedAfter48hCause: yup
                         .string()
                         .required("Required.")
@@ -974,8 +977,7 @@ export default defineComponent({
                 })
             )
             .strict(),
-        });
-        const dataSchema = yup.object().shape({
+
             bedsAvailable: yup
                 .number()
                 .min(0, "Cannot be negative.")
@@ -1556,8 +1558,6 @@ export default defineComponent({
             admissionsMor: false,
             diedBefore48hMor: false,
             diedAfter48hMor: false,
-            diedBefore48hSchema,
-            diedAfter48hSchema,
             dataSchema,
         };
     },
@@ -1595,36 +1595,36 @@ export default defineComponent({
             }
         },
         handleData(entry) {
-        let token = JSON.parse(localStorage.getItem('user')!);
-        if(token != null) {
-            entry.department = "maternity";
-            this.$axios.post("/api/datainput", entry, {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`
-                }
-            }).then(response => {
-                    this.message = response.data;
-                    this.successful = true;
-                    this.loading = false;
-                    if(response != null) {
-                        console.log("entry successful: " + this.successful);
-                        this.$router.push("/");
-                    } else {
-                        alert("entry could not be submitted");
+            let token = JSON.parse(localStorage.getItem('user')!);
+            if(token != null) {
+                entry.department = "maternity";
+                this.$axios.post("/api/datainput", entry, {
+                    headers: {
+                        'Authorization': `Bearer ${token.jwt}`
                     }
-                }
-            ).catch((error: any) => {
-                  this.message =
-                      (error.response &&
-                      error.response.data &&
-                      error.response.data.message) ||
-                      error.message;
-                  this.successful = false;
-                  this.loading = false;
-                  alert("entry could not be submitted");
-            });
-        }
-    },
+                }).then(response => {
+                        this.message = response.data;
+                        this.successful = true;
+                        this.loading = false;
+                        if(response != null) {
+                            console.log("entry successful: " + this.successful);
+                            this.$router.push("/");
+                        } else {
+                            alert("entry could not be submitted");
+                        }
+                    }
+                ).catch((error: any) => {
+                    this.message =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message;
+                    this.successful = false;
+                    this.loading = false;
+                    alert("entry could not be submitted");
+                });
+            }
+        },
 
     }
 });

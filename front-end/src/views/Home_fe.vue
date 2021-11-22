@@ -133,203 +133,36 @@
       padding: 2px 2px 2px 2px;
   }
 </style>
+<template>
 
-<template>  
-  <n-space vertical justify="center space-between space-around" size="large">
-    <n-grid :cols="2" >
-        <n-grid-item :offset="0">
-            <n-carousel autoplay>
-                <img class="carousel-img" src="../assets/project_photos/pic1.jpeg" />
-                <img class="carousel-img" src="../assets/project_photos/pic2.jpg" />
-                <img class="carousel-img" src="../assets/project_photos/pic3.jpeg" />
-            </n-carousel>
-        </n-grid-item>
-        <n-grid-item :offset="0">
-            <n-collapse arrow-placement="right">
-                <n-card class="rectangle-leader-board">
-                    <n-collapse-item name="expandLeadersBoard">
-                        <template #arrow>
-                        <n-icon size="40" color="white" depth="2">
-                            <ArrowIcon />
-                        </n-icon>
-                        </template>
-                        <template #header>
-                            <button @click.prevent="goToLeadersBoard">
-                                <h1>{{ $t('homePage.leaderBoard') }}</h1>
-                            </button>                
-                        </template>
-                        <h1>okay</h1>
-                    </n-collapse-item>
-                </n-card>
-            </n-collapse>
-        
-            <div class="row justify-content-center">
-                <n-grid :cols="2" item-responsive>
-                    <n-grid-item span="1">
-                        <n-collapse class="col justify-content-center" arrow-placement="right">
-                            <n-card class="rectangle-sky-blue-buttons" v-if="showNICU">
-                                <n-collapse-item name="expandDepartment">
-                                <template #arrow>
-                                    <n-icon size="40" color="white" depth="2">
-                                        <ArrowIcon />
-                                    </n-icon>
-                                </template>
-                                <template #header>
-                                    <button class="button" @click.prevent="goToNICUPAED" >
-                                        <h1>{{ $t('homePage.nicuPaed') }}</h1>
-                                    </button>                
-                                </template>
-                                <h1>okay</h1>
-                                </n-collapse-item>
-                            </n-card>
-                        </n-collapse>
-                    </n-grid-item>
-                    <n-grid-item span="1">
-                        <n-collapse class="col justify-content-center" arrow-placement="right">
-                            <n-card class="rectangle-sky-blue-buttons" v-if="showMaternity">
-                                <n-collapse-item name="expandDepartment">
-                                <template #arrow>
-                                    <n-icon size="40" color="white" depth="2">
-                                    <ArrowIcon />
-                                    </n-icon>
-                                </template>
-                                <template #header>
-                                    <button class="button" @click.prevent="goToMaternity" >
-                                        <h1>{{ $t('homePage.maternity') }}</h1>
-                                    </button>                
-                                </template>
-                                <h1>okay</h1>
-                                </n-collapse-item>
-                            </n-card>
-                        </n-collapse>
-                    </n-grid-item>
-                </n-grid>
-                <n-grid :cols="2"  item-responsive>
-                    <n-grid-item span="1">
-                        <n-collapse class="col justify-content-center" arrow-placement="right">
-                            <n-card class="rectangle-sky-blue-buttons" v-if="showRehab">
-                                <n-collapse-item name="expandDepartment">
-                                    <template #arrow>
-                                        <n-icon size="40" color="white" depth="2">
-                                            <ArrowIcon />
-                                        </n-icon>
-                                    </template>
-                                    <template #header>
-                                        <button class="button" @click.prevent="goToRehab" >
-                                            <h1>{{ $t('homePage.rehab') }}</h1>
-                                        </button>                
-                                    </template>
-                                    <h1>okay</h1>
-                                </n-collapse-item>
-                            </n-card>
-                        </n-collapse>
-                    </n-grid-item>
 
-                    <n-grid-item span="1">   
-                        <n-collapse class="col justify-content-center" arrow-placement="right">
-                            <n-card class="rectangle-sky-blue-buttons" v-if="showComHealth">
-                                <n-collapse-item name="expandDepartment">
-                                    <template #arrow>
-                                        <n-icon size="40" color="white" depth="2">
-                                            <ArrowIcon />
-                                        </n-icon>
-                                    </template>
-                                    <template #header>
-                                        <button class="button" @click.prevent="goToCommunityHealth" >
-                                            <h1>{{ $t('homePage.communityHealth') }}</h1>
-                                        </button>                
-                                    </template>
-                                    <h1>okay</h1>
-                                    <h1>okay</h1><h1>okay</h1><h1>okay</h1><h1>okay</h1><h1>okay</h1>
-                                </n-collapse-item>
-                            </n-card>
-                        </n-collapse>
-                    </n-grid-item>
-                </n-grid>
-            </div>
-            <n-card class="rectangle-msg-board">
-                <button class="button" style="display:inline-block;" @click.prevent="goToMessageBoard">
-                    <h1>{{ $t('homePage.messageBoard') }}</h1>
-                </button>
-            </n-card>
-            <n-card class="rectangle-case-studies">
-                <button class="button">
-                    <h1>{{ $t('homePage.caseStudy') }}</h1>
-                </button>
-            </n-card>
-    
-        </n-grid-item>
-        
-    </n-grid>
-  </n-space>
+<div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="../assets/project_photos/pic1.jpeg" class="d-block vw-100 vh-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/project_photos/pic2.jpg" class="d-block vw-100 vh-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="../assets/project_photos/pic3.jpeg" class="d-block vh-100 vw-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
 </template>
-
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue'
 import {KeyboardArrowDownOutlined as ArrowIcon} from "@vicons/material"
+import SideMenu from "./SideMenu.vue";
 export default defineComponent({
   name: "Home_fe",
-  components: {
-    ArrowIcon
-  },
-  mounted() {
-      if(!this.$store.state.auth.status.loggedIn) {
-          this.$router.push('/login');
-      }
-      this.showDepartments();
-  },
-  data: function() {
-
-    return {
-      showNICU: false,
-      showComHealth: false,
-      showMaternity: false,
-      showRehab: false,
-
-    }
-  },
-  methods: {
-    showDepartments(): void {
-      const token = JSON.parse(localStorage.getItem('user')!);
-      if(token.roles[0].authority == 'ROLE_ADMIN' || token.roles[0].authority == 'ROLE_HEAD') {
-        this.showNICU = true;
-        this.showComHealth = true;
-        this.showMaternity = true;
-        this.showRehab = true;
-      }
-      if(token.department == "NICU_PAED") {
-        this.showNICU = true;
-      }
-      if(token.department == "community_health") {
-        this.showComHealth = true;
-      }
-      if(token.department == "maternity")  {
-        this.showMaternity = true;
-      }
-      if(token.department == "rehab")  {
-        this.showRehab = true;
-      }
-    },
-
-    goToLeadersBoard(){
-      this.$router.push('/leadersboard');
-    },
-    goToNICUPAED() {
-      this.$router.push('/nicu_paed');
-    },
-    goToMaternity() {
-      this.$router.push('/maternity');
-    },
-    goToRehab() {
-      this.$router.push('/rehab');
-    },
-    goToCommunityHealth() {
-      this.$router.push('/community_health');
-    },
-    goToMessageBoard() {
-      this.$router.push('/message_board');
-    }
-
-  }
 });
 </script>

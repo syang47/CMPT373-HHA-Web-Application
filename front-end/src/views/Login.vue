@@ -91,15 +91,14 @@
 
         <div class="page">
             <div class="box">
-                <!-- Todo: modifiy each hard-code html element for "$t" templete -->
                 <h2>{{ $t('loginPage.login') }}</h2>
                 <div class="item">
-                    <input v-model="username" type="text" required>
-                    <label for="">{{ $t('loginPage.username') }}</label>
+                    <input v-model="username" type="text" required @keyup.enter="login">
+                    <label for="username">{{ $t('loginPage.username') }}</label>
                 </div>
                 <div class="item">
-                    <input v-model="password" type="password" required>
-                    <label for="">{{ $t('loginPage.password') }}</label>
+                    <input v-model="password" type="password" required @keyup.enter="login">
+                    <label for="password">{{ $t('loginPage.password') }}</label>
                 </div>
                 <div class="row">
                     <div class="col">
@@ -113,32 +112,29 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-    import { Vue } from "vue-class-component";
-
-    export default class Login extends Vue {
-        username = '';
-        password = '';
-
-        mounted() {
-            let tempThis = this;
-            if(tempThis.$store.state.auth.status.loggedIn) {
-                tempThis.$router.push('/');
-            } else {
-                document.onkeydown = function (e) {
-                    if(e.key == 'Enter'){
-                        tempThis.login();
-                    }
-                }
+import { defineComponent } from 'vue'
+export default defineComponent({
+    name: "Login",
+    mounted() {
+        this.$store.dispatch("auth/isTokenValid").then(response => {
+            if(this.$store.state.auth.status.loggedIn) {
+                this.$router.push('/');
             }
-        };
-
+        });
+    },
+    data: function() {
+        return {
+            username: "",
+            password: ""
+        }
+    },
+    methods: {
         login(): void {
-            let tempThis = this;
-            tempThis.$store.dispatch("auth/login", {username: tempThis.username, password: tempThis.password}).then( response => {
+            this.$store.dispatch("auth/login", {username: this.username, password: this.password}).then( response => {
                     if(response != null) {
                         let token = JSON.parse(localStorage.getItem('user')!);
                         console.log(token.roles[0].authority);
-                        tempThis.$router.push("/");
+                        this.$router.push("/");
                     } else {
                         alert("invalid credentials");
                     }
@@ -150,5 +146,6 @@
             );
         }
     }
+});
 
 </script>
