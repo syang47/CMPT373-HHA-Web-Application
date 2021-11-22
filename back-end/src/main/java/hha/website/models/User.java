@@ -37,7 +37,7 @@ public class User {
     @JsonIgnore
     private Set<CaseStudy> caseStudies;
 
-    @Column
+    @Column//make this into a function that automatically gets size by folder.size
     private Integer reportsSubmitted;
 
     @Column

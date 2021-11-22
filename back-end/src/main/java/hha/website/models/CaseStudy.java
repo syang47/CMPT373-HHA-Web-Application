@@ -18,8 +18,7 @@ public class CaseStudy {
     @Column(nullable = false)
     private Calendar dateSubmitted;
 
-    @ManyToOne(fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @JsonIgnore
     private User user;

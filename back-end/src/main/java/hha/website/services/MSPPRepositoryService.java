@@ -76,6 +76,7 @@ public class MSPPRepositoryService {
     }
 
     public void deleteForm(Integer documentId){
+        System.out.println("form deleted");
         msppRepository.deleteById(documentId);
     }
 
