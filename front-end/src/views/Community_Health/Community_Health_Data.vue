@@ -22,7 +22,7 @@ export default defineComponent({
                     label: 'bedsAvailable',
                     name: 'bedsAvailable',
                     as: 'input',
-                    rules: yup.number().min(0, "Cannot be negative.").required("Required.").default(0),
+                    rules: yup.number().min(0, "Cannot be negative.").default(0),
                 },
             ],
         };
