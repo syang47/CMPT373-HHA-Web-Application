@@ -30,11 +30,22 @@
               </tbody>
             </table>
           </div>
-          <!-- PATIENTS -->
+          <!-- PATIENTS FORM1 -->
           <div v-else-if="field.patient">
             <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
             <Patient v-model="s[field.name]" />
             
+          </div>
+          <!-- PATIENTS FORM2 -->
+          <div v-else-if="field.specPatient">
+            <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
+            <Patient v-model="s[field.name]" />
+          </div>
+
+          <!-- PATIENTS FORM3 -->
+          <div v-else-if="field.rehabPatient">
+            <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
+            <Patient v-model="s[field.name]" />
           </div>
 
           <!-- REGULAR INPUTS -->
@@ -76,7 +87,7 @@ export default defineComponent({
   components: {
     Form,
     RegularInput,
-    Patient
+    Patient,
   },
   data() {
     return {
