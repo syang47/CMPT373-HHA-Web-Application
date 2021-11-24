@@ -8,14 +8,27 @@
     position: relative;
   }
   .container-fluid {height:inherit;}
-  .pad {
-    padding-left: 25px;
-    padding-left: 25px;
-  }
+
   h1, h2, label, p {
     font-family: "Arial";
     font-weight: bold;
-    
+  }
+  .nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .viewWithSideBar {
+    position: fixed;
+    top: 105px;
+    object-fit: contain;
+    height: 100%;
+    width: 100vw;
+    overflow: auto;
+  }
+  .viewWithoutSideBar {
+    position: fixed;
+    top: 105px;
+    object-fit: contain;
   }
   .btn{
     font-family: "Arial";
@@ -38,44 +51,39 @@
 </style>
 
 <template>
-  <header class="w-100 navbar navbar-expand-md navbar-light bg-light sticky-top flex-wrap flex-sm-nowrap">
+
+  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light sticky-top">
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
-        <!--<li class="nav-item">
-          <button class="btn btn-secondary" @click="goToDataDisplay">
-            Data Display
-          </button>
-        </li>
-        <li class="nav-item">
-          <button class="btn btn-secondary" @click="goToAddAnnouncement">
-            {{ $t('header.addAnnouncement') }}
-          </button>
-        </li>-->
-        <li class="my-auto nav-item pad">
+        <li class="my-auto nav-item">
           <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
               <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
                 {{ language }}
               </option>
           </select>
         </li>
-        <li class="my-auto nav-item pad">
+        <li class="my-auto nav-item">
           <button class="btn btn-sm btn-outline-secondary" @click="loginOrLogout">
             {{ $t('header.loginOut') }}
           </button>
         </li>
-        
       </ul>
-      <a class="my-auto navbar-brand justify-content-end pad" href="/">
+      <a class="my-auto navbar-brand justify-content-end" href="/">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </a>
-  </header>
-  
-  <div class="container-fixed">
-      <div class="col min-vh-100">
-        <router-view />
+  </nav>
+  <div v-if="showSideBar">
+    <SideMenu />
+    <div class="container-fixed viewWithSideBar">
+      <div class="col min-vh-100 min-vw-100">
+        <router-view class="container-fluid g-0" />
       </div>
+    </div>
   </div>
-  <SideMenu v-if="showSideBar"/>
-
+  <div v-else>
+    <div class="col min-vh-100 min-vw-100 viewWithoutSideBar">
+      <router-view class="container-fluid g-0" />
+    </div>
+  </div>
   
 </template>
 
@@ -112,17 +120,6 @@ export default defineComponent({
       this.showSideBar = false;
     },
 
-    // goToRegister(): void {
-    //   this.$router.push('/register');
-    // },
-
-    // goToDataDisplay(): void {
-    //   this.$router.push('/dataDisplay');
-    // },
-    
-    // goToAddAnnouncement(): void {
-    //   this.$router.push('/announcement');
-    // },
 
     changeLang(choice: string): void {
       if(choice == "Français"){

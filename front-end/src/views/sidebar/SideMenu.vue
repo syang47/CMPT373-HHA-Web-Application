@@ -2,7 +2,6 @@
     .sidemenu{
         padding-top: 150px;
     }
-    .container-fluid {height:inherit;}
     .sidebar-overlay {
         position: fixed;
         width:100%;
@@ -15,7 +14,8 @@
     }
 </style>
 <template>
-    <sidebar-menu 
+    
+    <sidebar-menu
         ref="sidebar"
         v-if="showSideBar"
         class="sidemenu"
@@ -113,6 +113,7 @@ export default defineComponent({
         }
     },
     mounted() {
+        
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token != null) {
             this.showSideBar = true;
