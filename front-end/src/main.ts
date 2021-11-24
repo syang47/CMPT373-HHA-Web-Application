@@ -13,7 +13,6 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue-3/dist/bootstrap-vue-3.css';
 import { VuesticPlugin } from 'vuestic-ui'; // <-
 import 'vuestic-ui/dist/vuestic-ui.css'; // <-
-import VueResizeObserver from "vue-resize-observer";
 declare module "@vue/runtime-core" {
   interface ComponentCustomProperties {
     $axios: AxiosInstance;
@@ -30,7 +29,6 @@ app.use(i18n);
 app.use(BootstrapVue3);
 app.use(VueSideBarMenu);
 app.use(VuesticPlugin);
-app.use(VueResizeObserver);
 app.config.globalProperties.$axios = axios;
 axios.defaults.baseURL = "http://localhost:8080";
 app.use(Equal);
