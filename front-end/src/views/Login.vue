@@ -1,4 +1,5 @@
 <style>
+
     .background {
         background: url('../assets/IsaacCBRManager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
@@ -113,7 +114,6 @@
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue';
-import SideMenu from "@/views/sidebar/SideMenu.vue";
 
 export default defineComponent({
     name: "Login",

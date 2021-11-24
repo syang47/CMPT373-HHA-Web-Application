@@ -1,6 +1,89 @@
+
+<style scoped>
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.btn:hover {
+  border-radius: 10px;
+  color: #fff;
+  box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
+    0 0 100px 0 #c6fafe;
+}
+.background {
+    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
+    /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
+    /* -moz-background-size:100% 100%; */
+    position: absolute;
+    /* background-size: 100% 100%; */
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+
+@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+body {
+  border-top: 4px solid #DC0000;
+  background: #15151E;
+  color: #fff;
+  font-family: 'Rubik', sans-serif;
+  /* center the table horizontally */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table {
+  width: calc(90vw - 2rem);
+  max-width: 500px;
+  border-spacing: 0 1rem;
+}
+
+table tr > * {
+  text-align: center;
+  padding: 0.5rem;
+}
+
+table tr > *:nth-child(2) {
+  text-align: left;
+}
+
+table th {
+  font-weight: 3;
+  letter-spacing: 0.04rem;
+  font-size: 0.9rem;
+  color: #000000;
+}
+
+table td.gap span {
+  background: #38383F;
+  border-radius: 30px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+@media (max-width: 500px) {
+  table tr > *:nth-child(3) {
+    display: none;
+  }
+}
+
+</style>
+
 <template>
-<div class="background d-flex justify-content-center align-items-top" style="height: 100vh; ">
-    <div class="container-fluid ">
+
+<div class = "background">
+    <div class="container-fluid">
         <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
         <div class="container-fluid">
             <div class="row">
@@ -67,12 +150,13 @@
         </div>
     </div>
 </div>
+
 </template>
 
 <script lang="ts" type="text/typescript">
+
 import { defineComponent } from 'vue';
 import axios from 'axios';
-
 export default defineComponent({
     name: "LeadersBoard",
     mounted() {
@@ -127,83 +211,6 @@ export default defineComponent({
         }
     }
 });
+
 </script>
 
-<style scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
-
-.btn:hover {
-  border-radius: 10px;
-  color: #fff;
-  box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
-    0 0 100px 0 #c6fafe;
-}
-.background {
-    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
-    /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
-    /* -moz-background-size:100% 100%; */
-    /* background-size: 100% 100%; */
-    height: 100%;
-    position: relative;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
-}
-
-@import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-body {
-  border-top: 4px solid #DC0000;
-  background: #15151E;
-  color: #fff;
-  font-family: 'Rubik', sans-serif;
-  /* center the table horizontally */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-table {
-  width: calc(90vw - 2rem);
-  max-width: 500px;
-  border-spacing: 0 1rem;
-}
-
-table tr > * {
-  text-align: center;
-  padding: 0.5rem;
-}
-
-table tr > *:nth-child(2) {
-  text-align: left;
-}
-
-table th {
-  font-weight: 3;
-  letter-spacing: 0.04rem;
-  font-size: 0.9rem;
-  color: #000000;
-}
-
-table td.gap span {
-  background: #38383F;
-  border-radius: 30px;
-  padding: 0.5rem 0.75rem;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-}
-
-@media (max-width: 500px) {
-  table tr > *:nth-child(3) {
-    display: none;
-  }
-}
-</style>

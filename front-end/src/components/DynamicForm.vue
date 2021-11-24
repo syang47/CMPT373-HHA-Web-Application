@@ -1,23 +1,29 @@
 <template>
   <Form class="background" @submit="handleData" >
     <div class="signup-form"
-      v-for="{ as, name, label, children, ...attrs } in schema.fields"
+      v-for="{ as, name, label, header, children, ...attrs } in schema.fields"
       :key="name"
     >
       <div class="form-group">
-        <label :for="name">{{ $t('msppData.'+ label) }}</label>
-        <Field :as="as" :id="name" :name="name" v-bind="attrs" class="form-control">
-          <template v-if="children && children.length">
-            <component v-for="({ tag, text, ...childAttrs }, idx) in children"
-              :key="idx"
-              :is="tag"
-              v-bind="childAttrs"
+        <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
+        <div v-else>
+          <label :for="name">{{ $t('msppData.'+ label) }}</label>
+          <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
+          <ErrorMessage :name="name" class="error-feedback" />
+          <template v-if="children && children.length && s[name] > 0">
+            <div class="signup-form"
+              v-for="{ as, name, label, header, ...attrs } in children"
+              :key="name"
             >
-              {{ text }}
-            </component>
+              <h4 v-if="header" style="color:green">{{ $t('msppData.'+ header) }}</h4>
+              <div v-else>
+                <label style="color:green" :for="name">{{ $t('msppData.'+ label) }}</label>
+                <Field :as="as" :id="name" :name="name" v-bind="attrs" v-model="s[name]" class="form-control" />
+                <ErrorMessage :name="name" class="error-feedback" />
+              </div>
+            </div>
           </template>
-        </Field>
-        <ErrorMessage :name="name" class="error-feedback" />
+        </div>
       </div>
     </div>
     <div class="form-group">
@@ -44,6 +50,7 @@ export default defineComponent({
       successful: false,
       loading: false,
       message: "",
+      s: this.schema.fields
     }
   },
   props: {
@@ -94,7 +101,7 @@ export default defineComponent({
 <style scoped>
     .background {
         height: 100%;
-        position: relative;
+        position: absolute;
         width: 100%;
         overflow: auto;
     }
