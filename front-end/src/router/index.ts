@@ -50,14 +50,6 @@ const routes: Array<RouteRecordRaw> = [
     },
   },
   {
-    path: "/hehe",
-    component: Home,
-    meta: {
-      requiresAuth: false,
-    },
-  },
-  //leaders board
-  {
     path: "/leadersboard",
     name: "LeadersBoard",
     component: LeadersBoard,
