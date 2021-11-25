@@ -22,8 +22,7 @@
   </div>
 </template>
 <script lang="ts" type="text/typescript">
-import { ref, onBeforeMount, defineComponent } from 'vue'
-
+import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
   // mounted() {
