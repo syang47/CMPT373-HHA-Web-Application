@@ -35,7 +35,8 @@
         <Field class="form-control"
             type="number"
             :id="`dischargedAlivePatientNo_${idx}`" 
-            :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" />
+            :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"/>
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAlivePatientNo`" class="error-feedback" />
 
 
@@ -45,21 +46,21 @@
         <label :for="`dischargedAliveAllGoals_${idx}`">All goals met</label>
         <Field class="form-control"
             :id="`dischargedAliveAllGoals_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveAllGoals`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveAllGoals`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveGoalsPartially_${idx}`">Goals partially met, sufficient for discharge</label>
         <Field class="form-control"
             :id="`dischargedAliveGoalsPartially_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"/>
             :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveNoGoals_${idx}`">Goals not met, discharged for alternate reason</label>
         <Field class="form-control"
             :id="`dischargedAliveNoGoals_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveNoGoals`" class="error-feedback" />
 
@@ -70,49 +71,49 @@
         <label :for="`dischargedAliveADLsIndependent_${idx}`">Independent </label>
         <Field class="form-control"
             :id="`dischargedAliveADLsIndependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsIndependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsIndependent`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsModifiedIndependent_${idx}`">Modified Independent</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsModifiedIndependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModifiedIndependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModifiedIndependent`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsSupervision_${idx}`">Supervision</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsSupervision_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsSupervision`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsSupervision`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsMinimumAssistance_${idx}`">Minimum Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsMinimumAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMinimumAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMinimumAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsModerateAssistance_${idx}`">Moderate Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsModerateAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModerateAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsModerateAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsMaximumAssistance_${idx}`">Maximum Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsMaximumAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMaximumAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsMaximumAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveADLsDependent_${idx}`">Dependent</label>
         <Field class="form-control"
             :id="`dischargedAliveADLsDependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveADLsDependent`" class="error-feedback" />
 
@@ -123,49 +124,49 @@
         <label :for="`dischargedAliveTransfersIndependent_${idx}`">Independent </label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersIndependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersIndependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersIndependent`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersModifiedIndependent_${idx}`">Modified Independent</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersModifiedIndependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModifiedIndependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModifiedIndependent`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersSupervision_${idx}`">Supervision</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersSupervision_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersSupervision`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersSupervision`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersMinimumAssistance_${idx}`">Minimum Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersMinimumAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMinimumAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMinimumAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersModerateAssistance_${idx}`">Moderate Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersModerateAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModerateAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersModerateAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersMaximumAssistance_${idx}`">Maximum Assistance</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersMaximumAssistance_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMaximumAssistance`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersMaximumAssistance`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveTransfersDependent_${idx}`">Dependent</label>
         <Field class="form-control"
             :id="`dischargedAliveTransfersDependent_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveTransfersDependent`" class="error-feedback" />
 
@@ -176,28 +177,28 @@
         <label :for="`dischargedAliveWheelchair_${idx}`">Wheelchair</label>
         <Field class="form-control"
             :id="`dischargedAliveWheelchair_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveWheelchair`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveWheelchair`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveWalker_${idx}`">Walker</label>
         <Field class="form-control"
             :id="`dischargedAliveWalker_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveWalker`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveWalker`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveCane_${idx}`">Cane</label>
         <Field class="form-control"
             :id="`dischargedAliveCane_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveCane`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveCane`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveCrutches_${idx}`">Crutches</label>
         <Field class="form-control"
             :id="`dischargedAliveCrutches_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveCrutches`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveCrutches`" class="error-feedback" />
 
@@ -208,21 +209,21 @@
         <label :for="`dischargedAliveHomeAlone_${idx}`">Return home, alone</label>
         <Field class="form-control"
             :id="`dischargedAliveHomeAlone_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeAlone`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeAlone`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveHomeWithOther_${idx}`">Return home, with family/caregiver(s)</label>
         <Field class="form-control"
             :id="`dischargedAliveHomeWithOther_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeWithOther`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHomeWithOther`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveHospital_${idx}`">Admitted to hospital</label>
         <Field class="form-control"
             :id="`dischargedAliveHospital_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveHospital`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveHospital`" class="error-feedback" />
 
@@ -233,28 +234,28 @@
         <label :for="`dischargedAliveEmployed_${idx}`">Employed</label>
         <Field class="form-control"
             :id="`dischargedAliveEmployed_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveEmployed`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveEmployed`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveUnableToFindWork_${idx}`">Unemployed, unable to find work</label>
         <Field class="form-control"
             :id="`dischargedAliveUnableToFindWork_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveUnableToFindWork`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveUnableToFindWork`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveDueToCondition_${idx}`">Unemployed, due to condition</label>
         <Field class="form-control"
             :id="`dischargedAliveDueToCondition_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveDueToCondition`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveDueToCondition`" class="error-feedback" />
         <br>
         <label :for="`dischargedAliveRetired_${idx}`">Retired, not working due to age</label>
         <Field class="form-control"
             :id="`dischargedAliveRetired_${idx}`"
-            type="number"
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveRetired`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveRetired`" class="error-feedback" />
     </div>
