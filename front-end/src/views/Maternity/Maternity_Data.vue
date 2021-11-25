@@ -40,10 +40,10 @@
 
 <template>
 
-    <Form class="background" @submit="handleData" :validation-schema="dataSchema">
-        <div class="signup-form text-monospace">
+    <Form @submit="handleData" :validation-schema="dataSchema">
+        <div class="signup-form">
             <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
+                <h2>{{ $t('msppData.msppForm') }}</h2>
             </div>
             <div v-if="!successful">
 

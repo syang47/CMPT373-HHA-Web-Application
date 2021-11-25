@@ -1,4 +1,4 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+import { createRouter, createWebHistory, RouteRecordRaw } from "vue-router";
 import Login from "@/views/Login.vue";
 import Register from "@/views/Register.vue";
 import Home from "@/views/Home.vue";
@@ -47,6 +47,13 @@ const routes: Array<RouteRecordRaw> = [
     component: Home,
     meta: {
       requiresAuth: true,
+    },
+  },
+  {
+    path: "/hehe",
+    component: Home,
+    meta: {
+      requiresAuth: false,
     },
   },
   //leaders board
@@ -165,11 +172,13 @@ const routes: Array<RouteRecordRaw> = [
       requiresAuth: true,
     },
   },
+
+  // Other components
 ];
 
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
 });
 
