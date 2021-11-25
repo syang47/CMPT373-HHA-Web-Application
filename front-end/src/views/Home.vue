@@ -23,7 +23,7 @@
 </template>
 <script lang="ts" type="text/typescript">
 import { ref, onBeforeMount, defineComponent } from 'vue'
-import {KeyboardArrowDownOutlined as ArrowIcon} from "@vicons/material"
+
 export default defineComponent({
   name: "Home",
   // mounted() {
