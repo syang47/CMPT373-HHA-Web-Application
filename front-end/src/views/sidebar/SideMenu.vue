@@ -1,7 +1,4 @@
 <style scoped>
-    .sidemenu{
-        padding-top: 150px;
-    }
     .sidebar-overlay {
         position: fixed;
         width:100%;
@@ -16,25 +13,18 @@
 <template>
     
     <sidebar-menu
-        ref="sidebar"
-        v-if="showSideBar"
-        class="sidemenu"
         :collapsed="collapsed" 
         :menu="menu"
-        :show-one-child="true"
-        @toggle-collapse="onToggleCollapse"
-        @itemClick="onItemClick">
+        :showOneChild="true"
+        :showChild="true"
+        :relative="true"
+        >
     </sidebar-menu>
-    <div v-if="isOnMobile && !collapsed" class="sidebar-overlay" @click="collapsed=true" />
     
 </template>
 
 <script lang="ts" type="text/typescript">
 import { defineComponent } from 'vue';
-import { createPopper } from '@popperjs/core';
-const separator = {
-  template: `<hr style="border-color: rgba(0,0,0,0.1); margin: 20px;">`
-}
 export default defineComponent({
     name: "SideMenu",
     data: function() {
@@ -70,14 +60,6 @@ export default defineComponent({
                     hiddenOnCollapse: true
                 },
                 {
-                    component: separator
-                },
-                {
-                    title: 'Home',
-                    href: '/Home_fe',
-                    hiddenOnCollapse: true
-                },
-                {
                     href:'/',
                     title: "Departments",
                     child: [
@@ -108,39 +90,9 @@ export default defineComponent({
             ],
             collapsed: false,
             isOnMobile: false,
-            showSideBar: false,
 
         }
     },
-    mounted() {
-        
-        let token = JSON.parse(localStorage.getItem('user')!);
-        if(token != null) {
-            this.showSideBar = true;
-        } else {
-            this.showSideBar = false;
-        }
-        const dropdownUser = document.querySelector('#dropdown');
-
-    },
-    methods: {
-        onToggleCollapse(collapsed): void {
-            this.collapsed=collapsed;
-        },
-        onItemClick(event, item, node): void {
-            console.log(item);
-        },
-        onResize(): void {
-            if(window.innerWidth <= 767) {
-                this.isOnMobile = true
-                this.collapsed = true
-            } else {
-                this.isOnMobile = false
-                this.collapsed = false
-            }
-        },
-        
-    }
 });
 
 </script>

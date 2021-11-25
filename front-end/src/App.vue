@@ -10,6 +10,11 @@
   .container-fluid {
     height: inherit;
   }
+  .menu{
+    float: left;
+    position: fixed;
+    z-index: 9999;
+  }
   .nav-item {
     padding-left: 10px;
     padding-right: 10px;
@@ -41,6 +46,9 @@
 
 <template>
   <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light sticky-top">
+      <router-link to="/" class="navbar-brand active px-3">
+        <img src="@/assets/logo.png" width="140" alt=""/>
+      </router-link>
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
         <li class="my-auto nav-item">
           <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
@@ -55,24 +63,12 @@
           </button>
         </li>
       </ul>
-      <router-link to="/" class="navbar-brand active">
-        <img src="@/assets/logo.png" width="140" alt=""/>
-      </router-link>
   </nav>
-  <div v-if="showSideBar">
+  <div class="menu">
     <SideMenu />
-    <div class="container-fixed viewWithSideBar">
-      <div class="col min-vh-100 min-vw-100">
-        <router-view class="container-fluid g-0" />
-      </div>
-    </div>
   </div>
-  <div v-else>
-    <div class="col min-vh-100 min-vw-100 viewWithoutSideBar">
-      <router-view class="container-fluid g-0" />
-    </div>
-  </div>
-
+  
+  <router-view /> 
 </template>
 
 <script lang="ts">
@@ -91,13 +87,7 @@ export default defineComponent({
     return{
       languages: ["Français", "English"],
       l: "Français",
-      showSideBar: false,
     };
-  },
-  mounted() {
-    if(this.$store.state.auth.status.loggedIn) {
-        this.showSideBar = true;
-    }
   },
   methods: {
     loginOrLogout(): void {
@@ -105,7 +95,6 @@ export default defineComponent({
         this.$store.dispatch('auth/logout');
       }
       this.$router.push('/login');
-      this.showSideBar = false;
     },
 
 
