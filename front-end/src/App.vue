@@ -1,54 +1,88 @@
 <style>
+  body {
+    height: 100%;
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+    position: relative;
+  }
+  .container-fluid {
+    height: inherit;
+  }
+  .menu{
+    float: left;
+    position: fixed;
+    z-index: 9999;
+  }
+  .nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .viewWithSideBar {
+    position: fixed;
+    display:flex;
+    top: 105px;
+    object-fit: contain;
+    height: auto;
+    width: calc(100%-100px);
+    overflow: auto;
+    margin-left:65px;
+    margin-right:-65px;
+  }
+  .viewWithoutSideBar {
+    position: fixed;
+    top: 105px;
+    object-fit: contain;
+    height: 100%;
+    width: 100vw;
+    overflow: auto;
+  }
   .button{
     color:black;
   }
+
 </style>
 
 <template>
-   <div class="container-fluid">
-    
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-      <router-link to="/" class="navbar-brand active">
+  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light sticky-top">
+      <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
-      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div class="text-end" style="margin-left:auto; margin-left: 0;">
-        <select class="btn btn-light dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-            <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
-              {{ language }}
-            </option>
-        </select>
-        
-      </div>
-      <div class="navbar-collapse offcanvas-collapse" >
-          <div class="text-end" style="margin-left:auto; margin-right: 0;">
-            <button class="btn btn-light" @click="goToDataDisplay">
-              <p class="text-dark">Data Display</p>
-            </button>
-            <button class="btn btn-light" @click="goToAddAnnouncement">
-              <p class="text-dark">{{ $t('header.addAnnouncement') }}</p>
-            </button>
-            <button class="btn btn-light" @click="loginOrLogout">
-              <p class="text-dark">{{ $t('header.loginOut') }}</p>
-            </button>
-            <button class="btn btn-light" @click="goToRegister">
-              <p class="text-dark">{{ $t('header.register') }}</p>
-            </button>
-          </div>
-      </div>
-    </nav>
+      <ul class="d-flex justify-content-end navbar-nav ml-auto">
+        <li class="my-auto nav-item">
+          <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+                {{ language }}
+              </option>
+          </select>
+        </li>
+        <li class="my-auto nav-item">
+          <button class="btn btn-sm btn-outline-secondary" @click="loginOrLogout">
+            {{ $t('header.loginOut') }}
+          </button>
+        </li>
+      </ul>
+  </nav>
+  <div class="menu">
+    <SideMenu />
   </div>
-  <router-view />
+  
+  <router-view /> 
 </template>
 
 <script lang="ts">
+
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
+import SideMenu from "@/views/sidebar/SideMenu.vue";
 
 export default defineComponent({
   name: "App",
+  components: {
+    SideMenu,
+  },
+  
   data: function() {
     return{
       languages: ["Français", "English"],
@@ -63,17 +97,6 @@ export default defineComponent({
       this.$router.push('/login');
     },
 
-    goToRegister(): void {
-      this.$router.push('/register');
-    },
-
-    goToDataDisplay(): void {
-      this.$router.push('/dataDisplay');
-    },
-    
-    goToAddAnnouncement(): void {
-      this.$router.push('/announcement');
-    },
 
     changeLang(choice: string): void {
       if(choice == "Français"){
@@ -83,7 +106,8 @@ export default defineComponent({
         i18n.global.locale = 'en';
       }
     }
-  }
-})
+  },
+ 
+});
 
 </script>

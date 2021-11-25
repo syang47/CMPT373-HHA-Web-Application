@@ -1,4 +1,5 @@
 <style>
+
     .background {
         background: url('../assets/IsaacCBRManager.jpeg') no-repeat;
         /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
@@ -112,9 +113,11 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+
 export default defineComponent({
     name: "Login",
+
     mounted() {
         this.$store.dispatch("auth/isTokenValid").then(response => {
             if(this.$store.state.auth.status.loggedIn) {
@@ -125,7 +128,9 @@ export default defineComponent({
     data: function() {
         return {
             username: "",
-            password: ""
+            password: "",
+            showSideBar: false,
+
         }
     },
     methods: {
