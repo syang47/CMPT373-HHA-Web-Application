@@ -129,12 +129,7 @@ export default defineComponent({
           this.message = response.data;
           this.successful = true;
           this.loading = false;
-          if(response != null) {
-              console.log("entry successful: " + this.successful);
-              this.$router.push("/");
-          } else {
-              alert("entry could not be submitted");
-          }
+          alert("entry submitted");
         }).catch((error: any) => {
           this.message =
               (error.response &&
