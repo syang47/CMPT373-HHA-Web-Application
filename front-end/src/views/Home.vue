@@ -25,16 +25,5 @@
 import { defineComponent } from 'vue'
 export default defineComponent({
   name: "Home",
-  // mounted() {
-  //   this.rerender();
-  // },
-  // methods: {
-  //   rerender(): void{
-  //     const token = JSON.parse(localStorage.getItem('user')!);
-  //     if(token != null) {
-  //         this.$forceUpdate();
-  //     } 
-  //   }
-  // }
 });
 </script>

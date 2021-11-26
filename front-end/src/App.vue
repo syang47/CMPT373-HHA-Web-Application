@@ -38,9 +38,30 @@
     width: 100vw;
     overflow: auto;
   }
-  .button{
-    color:black;
+   h1, h2, label, p {
+    font-family: "Arial";
+    font-weight: bold;
+    
   }
+  .btn{
+    font-family: "Arial";
+    font-weight: bold;
+    border: 1px solid black;
+    color: black;
+    position: relative;
+    overflow: hidden;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  .btn:hover{
+    border-radius: 5px;
+    color: #fff;
+    box-shadow: 0 0 5px 0 black,
+    0 0 25px 0 black,
+    0 0 50px 0 black,
+    0 0 100px 0 black;
+  }
+
 
 </style>
 
@@ -64,7 +85,7 @@
         </li>
       </ul>
   </nav>
-  <div class="menu">
+  <div class="menu" v-if="showSidebar" :key="reloadSidebar">
     <SideMenu />
   </div>
   
@@ -87,7 +108,28 @@ export default defineComponent({
     return{
       languages: ["Français", "English"],
       l: "Français",
+      showSidebar: false,
+      reloadSidebar: 0
     };
+  },
+  watch: {
+    '$store.state.auth.status.loggedIn': function() {
+      console.log(this.$store.state.auth.status.loggedIn);
+      if(this.$store.state.auth.status.loggedIn){
+        this.showSidebar = true;
+        this.reloadSidebar += 1
+      } else {
+        this.showSidebar = false;
+        this.reloadSidebar += 1
+      }
+    }
+  },
+  beforeMount() {
+    if(this.$store.state.auth.status.loggedIn){
+        this.showSidebar = true;
+      } else {
+        this.showSidebar = false;
+      }
   },
   methods: {
     loginOrLogout(): void {
@@ -96,7 +138,6 @@ export default defineComponent({
       }
       this.$router.push('/login');
     },
-
 
     changeLang(choice: string): void {
       if(choice == "Français"){
