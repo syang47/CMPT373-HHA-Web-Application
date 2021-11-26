@@ -1,20 +1,8 @@
-<style>
-
-    .background {
-        height: 100%;
-        position: absolute;
-        width: 100%;
-        overflow: auto;
-    }
-
-</style>
-
 <template>
     <DynamicForm :schema="formSchema" :department="department" :formTitle="formTitle"/>
 </template>
 
 <script lang="ts" type="text/typescript">
-
 import { defineComponent } from 'vue'
 import * as yup from "yup";
 import DynamicForm from '@/components/DynamicForm.vue';
@@ -603,5 +591,4 @@ export default defineComponent({
         };
     },
 });
-
 </script>

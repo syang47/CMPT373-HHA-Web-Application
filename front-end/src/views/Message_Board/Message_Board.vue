@@ -15,7 +15,7 @@
 
   <div class="box">
     <div class="text-center">
-      <h2 class="font-weight-bold display-5 text-dark text-monospace">Message Board</h2>
+      <h2>Message Board</h2>
     </div>
     <div>
       
@@ -42,7 +42,9 @@
     </div>
     <div :key="rerender">
       <div class="btn btn-light" v-for="m in messages" :key="m" @click="showMessage(m)">
-        <h1 style="text-align:left">{{ m.title }}</h1>
+        <h1 style="text-align:left">
+          <p class="text-dark">{{ m.title }}</p>
+        </h1>
         <div>
           {{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}}
         </div>
@@ -69,6 +71,7 @@ export default defineComponent({
   components: {
     Form,
     Field,
+    ErrorMessage
   },
   data() {
     type Message = {
@@ -90,6 +93,7 @@ export default defineComponent({
       show: false,
       successful: false,
       loading: false,
+      errorMessage: "",
       dataSchema,
     };
   },
@@ -101,7 +105,6 @@ export default defineComponent({
       axios.get("/api/messages").then(response=> {
         this.messages = response.data;
         this.rerender += 1;
-        console.log(response.data);
       });
     },
 
@@ -121,7 +124,16 @@ export default defineComponent({
                 this.loading = false;
                 this.getMessages();
             }
-        )
+        ).catch((error: any) => {
+              this.errorMessage =
+                  (error.response &&
+                  error.response.data &&
+                  error.response.data.message) ||
+                  error.message;
+              this.successful = false;
+              this.loading = false;
+              alert("entry could not be submitted");
+        });
       }
     }
   }
