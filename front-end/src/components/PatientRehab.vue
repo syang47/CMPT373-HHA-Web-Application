@@ -35,7 +35,7 @@
             <label :for="`diedBefore48hAge_${idx}`">Age</label>
             <Field class="form-control"
                 :id="`diedBefore48hAge_${idx}`" 
-                type="numbere"
+                @input="$emit('update:modelValue', Object.keys(fields).length)"
                 :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
             <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
             <br>
@@ -63,7 +63,7 @@
 import { FieldArray, Field, ErrorMessage } from 'vee-validate';
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'Patient',
+  name: 'PatientRehab',
   components: {
     FieldArray,
     Field,

@@ -313,7 +313,7 @@
 import { FieldArray, Field, ErrorMessage } from 'vee-validate';
 import { defineComponent } from 'vue';
 export default defineComponent({
-  name: 'Patient',
+  name: 'SpecialPatient',
   components: {
     FieldArray,
     Field,

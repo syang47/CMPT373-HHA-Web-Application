@@ -39,13 +39,13 @@
           <!-- PATIENTS FORM2 -->
           <div v-else-if="field.specPatient">
             <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
-            <Patient v-model="s[field.name]" />
+            <SpecialPatient v-model="s[field.name]" />
           </div>
 
           <!-- PATIENTS FORM3 -->
           <div v-else-if="field.rehabPatient">
             <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
-            <Patient v-model="s[field.name]" />
+            <PatientRehab v-model="s[field.name]" />
           </div>
 
           <!-- REGULAR INPUTS -->
@@ -81,6 +81,8 @@
 import { Form } from 'vee-validate';
 import RegularInput from './RegularInput.vue';
 import Patient from './Patient.vue';
+import SpecialPatient from './SpecialPatient.vue'
+import PatientRehab from './PatientRehab.vue'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'DynamicForm',
@@ -88,6 +90,9 @@ export default defineComponent({
     Form,
     RegularInput,
     Patient,
+    SpecialPatient,
+    PatientRehab,
+
   },
   data() {
     return {
