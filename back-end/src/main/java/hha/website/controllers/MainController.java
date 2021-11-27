@@ -127,6 +127,16 @@ public class MainController {
         }
     }
 
+    @RequestMapping(value = "/api/user/employeeofthemonth/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> updateEmployeeOfTheMonth(@RequestParam("userId") Integer userId, @RequestParam("month") String month) {
+        return ResponseEntity.ok(userDetailsService.setEmployeeOfTheMonth(userId, month));
+    }
+
+    @RequestMapping(value = "/api/user/employeeofthemonth/{month}", method = RequestMethod.GET)
+    public ResponseEntity<?> getEmployeeOfTheMonth(@PathVariable("month") String month) {
+        return ResponseEntity.ok(userDetailsService.getEmployeeOfTheMonth(month));
+    }
+
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
     public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
@@ -145,7 +155,6 @@ public class MainController {
     @CrossOrigin
     @GetMapping("/api/departments")
     public ResponseEntity<?> getAllDepartments(){
-        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
@@ -162,7 +171,7 @@ public class MainController {
     }
 
     @GetMapping("/api/mspp/data/{date}/{id}")
-    public ResponseEntity<?> getMsppByFirstname(@PathVariable("id") String id, @PathVariable("date") String date) throws ParseException {
+    public ResponseEntity<?> getMsppByDateAndId(@PathVariable("id") String id, @PathVariable("date") String date) throws ParseException {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         Date d = format.parse(date);
         Calendar cal = Calendar.getInstance();

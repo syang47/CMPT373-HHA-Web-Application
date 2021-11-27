@@ -133,7 +133,6 @@ export default defineComponent({
                         this.photos.push("data:" + obj.photoType + ";base64," + obj.photo);
                     }
                 }
-                console.log(this.photos);
                 if(response != null) {
                     console.log("getting casestudy data successful");
                         

@@ -43,6 +43,9 @@ public class User {
     @Column
     private Integer points;
 
+    @Column
+    private String employeeOfTheMonth;
+
     public Integer getId() {
         return id;
     }
@@ -129,5 +132,13 @@ public class User {
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public String getEmployeeOfTheMonth() {
+        return employeeOfTheMonth;
+    }
+
+    public void setEmployeeOfTheMonth(String employeeOfTheMonth) {
+        this.employeeOfTheMonth = employeeOfTheMonth;
     }
 }

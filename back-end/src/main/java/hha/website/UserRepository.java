@@ -18,4 +18,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Modifying
     @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
     void updateUserReportsSubmitted(Integer id);
+
+    @Query("SELECT username, department FROM User WHERE employeeOfTheMonth = ?1")
+    User queryEmployeeOfTheMonth(String month);
 }

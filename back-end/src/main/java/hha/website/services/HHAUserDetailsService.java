@@ -47,7 +47,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
         Optional<Department> userDepartment = HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment());
-        userDepartment.ifPresent(d -> newUser.setDepartments(d));
+        userDepartment.ifPresent(newUser::setDepartments);
         newUser.setPoints(0);
         return userRepository.save(newUser);
     }
@@ -95,5 +95,15 @@ public class HHAUserDetailsService implements UserDetailsService {
 
     public void addASubmittedReportForUser(User user) {
         userRepository.updateUserReportsSubmitted(user.getId());
+    }
+
+    public User setEmployeeOfTheMonth(Integer userId, String month){
+        User u = userRepository.getById(userId);
+        u.setEmployeeOfTheMonth(month);
+        return u;
+    }
+
+    public User getEmployeeOfTheMonth(String month) {
+        return userRepository.queryEmployeeOfTheMonth(month);
     }
 }
