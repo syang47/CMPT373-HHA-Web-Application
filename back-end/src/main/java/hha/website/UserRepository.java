@@ -7,15 +7,24 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.List;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUsername(String username);
-
+    
     @Query("SELECT DISTINCT role FROM User")
     Collection<String> queryDistinctField();
-
+    
+    // @Query("SELECT username, FROM User")
+    // List<String> queryUsername();
+    
     @Modifying
     @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
     void updateUserReportsSubmitted(Integer id);
+
+    // public static final String FIND_USERNAMES = "SELECT username, role FROM User";
+    // @Query(value=FIND_USERNAMES, nativeQuery = true)
+    // public List<Object[]> findUserNames();
+    
 }

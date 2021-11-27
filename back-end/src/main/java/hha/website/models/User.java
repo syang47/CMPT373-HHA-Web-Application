@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -22,17 +24,17 @@ public class User {
     private String role;
 
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private Department department;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<MSPPRequirement> folder;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<CaseStudy> caseStudies;

@@ -16,7 +16,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsAwareConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -143,9 +145,17 @@ public class MainController {
     }
 
     @CrossOrigin
+    @GetMapping("/api/user/all")
+    public ResponseEntity<?> getAllUsers() {
+        System.out.println(Arrays.toString(userDetailsService.listAllUsers().toArray()));
+        // return ResponseEntity.ok(userDetailsService.findAllUsers());
+        return ResponseEntity.ok(userDetailsService.listAllUsers().toArray());
+    }
+
+    @CrossOrigin
     @GetMapping("/api/departments")
     public ResponseEntity<?> getAllDepartments(){
-        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
+        System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
