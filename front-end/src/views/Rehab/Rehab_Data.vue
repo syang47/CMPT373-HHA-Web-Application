@@ -39,6 +39,7 @@
 </style>
 
 <template>
+    <DynamicForm :schema="formSchema" :department="department" :formTitle="formTitle"/>
 
     <Form class="background" @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
@@ -587,23 +588,23 @@
 
                     <div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <h4 style="color:green">Reason Not Yet Discharged </h4>
-                            <label for="reasonNotReady">Not ready from therapy standpoint</label>
+                            <h4 style="color:green">{{ $t('msppData.reasonNotYetDischarged') }}</h4>
+                            <label for="reasonNotReady">{{ $t('msppData.reasonNotReady') }}</label>
                             <Field name="reasonNotReady" type="text" class="form-control" value=0 />
                             <ErrorMessage name="reasonNotReady" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="reasonWoundCare">Wound Care</label>
+                            <label for="reasonWoundCare">{{ $t('msppData.reasonWoundCare') }}</label>
                             <Field name="reasonWoundCare" type="text" class="form-control" value=0 />
                             <ErrorMessage name="reasonWoundCare" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="otherMedicalReason">Other medical reason (such as IV medication)</label>
+                            <label for="otherMedicalReason">{{ $t('msppData.otherMedicalReason') }}</label>
                             <Field name="otherMedicalReason" type="text" class="form-control" value=0 />
                             <ErrorMessage name="otherMedicalReason" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="reasonFinancial">Financial/no place to discharge to</label>
+                            <label for="reasonFinancial">{{ $t('msppData.reasonFinancial') }}</label>
                             <Field name="reasonFinancial" type="text" class="form-control" value=0 />
                             <ErrorMessage name="reasonFinancial" class="error-feedback" />
                         </div>
@@ -611,33 +612,33 @@
 
                     <div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <h4 style="color:green">Length of Stay of Current Inpatients </h4>
-                            <label for="length1_3m">1-3 months</label>
+                            <h4 style="color:green">{{ $t('msppData.lengthOfStayOfCurrentInpatients') }}</h4>
+                            <label for="length1_3m">{{ $t('msppData.length1_3m') }}</label>
                             <Field name="length1_3m" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length1_3m" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="length3_6m">3-6 months</label>
+                            <label for="length3_6m">{{ $t('msppData.length3_6m') }}</label>
                             <Field name="length3_6m" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length3_6m" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="length6m_1y">6 months - 1 year</label>
+                            <label for="length6m_1y">{{ $t('msppData.length6m_1y') }}</label>
                             <Field name="length6m_1y" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length6m_1y" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="length1_2y">1-2 years</label>
+                            <label for="length1_2y">{{ $t('msppData.length1_2y') }}</label>
                             <Field name="length1_2y" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length1_2y" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="length2_3y">2-3 years</label>
+                            <label for="length2_3y">{{ $t('msppData.length2_3y') }}</label>
                             <Field name="length2_3y" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length2_3y" class="error-feedback" />
                         </div>
                         <div v-if="stayedInTheWardMor" class="form-group">
-                            <label for="length3_y">3+ years</label>
+                            <label for="length3_y">{{ $t('msppData.length3_y') }}</label>
                             <Field name="length3_y" type="text" class="form-control" value=0 />
                             <ErrorMessage name="length3_y" class="error-feedback" />
                         </div>
@@ -1206,933 +1207,244 @@
 </template>
 
 <script lang="ts" type="text/typescript">
-
 import { defineComponent } from 'vue'
-import { Form, Field, ErrorMessage, FieldArray } from "vee-validate";
 import * as yup from "yup";
+import DynamicForm from '@/components/DynamicForm.vue';
 export default defineComponent({
     name: "Rehab_Data",
     components: {
-        Form,
-        Field,
-        ErrorMessage,
-        FieldArray,
+        DynamicForm,
     },
     data() {
-        const dataSchema = yup.object().shape({
-            diedBefore48hPatient: yup
-                .array()
-                .of(
-                yup.object().shape({
-                    diedBefore48hOption: yup
-                        .string()
-                        .required("Must choose an option.")
-                        .default(""),
-                    diedBefore48hAge: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    diedBefore48hCause: yup
-                        .string()
-                        .required("Required.")
-                        .default(""),
-                })
-            )
-            .strict(),
+            
+        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.");
+        const a: any = yup.number().min(0, "Cannot be negative.");
+        const formSchema: any = {
+            fields: [
+                {
+                    label: 'msppData.bedsAvailable',
+                    name: 'bedsAvailable',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.bedDays',
+                    name: 'bedDays',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.patientDays',
+                    name: 'patientDays',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.hospitalised',
+                    name: 'hospitalised',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.dischargedAlive',
+                    name: 'dischargedAlive',
+                    as: 'input',
+                    rules: r,
+                    specPatient: 1
+                },
+                {
+                    label: 'msppData.diedBefore48h',
+                    name: 'diedBefore48h',
+                    as: 'input',
+                    rules: r,
+                    rehabPatient: 1
+                },
+                {
+                    label: 'msppData.diedAfter48h',
+                    name: 'diedAfter48h',
+                    as: 'input',
+                    rules: r,
+                    rehabPatient: 1
+                },
+                {
+                    label: 'msppData.daysHospitalised',
+                    name: 'daysHospitalized',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.referrals',
+                    name: 'referrals',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.transfers',
+                    name: 'transfers',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.reasonSelfDischarge',
+                    name: 'selfDischarged',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            label: 'msppData.financeCare',
+                            name: 'financeCannotAfford',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.financeAvoidPay',
+                            name: 'financeAvoidPay',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.religiousCultural',
+                            name: 'reasonCultural',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.personalFamily',
+                            name: 'reasonPersonal',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.other',
+                            name: 'otherReason',
+                            as: 'input',
+                            rules: a,
+                        },
+                    ]
+                },
+                {
+                    label: 'msppData.stayedInTheWard',
+                    name: 'stayedInTheWard',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            header: 'msppData.reasonNotYetDischarged'
+                        },
+                        {
+                            label: 'msppData.reasonNotReady',
+                            name: 'reasonNotReady',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.reasonWoundCare',
+                            name: 'reasonWoundCare',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.otherMedicalReason',
+                            name: 'otherMedicalReason',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.reasonFinancial',
+                            name: 'reasonFinancial',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            header: 'msppData.reasonNotYetDischarged'
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.lengthOfStayOfCurrentInpatients',
+                            name: 'lengthOfStayOfCurrentInpatients',
+                            as: 'input',
+                            rules: a,
+                        },
 
-            diedAfter48hPatient: yup
-                .array()
-                .of(
-                yup.object().shape({
-                    diedAfter48hOption: yup
-                        .string()
-                        .required("Must choose an option.")
-                        .default(""),
-                    diedAfter48hAge: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    diedAfter48hCause: yup
-                        .string()
-                        .required("Required.")
-                        .default(""),
-                })
-            )
-            .strict(),
-
-            dischargedAlivePatient: yup
-                .array()
-                .of(
-                yup.object().shape({
-                    dischargedAliveOption: yup
-                        .string()
-                        .required("Must choose an option.")
-                        .default(""),
-
-                    dischargedAlivePatientNo: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                    dischargedAliveAllGoals: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveGoalsPartially: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveNoGoals: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    
-                    dischargedAliveADLsIndependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsModifiedIndependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsSupervision: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsMinimumAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsModerateAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsMaximumAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveADLsDependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                    dischargedAliveTransfersIndependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersModifiedIndependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersSupervision: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersMinimumAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersModerateAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersMaximumAssistance: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveTransfersDependent: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                    dischargedAliveWheelchair: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveWalker: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveCane: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveCrutches: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                    dischargedAliveHomeAlone: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveHomeWithOther: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveHospital: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                    dischargedAliveEmployed: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveUnableToFindWork: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveDueToCondition: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-                    dischargedAliveRetired: yup
-                        .string()
-                        .required("Required.")
-                        .default("0"),
-
-                })
-            )
-            .strict(),
-
-            bedsAvailable: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            bedDays: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            patientDays: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            hospitalized: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            dischargedAlive: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            diedBefore48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            diedAfter48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            daysHospitalized: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            referrals: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            transfers: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            selfDischarged: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            financeCannotAfford: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            financeAvoidPay: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            reasonCultural: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            reasonPersonal: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            otherReason: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-
-            stayedInTheWard: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            reasonNotReady: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            reasonWoundCare: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            otherMedicalReason: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            reasonFinancial: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length1_3m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length3_6m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length6m_1y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length1_2y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length2_3y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            length3_y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-
-            admissions: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            fromQuarterMorin: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            fromCapHaitian: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            fromDepartmentNord: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            fromOther: yup
-                .string()
-                .default(""),
-            mainCoditionTetraplegia: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionComplete: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionIncomplete: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC1: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC3: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC4: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC6: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC7: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionC8: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT1: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionParaplegia: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionComplete2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionIncomplete2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT3: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT4: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT6: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT7: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT8: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT9: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT10: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT11: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionT12: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionL1: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionL2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionL3: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionL4: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionL5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionS1: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionS2: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionS3: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionS4: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionS5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCITransportAccident: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIFall: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAssault: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCISports: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCINonTraumaticSpinalCordDysfunction: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIMedical: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIOtherTraumaticReason: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge0_5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge6_11: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge12_18: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge18_30: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge31_50: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge51_70: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIAge70: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIMale: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            SCIFemale: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionStroke: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionFracturedHip: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionFracturedLongBones: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionNeurodegenerativeDisease: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionHeadInjury: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionWoundCare: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionOtherMedical: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            mainCoditionOtherTrauma: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            timeLessThan1m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            time1_2m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            time3m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            time6m: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            time1y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            time2y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            timeMoreThan3y: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-            numberOfOutpatients: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            returningOutpatients: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newOutpatient: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newSCIParaplegia: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newSCITetraplegia: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newStroke: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newFracturedHip: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newFracturedLongBones: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newNeurodegenerativeDisease: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newHeadInjury: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newWoundCare: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newCerebralPalsy: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newDownSyndromel: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newOther: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge0_5: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge6_11: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge12_18: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge18_30: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge31_50: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge51_70: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newAge70: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newMale: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            newFemale: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-  
-        });
+                    ]
+                },
+                {
+                    label: 'msppData.admissions',
+                    name: 'admissions',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            header: 'msppData.wherePatientsComeFrom'
+                        },
+                        {
+                            label: 'msppData.quMo',
+                            name: 'fromQuarterMorin',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.capHai',
+                            name: 'fromCapHaitian',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.deptNord',
+                            name: 'fromDepartmentNord',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.otherDept',
+                            name: 'fromOther',
+                            as: 'input',
+                            rules: yup.string()
+                        },
+                    ]
+                },
+            ]
+        }
         return {
-            successful: false,
-            loading: false,
-            message: "",
-            selfDischargedMor: false,
-            admissionsMor: false,
-            diedBefore48hMor: false,
-            diedAfter48hMor: false,
-            dischargedAliveMor: false,
-            stayedInTheWardMor: false,
-            numberOfOutpatientsMor: false,
-            newOutpatientMor: false,
-            dataSchema,
+            formSchema,
+            department: "maternity",
+            formTitle: 'msppData.rehabForm'
         };
-    },
-    methods: {
-        checkDischargedAlive() {
-            let number: number = (document as any).getElementById("dischargedAlive").value;
-            if (number > 0) {
-                this.dischargedAliveMor = true;
-            } else {
-                this.dischargedAliveMor = false;
-            }
-        },
-        checkDiedBefore48h() {
-            let number: number = (document as any).getElementById("diedBefore48h").value;
-            if (number > 0) {
-                this.diedBefore48hMor = true;
-            } else {
-                this.diedBefore48hMor = false;
-            }
-        },
-        checkDiedAfter48h() {
-            let number: number = (document as any).getElementById("diedAfter48h").value;
-            if (number > 0) {
-                this.diedAfter48hMor = true;
-            } else {
-                this.diedAfter48hMor = false;
-            }
-        },
-        checkSelfDischarged() {
-            let number: number = (document as any).getElementById("selfDischarged").value;
-            if (number > 0) {
-                this.selfDischargedMor = true;
-            } else {
-                this.selfDischargedMor = false;
-            }
-        },
-        checkStayedInTheWard() {
-            let number: number = (document as any).getElementById("stayedInTheWard").value;
-            if (number > 0) {
-                this.stayedInTheWardMor = true;
-            } else {
-                this.stayedInTheWardMor = false;
-            }
-        },
-        checkAdmissions() {
-            let number: number = (document as any).getElementById("admissions").value;
-            if (number > 0) {
-                this.admissionsMor = true;
-            } else {
-                this.admissionsMor = false;
-            }
-        },
-        checkNumberOfOutpatients() {
-            let number: number = (document as any).getElementById("numberOfOutpatients").value;
-            if (number > 0) {
-                this.numberOfOutpatientsMor = true;
-            } else {
-                this.numberOfOutpatientsMor = false;
-            }
-        },
-        checkNewOutpatient() {
-            let number: number = (document as any).getElementById("newOutpatient").value;
-            if (number > 0) {
-                this.newOutpatientMor = true;
-            } else {
-                this.newOutpatientMor = false;
-            }
-        },
-        handleData(entry) {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            if(token != null) {
-                entry.department = "rehab";
-                this.$axios.post("/api/datainput", entry, {
-                    headers: {
-                        'Authorization': `Bearer ${token.jwt}`
-                    }
-                }).then(response => {
-                        this.message = response.data;
-                        this.successful = true;
-                        this.loading = false;
-                        if(response != null) {
-                            console.log("entry successful: " + this.successful);
-                            this.$router.push("/");
-                        } else {
-                            alert("entry could not be submitted");
-                        }
-                    }
-                ).catch((error: any) => {
-                    this.message =
-                        (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                        error.message;
-                    this.successful = false;
-                    this.loading = false;
-                    alert("entry could not be submitted");
-                });
-            }
-        },
-
     }
 });
 

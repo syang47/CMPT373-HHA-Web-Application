@@ -59,8 +59,9 @@
               :key="cField"
             >
               <h4 v-if="cField.header" style="color:green; text-align:center">{{ $t(cField.header) }}</h4>
+              <h4 v-if="cField.blueHeader" style="color:blue; text-align:center">{{ $t(cField.blueHeader) }}</h4>
               <div v-else>
-                <RegularInput :c="cColor" :field="cField" v-model="s[cField.name]" />
+                <RegularInput :field="cField" v-model="s[cField.name]" />
               </div>
             </div>
           </template>
