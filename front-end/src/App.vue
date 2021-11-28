@@ -74,6 +74,9 @@
     margin-left: 290px;
     padding-top: 107px;
   }
+  .main-wrapper{
+    height: calc(100vh - 140px);
+  }
   .vsm--toggle-btn{
     display: none !important;
   }

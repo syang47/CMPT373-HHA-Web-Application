@@ -36,35 +36,40 @@
 </style>
 
 <template>
-
-    <div class="signup-form text-monospace">
-        <div class="text-center container-fluid">
-            <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
-            <div class="row">
-                <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">Case Study Types</button>
+<div class="main-content">
+    <div class="card">
+      <div class="card-body">
+        <div class="signup-form text-monospace">
+            <div class="text-center container-fluid">
+                <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
+                <div class="row">
+                    <div class="form-group col">
+                        <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">Case Study Types</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary" v-on:click="showAllCaseStudies">All Case Studies</button>
+                    </div>
                 </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showAllCaseStudies">All Case Studies</button>
+                <div v-if="showComponentOne"> 
+                    <ul class="text-left" style="list-style-type:none;">
+                        <li v-for="(value) in caseStudyTypes" :key="value">
+                            <button class="btn btn-primary"> {{ value }} </button>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-            <div v-if="showComponentOne"> 
-                <ul class="text-left" style="list-style-type:none;">
-                    <li v-for="(value) in caseStudyTypes" :key="value">
-                        <button class="btn btn-primary"> {{ value }} </button>
-                    </li>
-                </ul>
-            </div>
-            <div v-else-if="showComponentTwo">
-                <div v-for="(p) in photos" :key="p">
-                    <img :src="p" />
+                <div v-else-if="showComponentTwo">
+                    <div v-for="(p) in photos" :key="p">
+                        <img :src="p" />
+                    </div>
+                    <ul class="text-left">
+                        <li v-for="(name) in caseStudyAllData" :key="name"> {{name}}</li>
+                    </ul>
                 </div>
-                <ul class="text-left">
-                    <li v-for="(name) in caseStudyAllData" :key="name"> {{name}}</li>
-                </ul>
             </div>
         </div>
+      </div>
     </div>
+</div>
 
 </template>
 

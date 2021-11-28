@@ -13,7 +13,10 @@
 
 <template>
 
-  <div class="box">
+  <div class="main-content">
+    <div class="card shadow-none">
+      <div class="card-body">
+        <div class="box">
     <div class="text-center">
       <h2>Message Board</h2>
     </div>
@@ -54,6 +57,9 @@
           </div>
         </div>
         
+      </div>
+    </div>
+  </div>
       </div>
     </div>
   </div>
