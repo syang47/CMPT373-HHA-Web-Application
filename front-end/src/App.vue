@@ -10,10 +10,19 @@
   .container-fluid {
     height: inherit;
   }
+  /* header */
+  .header-fixed{
+    position: fixed !important;
+    top:0;
+    left: 0;
+    z-index: 999999;
+  }
   .menu{
-    float: left;
     position: fixed;
     z-index: 9999;
+    padding-top: 107px;
+    height: 100vh;
+    overflow: auto;
   }
   .nav-item {
     padding-left: 10px;
@@ -61,12 +70,19 @@
     0 0 50px 0 black,
     0 0 100px 0 black;
   }
+  .main-content{
+    margin-left: 290px;
+    padding-top: 107px;
+  }
+  .vsm--toggle-btn{
+    display: none !important;
+  }
 
 
 </style>
 
 <template>
-  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light sticky-top">
+  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light header-fixed">
       <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
