@@ -83,6 +83,13 @@
     display: none !important;
   }
 
+  /* form box */
+.card.form-box{
+  max-width: 600px;
+    background-color: #f6f9f9;
+    margin: 0 auto;
+    box-shadow: 0 0.0625rem 0.5rem rgb(155 154 154 / 15%)
+}
 
 </style>
 
