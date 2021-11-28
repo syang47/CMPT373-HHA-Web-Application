@@ -5,7 +5,7 @@
         <div class="card-body">
           <Form @submit="handleData" v-slot="{ validate }" >
             <div class="signup-form">
-              <h2 class="font-weight-bold display-5 text-light">{{ $t(formTitle) }}</h2>
+              <h2 class="font-weight-bold display-5 text-dark">{{ $t(formTitle) }}</h2>
               <div
                 v-for="field in schema.fields"
                 :key="field"

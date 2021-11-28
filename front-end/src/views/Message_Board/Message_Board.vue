@@ -18,7 +18,7 @@
       <div class="card-body">
         <div class="box">
     <div class="text-center">
-      <h2>Message Board</h2>
+      <h2 class="display-5">Message Board</h2>
     </div>
     <div>
       
