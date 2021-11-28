@@ -17,9 +17,6 @@
         border-color: #5cb85c;
     }
     .signup-form{
-        width: 1000px;
-        margin: 0 auto;
-        padding: 50px 0;
         position: relative;
         overflow-y: auto;
     }
@@ -36,9 +33,6 @@
 </style>
 
 <template>
-<div class="main-content">
-    <div class="card">
-      <div class="card-body">
         <div class="signup-form text-monospace">
             <div class="text-center container-fluid">
                 <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
@@ -67,9 +61,6 @@
                 </div>
             </div>
         </div>
-      </div>
-    </div>
-</div>
 
 </template>
 
