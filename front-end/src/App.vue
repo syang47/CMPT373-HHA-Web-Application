@@ -16,6 +16,8 @@
     top:0;
     left: 0;
     z-index: 999999;
+    box-shadow: 0px 1px 8px rgb(0 0 0 / 25%);
+    background-color: #dddddd;
   }
   .menu{
     position: fixed;
@@ -85,7 +87,7 @@
 </style>
 
 <template>
-  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light header-fixed">
+  <nav class="w-100 navbar navbar-expand-sm navbar-light header-fixed">
       <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
