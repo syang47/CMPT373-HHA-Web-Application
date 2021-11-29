@@ -1,25 +1,12 @@
-<style scoped>
-    .sidebar-overlay {
-        position: fixed;
-        width:100%;
-        height:100%;
-        top:150;
-        left:0;
-        background-color: #000;
-        opacity: 0.5;
-        z-index:900;
-    }
-</style>
 <template>
-    
     <sidebar-menu
         :collapsed="collapsed" 
         :menu="menu"
+        :key="menu.title"
         :showOneChild="true"
         :relative="true"
         >
     </sidebar-menu>
-    
 </template>
 
 <script lang="ts" type="text/typescript">
@@ -59,11 +46,14 @@ export default defineComponent({
             departments.push(d);
         }
         
-        
-
         return {
-
-            menu:[
+            collapsed: false,
+            isOnMobile: false,
+        }
+    },
+    computed: {
+        menu() {
+            return [
                 {
                     header: "Hope Health Action",
                     hiddenOnCollapse: true
@@ -96,19 +86,16 @@ export default defineComponent({
                 {
                     href:'/',
                     title: "Departments",
-                    child: departments,
+                    // child: departments,
                     hiddenOnCollapse: true
                 },  
                 {
                     href: "/register",
                     title: this.$t("header.register"),
                     hiddenOnCollapse: true
-                }      
-            ],
-            collapsed: false,
-            isOnMobile: false,
-
-        }
+                },      
+            ];
+        },
     },
 });
 
