@@ -1,75 +1,45 @@
 <style scoped>
-
-    .btn {
-    }
     .box {
         width: 100%;
         height: 100%;
-        background: #00000060;
         position: absolute;
+        background: #fff;
         box-sizing: border-box;
         padding: 40px;
-    }
-    .form-control{
-        height: 40px;
-        box-shadow: none;
-        color: #969fa4;
-    }
-    .form-control:focus{
-        border-color: #5cb85c;
-    }
-    .signup-form{
-        width: 1000px;
-        margin: 0 auto;
-        padding: 50px 0;
-        position: relative;
-        overflow-y: auto;
-    }
-    .signup-form h2{
-        color: #636363;
-        margin: 0 0 15px;
-        position: relative;
-        text-align: center;
-    }
-    .signup-form .form-group{
-        margin-bottom: 20px;
     }
 
 </style>
 
 <template>
-
-    <div class="signup-form text-monospace">
-        <div class="text-center container-fluid">
-            <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
-            <div class="row">
-                <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="showCaseStudyData">Case Study of the Month</button>
-                    <!-- <button class="btn btn-secondary" type="radio" id="showCaseStudyQuery" value = "ShowCaseStudyQuery" v-model="dataDisplaySelected" />
-                    <label for="showCaseStudyQuery">Case Study of the Month</label> -->
-                </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showEmployeeOfTheMonthData">Employee of the Month</button>
-                    <!-- <button class="btn btn-secondary"  type="radio" id="showEmployeeOfTheMonthQuery" value = "ShowEmployeeOfTheMonthQuery" v-model="dataDisplaySelected" />
-                    <label for="showEmployeeOfTheMonthQuery">Employee of the Month</label> -->
-                </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showDepartmentData">Department Data Display</button> 
-                    <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
-                    <label for="showDepartmentDataQuery">Department Data Display</label> -->
-                </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showAllUserData">User Data Display</button> 
-                    <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
-                    <label for="showDepartmentDataQuery">Department Data Display</label> -->
+<div class="main-content">
+    <div class="card shadow-none">
+        <div class="card-body box">
+            <div class="text-center mb-3">
+                <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+                <div class="row">
+                    <div class="form-group col">
+                        <button class="btn btn-secondary btn-lg" v-on:click="showCaseStudyData">Case Study of the Month</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-lg" v-on:click="showEmployeeOfTheMonthData">Employee of the Month</button>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-lg" v-on:click="showDepartmentData">Department Data Display</button> 
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary btn-lg" v-on:click="showAllUserData">User Data Display</button> 
+                    </div>
                 </div>
             </div>
-            <div>{{ message }}</div>
-            <first-component v-if="showComponentOne" />
-            <second-component v-else-if="showComponentTwo" />
-            <user-data-component v-else-if="showUserDataComponent" />
+            <b-container class="mt-3">
+                <h2 class="text-center text-dark">{{ message }}</h2>
+                <first-component v-if="showComponentOne" />
+                <second-component v-else-if="showComponentTwo" />
+                <user-data-component v-else-if="showUserDataComponent" />
+            </b-container>
         </div>
     </div>
+</div>
 
 </template>
 
