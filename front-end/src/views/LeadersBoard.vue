@@ -8,22 +8,6 @@
   box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
     0 0 100px 0 #c6fafe;
 }
-.has-bg{
-    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
-    background-size:cover;
-background-position:  center center;
-}
-.background {
-    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
-    /* filter:"progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')"; */
-    /* -moz-background-size:100% 100%; */
-    position: absolute;
-    /* background-size: 100% 100%; */
-    height: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size:cover;
-}
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
@@ -81,6 +65,11 @@ table td.gap span {
     background-color: transparent;
 }
 
+.card.has-bg{
+    background-color: #edf2f9;
+    box-shadow: none !important;
+}
+
 </style>
 
 <template>
@@ -89,72 +78,76 @@ table td.gap span {
     <div class="main-wrapper">
     <div class="card shadow-none bg-none">
         <div class="card-body">
-            <div class="container-fluid">
-        <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col">
-                        <div class="card rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
-                            <div class="card-body">
-                                <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
-                                <ul>
-                                    <li v-for="prize in MonthlyPrize" :key="prize">
-                                        {{ prize }}
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+            <div class="card has-bg">
+                <div class="card-body">
+                    <div class="container-fluid">
+                <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col">
+                                <div class="card shadow-none rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
+                                    <div class="card-body">
+                                        <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
+                                        <ul>
+                                            <li v-for="prize in MonthlyPrize" :key="prize">
+                                                {{ prize }}
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
 
-                </div>
-                <div class="col" >
-                    <div class="card w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
-                        <div class="card-body">
-                            <h2 style="color:#000000;" class="card-title w-40">{{ $t('leaderBoard.annualAward') }}</h2>
-                            <ul>
-                                <li v-for="prize in AnnualPrize" :key="prize">
-                                    {{ prize }}
-                                </li>
-                            </ul>
+                        </div>
+                        <div class="col" >
+                            <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
+                                <div class="card-body">
+                                    <h2 style="color:#000000;" class="card-title w-40">{{ $t('leaderBoard.annualAward') }}</h2>
+                                    <ul>
+                                        <li v-for="prize in AnnualPrize" :key="prize">
+                                            {{ prize }}
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="row-6 rounded-left">
-                        <div class="card rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
-                            <div class="card-body">
-                                <table>
-                                    <thead>
-                                        <tr>
-                                            <th>{{ $t('leaderBoard.position') }}</th>
-                                            <th>{{ $t('leaderBoard.department') }}</th>
-                                            <th>{{ $t('leaderBoard.points') }}</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr v-for="(points, dep, index) in departmentPoints" :key="index">
-                                            <th>{{ index + 1 }}</th>
-                                            <td>{{ dep }}</td>
-                                            <td>{{ points }}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                    <div class="row">
+                        <div class="col">
+                            <div class="row-6 rounded-left">
+                                <div class="card shadow-none rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
+                                    <div class="card-body">
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>{{ $t('leaderBoard.position') }}</th>
+                                                    <th>{{ $t('leaderBoard.department') }}</th>
+                                                    <th>{{ $t('leaderBoard.points') }}</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr v-for="(points, dep, index) in departmentPoints" :key="index">
+                                                    <th>{{ index + 1 }}</th>
+                                                    <td>{{ dep }}</td>
+                                                    <td>{{ points }}</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col rounded mb-3 mt-3" style="background: #F59A23">
+                            <div class="card shadow-none w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
+                                <div class="card-body">
+                                    <h2 style="color:#000000;">{{ $t('leaderBoard.caseStudyOTM') }}</h2>
+                                    
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col rounded mb-3 mt-3" style="background: #F59A23">
-                    <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
-                        <div class="card-body">
-                            <h2 style="color:#000000;">{{ $t('leaderBoard.caseStudyOTM') }}</h2>
-                            
-                        </div>
-                    </div>
+            </div>
                 </div>
             </div>
-        </div>
-    </div>
         </div>
     </div>
     </div>
