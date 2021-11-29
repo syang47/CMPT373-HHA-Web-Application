@@ -841,7 +841,7 @@ export default defineComponent({
         return {
             formSchema,
             department: "maternity",
-            formTitle: 'msppData.rehabForm'
+            formTitle: 'msppData.maternityForm'
         };
     }
 });

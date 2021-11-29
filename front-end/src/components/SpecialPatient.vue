@@ -53,7 +53,7 @@
         <label :for="`dischargedAliveGoalsPartially_${idx}`">Goals partially met, sufficient for discharge</label>
         <Field class="form-control"
             :id="`dischargedAliveGoalsPartially_${idx}`"
-            @input="$emit('update:modelValue', Object.keys(fields).length)"/>
+            @input="$emit('update:modelValue', Object.keys(fields).length)"
             :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" />
         <ErrorMessage :name="`dischargedAlivePatient[${idx}].dischargedAliveGoalsPartially`" class="error-feedback" />
         <br>
