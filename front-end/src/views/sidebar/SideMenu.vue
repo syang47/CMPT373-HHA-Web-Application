@@ -16,7 +16,6 @@
         :collapsed="collapsed" 
         :menu="menu"
         :showOneChild="true"
-        :showChild="true"
         :relative="true"
         >
     </sidebar-menu>
@@ -28,7 +27,42 @@ import { defineComponent } from 'vue';
 export default defineComponent({
     name: "SideMenu",
     data: function() {
+        var departments = [] as any;
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMIN"){
+            let d = {
+                href:"/maternity",
+                title:  this.$t("homePage.maternity"),
+            }
+            departments.push(d);
+            d = {
+                href:"/rehab",
+                title:  this.$t("homePage.rehab"),
+            }
+            departments.push(d);
+            d = {
+                href:"/community_health",
+                title:  this.$t("homePage.communityHealth"),
+            }
+            departments.push(d);
+            d = {
+                href:"/nicu_paed",
+                title:  this.$t("homePage.nicuPaed"),
+            }
+            departments.push(d);
+
+        } else {
+            let d = {
+                href: '/' + token.department.toLowerCase(),
+                title: this.$t("departmentPage." + token.department.toLowerCase().replace("_","")),
+            }
+            departments.push(d);
+        }
+        
+        
+
         return {
+
             menu:[
                 {
                     header: "Hope Health Action",
@@ -62,24 +96,7 @@ export default defineComponent({
                 {
                     href:'/',
                     title: "Departments",
-                    child: [
-                        {
-                            href:"/maternity",
-                            title:  this.$t("homePage.maternity"),
-                        },
-                        {
-                            href:"/rehab",
-                            title:  this.$t("homePage.rehab"),
-                        },
-                        {
-                            href:"/community_health",
-                            title:  this.$t("homePage.communityHealth"),
-                        },
-                        {
-                            href:"/nicu_paed",
-                            title:  this.$t("homePage.nicuPaed"),
-                        },
-                    ],
+                    child: departments,
                     hiddenOnCollapse: true
                 },  
                 {
