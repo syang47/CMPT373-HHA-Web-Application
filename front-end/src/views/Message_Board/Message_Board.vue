@@ -16,50 +16,53 @@
   <div class="main-content">
     <div class="card shadow-none">
       <div class="card-body">
-        <div class="box">
-    <div class="text-center">
-      <h2 class="display-5">Message Board</h2>
-    </div>
-    <div>
-      
-      <button class="btn btn-light" @click="show = !show">Add message</button>
-        <Form v-if="show" @submit="handleData" :validation-schema="dataSchema">
-          <div class="form-group">
-            <label for="title">Title</label>
-            <Field name="title" type="text" class="form-control" />
-            <ErrorMessage name="title" class="error-feedback" />
+          <div class="card has-bg">
+            <div class="card-body">
+            <div class="text-center">
+              <h2 class="display-5">Message Board</h2>
+            </div>
+            <div>
+              
+              <div class="mb-3">
+                <button class="btn btn-primary" @click="show = !show">Add message</button>
+              </div>
+                <Form v-if="show" @submit="handleData" :validation-schema="dataSchema">
+                  <div class="mb-3">
+                    <label class="mb-2" for="title">Title</label>
+                    <Field name="title" type="text" class="form-control" />
+                    <ErrorMessage name="title" class="error-feedback" />
+                  </div>
+                  <div class="mb-3">
+                    <label class="mb-2" for="messageToPost">Message</label>
+                    <Field name="messageToPost" type="text" class="form-control" />
+                    <ErrorMessage name="messageToPost" class="error-feedback" />
+                  </div>
+                  <div class="mb-3">
+                    <button class="btn btn-secondary btn-block" :disabled="loading">
+                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                        {{ $t('msppData.submit') }}
+                    </button>
+                  </div>
+                </Form>
+              
+            </div>
+            <div :key="rerender">
+              <div class="card">
+                <div class="card-body" v-for="m in messages" :key="m" @click="showMessage(m)">
+                <h1 class="mb-2" style="text-align:left">
+                  <p class="text-dark">{{ m.title }} <span class="font-weight-normal">({{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}})</span></p>
+                </h1>
+                <div v-if="m.show">
+                  <div>
+                    {{ m.message }}
+                  </div>
+                </div>
+                
+              </div>
+              </div>
+            </div>
           </div>
-          <div class="form-group">
-            <label for="messageToPost">Message</label>
-            <Field name="messageToPost" type="text" class="form-control" />
-            <ErrorMessage name="messageToPost" class="error-feedback" />
           </div>
-          <div class="form-group">
-            <button class="btn btn-outline-light btn-block" :disabled="loading">
-                <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                {{ $t('msppData.submit') }}
-            </button>
-          </div>
-        </Form>
-      
-    </div>
-    <div :key="rerender">
-      <div class="btn btn-light" v-for="m in messages" :key="m" @click="showMessage(m)">
-        <h1 style="text-align:left">
-          <p class="text-dark">{{ m.title }}</p>
-        </h1>
-        <div>
-          {{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}}
-        </div>
-        <div v-if="m.show">
-          <div>
-            {{ m.message }}
-          </div>
-        </div>
-        
-      </div>
-    </div>
-  </div>
       </div>
     </div>
   </div>

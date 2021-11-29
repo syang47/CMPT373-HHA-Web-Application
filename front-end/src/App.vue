@@ -101,6 +101,10 @@
 .btn:hover{
   box-shadow: none !important;
 }
+/* global style */
+.font-weight-normal{
+  font-weight: 400;
+}
 
 </style>
 

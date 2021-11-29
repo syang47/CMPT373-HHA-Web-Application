@@ -36,7 +36,9 @@
 <div class="main-content">
     <div class="card shadow-none">
       <div class="card-body">
-        <div class="signup-form text-monospace">
+        <div class="card has-bg">
+            <div class="card-body">
+                <div class="signup-form text-monospace">
             <div class="text-center">
                 <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
                 <div class="row">
@@ -59,6 +61,8 @@
                 <div>{{ message }}</div>
                 <first-component v-if="showComponentOne" />
                 <second-component v-else-if="showComponentTwo" />
+            </div>
+        </div>
             </div>
         </div>
       </div>
