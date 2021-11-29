@@ -6,7 +6,6 @@
         width: 100%;
         overflow: auto;
     }
-
     .form-control{
         height: 40px;
         box-shadow: none;
@@ -14,11 +13,6 @@
     }
     .form-control:focus{
         border-color: #5cb85c;
-    }
-    .signup-form{
-        width: 600px;
-        margin: 0 auto;
-        padding: 30px 0;
     }
     .signup-form h2{
         color: #636363;

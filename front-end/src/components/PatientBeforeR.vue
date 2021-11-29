@@ -32,24 +32,28 @@
         <!-- Input boxed list -->
         <div>
             <br>
-            <label :for="`diedBefore48hAge_${idx}`">Age</label>
-            <Field class="form-control"
-                :id="`diedBefore48hAge_${idx}`" 
-                @input="$emit('update:modelValue', Object.keys(fields).length)"
-                :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
-            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
-            <br>
-            <legend :for="`diedBefore48hCause_${idx}`">Patient {{ idx+1 }} Cause of Death</legend>
-            <Field class="form-control"
-                :id="`diedBefore48hCause_${idx}`"
-                :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
-            <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+            <div class="my-3">
+                <label :for="`diedBefore48hAge_${idx}`">Age</label>
+                <Field class="form-control"
+                    :id="`diedBefore48hAge_${idx}`" 
+                    @input="$emit('update:modelValue', Object.keys(fields).length)"
+                    :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" />
+                <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+            </div>
+            <div class="my-3">
+                <br>
+                <legend :for="`diedBefore48hCause_${idx}`">Patient {{ idx+1 }} Cause of Death</legend>
+                <Field class="form-control"
+                    :id="`diedBefore48hCause_${idx}`"
+                    :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
+                <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+            </div>
         </div>
 
-        <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">Remove patient X</button>
         </fieldset>
 
-        <button class="btn btn-outline-light btn-block" type="button" @click="push({ 
+        <button class="btn btn-primary btn-block" type="button" @click="push({ 
             diedBefore48hOption: '', 
             diedBefore48hAge: '', 
             diedBefore48hCause: '', 
