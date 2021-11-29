@@ -52,14 +52,14 @@ export default defineComponent({
                     name: 'diedBefore48h',
                     as: 'input',
                     rules: r,
-                    patient: 1
+                    patientBeforeM: 1
                 },
                 {
                     label: 'msppData.diedAfter48h',
                     name: 'diedAfter48h',
                     as: 'input',
                     rules: r,
-                    patient: 1
+                    patientAfterM: 1
                 },
                 {
                     label: 'msppData.daysHospitalised',
@@ -841,7 +841,7 @@ export default defineComponent({
         return {
             formSchema,
             department: "maternity",
-            formTitle: 'msppData.rehabForm'
+            formTitle: 'msppData.maternityForm'
         };
     }
 });
