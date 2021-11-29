@@ -99,8 +99,17 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.updateUserReportsSubmitted(user.getId());
     }
     
-    public List<User> listAllUsers() {
-        return userRepository.findAll();   
+    public List<List<String>> listAllUsers() {
+        List<List<String>> users = new ArrayList<>();
+        for(User u : userRepository.findAll()){
+            List<String> userData = new ArrayList<>();
+            userData.add(u.getId().toString());
+            userData.add(u.getUsername());
+            userData.add(u.getDepartment().getDepartmentname());
+            userData.add(u.getRole());
+            users.add(userData);
+        }
+        return users;
     }
     // public List<String> listUsernames() {
     //     return userRepository.queryUsername();

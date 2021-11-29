@@ -58,10 +58,16 @@
                     <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
                     <label for="showDepartmentDataQuery">Department Data Display</label> -->
                 </div>
+                <div class="col">
+                    <button class="btn btn-secondary" v-on:click="showAllUserData">User Data Display</button> 
+                    <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
+                    <label for="showDepartmentDataQuery">Department Data Display</label> -->
+                </div>
             </div>
             <div>{{ message }}</div>
             <first-component v-if="showComponentOne" />
             <second-component v-else-if="showComponentTwo" />
+            <user-data-component v-else-if="showUserDataComponent" />
         </div>
     </div>
 
@@ -72,17 +78,20 @@
 import { defineComponent } from 'vue'
 import CaseStudyDisplay from "./Data_Output/CaseStudyDisplay.vue";
 import DepartmentDataDisplay from "./Data_Output/DepartmentDataDisplay.vue";
+import UserDataDisplay from "./Data_Output/UserDataDisplay.vue";
 export default defineComponent({
     name: "DataDisplay",
     components: {
         'first-component': CaseStudyDisplay,
-        'second-component': DepartmentDataDisplay
+        'second-component': DepartmentDataDisplay,
+        'user-data-component': UserDataDisplay
     },
     data: function() {
         return {
             message: "",
             showComponentOne: false,
             showComponentTwo: false,
+            showUserDataComponent: false,
         };
     },
     methods: {
@@ -90,20 +99,26 @@ export default defineComponent({
             this.message = "Displaying case study data";
             this.showComponentOne = !this.showComponentOne;
             this.showComponentTwo = false;
+            this.showUserDataComponent = false; 
         },
         showEmployeeOfTheMonthData() {
             this.message = "Displaying employee of the month data to be implemented...";
-            //  this.showComponentOne = false;
-            //  this.showComponentTwo = !this.showComponentTwo; 
+            this.showComponentOne = false;
+            this.showComponentTwo = false;
+            this.showUserDataComponent = false; 
         },
         showDepartmentData() {
             this.message = "Displaying department input data";
             this.showComponentOne = false;
             this.showComponentTwo = !this.showComponentTwo;             
         },
+        showAllUserData() {
+            this.message = "Displaying user data";
+            this.showComponentOne = false;
+            this.showComponentTwo = false;
+            this.showUserDataComponent = !this.showUserDataComponent;
+        }
     }
-
-    
 });
 
 </script>
