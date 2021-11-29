@@ -54,45 +54,51 @@
       <div class="card-body">
         <Form @submit="handleRegister" :validation-schema="userSchema">
 
-        <div class="box">
+        <div class="card has-bg">
+            <div class="card-body">
             <div class="signup-form text-monospace">
                 <div class="text-center">
                     <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
                     <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('registerPage.registration') }}</h2>
                 </div>
                 <div v-if="!successful">
-                    <div class="form-group">
-                        <label for="username">{{ $t('registerPage.username') }}</label>
+                    <div class="mb-3">
+                        <label class="mb-2" for="username">{{ $t('registerPage.username') }}</label>
                         <Field name="username" type="text" class="form-control" />
-                        <ErrorMessage name="username" class="error-feedback" />
+                        <div class="mt-1">
+                            <ErrorMessage name="username" class="error-feedback" />
+                        </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label for="password">{{ $t('registerPage.password') }}</label>
+                    <div class="mb-3">
+                        <label class="mb-2" for="password">{{ $t('registerPage.password') }}</label>
                         <Field name="password" type="password" class="form-control" />
-                        <ErrorMessage name="password" class="error-feedback" />
+                        <div class="mt-1">
+                            <ErrorMessage name="password" class="error-feedback" />
+                        </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="departments">{{ $t('registerPage.selectDept') }}</label>
+                    <div class="mb-3">
+                        <label class="mb-2" for="departments">{{ $t('registerPage.selectDept') }}</label>
                         <Field v-slot="{ value }" name="departments" as="select">
                         <option v-for="d in departments" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
                         </Field>
 
                     </div>
-                    <div class="form-group" v-if="isAdmin()">
+                    <div class="mb-3" v-if="isAdmin()">
                         <Field name="head" type="checkbox" :value="true"/>
-                        <label for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
+                        <label class="mb-2" for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
                     </div>
-                    <div class="form-group">
-                        <button class="btn btn-outline-light btn-block" :disabled="loading">
+                    <div class="mb-3">
+                        <button class="btn btn-secondary btn-block" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                             {{ $t('registerPage.signUp') }}
                         </button>
                     </div>
                 </div>
             </div>
-            </div>
+        </div>
+        </div>
         </Form>
 
         <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
