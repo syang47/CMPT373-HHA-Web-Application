@@ -70,8 +70,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole("ROLE_ADMIN");
         admin.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
-        admin.setReportsSubmitted(0);
-        admin.setPoints(0);
         userRepository.save(admin);
 
         User randomHead = new User();
@@ -80,7 +78,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomHead.setPassword(passwordEncoder.encode("head"));
         randomHead.setRole("ROLE_HEAD");
         randomHead.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
-        randomHead.setPoints(0);
         userRepository.save(randomHead);
 
         User randomUser = new User();
@@ -89,7 +86,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
         randomUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("maternity").get());
-        randomUser.setPoints(0);
         userRepository.save(randomUser);
     }
 
@@ -98,12 +94,21 @@ public class HHAUserDetailsService implements UserDetailsService {
     }
 
     public User setEmployeeOfTheMonth(Integer userId, String month){
+        Optional<User> currentEmployeeOfTheMonth = userRepository.queryEmployeeOfTheMonth(month);
+        currentEmployeeOfTheMonth.ifPresent(e -> e.setEmployeeOfTheMonth(""));
         User u = userRepository.getById(userId);
         u.setEmployeeOfTheMonth(month);
-        return u;
+        return userRepository.save(u);
     }
 
-    public User getEmployeeOfTheMonth(String month) {
-        return userRepository.queryEmployeeOfTheMonth(month);
+    public List<String> getEmployeeOfTheMonth(String month) {
+        List<String> employeeInfo = new ArrayList<>();
+        Optional<User> u = userRepository.queryEmployeeOfTheMonth(month);
+        u.ifPresent(e -> {
+            employeeInfo.add(e.getUsername());
+            employeeInfo.add(e.getDepartment().getDepartmentname());
+        });
+
+        return employeeInfo;
     }
 }

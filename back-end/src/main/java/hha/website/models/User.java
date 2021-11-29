@@ -38,13 +38,13 @@ public class User {
     private Set<CaseStudy> caseStudies;
 
     @Column
-    private Integer reportsSubmitted;
+    private Integer reportsSubmitted = 0;
 
     @Column
-    private Integer points;
+    private Integer points = 0;
 
     @Column
-    private String employeeOfTheMonth;
+    private String employeeOfTheMonth = "";
 
     public Integer getId() {
         return id;

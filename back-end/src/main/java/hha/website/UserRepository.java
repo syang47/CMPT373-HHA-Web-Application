@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Collection;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
@@ -19,6 +20,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
     void updateUserReportsSubmitted(Integer id);
 
-    @Query("SELECT username, department FROM User WHERE employeeOfTheMonth = ?1")
-    User queryEmployeeOfTheMonth(String month);
+    @Query("SELECT u FROM User u WHERE employeeOfTheMonth = ?1")
+    Optional<User> queryEmployeeOfTheMonth(String month);
 }
