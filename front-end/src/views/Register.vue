@@ -174,27 +174,35 @@ export default defineComponent({
             this.message = "";
             this.successful = false;
             this.loading = true;
-
-            this.$store.dispatch("auth/register", user).then(
-                (data) => {
-                    this.message = data.message;
-                    this.successful = true;
-                    this.loading = false;
-                    console.log("registration successful: " + this.successful);
-                    this.$router.push('/');
-                },
-                (error) => {
-                    this.message =
-                        (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                        error.message || error.toString();
-                    this.successful = false;
-                    this.loading = false;
-                    console.log("registration:" + this.successful);
-                    console.log(user);
+            const token = JSON.parse(localStorage.getItem('user')!);
+            let role = "ROLE_USER";
+            if(user.head) {
+                role = "ROLE_HEAD";
+            }
+            return axios.post('/api/register', {
+                username: user.username,
+                password: user.password,
+                department: user.departments,
+                role: role,
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
                 }
-            );
+            }).then(response => {
+                this.message = response.data;
+                this.successful = true;
+                this.loading = false;
+                console.log("registration successful: " + this.successful);
+            }).catch(error => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message || error.toString();
+                this.successful = false;
+                this.loading = false;
+                console.log("registration:" + this.successful);
+            });
         },
 
     }

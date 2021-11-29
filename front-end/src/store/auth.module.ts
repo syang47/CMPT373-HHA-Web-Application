@@ -36,16 +36,6 @@ export const auth = {
             AuthService.logout();
             commit('logout');
         },
-        register(user) {
-            return AuthService.register(user).then(
-                response => {
-                    return Promise.resolve(response.data);
-                },
-                error => {
-                    return Promise.reject(error);
-                }
-            );
-        },
         isTokenValid({ commit }){
             return AuthService.isTokenValid().then(
                 response => {
