@@ -1,16 +1,17 @@
 
 <style scoped>
 
-* {
-  margin: 0;
-  padding: 0;
-}
 
 .btn:hover {
   border-radius: 10px;
   color: #fff;
   box-shadow: 0 0 5px 0 #c6fafe, 0 0 25px 0 #c6fafe, 0 0 50px 0 #c6fafe,
     0 0 100px 0 #c6fafe;
+}
+.has-bg{
+    background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
+    background-size:cover;
+background-position:  center center;
 }
 .background {
     background: url('../assets/project_photos/leaders_board_background.jpeg') no-repeat;
@@ -26,11 +27,6 @@
 
 @import url('https://fonts.googleapis.com/css?family=Rubik:300,400,500');
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 body {
   border-top: 4px solid #DC0000;
   background: #15151E;
@@ -78,12 +74,22 @@ table td.gap span {
   }
 }
 
+.min-100vh{
+    min-height: 100vh;
+}
+.bg-none{
+    background-color: transparent;
+}
+
 </style>
 
 <template>
 
-<div class = "background">
-    <div class="container-fluid">
+<div class="main-content has-bg min-100vh">
+    <div class="main-wrapper">
+    <div class="card shadow-none bg-none">
+        <div class="card-body">
+            <div class="container-fluid">
         <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
         <div class="container-fluid">
             <div class="row">
@@ -148,6 +154,9 @@ table td.gap span {
                 </div>
             </div>
         </div>
+    </div>
+        </div>
+    </div>
     </div>
 </div>
 

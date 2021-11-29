@@ -1,7 +1,5 @@
 <style scoped>
 
-    .btn {
-    }
     .box {
         width: 100%;
         height: 100%;
@@ -19,9 +17,6 @@
         border-color: #5cb85c;
     }
     .signup-form{
-        width: 1000px;
-        margin: 0 auto;
-        padding: 50px 0;
         position: relative;
         overflow-y: auto;
     }

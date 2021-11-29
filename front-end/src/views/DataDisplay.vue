@@ -1,7 +1,6 @@
 <style scoped>
 
-    .btn {
-    }
+
     .box {
         width: 100%;
         height: 100%;
@@ -19,11 +18,7 @@
         border-color: #5cb85c;
     }
     .signup-form{
-        width: 1000px;
-        margin: 0 auto;
-        padding: 50px 0;
         position: relative;
-        overflow-y: auto;
     }
     .signup-form h2{
         color: #636363;
@@ -38,32 +33,37 @@
 </style>
 
 <template>
-
-    <div class="signup-form text-monospace">
-        <div class="text-center container-fluid">
-            <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
-            <div class="row">
-                <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="showCaseStudyData">Case Study of the Month</button>
-                    <!-- <button class="btn btn-secondary" type="radio" id="showCaseStudyQuery" value = "ShowCaseStudyQuery" v-model="dataDisplaySelected" />
-                    <label for="showCaseStudyQuery">Case Study of the Month</label> -->
+<div class="main-content">
+    <div class="card shadow-none">
+      <div class="card-body">
+        <div class="signup-form text-monospace">
+            <div class="text-center">
+                <h2 class="font-weight-bold display-5 text-dark text-monospace col">Display Data</h2>
+                <div class="row">
+                    <div class="form-group col">
+                        <button class="btn btn-secondary" v-on:click="showCaseStudyData">Case Study of the Month</button>
+                        <!-- <button class="btn btn-secondary" type="radio" id="showCaseStudyQuery" value = "ShowCaseStudyQuery" v-model="dataDisplaySelected" />
+                        <label for="showCaseStudyQuery">Case Study of the Month</label> -->
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary" v-on:click="showEmployeeOfTheMonthData">Employee of the Month</button>
+                        <!-- <button class="btn btn-secondary"  type="radio" id="showEmployeeOfTheMonthQuery" value = "ShowEmployeeOfTheMonthQuery" v-model="dataDisplaySelected" />
+                        <label for="showEmployeeOfTheMonthQuery">Employee of the Month</label> -->
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-secondary" v-on:click="showDepartmentData">Department Data Display</button> 
+                        <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
+                        <label for="showDepartmentDataQuery">Department Data Display</label> -->
+                    </div>
                 </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showEmployeeOfTheMonthData">Employee of the Month</button>
-                    <!-- <button class="btn btn-secondary"  type="radio" id="showEmployeeOfTheMonthQuery" value = "ShowEmployeeOfTheMonthQuery" v-model="dataDisplaySelected" />
-                    <label for="showEmployeeOfTheMonthQuery">Employee of the Month</label> -->
-                </div>
-                <div class="col">
-                    <button class="btn btn-secondary" v-on:click="showDepartmentData">Department Data Display</button> 
-                    <!-- <button class="btn btn-secondary" type="radio" id="showDepartmentDataQuery" value = "ShowDepartmentDataQuery" v-model="dataDisplaySelected" />
-                    <label for="showDepartmentDataQuery">Department Data Display</label> -->
-                </div>
+                <div>{{ message }}</div>
+                <first-component v-if="showComponentOne" />
+                <second-component v-else-if="showComponentTwo" />
             </div>
-            <div>{{ message }}</div>
-            <first-component v-if="showComponentOne" />
-            <second-component v-else-if="showComponentTwo" />
         </div>
+      </div>
     </div>
+</div>
 
 </template>
 
