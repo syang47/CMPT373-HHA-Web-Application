@@ -38,7 +38,12 @@
 
 <template>
 
-    <Form @submit="handleData" :validation-schema="dataSchema">
+    <div class="main-content">
+        <div class="card shadow-none">
+            <div class="card-body">
+                <div class="card form-box">
+                    <div class="card-body">
+                        <Form @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
             <div class="text-center">
                 <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
@@ -76,6 +81,11 @@
 
     <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
         {{ message }}
+    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 </template>
