@@ -1,5 +1,4 @@
 <style scoped>
-
     .box {
         width: 100%;
         height: 100%;
@@ -44,19 +43,24 @@
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col" v-for="header in tableHeader" :key="header">{{header}}</th>
+                            <th scope="col" v-for="header in tableHeaders" :key="header">{{header}}</th>
                         </tr>
                     </thead>    
                     <tbody>
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
-                            <td><button>Edit</button></td>
-                            <td><button>Delete</button></td>
+                            <td>
+                                <button class="btn btn-warning px-2">Edit</button>
+                            </td>
+                            <td>
+                                <button @click="deleteUser(user)" class="btn btn-danger px-2">Delete</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
+        <h3>{{finalmessage}}</h3>
     </div>
 
 </template>
@@ -70,8 +74,9 @@ export default defineComponent({
         return {
             message: "",
             userAllData: [],
-            tableHeader: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
+            tableHeaders: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
             showComponentOne: true,
+            finalmessage: "",
         };
     },
     mounted() {
@@ -104,6 +109,41 @@ export default defineComponent({
                     error.message;
                 
                 alert("failed to fetch user data types");
+            });
+        },
+        // editUser() {
+        //     this.finalmessage = "trying to edit user...";
+        // },
+        deleteUser(tuple) {
+            var id = tuple[0];
+            console.log(id);
+            console.log(typeof id);
+            let token = JSON.parse(localStorage.getItem('user')!);
+            this.message = "Displaying all user data";
+            
+            this.$axios.delete(`/api/user/delete/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                }
+            }).then(response => {
+                this.finalmessage = response.data;
+                console.log(response.data);
+                if(response != null) {
+                    console.log("successfully deleted user");
+                    this.$nextTick(() => {
+                        this.fetchAllUserData();
+                    })
+                } else {
+                    alert("no user was deleted...");
+                }
+            }).catch((error: any) => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message;
+                
+                alert("error occurred when deleting user");
             });
         }
         
