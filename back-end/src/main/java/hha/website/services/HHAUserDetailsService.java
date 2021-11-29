@@ -111,6 +111,10 @@ public class HHAUserDetailsService implements UserDetailsService {
         }
         return users;
     }
+
+    public void deleteUser(int id) {
+        userRepository.deleteById(id);
+    }
     // public List<String> listUsernames() {
     //     return userRepository.queryUsername();
     // }

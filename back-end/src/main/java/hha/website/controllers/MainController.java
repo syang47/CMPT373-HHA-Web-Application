@@ -237,4 +237,23 @@ public class MainController {
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
 
+    @CrossOrigin
+    @DeleteMapping(value="/api/user/delete/{id}")
+    public String deleteUser(@PathVariable("id") String id) {
+        Integer ID = Integer.parseInt(id);
+        userDetailsService.deleteUser(ID);
+        return "user has been deleted successfully";
+    }
+
+    // @DeleteMapping(value = "/posts/{id}")
+    // public ResponseEntity<?> deletePost(@PathVariable String id) {
+    //     Integer ID = Integer.parseInt(id);
+    //     var isRemoved = userDetailsService.deleteUser(id);
+
+    //     if (!isRemoved) {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+
+    //     return new ResponseEntity<>(id, HttpStatus.OK);
+    // }
 }

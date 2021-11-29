@@ -24,17 +24,17 @@ public class User implements Serializable{
     private String role;
 
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "department_id")
     @JsonIgnore
     private Department department;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<MSPPRequirement> folder;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER,
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<CaseStudy> caseStudies;
