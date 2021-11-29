@@ -41,7 +41,7 @@
     <div class="main-content">
         <div class="card shadow-none">
             <div class="card-body">
-                <div class="card form-box">
+                <div class="card form-box has-bg">
                     <div class="card-body">
                         <Form @submit="handleData" :validation-schema="dataSchema">
         <div class="signup-form text-monospace">
@@ -49,33 +49,36 @@
                 <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
             </div>
             <div v-if="!successful">
-                <div class="form-group">
-                    <label for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label class="mb-2" for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
                     <Field name="monthly" type="text" class="form-control" />
                     <ErrorMessage name="monthly" class="error-feedback" />
 
-                    <label for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                    </div>
+                    <label class="mb-2" for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
                     <Field name="monthlyPhoto" type="file" rules="image" />
                     <ErrorMessage name="monthlyPhoto" class="error-feedback" />
                 </div>
-                <div class="form-group">
-                    <label for="annual">{{ $t('announcementPage.annualAward') }}</label>
-                    <Field name="annual" type="text" class="form-control" />
-                    <ErrorMessage name="annual" class="error-feedback" />
+                <div class="mb-3">
+                    <div class="mb-3">
+                        <label class="mb-2" for="annual">{{ $t('announcementPage.annualAward') }}</label>
+                            <Field name="annual" type="text" class="form-control" />
+                            <ErrorMessage name="annual" class="error-feedback" />
+                    </div>
 
-                    <div class="form-group">
-                    <label for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                    
+                    <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
                     <Field name="annualPhoto" type="file" rules="image" />
                     <ErrorMessage name="annualPhoto" class="error-feedback" />
                 </div>
-                <div class="form-group">
-                    <button class="btn btn-outline-light btn-block" :disabled="loading">
+                <div class="mb-3">
+                    <button class="btn btn-secondary btn-block" :disabled="loading">
                         <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                         {{ $t('announcementPage.submit') }}
                     </button>
                 </div>
             </div>
-        </div>
         </div>
     </Form>
 
