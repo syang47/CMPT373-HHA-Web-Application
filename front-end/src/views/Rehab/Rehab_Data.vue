@@ -94,14 +94,14 @@ export default defineComponent({
                     name: 'diedBefore48h',
                     as: 'input',
                     rules: r,
-                    rehabPatient: 1
+                    patientBeforeR: 1
                 },
                 {
                     label: 'msppData.diedAfter48h',
                     name: 'diedAfter48h',
                     as: 'input',
                     rules: r,
-                    rehabPatient: 1
+                    patientAfterR: 1
                 },
                 {
                     label: 'msppData.daysHospitalised',

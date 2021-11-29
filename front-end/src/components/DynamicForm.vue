@@ -33,28 +33,40 @@
                       </tbody>
                     </table>
                   </div>
-                  <!-- PATIENTS FORM1 -->
-                  <div v-else-if="field.patient">
+                  <!-- Meternity: PATIENTS FORM1 -->
+                  <div v-else-if="field.patientBeforeM">
                     <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
-                    <Patient v-model="s[field.name]" />
-
+                    <PatientBeforeM v-model="s[field.name]" />
                   </div>
-                  <!-- PATIENTS FORM2 -->
+                  <!-- Meternity: PATIENTS FORM2 -->
+                  <div v-else-if="field.patientAfterM">
+                    <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
+                    <PatientAfterM v-model="s[field.name]" />
+                  </div>
+
+                  <!--Rehab:  PATIENTS FORM1 -->
                   <div v-else-if="field.specPatient">
                     <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
                     <SpecialPatient v-model="s[field.name]" />
                   </div>
 
-                  <!-- PATIENTS FORM3 -->
-                  <div v-else-if="field.rehabPatient">
+                  <!--Rehab: PATIENTS FORM2 -->
+                  <div v-else-if="field.patientBeforeR">
                     <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
-                    <PatientRehab v-model="s[field.name]" />
+                    <PatientBeforeR v-model="s[field.name]" />
+                  </div>
+
+                  <!--Rehab: PATIENTS FORM3 -->
+                  <div v-else-if="field.patientAfterR">
+                    <RegularInput :field="field" v-model="s[field.name]" :modelValue="s[field.name]"/>
+                    <PatientAfterR v-model="s[field.name]" />
                   </div>
 
                   <!-- REGULAR INPUTS -->
                   <div v-else>
                     <RegularInput :field="field" v-model="s[field.name]" />
                   </div>
+                  
                   <!-- ADDITIONAL REGULAR INPUTS -->
                   <template v-if="field.children && field.children.length && s[field.name] > 0">
                     <div class="signup-form"
@@ -87,18 +99,22 @@
 <script lang="ts" type="text/typescript">
 import { Form } from 'vee-validate';
 import RegularInput from './RegularInput.vue';
-import Patient from './Patient.vue';
+import PatientBeforeM from './PatientBeforeM.vue';
+import PatientAfterM from './PatientAfterM.vue'
 import SpecialPatient from './SpecialPatient.vue'
-import PatientRehab from './PatientRehab.vue'
+import PatientBeforeR from './PatientBeforeR.vue'
+import PatientAfterR from './PatientAfterR.vue'
 import { defineComponent } from 'vue';
 export default defineComponent({
   name: 'DynamicForm',
   components: {
     Form,
     RegularInput,
-    Patient,
+    PatientBeforeM,
+    PatientAfterM,
     SpecialPatient,
-    PatientRehab,
+    PatientBeforeR,
+    PatientAfterR,
 
   },
   data() {
