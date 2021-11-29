@@ -1,250 +1,8 @@
-<template>
-    <Form class="background" @submit="handleData" :validation-schema="dataSchema">
-        <div class="signup-form text-monospace">
-            <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.rehabForm') }}</h2>
-            </div>
-            <div v-if="!successful">
-                <div class="form-group">
-                    <label for="bedsAvailable">{{ $t('msppData.bedsAvailable') }}</label>
-                    <Field name="bedsAvailable" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="bedsAvailable" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="bedDays">{{ $t('msppData.bedDays') }}</label>
-                    <Field name="bedDays" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="bedDays" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="patientDays">{{ $t('msppData.patientDays') }}</label>
-                    <Field name="patientDays" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="patientDays" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="hospitalized">{{ $t('msppData.hospitalised') }}</label>
-                    <Field name="hospitalized" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="hospitalized" class="error-feedback" />
-                </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedNICU">Hospitalized NICU</label>
-                    <Field name="hospitalizedNICU" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedNICU" class="error-feedback" />
-                </div>
-                <div v-if="hospitalizedMor" class="form-group">
-                    <label for="hospitalizedPaed">Hospitalized Paed</label>
-                    <Field name="hospitalizedPaed" type="text" class="form-control" />
-                    <ErrorMessage name="hospitalizedPaed" class="error-feedback" />
-                </div>
-
-
-
-
-                <div class="form-group">
-                    <label for="dischargedAlive">{{ $t('msppData.dischargedAlive') }}</label>
-                    <Field name="dischargedAlive" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="dischargedAlive" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="diedBefore48h">{{ $t('msppData.diedBefore48h') }}</label>
-                    <Field name="diedBefore48h" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="diedBefore48h" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="diedAfter48h">{{ $t('msppData.diedAfter48h') }}</label>
-                    <Field name="diedAfter48h" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="diedAfter48h" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="daysHospitalised">{{ $t('msppData.daysHospitalised') }}</label>
-                    <Field name="daysHospitalised" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="daysHospitalised" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="referrals">{{ $t('msppData.referrals') }}</label>
-                    <Field name="referrals" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="referrals" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="transfers">{{ $t('msppData.transfers') }}</label>
-                    <Field name="transfers" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="transfers" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="selfDischarged">{{ $t('msppData.selfDischarged') }}</label>
-                    <Field name="selfDischarged" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="selfDischarged" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="stayedInTheWard">{{ $t('msppData.stayedInTheWard') }}</label>
-                    <Field name="stayedInTheWard" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="stayedInTheWard" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="admissions">{{ $t('msppData.admissions') }}</label>
-                    <Field name="admissions" type="text" class="form-control" value=0 />
-                    <ErrorMessage name="admissions" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-outline-light btn-block" :disabled="loading">
-                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        {{ $t('msppData.submit') }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </Form>
-    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
-        {{ message }}
-    </div>
-</template>
-
-<script lang="ts" type="text/typescript">
-import { defineComponent } from 'vue'
-import { Form, Field, ErrorMessage } from "vee-validate";
-import * as yup from "yup";
-export default defineComponent({
-    name: "Rehab_Data",
-    components: {
-        Form,
-        Field,
-        ErrorMessage,
-    },
-    data() {
-        const dataSchema = yup.object().shape({
-            bedsAvailable: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            bedDays: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            patientDays: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            hospitalized: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            hospitalizedNICU: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            hospitalizedPaed: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-
-
-            dischargedAlive: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            diedBefore48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            diedAfter48h: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            daysHospitalized: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            referrals: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            transfers: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            selfDischarged: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            stayedInTheWard: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-            admissions: yup
-                .number()
-                .min(0, "Cannot be negative.")
-                .required("Required.")
-                .default(0),
-        });
-        return {
-            successful: false,
-            loading: false,
-            message: "",
-            hospitalizedMor: false,
-            dataSchema,
-        };
-    },
-    methods: {
-        checkHospitalized() {
-            let number: number = (document as any).getElementById("hospitalized").value;
-            if (number > 0) {
-                this.hospitalizedMor = true;
-            } else {
-                this.hospitalizedMor = false;
-            }
-        },
-        handleData(entry) {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            if(token != null) {
-                entry.department = "rehab";
-                this.$axios.post("/api/datainput", entry, {
-                    headers: {
-                        'Authorization': `Bearer ${token.jwt}`
-                    }
-                }).then(response => {
-                        this.message = response.data;
-                        this.successful = true;
-                        this.loading = false;
-                        if(response != null) {
-                            console.log("entry successful: " + this.successful);
-                            this.$router.push("/");
-                        } else {
-                            alert("entry could not be submitted");
-                        }
-                    }
-                ).catch((error: any) => {
-                      this.message =
-                          (error.response &&
-                          error.response.data &&
-                          error.response.data.message) ||
-                          error.message;
-                      this.successful = false;
-                      this.loading = false;
-                      alert("entry could not be submitted");
-                });
-            }
-        },
-    }
-});
-</script>
-
 <style>
+
     .background {
         height: 100%;
-        position: relative;
+        position: absolute;
         width: 100%;
         overflow: auto;
     }
@@ -256,11 +14,6 @@ export default defineComponent({
     .form-control:focus{
         border-color: #5cb85c;
     }
-    .signup-form{
-        width: 400px;
-        margin: 0 auto;
-        padding: 30px 0;
-    }
     .signup-form h2{
         color: #636363;
         margin: 0 0 15px;
@@ -270,4 +23,896 @@ export default defineComponent({
     .signup-form .form-group{
         margin-bottom: 20px;
     }
+    .category-heading{
+        font-size:20px;
+    }
+    table, th, td {
+      border:1px solid black;
+    }
+
 </style>
+
+<template>
+<DynamicForm :schema="formSchema" :department="department" :formTitle="formTitle"/>
+</template>
+
+<script lang="ts" type="text/typescript">
+
+import { defineComponent } from 'vue'
+import * as yup from "yup";
+import DynamicForm from '@/components/DynamicForm.vue';
+export default defineComponent({
+    name: "Rehab_Data",
+    components: {
+        DynamicForm,
+    },
+    data() {
+            
+        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.");
+        const a: any = yup.number().min(0, "Cannot be negative.");
+        const formSchema: any = {
+            fields: [
+                {
+                    label: 'msppData.bedsAvailable',
+                    name: 'bedsAvailable',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.bedDays',
+                    name: 'bedDays',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.patientDays',
+                    name: 'patientDays',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.hospitalised',
+                    name: 'hospitalised',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.dischargedAlive',
+                    name: 'dischargedAlive',
+                    as: 'input',
+                    rules: r,
+                    specPatient: 1,
+                },
+                {
+                    label: 'msppData.diedBefore48h',
+                    name: 'diedBefore48h',
+                    as: 'input',
+                    rules: r,
+                    patientBeforeR: 1
+                },
+                {
+                    label: 'msppData.diedAfter48h',
+                    name: 'diedAfter48h',
+                    as: 'input',
+                    rules: r,
+                    patientAfterR: 1
+                },
+                {
+                    label: 'msppData.daysHospitalised',
+                    name: 'daysHospitalized',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.referrals',
+                    name: 'referrals',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.transfers',
+                    name: 'transfers',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.reasonSelfDischarge',
+                    name: 'selfDischarged',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            header: 'msppData.reasonSelfDischarge'
+                        },
+                        {
+                            label: 'msppData.financeCare',
+                            name: 'financeCannotAfford',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.financeAvoidPay',
+                            name: 'financeAvoidPay',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.religiousCultural',
+                            name: 'reasonCultural',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.personalFamily',
+                            name: 'reasonPersonal',
+                            as: 'input',
+                            rules: a,
+                        },
+                        {
+                            label: 'msppData.other',
+                            name: 'otherReason',
+                            as: 'input',
+                            rules: a,
+                        },
+                    ]
+                },
+                {
+                    label: 'msppData.stayedInTheWard',
+                    name: 'stayedInTheWard',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            header: 'msppData.reasonNotYetDischarged'
+                        },
+                        {
+                            label: 'msppData.reasonNotReady',
+                            name: 'reasonNotReady',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.reasonWoundCare',
+                            name: 'reasonWoundCare',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.otherMedicalReason',
+                            name: 'otherMedicalReason',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.reasonFinancial',
+                            name: 'reasonFinancial',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            header: 'msppData.lengthOfStayOfCurrentInpatients'
+                        },
+                        {
+                            label: 'msppData.length1_3m',
+                            name: 'length1_3m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.length3_6m',
+                            name: 'length3_6m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.length6m_1y',
+                            name: 'length6m_1y',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.length1_2y',
+                            name: 'length1_2y',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.length2_3y',
+                            name: 'length2_3y',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.length3_y',
+                            name: 'length3_y',
+                            as: 'input',
+                            rules: a
+                        },
+                    ]
+                },
+                {
+                    label: 'msppData.admissions',
+                    name: 'admissions',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            header: 'msppData.wherePatientsComeFrom'
+                        },
+                        {
+                            label: 'msppData.quMo',
+                            name: 'fromQuarterMorin',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.capHai',
+                            name: 'fromCapHaitian',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.deptNord',
+                            name: 'fromDepartmentNord',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.otherDept',
+                            name: 'fromOther',
+                            as: 'input',
+                            rules: yup.string()
+                        },
+
+                        {
+                            header: 'msppData.mainCondition'
+                        },
+                        {
+                            label: 'msppData.mainCoditionTetraplegia',
+                            name: 'mainCoditionTetraplegia',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionComplete',
+                            name: 'mainCoditionComplete',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionIncomplete',
+                            name: 'mainCoditionIncomplete',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC1',
+                            name: 'mainCoditionC1',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC2',
+                            name: 'mainCoditionC2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC3',
+                            name: 'mainCoditionC3',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC4',
+                            name: 'mainCoditionC4',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC5',
+                            name: 'mainCoditionC5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC6',
+                            name: 'mainCoditionC6',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC7',
+                            name: 'mainCoditionC7',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC8',
+                            name: 'mainCoditionC8',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT1',
+                            name: 'mainCoditionT1',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionParaplegia',
+                            name: 'mainCoditionParaplegia',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionComplete2',
+                            name: 'mainCoditionComplete2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionIncomplete2',
+                            name: 'mainCoditionIncomplete2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT2',
+                            name: 'mainCoditionT2',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            label: 'msppData.mainCoditionC4',
+                            name: 'mainCoditionC4',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC5',
+                            name: 'mainCoditionC5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC6',
+                            name: 'mainCoditionC6',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC7',
+                            name: 'mainCoditionC7',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionC8',
+                            name: 'mainCoditionC8',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT1',
+                            name: 'mainCoditionT1',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionParaplegia',
+                            name: 'mainCoditionParaplegia',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionComplete2',
+                            name: 'mainCoditionComplete2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionIncomplete2',
+                            name: 'mainCoditionIncomplete2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT2',
+                            name: 'mainCoditionT2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT3',
+                            name: 'mainCoditionT3',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT4',
+                            name: 'mainCoditionT4',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT5',
+                            name: 'mainCoditionT5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT6',
+                            name: 'mainCoditionT6',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT7',
+                            name: 'mainCoditionT7',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT8',
+                            name: 'mainCoditionT8',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT9',
+                            name: 'mainCoditionT9',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT10',
+                            name: 'mainCoditionT10',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT11',
+                            name: 'mainCoditionT11',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionT12',
+                            name: 'mainCoditionT12',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionL1',
+                            name: 'mainCoditionL1',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionL2',
+                            name: 'mainCoditionL2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionL3',
+                            name: 'mainCoditionL3',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionL4',
+                            name: 'mainCoditionL4',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionL5',
+                            name: 'mainCoditionL5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionS1',
+                            name: 'mainCoditionS1',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionS2',
+                            name: 'mainCoditionS2',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionS3',
+                            name: 'mainCoditionS3',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionS4',
+                            name: 'mainCoditionS4',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionS5',
+                            name: 'mainCoditionS5',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            blueHeader: 'msppData.causeOfSCI'
+                        },
+                        {
+                            label: 'msppData.SCITransportAccident',
+                            name: 'SCITransportAccident',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIFall',
+                            name: 'SCIFall',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAssault',
+                            name: 'SCIAssault',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCISports',
+                            name: 'SCISports',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCINonTraumaticSpinalCordDysfunction',
+                            name: 'SCINonTraumaticSpinalCordDysfunction',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIMedical',
+                            name: 'SCIMedical',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIOtherTraumaticReason',
+                            name: 'SCIOtherTraumaticReason',
+                            as: 'input',
+                            rules: a
+                        },
+                        
+                        {
+                            blueHeader: 'msppData.ageRehab'
+                        },
+                        {
+                            label: 'msppData.SCIAge0_5',
+                            name: 'SCIAge0_5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge6_11',
+                            name: 'SCIAge6_11',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge12_18',
+                            name: 'SCIAge12_18',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge18_30',
+                            name: 'SCIAge18_30',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge31_50',
+                            name: 'SCIAge31_50',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge51_70',
+                            name: 'SCIAge51_70',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIAge70',
+                            name: 'SCIAge70',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            blueHeader: 'msppData.genderRehab'
+                        },
+                        {
+                            label: 'msppData.SCIMale',
+                            name: 'SCIMale',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.SCIFemale',
+                            name: 'SCIFemale',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            header: 'msppData.mainConditionCont'
+                        },
+                        {
+                            label: 'msppData.mainCoditionStroke',
+                            name: 'mainCoditionStroke',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionFracturedHip',
+                            name: 'mainCoditionFracturedHip',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionFracturedLongBones',
+                            name: 'mainCoditionFracturedLongBones',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionNeurodegenerativeDisease',
+                            name: 'mainCoditionNeurodegenerativeDisease',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionHeadInjury',
+                            name: 'mainCoditionHeadInjury',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionWoundCare',
+                            name: 'mainCoditionWoundCare',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionOtherMedical',
+                            name: 'mainCoditionOtherMedical',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.mainCoditionOtherTrauma',
+                            name: 'mainCoditionOtherTrauma',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            header: 'msppData.timeFromInjury'
+                        },
+                        {
+                            label: 'msppData.timeLessThan1m',
+                            name: 'timeLessThan1m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.time1_2m',
+                            name: 'time1_2m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.time3m',
+                            name: 'time3m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.time6m',
+                            name: 'time6m',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.time1y',
+                            name: 'time1y',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.time2y',
+                            name: 'time2y',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.timeMoreThan3y',
+                            name: 'timeMoreThan3y',
+                            as: 'input',
+                            rules: a
+                        },
+                    ]
+                },
+                {
+                    label: 'msppData.numberOfOutpatients',
+                    name: 'numberOfOutpatients',
+                    as: 'input',
+                    rules: r,
+                    children: [
+                        {
+                            label: 'msppData.returningOutpatients',
+                            name: 'returningOutpatients',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newOutpatient',
+                            name: 'newOutpatient',
+                            as: 'input',
+                            rules: a,
+                            children: [
+                                {
+                                    header: 'msppData.mainConditionOfNewPatients'
+                                },
+                                {
+                                    label: 'msppData.newSCIParaplegia',
+                                    name: 'newSCIParaplegia',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newSCITetraplegia',
+                                    name: 'newSCITetraplegia',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newStroke',
+                                    name: 'newStroke',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newFracturedHip',
+                                    name: 'newFracturedHip',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newFracturedLongBones',
+                                    name: 'newFracturedLongBones',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newNeurodegenerativeDisease',
+                                    name: 'newNeurodegenerativeDisease',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newHeadInjury',
+                                    name: 'newHeadInjury',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newWoundCare',
+                                    name: 'newWoundCare',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newCerebralPalsy',
+                                    name: 'newCerebralPalsy',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newDownSyndromel',
+                                    name: 'newDownSyndromel',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newOther',
+                                    name: 'newOther',
+                                    as: 'input',
+                                    rules: a
+                                },
+
+                                {
+                                    header: 'msppData.ageOfNewpatients'
+                                },
+                                {
+                                    label: 'msppData.newAge0_5',
+                                    name: 'newAge0_5',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge6_11',
+                                    name: 'newAge6_11',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge12_18',
+                                    name: 'newAge12_18',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge18_30',
+                                    name: 'newAge18_30',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge31_50',
+                                    name: 'newAge31_50',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge51_70',
+                                    name: 'newAge51_70',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newAge70',
+                                    name: 'newAge70',
+                                    as: 'input',
+                                    rules: a
+                                },
+
+                                {
+                                    header: 'msppData.genderOfNewpatients'
+                                },
+                                {
+                                    label: 'msppData.newMale',
+                                    name: 'newMale',
+                                    as: 'input',
+                                    rules: a
+                                },
+                                {
+                                    label: 'msppData.newFemale',
+                                    name: 'newFemale',
+                                    as: 'input',
+                                    rules: a
+                                },
+                            ]
+                        },
+                    ]
+                }
+            ],
+        };   
+        return {
+            formSchema,
+            department: "Rehab",
+            formTitle: 'msppData.rehabForm'
+        };
+    }
+});
+</script>
+

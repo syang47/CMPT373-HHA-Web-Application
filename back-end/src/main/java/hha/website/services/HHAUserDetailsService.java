@@ -4,6 +4,8 @@ import hha.website.UserRepository;
 import hha.website.models.Department;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
+
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -96,4 +98,29 @@ public class HHAUserDetailsService implements UserDetailsService {
     public void addASubmittedReportForUser(User user) {
         userRepository.updateUserReportsSubmitted(user.getId());
     }
+    
+    public List<List<String>> listAllUsers() {
+        List<List<String>> users = new ArrayList<>();
+        for(User u : userRepository.findAll()){
+            List<String> userData = new ArrayList<>();
+            userData.add(u.getId().toString());
+            userData.add(u.getUsername());
+            userData.add(u.getDepartment().getDepartmentname());
+            userData.add(u.getRole());
+            users.add(userData);
+        }
+        return users;
+    }
+
+    public void deleteUser(int id) {
+        userRepository.deleteById(id);
+    }
+    // public List<String> listUsernames() {
+    //     return userRepository.queryUsername();
+    // }
+
+    // private Session session;
+    // public List<User> findAllUsers() {
+    //     return Session.createQuery("SELECT a FROM User a", User.class).getResultList();
+    // }
 }
