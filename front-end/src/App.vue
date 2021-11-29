@@ -88,7 +88,18 @@
   max-width: 600px;
     background-color: #f6f9f9;
     margin: 0 auto;
-    box-shadow: 0 0.0625rem 0.5rem rgb(155 154 154 / 15%)
+}
+
+/* box style */
+.card{
+  box-shadow: none !important;
+}
+.card.has-bg{
+    background-color: #edf2f9;
+    box-shadow: none !important;
+}
+.btn:hover{
+  box-shadow: none !important;
 }
 
 </style>

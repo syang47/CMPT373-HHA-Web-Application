@@ -65,11 +65,6 @@ table td.gap span {
     background-color: transparent;
 }
 
-.card.has-bg{
-    background-color: #edf2f9;
-    box-shadow: none !important;
-}
-
 </style>
 
 <template>
