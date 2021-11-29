@@ -15,11 +15,6 @@
     .form-control:focus{
         border-color: #5cb85c;
     }
-    .signup-form{
-        width: 600px;
-        margin: 0 auto;
-        padding: 30px 0;
-    }
     .signup-form h2{
         color: #636363;
         margin: 0 0 15px;
@@ -42,7 +37,9 @@
 <div class="main-content">
     <div class="card shadow-none">
       <div class="card-body">
-        <Form  @submit="handleData" :validation-schema="dataSchema">
+        <div class="card has-bg form-box">
+            <div class="card-body">
+                <Form  @submit="handleData" :validation-schema="dataSchema">
             <div class="signup-form text-monospace">
                 <div class="text-center">
                     <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('msppData.msppForm') }}</h2>
@@ -1192,7 +1189,7 @@
                     </div>
 
                     <div class="form-group">
-                        <button class="btn btn-outline-light btn-block" :disabled="loading">
+                        <button class="btn btn-secondary btn-block" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                             {{ $t('msppData.submit') }}
                         </button>
@@ -1202,6 +1199,8 @@
         </Form>
         <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
             {{ message }}
+        </div>
+            </div>
         </div>
       </div>
     </div>

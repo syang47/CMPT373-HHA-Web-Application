@@ -3,14 +3,16 @@
 <div class="main-content">
     <div class="card shadow-none bg-none">
         <div class="card-body">
-          <Form @submit="handleData" v-slot="{ validate }" >
+          <div class="card has-bg form-box">
+            <div class="card-body">
+              <Form @submit="handleData" v-slot="{ validate }" >
             <div class="signup-form">
               <h2 class="font-weight-bold display-5 text-dark">{{ $t(formTitle) }}</h2>
               <div
                 v-for="field in schema.fields"
                 :key="field"
               >
-                <div class="form-group">
+                <div class="mb-3">
                   <!-- HEADER -->
                   <h4 v-if="field.header" style="color:red; text-align:center">{{ $t(field.header) }}</h4>
                   <!-- TABLE -->
@@ -59,14 +61,16 @@
                   
                 </div>
               </div>
-              <div class="form-group">
-                <button class="btn btn-outline-light btn-block" :disabled="loading" @click="validate">
+              <div class="mb-3">
+                <button class="btn btn-secondary btn-block" :disabled="loading" @click="validate">
                   <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                   {{ $t('msppData.submit') }}
                 </button>
               </div>
             </div>
           </Form>
+            </div>
+          </div>
         </div>
     </div>
 </div>
