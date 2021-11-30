@@ -38,10 +38,10 @@
                     <tbody>
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
-                            <td>
-                                <button class="btn btn-warning px-2">Edit</button>
-                            </td>
-                            <td>
+                            <!-- <td v-if="hasPermissions">
+                                <button @click="editUser(user)" class="btn btn-warning px-2">Edit</button>
+                            </td> -->
+                            <td v-if="hasPermissions">
                                 <button @click="deleteUser(user)" class="btn btn-danger px-2">Delete</button>
                             </td>
                         </tr>
@@ -66,6 +66,7 @@ export default defineComponent({
             tableHeaders: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
             showComponentOne: true,
             finalmessage: "",
+            hasPermissions: false
         };
     },
     mounted() {
@@ -73,6 +74,10 @@ export default defineComponent({
         this.$nextTick(() => {
             this.fetchAllUserData();
         })
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HEAD"){
+            this.hasPermissions = true;
+        }
     },
     methods: {
         fetchAllUserData() {
@@ -100,9 +105,35 @@ export default defineComponent({
                 alert("failed to fetch user data types");
             });
         },
-        // editUser() {
-        //     this.finalmessage = "trying to edit user...";
-        // },
+        editUser(user) {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            this.message = "Displaying all user data";
+            
+            this.$axios.post(`/api/user/edit`, user ,{
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+            }).then(response => {
+                this.finalmessage = response.data;
+                console.log(response.data);
+                if(response != null) {
+                    console.log("successfully edited user");
+                    this.$nextTick(() => {
+                        this.fetchAllUserData();
+                    })
+                } else {
+                    alert("no user was edited...");
+                }
+            }).catch((error: any) => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message;
+                
+                alert("error occurred when edited user");
+            });
+        },
         deleteUser(tuple) {
             var id = tuple[0];
             console.log(id);

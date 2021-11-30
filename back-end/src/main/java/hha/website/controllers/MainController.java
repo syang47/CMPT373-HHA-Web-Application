@@ -126,6 +126,28 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
+    @CrossOrigin
+    @DeleteMapping(value="/api/user/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") String id) {
+        try{
+            Integer ID = Integer.parseInt(id);
+            userDetailsService.deleteUser(ID);
+            return new ResponseEntity<>("user has been deleted successfully", HttpStatus.OK);
+        } catch (Exception e){
+            return new ResponseEntity<>("Failed to delete user", HttpStatus.SERVICE_UNAVAILABLE);
+        }
+    }
+
+//    @CrossOrigin
+//    @RequestMapping(value = "/api/user/edit", method = RequestMethod.PATCH)
+//    public ResponseEntity<?> editUser(@RequestParam Integer userId, @RequestBody String userData) {
+//        try{
+//            return ResponseEntity.ok(msppRepositoryService.editRequiredForm(documentId, MSPPDataJson));
+//        } catch (Exception e){
+//            return new ResponseEntity<>("Failed to edit form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+
     @RequestMapping(value = "/api/mspp/submit", method = RequestMethod.POST)
     public ResponseEntity<?> submitMSPPForm(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
@@ -164,8 +186,6 @@ public class MainController {
         // return ResponseEntity.ok(userDetailsService.findAllUsers());
         return ResponseEntity.ok(userDetailsService.listAllUsers().toArray());
     }
-
-
 
     @CrossOrigin
     @GetMapping("/api/mspp/data")
@@ -260,23 +280,6 @@ public class MainController {
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
 
-    @CrossOrigin
-    @DeleteMapping(value="/api/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") String id) {
-        Integer ID = Integer.parseInt(id);
-        userDetailsService.deleteUser(ID);
-        return "user has been deleted successfully";
-    }
 
-    // @DeleteMapping(value = "/posts/{id}")
-    // public ResponseEntity<?> deletePost(@PathVariable String id) {
-    //     Integer ID = Integer.parseInt(id);
-    //     var isRemoved = userDetailsService.deleteUser(id);
 
-    //     if (!isRemoved) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     return new ResponseEntity<>(id, HttpStatus.OK);
-    // }
 }
