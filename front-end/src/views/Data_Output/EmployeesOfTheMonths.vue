@@ -67,7 +67,7 @@ export default defineComponent({
     methods: {
         getAllEmployeesOfTheMonths(): void {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.$axios.get("/api/user/employeeofthemonths", {
+            this.$axios.get("/api/user/allemployeesofthemonths", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`
                 },

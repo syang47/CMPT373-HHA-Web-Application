@@ -134,12 +134,13 @@ public class MainController {
         return ResponseEntity.ok("User " + userDetailsService.setEmployeeOfTheMonth(userId, month) + " set as employee of the month for " + month);
     }
 
-    @RequestMapping(value = "/api/user/employeeofthemonth/{month}", method = RequestMethod.GET)
-    public ResponseEntity<?> getEmployeeOfTheMonth(@PathVariable("month") String month) {
+    @CrossOrigin
+    @RequestMapping(value = "/api/user/employeeofthemonth", method = RequestMethod.GET)
+    public ResponseEntity<?> getEmployeeOfTheMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(userDetailsService.getEmployeeOfTheMonth(month));
     }
 
-    @RequestMapping(value = "/api/user/employeeofthemonths", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/user/allemployeesofthemonths", method = RequestMethod.GET)
     public ResponseEntity<?> getAllEmployeesOfTheMonths() {
         return ResponseEntity.ok(userDetailsService.getAllEmployeesOfTheMonths());
     }

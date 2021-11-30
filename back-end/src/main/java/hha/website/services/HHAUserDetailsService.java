@@ -138,6 +138,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         u.ifPresent(e -> {
             employeeInfo.add(e.getUsername());
             employeeInfo.add(e.getDepartment().getDepartmentname());
+            employeeInfo.add(e.getEmployeeOfTheMonth());
         });
 
         return employeeInfo;
