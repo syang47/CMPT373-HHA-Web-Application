@@ -5,12 +5,14 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
+
+import java.io.Serializable;
 import java.util.Set;
 
 @Entity
 @Table(name="users")
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class User {
+public class User implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

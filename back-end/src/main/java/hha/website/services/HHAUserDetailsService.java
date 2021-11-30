@@ -93,6 +93,45 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.updateUserReportsSubmitted(user.getId());
     }
 
+    public List<List<String>> listAllUsers(User user) {
+        List<List<String>> users = new ArrayList<>();
+        List<User> userList;
+        if(user.getRole().equals("ROLE_ADMIN") || user.getRole().equals("ROLE_HOSPITALADMIN")){
+            userList = userRepository.findAll();
+        } else {
+            userList = userRepository.findByDepartmentId(user.getDepartment().getDepartmentname());
+        }
+        for(User u : userList){
+            List<String> userData = new ArrayList<>();
+            userData.add(u.getId().toString());
+            userData.add(u.getUsername());
+            userData.add(u.getDepartment().getDepartmentname());
+            userData.add(u.getRole());
+            users.add(userData);
+        }
+        return users;
+    }
+
+    public void deleteUser(int id) throws Exception {
+        Optional<User> userToDelete = userRepository.findById(id);
+        if(userToDelete.isPresent()){
+            if(userToDelete.get().getRole().equals("ROLE_ADMIN") || userToDelete.get().getRole().equals("ROLE_HEAD") || userToDelete.get().getRole().equals("ROLE_HOSPITALADMIN")){
+                throw new Exception("Cannot delete elevated user");
+            } else {
+                userRepository.deleteById(id);
+            }
+        }
+
+    }
+    // public List<String> listUsernames() {
+    //     return userRepository.queryUsername();
+    // }
+
+    // private Session session;
+    // public List<User> findAllUsers() {
+    //     return Session.createQuery("SELECT a FROM User a", User.class).getResultList();
+    // }
+
     public User setEmployeeOfTheMonth(Integer userId, String month){
         Optional<User> currentEmployeeOfTheMonth = userRepository.queryEmployeeOfTheMonth(month);
         currentEmployeeOfTheMonth.ifPresent(e -> e.setEmployeeOfTheMonth(""));

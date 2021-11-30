@@ -10,10 +10,21 @@
   .container-fluid {
     height: inherit;
   }
+  /* header */
+  .header-fixed{
+    position: fixed !important;
+    top:0;
+    left: 0;
+    z-index: 999999;
+    box-shadow: 0px 1px 8px rgb(0 0 0 / 25%);
+    background-color: #dddddd;
+  }
   .menu{
-    float: left;
     position: fixed;
     z-index: 9999;
+    padding-top: 107px;
+    height: 100vh;
+    overflow: auto;
   }
   .nav-item {
     padding-left: 10px;
@@ -61,12 +72,29 @@
     0 0 50px 0 black,
     0 0 100px 0 black;
   }
+  .main-content{
+    margin-left: 290px;
+    padding-top: 107px;
+  }
+  .main-wrapper{
+    height: calc(100vh - 140px);
+  }
+  .vsm--toggle-btn{
+    display: none !important;
+  }
 
+  /* form box */
+.card.form-box{
+  max-width: 600px;
+    background-color: #f6f9f9;
+    margin: 0 auto;
+    box-shadow: 0 0.0625rem 0.5rem rgb(155 154 154 / 15%)
+}
 
 </style>
 
 <template>
-  <nav class="w-100 navbar navbar-expand-sm navbar-light bg-light sticky-top">
+  <nav class="w-100 navbar navbar-expand-sm navbar-light header-fixed">
       <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>

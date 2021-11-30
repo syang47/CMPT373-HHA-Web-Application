@@ -15,7 +15,10 @@
 </style>
 
 <template>
-  <div class="container-fluid"> 
+  <div class="main-content">
+    <div class="card">
+      <div class="card-body">
+        <div class="container-fluid"> 
     <h1 class="display-2 text-center text-dark">{{ $t('departmentPage.communityHealth') }}</h1> 
     <div class="container">
         <div class="row">
@@ -62,6 +65,9 @@
             </div>
           </div>      
         </div>
+    </div>
+  </div>
+      </div>
     </div>
   </div>
 </template>
