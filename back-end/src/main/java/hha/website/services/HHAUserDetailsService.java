@@ -123,31 +123,35 @@ public class HHAUserDetailsService implements UserDetailsService {
         }
 
     }
-    // public List<String> listUsernames() {
-    //     return userRepository.queryUsername();
-    // }
 
-    // private Session session;
-    // public List<User> findAllUsers() {
-    //     return Session.createQuery("SELECT a FROM User a", User.class).getResultList();
-    // }
-
-    public User setEmployeeOfTheMonth(Integer userId, String month){
-        Optional<User> currentEmployeeOfTheMonth = userRepository.queryEmployeeOfTheMonth(month);
+    public String setEmployeeOfTheMonth(Integer userId, String month){
+        Optional<User> currentEmployeeOfTheMonth = userRepository.findByEmployeeOfTheMonth(month);
         currentEmployeeOfTheMonth.ifPresent(e -> e.setEmployeeOfTheMonth(""));
         User u = userRepository.getById(userId);
         u.setEmployeeOfTheMonth(month);
-        return userRepository.save(u);
+        return u.getUsername();
     }
 
     public List<String> getEmployeeOfTheMonth(String month) {
         List<String> employeeInfo = new ArrayList<>();
-        Optional<User> u = userRepository.queryEmployeeOfTheMonth(month);
+        Optional<User> u = userRepository.findByEmployeeOfTheMonth(month);
         u.ifPresent(e -> {
             employeeInfo.add(e.getUsername());
             employeeInfo.add(e.getDepartment().getDepartmentname());
         });
 
         return employeeInfo;
+    }
+
+    public List<List<String>> getAllEmployeesOfTheMonths() {
+        List<List<String>> users = new ArrayList<>();
+        for(User u : userRepository.queryAllEmployeesOfTheMonths()){
+            List<String> userData = new ArrayList<>();
+            userData.add(u.getUsername());
+            userData.add(u.getDepartment().getDepartmentname());
+            userData.add(u.getEmployeeOfTheMonth());
+            users.add(userData);
+        }
+        return users;
     }
 }

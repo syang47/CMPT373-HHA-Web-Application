@@ -131,12 +131,17 @@ public class MainController {
 
     @RequestMapping(value = "/api/user/employeeofthemonth/submit", method = RequestMethod.POST)
     public ResponseEntity<?> updateEmployeeOfTheMonth(@RequestParam("userId") Integer userId, @RequestParam("month") String month) {
-        return ResponseEntity.ok(userDetailsService.setEmployeeOfTheMonth(userId, month));
+        return ResponseEntity.ok("User " + userDetailsService.setEmployeeOfTheMonth(userId, month) + " set as employee of the month for " + month);
     }
 
     @RequestMapping(value = "/api/user/employeeofthemonth/{month}", method = RequestMethod.GET)
     public ResponseEntity<?> getEmployeeOfTheMonth(@PathVariable("month") String month) {
         return ResponseEntity.ok(userDetailsService.getEmployeeOfTheMonth(month));
+    }
+
+    @RequestMapping(value = "/api/user/employeeofthemonths", method = RequestMethod.GET)
+    public ResponseEntity<?> getAllEmployeesOfTheMonths() {
+        return ResponseEntity.ok(userDetailsService.getAllEmployeesOfTheMonths());
     }
 
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
@@ -150,7 +155,6 @@ public class MainController {
     @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
-        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
@@ -158,7 +162,6 @@ public class MainController {
     @GetMapping("/api/user/all")
     public ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String jwt) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        System.out.println(Arrays.toString(userDetailsService.listAllUsers(user).toArray()));
         return ResponseEntity.ok(userDetailsService.listAllUsers(user).toArray());
     }
 

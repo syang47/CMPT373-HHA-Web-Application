@@ -111,16 +111,6 @@
             {{ $t('header.loginOut') }}
           </button>
         </li>
-        <li class="my-auto nav-item">
-          <button class="btn btn-sm btn-outline-secondary" @click="testemployee">
-            employeeofthemonth
-          </button>
-        </li>
-        <li class="my-auto nav-item">
-          <button class="btn btn-sm btn-outline-secondary" @click="gettestemployee">
-            get employeeofthemonth
-          </button>
-        </li>
       </ul>
   </nav>
   <div class="menu" v-if="showSidebar" :key="reloadSidebar">
@@ -185,35 +175,6 @@ export default defineComponent({
         i18n.global.locale = 'en';
       }
     },
-
-    testemployee(): void{
-      let token = JSON.parse(localStorage.getItem('user')!);
-      this.$axios.post("/api/user/employeeofthemonth/submit", {}, {
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        },
-        params: {
-          userId: 1,
-          month: "September 2021"
-        }
-      }).then(response => {
-        console.log(response);
-      });
-    },
-
-    gettestemployee(): void {
-      let token = JSON.parse(localStorage.getItem('user')!);
-      this.$axios.get("/api/user/employeeofthemonth/submit", {
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        },
-        params: {
-          month: "September 2021"
-        }
-      }).then(response => {
-        console.log(response);
-      });
-    }
 
   },
  
