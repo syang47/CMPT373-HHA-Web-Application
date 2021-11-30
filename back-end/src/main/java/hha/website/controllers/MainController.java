@@ -239,9 +239,13 @@ public class MainController {
 
     @CrossOrigin
     @DeleteMapping(value="/api/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") Integer id) {
-        userDetailsService.deleteUser(id);
-        return "user has been deleted successfully";
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
+        try{
+            userDetailsService.deleteUser(id);
+            return new ResponseEntity<>("user has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 
     // @DeleteMapping(value = "/posts/{id}")

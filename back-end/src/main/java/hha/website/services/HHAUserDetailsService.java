@@ -102,13 +102,11 @@ public class HHAUserDetailsService implements UserDetailsService {
     public List<List<String>> listAllUsers(User user) {
         List<List<String>> users = new ArrayList<>();
         List<User> userList;
-        if(user.getRole().equals("ROLE_ADMIN")){
+        if(user.getRole().equals("ROLE_ADMIN") || user.getRole().equals("ROLE_HOSPITALADMIN")){
             userList = userRepository.findAll();
         } else {
             userList = userRepository.findByDepartmentId(user.getDepartment().getDepartmentname());
         }
-
-
         for(User u : userList){
             List<String> userData = new ArrayList<>();
             userData.add(u.getId().toString());
@@ -120,8 +118,16 @@ public class HHAUserDetailsService implements UserDetailsService {
         return users;
     }
 
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
+    public void deleteUser(int id) throws Exception {
+        Optional<User> userToDelete = userRepository.findById(id);
+        if(userToDelete.isPresent()){
+            if(userToDelete.get().getRole().equals("ROLE_ADMIN") || userToDelete.get().getRole().equals("ROLE_HEAD") || userToDelete.get().getRole().equals("ROLE_HOSPITALADMIN")){
+                throw new Exception("Cannot delete elevated user");
+            } else {
+                userRepository.deleteById(id);
+            }
+        }
+
     }
     // public List<String> listUsernames() {
     //     return userRepository.queryUsername();
