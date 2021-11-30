@@ -146,10 +146,10 @@ public class MainController {
 
     @CrossOrigin
     @GetMapping("/api/user/all")
-    public ResponseEntity<?> getAllUsers() {
-        System.out.println(Arrays.toString(userDetailsService.listAllUsers().toArray()));
-        // return ResponseEntity.ok(userDetailsService.findAllUsers());
-        return ResponseEntity.ok(userDetailsService.listAllUsers().toArray());
+    public ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String jwt) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        System.out.println(Arrays.toString(userDetailsService.listAllUsers(user).toArray()));
+        return ResponseEntity.ok(userDetailsService.listAllUsers(user).toArray());
     }
 
     @CrossOrigin
@@ -239,9 +239,8 @@ public class MainController {
 
     @CrossOrigin
     @DeleteMapping(value="/api/user/delete/{id}")
-    public String deleteUser(@PathVariable("id") String id) {
-        Integer ID = Integer.parseInt(id);
-        userDetailsService.deleteUser(ID);
+    public String deleteUser(@PathVariable("id") Integer id) {
+        userDetailsService.deleteUser(id);
         return "user has been deleted successfully";
     }
 

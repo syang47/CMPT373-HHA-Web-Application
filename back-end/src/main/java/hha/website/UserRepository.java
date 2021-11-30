@@ -23,6 +23,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
     void updateUserReportsSubmitted(Integer id);
 
+    @Query("SELECT u FROM User u WHERE department_id = ?1")
+    List<User> findByDepartmentId(String departmentname);
+
     // public static final String FIND_USERNAMES = "SELECT username, role FROM User";
     // @Query(value=FIND_USERNAMES, nativeQuery = true)
     // public List<Object[]> findUserNames();
