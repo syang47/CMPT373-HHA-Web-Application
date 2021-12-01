@@ -119,37 +119,8 @@ public class MainController {
         }
     }
 
-    @CrossOrigin
-    @GetMapping("/api/user/role")
-    public ResponseEntity<?> getUserField() {
-        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
-        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
-    }
-
-    @CrossOrigin
-    @DeleteMapping(value="/api/user/delete/{id}")
-    public ResponseEntity<?> deleteUser(@PathVariable("id") String id) {
-        try{
-            Integer ID = Integer.parseInt(id);
-            userDetailsService.deleteUser(ID);
-            return new ResponseEntity<>("user has been deleted successfully", HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>("Failed to delete user", HttpStatus.SERVICE_UNAVAILABLE);
-        }
-    }
-
-//    @CrossOrigin
-//    @RequestMapping(value = "/api/user/edit", method = RequestMethod.PATCH)
-//    public ResponseEntity<?> editUser(@RequestParam Integer userId, @RequestBody String userData) {
-//        try{
-//            return ResponseEntity.ok(msppRepositoryService.editRequiredForm(documentId, MSPPDataJson));
-//        } catch (Exception e){
-//            return new ResponseEntity<>("Failed to edit form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
-
-    @RequestMapping(value = "/api/mspp/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> submitMSPPForm(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
+    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
+    public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         try{
             return ResponseEntity.ok(msppRepositoryService.save(user, MSPPDataJson[0], MSPPDataJson[1]));
@@ -159,32 +130,25 @@ public class MainController {
     }
 
     @CrossOrigin
-    @RequestMapping(value = "/api/mspp/delete", method = RequestMethod.DELETE)
-    public ResponseEntity<?> deleteMSPPForm(@RequestParam Integer documentId) {
-        try{
-            msppRepositoryService.deleteForm(documentId);
-            return new ResponseEntity<>("Deleted form with id " + documentId, HttpStatus.OK);
-        } catch (Exception e){
-            return new ResponseEntity<>("Failed to delete form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
-
-    @CrossOrigin
-    @RequestMapping(value = "/api/mspp/edit", method = RequestMethod.PATCH)
-    public ResponseEntity<?> editMSPPForm(@RequestParam Integer documentId, @RequestBody String MSPPDataJson) {
-        try{
-            return ResponseEntity.ok(msppRepositoryService.editRequiredForm(documentId, MSPPDataJson));
-        } catch (Exception e){
-            return new ResponseEntity<>("Failed to delete form with id " + documentId, HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+    @GetMapping("/api/user/role")
+    public ResponseEntity<?> getUserField() {
+        System.out.println(Arrays.toString(userDetailsService.listDistinctItemsInField().toArray()));
+        return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
     @CrossOrigin
     @GetMapping("/api/user/all")
-    public ResponseEntity<?> getAllUsers() {
-        System.out.println(Arrays.toString(userDetailsService.listAllUsers().toArray()));
-        // return ResponseEntity.ok(userDetailsService.findAllUsers());
-        return ResponseEntity.ok(userDetailsService.listAllUsers().toArray());
+    public ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String jwt) {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        System.out.println(Arrays.toString(userDetailsService.listAllUsers(user).toArray()));
+        return ResponseEntity.ok(userDetailsService.listAllUsers(user).toArray());
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/departments")
+    public ResponseEntity<?> getAllDepartments(){
+        System.out.println(HHADepartmentService.listDepartmentNames());
+        return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
     @CrossOrigin
@@ -210,12 +174,11 @@ public class MainController {
         return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, cal));
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
     public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        ObjectMapper objectMapper = new ObjectMapper();
-        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
-        return ResponseEntity.ok(caseStudyService.save(user, data, file));
+        return ResponseEntity.ok(caseStudyService.save(user, json, file));
     }
 
     @CrossOrigin
@@ -231,11 +194,16 @@ public class MainController {
     }
 
     @CrossOrigin
-    @GetMapping("/api/departments")
-    public ResponseEntity<?> getAllDepartments(){
-        System.out.println(Arrays.toString(HHADepartmentService.listDepartmentNames().toArray()));
-        return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
+    @DeleteMapping(value="/api/casestudy/delete")
+    public ResponseEntity<?> deleteCaseStudy(@RequestParam("id") Integer id) {
+        try{
+            caseStudyService.deleteCaseStudy(id);
+            return new ResponseEntity<>("Case study has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
+
 
     @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {
@@ -280,6 +248,26 @@ public class MainController {
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
 
+    @CrossOrigin
+    @DeleteMapping(value="/api/user/delete/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
+        try{
+            userDetailsService.deleteUser(id);
+            return new ResponseEntity<>("user has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
+    // @DeleteMapping(value = "/posts/{id}")
+    // public ResponseEntity<?> deletePost(@PathVariable String id) {
+    //     Integer ID = Integer.parseInt(id);
+    //     var isRemoved = userDetailsService.deleteUser(id);
 
+    //     if (!isRemoved) {
+    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    //     }
+
+    //     return new ResponseEntity<>(id, HttpStatus.OK);
+    // }
 }

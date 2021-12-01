@@ -54,51 +54,52 @@
       <div class="card-body">
         <Form @submit="handleRegister" :validation-schema="userSchema">
 
-        <div class="card has-bg">
-            <div class="card-body">
+        <div class="box">
             <div class="signup-form text-monospace">
                 <div class="text-center">
                     <img class="mb-4" src="@/assets/logo.png" width="300" alt="">
                     <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('registerPage.registration') }}</h2>
                 </div>
                 <div v-if="!successful">
-                    <div class="mb-3">
-                        <label class="mb-2" for="username">{{ $t('registerPage.username') }}</label>
+                    <div class="form-group">
+                        <label for="username">{{ $t('registerPage.username') }}</label>
                         <Field name="username" type="text" class="form-control" />
-                        <div class="mt-1">
-                            <ErrorMessage name="username" class="error-feedback" />
-                        </div>
+                        <ErrorMessage name="username" class="error-feedback" />
                     </div>
                     
-                    <div class="mb-3">
-                        <label class="mb-2" for="password">{{ $t('registerPage.password') }}</label>
+                    <div class="form-group">
+                        <label for="password">{{ $t('registerPage.password') }}</label>
                         <Field name="password" type="password" class="form-control" />
-                        <div class="mt-1">
-                            <ErrorMessage name="password" class="error-feedback" />
-                        </div>
+                        <ErrorMessage name="password" class="error-feedback" />
                     </div>
 
-                    <div class="mb-3">
-                        <label class="mb-2" for="departments">{{ $t('registerPage.selectDept') }}</label>
+                    <div class="form-group">
+                        <label for="departments">{{ $t('registerPage.selectDept') }}</label>
                         <Field v-slot="{ value }" name="departments" as="select">
                         <option v-for="d in departments" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
                         </Field>
 
                     </div>
-                    <div class="mb-3" v-if="isAdmin()">
-                        <Field name="head" type="checkbox" :value="true"/>
-                        <label class="mb-2" for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
+                    <div class="form-group" v-if="isAdmin()">
+                        <div>
+                            <Field name="hospitalAdmin" type="checkbox" :value="true"/>
+                            <label for="hospitalAdmin">{{ $t('registerPage.hospitalAdmin') }}</label>
+                        </div>
+                        <div>
+                            <Field name="head" type="checkbox" :value="true"/>
+                            <label for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
+                        </div>
+                        
                     </div>
-                    <div class="mb-3">
-                        <button class="btn btn-secondary btn-block" :disabled="loading">
+                    <div class="form-group">
+                        <button class="btn btn-outline-light btn-block" :disabled="loading">
                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                             {{ $t('registerPage.signUp') }}
                         </button>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+            </div>
         </Form>
 
         <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
@@ -139,6 +140,8 @@ export default defineComponent({
             departments: yup
                 .string()
                 .required("Must select a department for the user."),
+            hospitalAdmin:yup
+                .boolean(),
             head: yup
                 .boolean()
         });
@@ -182,7 +185,9 @@ export default defineComponent({
             this.loading = true;
             const token = JSON.parse(localStorage.getItem('user')!);
             let role = "ROLE_USER";
-            if(user.head) {
+            if(user.hospitalAdmin){
+                role = "ROLE_HOSPITALADMN";
+            } else if(user.head) {
                 role = "ROLE_HEAD";
             }
             return axios.post('/api/register', {
@@ -195,10 +200,9 @@ export default defineComponent({
                     'Authorization': `Bearer ${token.jwt}`
                 }
             }).then(response => {
-                this.message = response.data;
+                this.message = "registration successful with username: " + response.data.username;
                 this.successful = true;
                 this.loading = false;
-                console.log("registration successful: " + this.successful);
             }).catch(error => {
                 this.message =
                     (error.response &&
@@ -207,7 +211,6 @@ export default defineComponent({
                     error.message || error.toString();
                 this.successful = false;
                 this.loading = false;
-                console.log("registration:" + this.successful);
             });
         },
 
