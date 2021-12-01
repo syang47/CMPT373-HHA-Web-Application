@@ -85,22 +85,9 @@
                         </Field>
 
                     </div>
-<<<<<<< HEAD
-                    <div class="form-group" v-if="isAdmin()">
-                        <div>
-                            <Field name="hospitalAdmin" type="checkbox" :value="true"/>
-                            <label for="hospitalAdmin">{{ $t('registerPage.hospitalAdmin') }}</label>
-                        </div>
-                        <div>
-                            <Field name="head" type="checkbox" :value="true"/>
-                            <label for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
-                        </div>
-                        
-=======
                     <div class="mb-3" v-if="isAdmin()">
                         <Field name="head" type="checkbox" :value="true"/>
                         <label class="mb-2" for="head">{{ $t('registerPage.deptHeadMedDir') }}</label>
->>>>>>> master
                     </div>
                     <div class="mb-3">
                         <button class="btn btn-secondary btn-block" :disabled="loading">
