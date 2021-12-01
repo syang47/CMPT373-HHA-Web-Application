@@ -5,24 +5,30 @@
             v-for="(field, idx) in fields"
             :key="field.key"
         >
-        <legend style="color:green; text-align:center">Patient {{ idx+1 }}</legend>
-        <label :for="`diedBefore48hAge_${idx}`">Age</label>
-        <Field class="form-control"
-                :id="`diedBefore48hAge_${idx}`" 
-                :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" :value="modelValue"
-                @input="$emit('update:modelValue', Object.keys(fields).length)"/>
-        <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+        <div class="my-3">
+          <legend style="color:green; text-align:center">Patient {{ idx+1 }}</legend>
+        </div>
+        <div class="mb-3">
+          <label :for="`diedBefore48hAge_${idx}`">Age</label>
+          <Field class="form-control"
+                  :id="`diedBefore48hAge_${idx}`" 
+                  :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" :value="modelValue"
+                  @input="$emit('update:modelValue', Object.keys(fields).length)"/>
+          <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" class="error-feedback" />
+        </div>
 
-        <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
+        <div class="mb-3">
+          <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
         <Field class="form-control"
                 :id="`diedBefore48hCause_${idx}`"
                 :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
         <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
+        </div>
 
-        <button class="btn btn-outline-light btn-block" type="button" @click="remove(idx)">Remove patient</button>
+        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">Remove patient</button>
         </fieldset>
 
-        <button class="btn btn-outline-light btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
+        <button class="btn btn-primary btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
         New Patient + 
         </button>
     </FieldArray>
