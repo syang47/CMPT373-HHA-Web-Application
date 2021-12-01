@@ -129,14 +129,6 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
-        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        ObjectMapper objectMapper = new ObjectMapper();
-        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
-        return ResponseEntity.ok(caseStudyService.save(user, data, file));
-    }
-
     @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
@@ -183,6 +175,13 @@ public class MainController {
     }
 
     @CrossOrigin
+    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
+    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        return ResponseEntity.ok(caseStudyService.save(user, json, file));
+    }
+
+    @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
@@ -193,6 +192,18 @@ public class MainController {
     public ResponseEntity<?> getCaseStudyEntry(){
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
     }
+
+    @CrossOrigin
+    @DeleteMapping(value="/api/casestudy/delete")
+    public ResponseEntity<?> deleteCaseStudy(@RequestParam("id") Integer id) {
+        try{
+            caseStudyService.deleteCaseStudy(id);
+            return new ResponseEntity<>("Case study has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 
     @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {

@@ -1,12 +1,5 @@
 <style scoped>
 
-    .box {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        box-sizing: border-box;
-        padding: 40px;
-    }
     .signup-form{
         width: 1000px;
         margin: 0 auto;
@@ -16,40 +9,65 @@
         text-align: center;
         margin-bottom: 20px;
     }
-    h2{
-        color: #636363;
-        margin: 0 0 15px;
-        position: relative;
+    h1, h2{
+        font-family: "Arial";
+        font-weight: bold;
         text-align: center;
+    }
+    .box {
+        width: 100%;
+        height: 100%;
+        background: #00000060;
+        box-sizing: border-box;
+        display: block;
+        padding: 40px;
     }
 </style>
 
 <template>
 <div class="signup-form main-content">
     <div class="text-center container-fluid">
-        <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
-        <div class="row">
-            <div class="form-group col">
-                <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">Case Study Types</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary" v-on:click="showAllCaseStudies">All Case Studies</button>
-            </div>
-        </div>
-        <div v-if="showComponentOne"> 
-            <ul class="text-left" style="list-style-type:none;">
-                <li v-for="(value) in caseStudyTypes" :key="value">
-                    <button class="btn btn-primary"> {{ value }} </button>
-                </li>
-            </ul>
-        </div>
-        <div v-else-if="showComponentTwo">
-            <div v-for="(p) in photos" :key="p">
-                <img :src="p" />
-            </div>
-            <ul class="text-left">
-                <li v-for="(name) in caseStudyAllData" :key="name"> {{name}}</li>
-            </ul>
+        <h2 class="font-weight-bold display-5 text-dark col">Case Studies</h2>
+        <div> 
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" v-for="header in tableHeaders" :key="header">{{header}}</th>
+                    </tr>
+                </thead>    
+                <tbody v-for="entry in caseStudyAllData" :key="entry">
+                    <tr>
+                        <td v-for="attribute in entry" :key="attribute">
+                            <div>
+                                {{attribute}} 
+                            </div> 
+                        </td>
+                        <td>
+                            <button @click="showCaseStudy(entry)" class="btn btn-info">Expand</button>
+                        </td>
+                        <td>
+                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger">Delete</button>
+                        </td>
+
+                    </tr>
+                    <tr v-if="showData[entry[0] - 1]">
+                        <td class="container" colspan=6>
+                            <div class="row">
+                                <div class="card w-25" v-for="ad in Object.entries(caseStudyExpandedData[entry[0] - 1])" :key="ad">
+                                    <div class="col-auto">
+                                        <h1 class="card-title text-primary"> {{ad[0]}} </h1>
+                                        <p class="card-text"> {{ad[1]}}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <img :src="photos[entry[0] - 1]" />
+                                </div>
+                            </div>
+                            
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -64,64 +82,35 @@ export default defineComponent({
     data: function() {
         return {
             message: "",
-            caseStudyTypes: [],
-            caseStudyAllData: [],
-            photos: [""],
-            showComponentOne: false,
-            showComponentTwo: false,
-            
+            tableHeaders: ["ID", "Date Submitted", "Case Study Type", "Submitted By"],
+            expandedHeaders: [],
+            caseStudyAllData: [] as any,
+            photos: [] as any,
+            caseStudyExpandedData: [] as any,
+            showData: [] as any
         };
     },
     mounted() {
-        "#v-for-object";
+        this.showAllCaseStudies();
     },
     methods: {
-        showCaseStudyTypes() {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing case study data types";
-            this.showComponentOne = !this.showComponentOne;
-            this.showComponentTwo = false;
-            this.$axios.get("/api/casestudy/types", {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`,
-                }
-            }).then(response => {
-                // this.caseStudyTypes = JSON.stringify(response.data);
-                this.caseStudyTypes = response.data;
-                if(response != null) {
-                    console.log("getting casestudy types successful");
-                } else {
-                    alert("no data in case study can be fetched...");
-                }
-            }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
-                
-                alert("failed to fetch casestudy data types");
-            });
-        },
         showAllCaseStudies() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying employee of the month data";
-            this.showComponentOne = false;
-            this.showComponentTwo = !this.showComponentTwo;
             this.$axios.get("/api/casestudy/entry", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
-            }).then(response => {
-                this.caseStudyAllData=response.data;
-                var d: any;
-                for(d in response.data){
-                    const obj = response.data[d];
-                    if(obj.photo) {
-                        this.photos.push("data:" + obj.photoType + ";base64," + obj.photo);
+            }).then(response => {                
+                for(var d in response.data){
+                    var obj = response.data[d];
+                    if(obj[4]) {
+                        this.photos.push("data:" + obj[5] + ";base64," + obj[4]);
                     }
+                    this.caseStudyExpandedData.push(obj[6]);
+                    obj = obj.slice(0, 4);
+                    this.caseStudyAllData.push(obj);
+                    this.showData.push(false);
                 }
-                console.log(this.photos);
                 if(response != null) {
                     console.log("getting casestudy data successful");
                         
@@ -138,6 +127,34 @@ export default defineComponent({
                 alert("failed to fetch casestudy data entries");
             });
         },
+
+        showCaseStudy(entry){
+            this.showData[entry[0] - 1] = !this.showData[entry[0] - 1];
+        },
+
+        deleteCaseStudy(entry){
+            let token = JSON.parse(localStorage.getItem('user')!);
+            this.message = "Displaying all user data";
+            
+            this.$axios.delete("/api/casestudy/delete", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    id: entry[0]
+                }
+            }).then(response => {
+                alert(response.data);
+            }).catch((error: any) => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message;
+                
+                alert("error occurred when deleting user");
+            });
+        }
     }
     
 });
