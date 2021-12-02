@@ -40,150 +40,238 @@
     <div class="card shadow-none">
       <div class="card-body">
         <Form @submit="handleData" :validation-schema="dataSchema">
-            <div class="signup-form text-monospace">
-                <div class="text-center">
-                    <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('caseStudyForm.caseStudyForm') }}</h2>
+            <div class="text-center">
+                <div class="text-center mb-3">
+                    <h2 class="font-weight-bold display-5 text-dark mb-3">{{ $t('caseStudyForm.caseStudyForm') }}</h2>
                 </div>
-                <div v-if="!successful">
-                    <div class="form-group">
+                <div v-if="!successful" class="text-center">
+                    <div class="form-group mb-3">
                         <label for="caseStudyType">{{ $t('caseStudyForm.selectCSType') }}</label>
                         <Field v-model="caseStudySelected" v-slot="{ value }" name="caseStudyType" as="select">
                             <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
                         </Field>
                     </div>
                     <div v-if="caseStudySelected == 'patient_story'">
-                        <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.pStory') }}</h4>
-                        <div class="form-group text-center">
+                        <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.pStory') }}</h2>
+                        <div class="form-group text-center mb-3">
                             <label for="patientName">{{ $t('caseStudyForm.pName') }}</label>
-                            <Field name="patientName" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientName" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientName" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientName" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="patientAge">{{ $t('caseStudyForm.pAge') }}</label>
-                            <Field name="patientAge" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientAge" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientAge" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientAge" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="patientOrigin">{{ $t('caseStudyForm.pFrom') }}</label>
-                            <Field name="patientOrigin" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientOrigin" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientOrigin" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientOrigin" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="patientReasoning">{{ $t('caseStudyForm.pChoose') }}</label>
-                            <Field name="patientReasoning" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientReasoning" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientReasoning" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientReasoning" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="patientDuration">{{ $t('caseStudyForm.pHowLongHCBH') }}</label>
-                            <Field name="patientDuration" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientDuration" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientDuration" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientDuration" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="patientDiagnosis">{{ $t('caseStudyForm.diagnosis') }}</label>
-                            <Field name="patientDiagnosis" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="patientDiagnosis" v-slot="{ field }" class="form-control" >
+                                    <textarea name="patientDiagnosis" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="patientDiagnosis" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{ $t('caseStudyForm.morePersonalElements') }}</p>
                     </div>
                     <div v-if="caseStudySelected == 'staff_recognition'">
-                        <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.sRecognition') }}</h4>
-                        <div class="form-group text-center">
+                        <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.sRecognition') }}</h2>
+                        <div class="form-group text-center mb-3">
                             <label for="staffName">{{ $t('caseStudyForm.sName') }}</label>
-                            <Field name="staffName" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="staffName" v-slot="{ field }" class="form-control" >
+                                    <textarea name="staffName" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="staffName" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="staffTitle">{{ $t('caseStudyForm.roleJob') }}</label>
-                            <Field name="staffTitle" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="staffTitle" v-slot="{ field }" class="form-control" >
+                                    <textarea name="staffTitle" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="staffTitle" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="staffDepartment">{{ $t('caseStudyForm.whatDept') }}</label>
-                            <Field name="staffDepartment" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="staffDepartment" v-slot="{ field }" class="form-control" >
+                                    <textarea name="staffDepartment" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="staffDepartment" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="staffEmploymentDuration">{{ $t('caseStudyForm.sHowLongHCBH') }}</label>
-                            <Field name="staffEmploymentDuration" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="staffEmploymentDuration" v-slot="{ field }" class="form-control" >
+                                    <textarea name="staffEmploymentDuration" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="staffEmploymentDuration" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="staffEnjoymentPoints">{{ $t('caseStudyForm.enjoyHCBH') }}</label>
-                            <Field name="staffEnjoymentPoints" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="staffEnjoymentPoints" v-slot="{ field }" class="form-control" >
+                                    <textarea name="staffEnjoymentPoints" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="staffEnjoymentPoints" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{ $t('caseStudyForm.sRecognise') }}</p>
                     </div>
                     <div v-if="caseStudySelected == 'training_session'">
-                        <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.tSession') }}</h4>
-                        <div class="form-group text-center">
+                        <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.tSession') }}</h2>
+                        <div class="form-group text-center mb-3">
                             <label for="trainingDate">{{ $t('caseStudyForm.tDate') }}</label>
-                            <Field name="trainingDate" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="trainingDate" v-slot="{ field }" class="form-control" >
+                                    <textarea name="trainingDate" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="trainingDate" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="trainingSubject">{{ $t('caseStudyForm.tAbout') }}</label>
-                            <Field name="trainingSubject" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="trainingSubject" v-slot="{ field }" class="form-control" >
+                                    <textarea name="trainingSubject" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="trainingSubject" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="trainingConductor">{{ $t('caseStudyForm.tConducted') }}</label>
-                            <Field name="trainingConductor" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="trainingConductor" v-slot="{ field }" class="form-control" >
+                                    <textarea name="trainingConductor" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="trainingConductor" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="trainingAttendees">{{ $t('caseStudyForm.tAttend') }}</label>
-                            <Field name="trainingAttendees" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="trainingAttendees" v-slot="{ field }" class="form-control" >
+                                    <textarea name="trainingAttendees" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="trainingAttendees" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="trainingBenefits">{{ $t('caseStudyForm.tBenefit') }}</label>
-                            <Field name="trainingBenefits" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="trainingBenefits" v-slot="{ field }" class="form-control" >
+                                    <textarea name="trainingBenefits" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="trainingBenefits" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{ $t('caseStudyForm.generalSummary') }}</p>
                     </div>
                     <div v-if="caseStudySelected == 'equipment_received'">
-                        <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.eReceived') }}</h4>
-                        <div class="form-group text-center">
+                        <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.eReceived') }}</h2>
+                        <div class="form-group text-center mb-3">
                             <label for="equipmentReceived">{{ $t('caseStudyForm.eWhat') }} </label>
-                            <Field name="equipmentReceived" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="equipmentReceived" v-slot="{ field }" class="form-control" >
+                                    <textarea name="equipmentReceived" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="equipmentReceived" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="equipmentDepartmentTo">{{ $t('caseStudyForm.eDept') }}</label>
-                            <Field name="equipmentDepartmentTo" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="equipmentDepartmentTo" v-slot="{ field }" class="form-control" >
+                                    <textarea name="equipmentDepartmentTo" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="equipmentDepartmentTo" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="equipmentFrom">{{ $t('caseStudyForm.eFrom') }}</label>
-                            <Field name="equipmentFrom" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="equipmentFrom" v-slot="{ field }" class="form-control" >
+                                    <textarea name="equipmentFrom" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="equipmentFrom" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="equipmentOrigin">{{ $t('caseStudyForm.eDonatePurchase') }}</label>
-                            <Field name="equipmentOrigin" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="equipmentOrigin" v-slot="{ field }" class="form-control" >
+                                    <textarea name="equipmentOrigin" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="equipmentOrigin" class="error-feedback" />
                         </div>
-                        <div class="form-group text-center">
+                        <div class="form-group text-center mb-3">
                             <label for="equipmentUsage">{{ $t('caseStudyForm.eDo') }}</label>
-                            <Field name="equipmentUsage" type="text" class="form-control" />
+                            <div style="width: 60%; margin:0 auto;">
+                                <Field name="equipmentUsage" v-slot="{ field }" class="form-control" >
+                                    <textarea name="equipmentUsage" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                </Field>
+                            </div>
                             <ErrorMessage name="equipmentUsage" class="error-feedback" />
                         </div>
                         <p style="text-align:center">{{ $t('caseStudyForm.eBenefit') }}</p>
                     </div>
                     <div v-if="caseStudySelected == 'other'">
-                        <h4 style="color:red; text-align:center">{{ $t('caseStudyForm.other') }}</h4>
+                        <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.other') }}</h2>
                         <p style="text-align:center">{{ $t('caseStudyForm.eExtra') }}</p>
                     </div>
 
-                    <div class="form-group text-center" v-if="caseStudySelected != null">
-                        <Field name="story" type="text" class="form-control" />
+                    <div class="form-group text-center mb-3" v-if="caseStudySelected != null">
+                        <div style="width: 60%; margin:0 auto;">
+                            <Field name="story" v-slot="{ field }" class="form-control" >
+                                <textarea name="story" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                            </Field>
+                        </div>
                         <ErrorMessage name="story" class="error-feedback" />
                     </div>
 
 
-                    <div class="form-group text-center">
+                    <div class="form-group text-center mb-3">
                         <Field name="permission" type="checkbox" :value="true"/>
                         <label for="permission">{{ $t('caseStudyForm.disclaimer') }}</label>
                         <ErrorMessage name="permission" class="error-feedback" />

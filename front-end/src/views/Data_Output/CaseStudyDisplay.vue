@@ -59,7 +59,7 @@
                                         <p class="card-text"> {{ad[1]}}</p>
                                     </div>
                                 </div>
-                                <div>
+                                <div v-if="photos[entry[0] - 1]">
                                     <img :src="photos[entry[0] - 1]" />
                                 </div>
                             </div>
@@ -105,6 +105,8 @@ export default defineComponent({
                     var obj = response.data[d];
                     if(obj[4]) {
                         this.photos.push("data:" + obj[5] + ";base64," + obj[4]);
+                    } else {
+                        this.photos.push(false);
                     }
                     this.caseStudyExpandedData.push(obj[6]);
                     obj = obj.slice(0, 4);
@@ -130,6 +132,7 @@ export default defineComponent({
 
         showCaseStudy(entry){
             this.showData[entry[0] - 1] = !this.showData[entry[0] - 1];
+            console.log(this.photos);
         },
 
         deleteCaseStudy(entry){
