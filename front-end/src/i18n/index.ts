@@ -56,6 +56,26 @@ const i18n = createI18n({
         annualAward: "Prix ​​annuel",
         submit: "Soumettre",
       },
+      dataDisplay: {
+        displayData: "Afficher les données",
+        caseStudyOTM: "Étude de cas du mois",
+        employeeOTM: "Employé du mois",
+        departmentDataDisplay: "Affichage des données du département",
+        userDataDisplay: "Affichage des données utilisateur",
+        caseStudyTypes: "Types d'études de cas",
+        allCaseStudies: "Toutes les études de cas",
+        allDepartmentMSPPData: "Toutes les données MSPP du département",
+        MSPPDataListByDates: "Liste de données MSPP par dates",
+        edit: "Éditer",
+        delete: "Effacer",
+        id: "IDENTIFIANT",
+        username: "NOM D'UTILISATEUR",
+        department: "DÉPARTEMENT",
+        role: "RÔLE",
+        dataType: "Type de données",
+        dataValue: "Valeur des données",
+        dateSubmitted: "Date de soumission",
+      },
       homePage: {
         leaderBoard: "CLASSEMENT",
         nicuPaed: "USIN/PAED",
@@ -411,11 +431,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Sexe des nouveaux patients",
         newMale: "Mâle",
         newFemale: "Femelle",
-
-        
-
-
-
       },
       departmentPage: {
         nicupaed: "USIN/PAED",
@@ -433,11 +448,11 @@ const i18n = createI18n({
         annually: "Annuellement: ",
       },
       leaderBoard: {
-        leadersBoard: "Conseil des dirigeants",
+        leaderBoard: "Classement",
         monthlyAward: "Récompense mensuelle",
         annualAward: "Prix ​​annuel",
         position: "Position",
-        department: "département",
+        department: "Département",
         points: "Points",
         caseStudyOTM: "Étude de cas du mois",
       },
@@ -539,6 +554,26 @@ const i18n = createI18n({
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",
         submit: "Submit",
+      },
+      dataDisplay: {
+        displayData: "Display Data",
+        caseStudyOTM: "Case Study of the Month",
+        employeeOTM: "Employee of the Month",
+        departmentDataDisplay: "Department Data Display",
+        userDataDisplay: "User Data Display",
+        caseStudyTypes: "Case Study Types",
+        allCaseStudies: "All Case Studies",
+        allDepartmentMSPPData: "All Department's MSPP Data",
+        MSPPDataListByDates: "MSPP Data List By Dates",
+        edit: "Edit",
+        delete: "Delete",
+        id: "ID",
+        username: "USERNAME",
+        department: "DEPARTMENT",
+        role: "ROLE",
+        dataType: "Data Type",
+        dataValue: "Data Value",
+        dateSubmitted: "Date Submitted",
       },
       homePage: {
         leaderBoard: "LEADER BOARD",
@@ -895,7 +930,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Gender of New patients",
         newMale: "Male",
         newFemale: "Female",
-        
       },
       departmentPage: {
         nicupaed: "NICU/PAED",
@@ -913,7 +947,7 @@ const i18n = createI18n({
         annually: "Annually: ",
       },
       leaderBoard: {
-        leadersBoard: "Leaders Board",
+        leaderBoard: "Leader Board",
         monthlyAward: "Monthly Award",
         annualAward: "Annual Award",
         position: "Position",

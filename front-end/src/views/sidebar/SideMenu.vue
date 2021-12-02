@@ -56,7 +56,6 @@ export default defineComponent({
             }          
             return [
                 {
-                    // header: "Hope Health Action",
                     header: this.$t("sideBar.HHA"),
                     hiddenOnCollapse: true
                 },
@@ -72,7 +71,6 @@ export default defineComponent({
                 },
                 {
                     href:'/dataDisplay',
-                    // title: "DataDisplay",
                     title: this.$t("sideBar.dataDisplay"),
                     hiddenOnCollapse: true
                 },
@@ -88,7 +86,6 @@ export default defineComponent({
                 },
                 {
                     href:'/',
-                    // title: "Departments",
                     title: this.$t("sideBar.departments"),
                     child: departments,
                     hiddenOnCollapse: true

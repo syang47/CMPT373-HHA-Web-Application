@@ -76,7 +76,7 @@ table td.gap span {
             <div class="card has-bg">
                 <div class="card-body">
                     <div class="container-fluid">
-                <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leadersBoard') }}</h1>
+                <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leaderBoard') }}</h1>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col">

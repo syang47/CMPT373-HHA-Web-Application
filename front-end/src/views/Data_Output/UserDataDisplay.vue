@@ -27,7 +27,7 @@
 <template>
     <div class="signup-form main-content">
         <div class="text-center container-fluid">
-            <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+            <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
             <div v-if="showComponentOne"> 
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
@@ -39,10 +39,10 @@
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
                             <td>
-                                <button class="btn btn-warning px-2">Edit</button>
+                                <button class="btn btn-warning px-2">{{ $t("dataDisplay.edit") }}</button>
                             </td>
                             <td>
-                                <button @click="deleteUser(user)" class="btn btn-danger px-2">Delete</button>
+                                <button @click="deleteUser(user)" class="btn btn-danger px-2">{{ $t("dataDisplay.delete") }}</button>
                             </td>
                         </tr>
                     </tbody>
@@ -63,7 +63,7 @@ export default defineComponent({
         return {
             message: "",
             userAllData: [],
-            tableHeaders: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
+            tableHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.username'), this.$t('dataDisplay.department'), this.$t('dataDisplay.role')],
             showComponentOne: true,
             finalmessage: "",
         };
@@ -77,7 +77,7 @@ export default defineComponent({
     methods: {
         fetchAllUserData() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying all user data";
+            this.message = "Displaying all user data / Affichage de toutes les données utilisateur";
             
             this.$axios.get("/api/user/all", {
                 headers: {
@@ -88,7 +88,7 @@ export default defineComponent({
                 if(response != null) {
                     console.log("getting all user data successful");
                 } else {
-                    alert("no data in user data can be fetched...");
+                    alert("no data in user data can be fetched / aucune donnée dans les données utilisateur ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -97,7 +97,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch user data types");
+                alert("failed to fetch user data types / échec de la récupération des types de données utilisateur");
             });
         },
         // editUser() {
@@ -108,7 +108,7 @@ export default defineComponent({
             console.log(id);
             console.log(typeof id);
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying all user data";
+            this.message = "Displaying all user data / Affichage de toutes les données utilisateur";
             
             this.$axios.delete(`/api/user/delete/${id}`, {
                 headers: {
@@ -123,7 +123,7 @@ export default defineComponent({
                         this.fetchAllUserData();
                     })
                 } else {
-                    alert("no user was deleted...");
+                    alert("no user was deleted / aucun utilisateur n'a été supprimé");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -132,7 +132,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("error occurred when deleting user");
+                alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });
         }
         

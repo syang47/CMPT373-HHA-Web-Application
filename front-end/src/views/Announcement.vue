@@ -178,7 +178,7 @@ export default defineComponent({
                             console.log("entry successful: " + this.successful);
                             this.$router.push("/");
                         } else {
-                            alert("entry could not be submitted");
+                            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
                         }
                     }
                 ).catch((error: any) => {
@@ -189,7 +189,7 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
-                      alert("entry could not be submitted");
+                      alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
                 });
             }
         },

@@ -15,19 +15,19 @@
     <div class="card shadow-none">
         <div class="card-body box">
             <div class="text-center mb-3">
-                <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+                <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
                 <div class="row">
                     <div class="form-group col">
-                        <button class="btn btn-secondary btn-lg" v-on:click="showCaseStudyData">Case Study of the Month</button>
+                        <button class="btn btn-secondary btn-lg" v-on:click="showCaseStudyData">{{ $t("dataDisplay.caseStudyOTM") }}</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary btn-lg" v-on:click="showEmployeeOfTheMonthData">Employee of the Month</button>
+                        <button class="btn btn-secondary btn-lg" v-on:click="showEmployeeOfTheMonthData">{{ $t("dataDisplay.employeeOTM") }}</button>
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary btn-lg" v-on:click="showDepartmentData">Department Data Display</button> 
+                        <button class="btn btn-secondary btn-lg" v-on:click="showDepartmentData">{{ $t("dataDisplay.departmentDataDisplay") }}</button> 
                     </div>
                     <div class="col">
-                        <button class="btn btn-secondary btn-lg" v-on:click="showAllUserData">User Data Display</button> 
+                        <button class="btn btn-secondary btn-lg" v-on:click="showAllUserData">{{ $t("dataDisplay.userDataDisplay") }}</button> 
                     </div>
                 </div>
             </div>
@@ -66,24 +66,24 @@ export default defineComponent({
     },
     methods: {
         showCaseStudyData() {
-            this.message = "Displaying case study data";
+            this.message = "Displaying case study data / Affichage des données des études de cas";
             this.showComponentOne = !this.showComponentOne;
             this.showComponentTwo = false;
             this.showUserDataComponent = false; 
         },
         showEmployeeOfTheMonthData() {
-            this.message = "Displaying employee of the month data to be implemented...";
+            this.message = "Displaying employee of the month data to be implemented / Affichage des données de l'employé du mois à mettre en œuvre";
             this.showComponentOne = false;
             this.showComponentTwo = false;
             this.showUserDataComponent = false; 
         },
         showDepartmentData() {
-            this.message = "Displaying department input data";
+            this.message = "Displaying department input data / Affichage des données d'entrée du département";
             this.showComponentOne = false;
             this.showComponentTwo = !this.showComponentTwo;             
         },
         showAllUserData() {
-            this.message = "Displaying user data";
+            this.message = "Displaying user data / Affichage des données utilisateur";
             this.showComponentOne = false;
             this.showComponentTwo = false;
             this.showUserDataComponent = !this.showUserDataComponent;

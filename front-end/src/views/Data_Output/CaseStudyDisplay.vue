@@ -27,13 +27,13 @@
 <template>
 <div class="signup-form main-content">
     <div class="text-center container-fluid">
-        <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+        <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
         <div class="row">
             <div class="form-group col">
-                <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">Case Study Types</button>
+                <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">{{ $t("dataDisplay.caseStudyTypes") }}</button>
             </div>
             <div class="col">
-                <button class="btn btn-secondary" v-on:click="showAllCaseStudies">All Case Studies</button>
+                <button class="btn btn-secondary" v-on:click="showAllCaseStudies">{{ $t('dataDisplay.allCaseStudies') }}</button>
             </div>
         </div>
         <div v-if="showComponentOne"> 
@@ -78,7 +78,7 @@ export default defineComponent({
     methods: {
         showCaseStudyTypes() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing case study data types";
+            this.message = "Displaying existing case study data types / Affichage des types de données d'études de cas existants";
             this.showComponentOne = !this.showComponentOne;
             this.showComponentTwo = false;
             this.$axios.get("/api/casestudy/types", {
@@ -91,7 +91,7 @@ export default defineComponent({
                 if(response != null) {
                     console.log("getting casestudy types successful");
                 } else {
-                    alert("no data in case study can be fetched...");
+                    alert("no data in case study can be fetched / aucune donnée dans l'étude de cas ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -100,12 +100,12 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch casestudy data types");
+                alert("failed to fetch casestudy data types / échec de la récupération des types de données d'étude de cas");
             });
         },
         showAllCaseStudies() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying employee of the month data";
+            this.message = "Displaying employee of the month data / Affichage des données de l'employé du mois";
             this.showComponentOne = false;
             this.showComponentTwo = !this.showComponentTwo;
             this.$axios.get("/api/casestudy/entry", {
@@ -126,7 +126,7 @@ export default defineComponent({
                     console.log("getting casestudy data successful");
                         
                 } else {
-                    alert("no data in case study can be fetched...");
+                    alert("no data in case study can be fetched / aucune donnée dans l'étude de cas ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -135,7 +135,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch casestudy data entries");
+                alert("failed to fetch casestudy data entries / n'a pas réussi à récupérer les entrées de données de l'étude de cas");
             });
         },
     }
