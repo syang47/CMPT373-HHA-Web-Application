@@ -757,155 +757,153 @@ export default defineComponent({
                     name: 'numberOfOutpatients',
                     as: 'input',
                     rules: r,
+                },
+                {
+                    label: 'msppData.returningOutpatients',
+                    name: 'returningOutpatients',
+                    as: 'input',
+                    rules: r,
+                },
+                {
+                    label: 'msppData.newOutpatient',
+                    name: 'newOutpatient',
+                    as: 'input',
+                    rules: r,
                     children: [
                         {
-                            label: 'msppData.returningOutpatients',
-                            name: 'returningOutpatients',
+                            header: 'msppData.mainConditionOfNewPatients'
+                        },
+                        {
+                            label: 'msppData.newSCIParaplegia',
+                            name: 'newSCIParaplegia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.newOutpatient',
-                            name: 'newOutpatient',
+                            label: 'msppData.newSCITetraplegia',
+                            name: 'newSCITetraplegia',
                             as: 'input',
-                            rules: r,
-                            children: [
-                                {
-                                    header: 'msppData.mainConditionOfNewPatients'
-                                },
-                                {
-                                    label: 'msppData.newSCIParaplegia',
-                                    name: 'newSCIParaplegia',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newSCITetraplegia',
-                                    name: 'newSCITetraplegia',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newStroke',
-                                    name: 'newStroke',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newFracturedHip',
-                                    name: 'newFracturedHip',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newFracturedLongBones',
-                                    name: 'newFracturedLongBones',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newNeurodegenerativeDisease',
-                                    name: 'newNeurodegenerativeDisease',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newHeadInjury',
-                                    name: 'newHeadInjury',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newWoundCare',
-                                    name: 'newWoundCare',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newCerebralPalsy',
-                                    name: 'newCerebralPalsy',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newDownSyndromel',
-                                    name: 'newDownSyndromel',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newOther',
-                                    name: 'newOther',
-                                    as: 'input',
-                                    rules: a
-                                },
-
-                                {
-                                    header: 'msppData.ageOfNewpatients'
-                                },
-                                {
-                                    label: 'msppData.newAge0_5',
-                                    name: 'newAge0_5',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge6_11',
-                                    name: 'newAge6_11',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge12_18',
-                                    name: 'newAge12_18',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge18_30',
-                                    name: 'newAge18_30',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge31_50',
-                                    name: 'newAge31_50',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge51_70',
-                                    name: 'newAge51_70',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newAge70',
-                                    name: 'newAge70',
-                                    as: 'input',
-                                    rules: a
-                                },
-
-                                {
-                                    header: 'msppData.genderOfNewpatients'
-                                },
-                                {
-                                    label: 'msppData.newMale',
-                                    name: 'newMale',
-                                    as: 'input',
-                                    rules: a
-                                },
-                                {
-                                    label: 'msppData.newFemale',
-                                    name: 'newFemale',
-                                    as: 'input',
-                                    rules: a
-                                },
-                            ]
+                            rules: a
                         },
+                        {
+                            label: 'msppData.newStroke',
+                            name: 'newStroke',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newFracturedHip',
+                            name: 'newFracturedHip',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newFracturedLongBones',
+                            name: 'newFracturedLongBones',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newNeurodegenerativeDisease',
+                            name: 'newNeurodegenerativeDisease',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newHeadInjury',
+                            name: 'newHeadInjury',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newWoundCare',
+                            name: 'newWoundCare',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newCerebralPalsy',
+                            name: 'newCerebralPalsy',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newDownSyndromel',
+                            name: 'newDownSyndromel',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newOther',
+                            name: 'newOther',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            header: 'msppData.ageOfNewpatients'
+                        },
+                        {
+                            label: 'msppData.newAge0_5',
+                            name: 'newAge0_5',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge6_11',
+                            name: 'newAge6_11',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge12_18',
+                            name: 'newAge12_18',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge18_30',
+                            name: 'newAge18_30',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge31_50',
+                            name: 'newAge31_50',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge51_70',
+                            name: 'newAge51_70',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newAge70',
+                            name: 'newAge70',
+                            as: 'input',
+                            rules: a
+                        },
+
+                        {
+                            header: 'msppData.genderOfNewpatients'
+                        },
+                        {
+                            label: 'msppData.newMale',
+                            name: 'newMale',
+                            as: 'input',
+                            rules: a
+                        },
+                        {
+                            label: 'msppData.newFemale',
+                            name: 'newFemale',
+                            as: 'input',
+                            rules: a
+                        }
                     ]
                 }
-            ],
+            ]
         };   
         return {
             formSchema,

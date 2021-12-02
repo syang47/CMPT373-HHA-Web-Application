@@ -80,19 +80,6 @@
                       <div v-else>
                         <RegularInput :field="cField" v-model="s[cField.name]" />
                       </div>
-<!-- 
-                      <template v-if="cField.children && cField.children.length && s[cField.name] > 0">
-                        <div class="signup-form"
-                          v-for="gcField in cfield.children"
-                          :key="gcField"
-                        >
-                          <h4 v-if="gcField.header" style="color:green; text-align:center">{{ $t(gcField.header) }}</h4>
-                          <div v-else>
-                            <RegularInput :field="cgField" v-model="s[gcField.name]" />
-                          </div>
-                        </div>
-                      </template> -->
-
                     </div>
                   </template>
 
