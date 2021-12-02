@@ -14,6 +14,11 @@
         font-weight: bold;
         text-align: center;
     }
+    p{
+        font-family: "Arial";
+        font-weight: normal;
+        text-align: center;
+    }
     .box {
         width: 100%;
         height: 100%;
@@ -56,7 +61,9 @@
                                 <div class="card w-25" v-for="ad in Object.entries(caseStudyExpandedData[entry[0] - 1])" :key="ad">
                                     <div class="col-auto">
                                         <h1 class="card-title text-primary"> {{ad[0]}} </h1>
-                                        <p class="card-text"> {{ad[1]}}</p>
+                                        <div class="card-body"> 
+                                            <p>{{ad[1]}}</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div v-if="photos[entry[0] - 1]">
