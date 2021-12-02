@@ -24,6 +24,7 @@ const i18n = createI18n({
         password: "Mot de passe",
         selectDept: "Sélectionnez un département:",
         deptHeadMedDir: "Chef de service/Directeur médical?",
+        hospitalAdmin: "Administrateur de l'hôpital?",
         mbal6c: "Doit être au moins 6 caractères!",
         mbal4c: "Doit comporter au moins 4 caractères!",
         role: "Rôle",
@@ -404,6 +405,8 @@ const i18n = createI18n({
 
       },
       departmentPage: {
+        data: "Données",
+        department: "Départements",
         nicupaed: "USIN/PAED",
         maternity: "Maternité",
         rehab: "Désintox",
@@ -494,6 +497,7 @@ const i18n = createI18n({
         password: "Password",
         selectDept: "Select A Department:",
         deptHeadMedDir: "Department Head/Medical Director?",
+        hospitalAdmin: "Hospital Admin?",
         mbal6c: "Must be at least 6 characters!",
         mbal4c: "Must be at least 4 characters!",
         role: "Role",
@@ -870,6 +874,8 @@ const i18n = createI18n({
         
       },
       departmentPage: {
+        data: "Data",
+        department: "Departments",
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",

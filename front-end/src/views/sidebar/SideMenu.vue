@@ -24,7 +24,7 @@ export default defineComponent({
         menu() {
             var departments = [] as any;
             let token = JSON.parse(localStorage.getItem('user')!);
-            if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMIN"){
+            if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
                 let d1 = {
                     href:"/maternity",
                     title:  this.$t("homePage.maternity"),
@@ -66,12 +66,12 @@ export default defineComponent({
                 },
                 {
                     href:'/announcement',
-                    title: this.$t("announcementPage.addAnnouncement"),
+                    title: this.$t("announcementPage.addAnnouncement").toUpperCase(),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/dataDisplay',
-                    title: "DataDisplay",
+                    title: this.$t("departmentPage.data").toUpperCase(),
                     hiddenOnCollapse: true
                 },
                 {
@@ -86,7 +86,7 @@ export default defineComponent({
                 },
                 {
                     href:'/',
-                    title: "Departments",
+                    title: this.$t("departmentPage.department").toUpperCase(),
                     child: departments,
                     hiddenOnCollapse: true
                 },  

@@ -139,6 +139,8 @@ export default defineComponent({
             departments: yup
                 .string()
                 .required("Must select a department for the user."),
+            hospitalAdmin:yup
+                .boolean(),
             head: yup
                 .boolean()
         });
@@ -182,7 +184,9 @@ export default defineComponent({
             this.loading = true;
             const token = JSON.parse(localStorage.getItem('user')!);
             let role = "ROLE_USER";
-            if(user.head) {
+            if(user.hospitalAdmin){
+                role = "ROLE_HOSPITALADMN";
+            } else if(user.head) {
                 role = "ROLE_HEAD";
             }
             return axios.post('/api/register', {
@@ -195,10 +199,9 @@ export default defineComponent({
                     'Authorization': `Bearer ${token.jwt}`
                 }
             }).then(response => {
-                this.message = response.data;
+                this.message = "registration successful with username: " + response.data.username;
                 this.successful = true;
                 this.loading = false;
-                console.log("registration successful: " + this.successful);
             }).catch(error => {
                 this.message =
                     (error.response &&
@@ -207,7 +210,6 @@ export default defineComponent({
                     error.message || error.toString();
                 this.successful = false;
                 this.loading = false;
-                console.log("registration:" + this.successful);
             });
         },
 

@@ -49,7 +49,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
         Optional<Department> userDepartment = HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment());
-        userDepartment.ifPresent(d -> newUser.setDepartments(d));
+        userDepartment.ifPresent(newUser::setDepartments);
         newUser.setPoints(0);
         return userRepository.save(newUser);
     }
@@ -99,9 +99,15 @@ public class HHAUserDetailsService implements UserDetailsService {
         userRepository.updateUserReportsSubmitted(user.getId());
     }
     
-    public List<List<String>> listAllUsers() {
+    public List<List<String>> listAllUsers(User user) {
         List<List<String>> users = new ArrayList<>();
-        for(User u : userRepository.findAll()){
+        List<User> userList;
+        if(user.getRole().equals("ROLE_ADMIN") || user.getRole().equals("ROLE_HOSPITALADMIN")){
+            userList = userRepository.findAll();
+        } else {
+            userList = userRepository.findByDepartmentId(user.getDepartment().getDepartmentname());
+        }
+        for(User u : userList){
             List<String> userData = new ArrayList<>();
             userData.add(u.getId().toString());
             userData.add(u.getUsername());
@@ -112,8 +118,16 @@ public class HHAUserDetailsService implements UserDetailsService {
         return users;
     }
 
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
+    public void deleteUser(int id) throws Exception {
+        Optional<User> userToDelete = userRepository.findById(id);
+        if(userToDelete.isPresent()){
+            if(userToDelete.get().getRole().equals("ROLE_ADMIN") || userToDelete.get().getRole().equals("ROLE_HEAD") || userToDelete.get().getRole().equals("ROLE_HOSPITALADMIN")){
+                throw new Exception("Cannot delete elevated user");
+            } else {
+                userRepository.deleteById(id);
+            }
+        }
+
     }
     // public List<String> listUsernames() {
     //     return userRepository.queryUsername();
