@@ -145,14 +145,6 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.getAllEmployeesOfTheMonths());
     }
 
-    @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
-    public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
-        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
-        ObjectMapper objectMapper = new ObjectMapper();
-        CaseStudyDTO data = objectMapper.readValue(json, CaseStudyDTO.class);
-        return ResponseEntity.ok(caseStudyService.save(user, data, file));
-    }
-
     @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
