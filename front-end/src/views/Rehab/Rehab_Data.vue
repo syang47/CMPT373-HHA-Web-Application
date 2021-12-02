@@ -116,7 +116,7 @@ export default defineComponent({
                     rules: r,
                 },
                 {
-                    label: 'msppData.reasonSelfDischarge',
+                    label: 'msppData.selfDischarged',
                     name: 'selfDischarged',
                     as: 'input',
                     rules: r,
@@ -768,7 +768,7 @@ export default defineComponent({
                             label: 'msppData.newOutpatient',
                             name: 'newOutpatient',
                             as: 'input',
-                            rules: a,
+                            rules: r,
                             children: [
                                 {
                                     header: 'msppData.mainConditionOfNewPatients'
