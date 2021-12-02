@@ -76,6 +76,12 @@ const i18n = createI18n({
         dataValue: "Valeur des données",
         dateSubmitted: "Date de soumission",
       },
+      messageBoard: {
+        messageBoard: "Babillard",
+        addMessage: "Ajouter un message",
+        title: "Titre",
+        message: "Un message",
+      },
       homePage: {
         leaderBoard: "CLASSEMENT",
         nicuPaed: "USIN/PAED",
@@ -574,6 +580,12 @@ const i18n = createI18n({
         dataType: "Data Type",
         dataValue: "Data Value",
         dateSubmitted: "Date Submitted",
+      },
+      messageBoard: {
+        messageBoard: "Message Board",
+        addMessage: "Add A Message",
+        title: "Title",
+        message: "Message",
       },
       homePage: {
         leaderBoard: "LEADER BOARD",
