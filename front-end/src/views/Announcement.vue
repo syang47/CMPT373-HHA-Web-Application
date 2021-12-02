@@ -41,48 +41,50 @@
     <div class="main-content">
         <div class="card shadow-none">
             <div class="card-body">
-                <div class="card form-box">
+                <div class="card form-box mb-3">
                     <div class="card-body">
                         <Form @submit="handleData" :validation-schema="dataSchema">
-        <div class="signup-form text-monospace">
-            <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
-            </div>
-            <div v-if="!successful">
-                <div class="form-group">
-                    <label for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
-                    <Field name="monthly" type="text" class="form-control" />
-                    <ErrorMessage name="monthly" class="error-feedback" />
+                            <div class="signup-form text-monospace">
+                                <div class="text-center">
+                                    <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
+                                </div>
+                                <div v-if="!successful">
+                                    <div class="form-group">
+                                        <label class="mb-3" for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
+                                        <Field name="monthly" v-slot="{ field }" class="form-control mb-3" >
+                                            <textarea name="monthly" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                        </Field>
+                                        <ErrorMessage name="monthly" class="error-feedback" />
 
-                    <label for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                    <Field name="monthlyPhoto" type="file" rules="image" />
-                    <ErrorMessage name="monthlyPhoto" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <label for="annual">{{ $t('announcementPage.annualAward') }}</label>
-                    <Field name="annual" type="text" class="form-control" />
-                    <ErrorMessage name="annual" class="error-feedback" />
+                                        <label class="mb-2" for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                                        <Field name="monthlyPhoto" type="file" rules="image" />
+                                        <ErrorMessage name="monthlyPhoto" class="error-feedback" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>
+                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >
+                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                        </Field>
+                                        <ErrorMessage name="annual" class="error-feedback" />
 
-                    <div class="form-group">
-                    <label for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                    <Field name="annualPhoto" type="file" rules="image" />
-                    <ErrorMessage name="annualPhoto" class="error-feedback" />
-                </div>
-                <div class="form-group">
-                    <button class="btn btn-outline-light btn-block" :disabled="loading">
-                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        {{ $t('announcementPage.submit') }}
-                    </button>
-                </div>
-            </div>
-        </div>
-        </div>
-    </Form>
-
-    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
-        {{ message }}
-    </div>
+                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                                        <Field name="annualPhoto" type="file" rules="image" />
+                                        <ErrorMessage name="annualPhoto" class="error-feedback" />
+                                    </div>
+                                    <div class="form-group">
+                                        <button class="btn btn-outline-light btn-block" :disabled="loading">
+                                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                                            {{ $t('announcementPage.submit') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form>
+                    
                     </div>
+                </div>
+                <div v-if="message" style="width: 60%; margin:0 auto;" class="alert text-center" :class="successful ? 'alert-success' : 'alert-danger'">
+                    {{ message }}
                 </div>
             </div>
         </div>
@@ -168,15 +170,9 @@ export default defineComponent({
                         'Authorization': `Bearer ${token.jwt}`,
                     }
                 }).then(response => {
-                        this.message = response.data;
+                        this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
-                        if(response != null) {
-                            console.log("entry successful: " + this.successful);
-                            this.$router.push("/");
-                        } else {
-                            alert("entry could not be submitted");
-                        }
                     }
                 ).catch((error: any) => {
                       this.message =
@@ -186,7 +182,6 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
-                      alert("entry could not be submitted");
                 });
             }
         },
