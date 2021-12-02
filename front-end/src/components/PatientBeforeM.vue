@@ -6,10 +6,10 @@
             :key="field.key"
         >
         <div class="my-3">
-          <legend style="color:green; text-align:center">Patient {{ idx+1 }}</legend>
+          <legend style="color:green; text-align:center">{{ $t('patient.patient') }} {{ idx+1 }}</legend>
         </div>
         <div class="mb-3">
-          <label :for="`diedBefore48hAge_${idx}`">Age</label>
+          <label :for="`diedBefore48hAge_${idx}`">{{ $t('patient.age') }}</label>
           <Field class="form-control"
                   :id="`diedBefore48hAge_${idx}`" 
                   :name="`diedBefore48hPatient[${idx}].diedBefore48hAge`" :value="modelValue"
@@ -18,18 +18,18 @@
         </div>
 
         <div class="mb-3">
-          <label :for="`diedBefore48hCause_${idx}`">Cause of Death</label>
+          <label :for="`diedBefore48hCause_${idx}`">{{ $t('patient.causeOfDeath') }}</label>
         <Field class="form-control"
                 :id="`diedBefore48hCause_${idx}`"
                 :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
         <ErrorMessage :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" class="error-feedback" />
         </div>
 
-        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">Remove patient</button>
+        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">{{ $t('patient.removePatient') }}</button>
         </fieldset>
 
         <button class="btn btn-primary btn-block" type="button" @click="push({ diedBefore48hAge: '', diedBefore48hCause: '' })">
-        New Patient + 
+        {{ $t('patient.newPatient') }}
         </button>
     </FieldArray>
 </template>
