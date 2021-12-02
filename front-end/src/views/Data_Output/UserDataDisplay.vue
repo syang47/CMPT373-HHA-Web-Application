@@ -28,7 +28,7 @@
     <div class="signup-form main-content">
         <div class="text-center container-fluid">
             <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
-            <div v-if="showComponentOne"> 
+            <div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -38,11 +38,15 @@
                     <tbody>
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
-                            <!-- <td v-if="hasPermissions">
-                                <button @click="editUser(user)" class="btn btn-warning px-2">Edit</button>
+
+                            <td v-if="hasPermissions">
+                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">Set Employee Of The Month</button>
+                            </td>
+                            <!-- <td>
+                                <button class="btn btn-warning px-2">Edit</button>
                             </td> -->
                             <td v-if="hasPermissions">
-                                <button @click="deleteUser(user)" class="btn btn-danger px-2">Delete</button>
+                                <button @click="deleteUser(user)" class="btn btn-danger">Delete</button>
                             </td>
                         </tr>
                     </tbody>
@@ -64,7 +68,6 @@ export default defineComponent({
             message: "",
             userAllData: [],
             tableHeaders: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
-            showComponentOne: true,
             finalmessage: "",
             hasPermissions: false
         };
@@ -75,8 +78,8 @@ export default defineComponent({
             this.fetchAllUserData();
         })
         let token = JSON.parse(localStorage.getItem('user')!);
-        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HEAD"){
-            this.hasPermissions = true;
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
         }
     },
     methods: {
@@ -105,35 +108,9 @@ export default defineComponent({
                 alert("failed to fetch user data types");
             });
         },
-        editUser(user) {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying all user data";
-            
-            this.$axios.post(`/api/user/edit`, user ,{
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`,
-                },
-            }).then(response => {
-                this.finalmessage = response.data;
-                console.log(response.data);
-                if(response != null) {
-                    console.log("successfully edited user");
-                    this.$nextTick(() => {
-                        this.fetchAllUserData();
-                    })
-                } else {
-                    alert("no user was edited...");
-                }
-            }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
-                
-                alert("error occurred when edited user");
-            });
-        },
+        // editUser() {
+        //     this.finalmessage = "trying to edit user...";
+        // },
         deleteUser(tuple) {
             var id = tuple[0];
             console.log(id);
@@ -165,7 +142,25 @@ export default defineComponent({
                 
                 alert("error occurred when deleting user");
             });
-        }
+        },
+
+        setEmployeeOfTheMonth(user){
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+               'April', 'May', 'June', 'July',
+               'August', 'September', 'October', 'November', 'December'];
+            this.$axios.post("/api/user/employeeofthemonth/submit", {}, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    userId: user[0],
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response => {
+                alert(response.data);
+            });
+        },
         
     }
     

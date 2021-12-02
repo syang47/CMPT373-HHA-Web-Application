@@ -126,6 +126,12 @@
             {{ $t('header.loginOut') }}
           </button>
         </li>
+        <li class="my-auto nav-item">
+          <button class="btn btn-sm btn-outline-secondary" @click="gettestemployee">
+            get employeeofthemonth
+          </button>
+        </li>
+
       </ul>
   </nav>
   <div class="menu" v-if="showSidebar" :key="reloadSidebar">
@@ -181,17 +187,6 @@ export default defineComponent({
       this.$router.push('/login');
     },
 
-    goToRegister(): void {
-      this.$router.push('/register');
-    },
-
-    goToDataDisplay(): void {
-      this.$router.push('/dataDisplay');
-    },
-    
-    goToAddAnnouncement(): void {
-      this.$router.push('/announcement');
-    },
     changeLang(choice: string): void {
       if(choice == "Français"){
         i18n.global.locale = 'fr';
@@ -200,36 +195,25 @@ export default defineComponent({
         i18n.global.locale = 'en';
       }
     },
+    gettestemployee(): void {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      var months = ['January', 'February', 'March',
+        'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+      this.$axios.get("/api/user/employeeofthemonth", {
+        headers: {
+          'Authorization': `Bearer ${token.jwt}`
+        },
+        params: {
+          month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+        }
+      }).then(response => {
+        console.log(response.data);
+      });
+    }
 
-    testDelete() {
-      let token = JSON.parse(localStorage.getItem('user')!);
-      this.$axios.delete("/api/mspp/delete",{
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        },
-        params: {
-          documentId: 3
-        }
-      }).then(response => {
-        console.log(response);
-      });
-    },
-    testEdit() {
-      let token = JSON.parse(localStorage.getItem('user')!);
-      let testObj = {bedAvailable: "testReq"};
-      let te = JSON.stringify(testObj);
-      this.$axios.patch("/api/mspp/edit", {MSPPDataJson: te},{
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        },
-        params: {
-          documentId: 1
-        }
-      }).then(response => {
-        console.log(response);
-      });
-    },
-  }
-})
+  },
+ 
+});
 
 </script>

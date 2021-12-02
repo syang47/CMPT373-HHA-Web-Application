@@ -39,11 +39,14 @@ public class User implements Serializable{
     @JsonIgnore
     private Set<CaseStudy> caseStudies;
 
-    @Column//make this into a function that automatically gets size by folder.size
-    private Integer reportsSubmitted;
+    @Column
+    private Integer reportsSubmitted = 0;
 
     @Column
-    private Integer points;
+    private Integer points = 0;
+
+    @Column
+    private String employeeOfTheMonth = "";
 
     public Integer getId() {
         return id;
@@ -131,5 +134,13 @@ public class User implements Serializable{
 
     public void setPoints(Integer points) {
         this.points = points;
+    }
+
+    public String getEmployeeOfTheMonth() {
+        return employeeOfTheMonth;
+    }
+
+    public void setEmployeeOfTheMonth(String employeeOfTheMonth) {
+        this.employeeOfTheMonth = employeeOfTheMonth;
     }
 }
