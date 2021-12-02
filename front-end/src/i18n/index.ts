@@ -405,6 +405,8 @@ const i18n = createI18n({
 
       },
       departmentPage: {
+        data: "Données",
+        department: "Départements",
         nicupaed: "USIN/PAED",
         maternity: "Maternité",
         rehab: "Désintox",
@@ -872,6 +874,8 @@ const i18n = createI18n({
         
       },
       departmentPage: {
+        data: "Data",
+        department: "Departments",
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",

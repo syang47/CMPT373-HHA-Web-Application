@@ -66,12 +66,12 @@ export default defineComponent({
                 },
                 {
                     href:'/announcement',
-                    title: this.$t("announcementPage.addAnnouncement"),
+                    title: this.$t("announcementPage.addAnnouncement").toUpperCase(),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/dataDisplay',
-                    title: "DataDisplay",
+                    title: this.$t("departmentPage.data").toUpperCase(),
                     hiddenOnCollapse: true
                 },
                 {
@@ -86,7 +86,7 @@ export default defineComponent({
                 },
                 {
                     href:'/',
-                    title: "Departments",
+                    title: this.$t("departmentPage.department").toUpperCase(),
                     child: departments,
                     hiddenOnCollapse: true
                 },  

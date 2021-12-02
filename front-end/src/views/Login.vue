@@ -16,7 +16,8 @@
         padding: 0;
     }
     h2 {
-        font-family: "Arial Bold";
+        font-family: "Arial";
+        font-weight: bold;
         text-align: center;
         color: #fff;
         margin-bottom: 30px;

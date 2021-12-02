@@ -1,11 +1,9 @@
 package hha.website.services;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.CaseStudyRepository;
-import hha.website.models.CaseStudy;
-import hha.website.models.CaseStudyDTO;
-import hha.website.models.Department;
-import hha.website.models.User;
+import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cglib.core.CollectionUtils;
 import org.springframework.stereotype.Service;
@@ -29,13 +27,12 @@ public class CaseStudyService {
     @Autowired
     private HHADepartmentService hhaDepartmentService;
 
-    public CaseStudy save(User user, CaseStudyDTO data, MultipartFile file) {
+    public CaseStudy save(User user, String data, MultipartFile file) throws JsonProcessingException  {
         CaseStudy entry = new CaseStudy();
 
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
         entry.setUser(user);
-        entry.setCaseStudyType(data.getCaseStudyType());
 
         Optional<MultipartFile> photoBytes = Optional.ofNullable(file);
         photoBytes.ifPresent(p -> {
@@ -47,43 +44,44 @@ public class CaseStudyService {
             }
         });
 
-        entry.setPatientName(data.getPatientName());
-        entry.setPatientAge(data.getPatientAge());
-        entry.setPatientOrigin(data.getPatientOrigin());
-        entry.setPatientReasoning(data.getPatientReasoning());
-        entry.setPatientDuration(data.getPatientDuration());
-        entry.setPatientDiagnosis(data.getPatientDiagnosis());
-
-        entry.setStaffName(data.getStaffName());
-        entry.setStaffTitle(data.getStaffTitle());
-        entry.setStaffDepartment(data.getStaffDepartment());
-        entry.setStaffEmploymentDuration(data.getStaffEmploymentDuration());
-        entry.setStaffEnjoymentPoints(data.getStaffEnjoymentPoints());
-
-        entry.setTrainingDate(data.getTrainingDate());
-        entry.setTrainingSubject(data.getTrainingSubject());
-        entry.setTrainingConductor(data.getTrainingConductor());
-        entry.setTrainingAttendees(data.getTrainingAttendees());
-        entry.setTrainingBenefits(data.getTrainingBenefits());
-
-        entry.setEquipmentReceived(data.getEquipmentReceived());
-        entry.setEquipmentDepartmentTo(data.getEquipmentDepartmentTo());
-        entry.setEquipmentDepartmentFrom(data.getEquipmentFrom());
-        entry.setEquipmentOrigin(data.getEquipmentOrigin());
-        entry.setEquipmentUsage(data.getEquipmentUsage());
-
-        entry.setStory(data.getStory());
+        ObjectMapper objectMapper = new ObjectMapper();
+        Map<String, Object> d;
+        try {
+            d = objectMapper.readValue(data, Map.class);
+            entry.setCaseStudyType(d.remove("caseStudyType").toString());
+            entry.setCaseStudyData(d);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+            throw e;
+        }
 
         hhaDepartmentService.addASubmittedReport(user);
         System.out.println("case study saved");
         return caseStudyRepository.save(entry);
     }
 
-    public List<CaseStudy> listAllCaseStudies() {
-        return caseStudyRepository.findAll();
+    public List<List<Object>> listAllCaseStudies() {
+        List<List<Object>> caseStudies = new ArrayList<>();
+        for(CaseStudy c : caseStudyRepository.findAll()){
+            List<Object> cData = new ArrayList<>();
+            cData.add(c.getId());
+            cData.add(c.getDateSubmitted().getTime().toString());
+            cData.add(c.getCaseStudyType());
+            cData.add(c.getUser().getUsername());
+            cData.add(c.getPhoto());
+            cData.add(c.getPhotoType());
+            cData.add(c.getCaseStudyData());
+            caseStudies.add(cData);
+        }
+        return caseStudies;
     }
 
     public List<String> listCaseStudyTypes() {
         return caseStudyRepository.queryCaseStudyTypes();
+    }
+
+    public void deleteCaseStudy(int id) {
+        Optional<CaseStudy> caseStudyToDelete = caseStudyRepository.findById(id);
+        caseStudyToDelete.ifPresent(c -> caseStudyRepository.deleteById(id));
     }
 }
