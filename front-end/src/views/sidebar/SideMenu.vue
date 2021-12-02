@@ -27,22 +27,22 @@ export default defineComponent({
             if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMIN"){
                 let d1 = {
                     href:"/maternity",
-                    title:  this.$t("homePage.maternity"),
+                    title:  this.$t("sideBar.maternity"),
                 }
                 departments.push(d1);
                 let d2 = {
                     href:"/rehab",
-                    title:  this.$t("homePage.rehab"),
+                    title:  this.$t("sideBar.rehab"),
                 }
                 departments.push(d2);
                 let d3 = {
                     href:"/community_health",
-                    title:  this.$t("homePage.communityHealth"),
+                    title:  this.$t("sideBar.communityHealth"),
                 }
                 departments.push(d3);
                 let d4 = {
                     href:"/nicu_paed",
-                    title:  this.$t("homePage.nicuPaed"),
+                    title:  this.$t("sideBar.nicuPaed"),
                 }
                 departments.push(d4);
                 // return departments.push(d1,d2,d3,d4);
@@ -56,43 +56,46 @@ export default defineComponent({
             }          
             return [
                 {
-                    header: "Hope Health Action",
+                    // header: "Hope Health Action",
+                    header: this.$t("sideBar.HHA"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/leadersboard',
-                    title: this.$t("homePage.leaderBoard"),
+                    title: this.$t("sideBar.leaderBoard"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/announcement',
-                    title: this.$t("announcementPage.addAnnouncement"),
+                    title: this.$t("sideBar.addAnnouncement"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/dataDisplay',
-                    title: "DataDisplay",
+                    // title: "DataDisplay",
+                    title: this.$t("sideBar.dataDisplay"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/message_board',
-                    title: this.$t("homePage.messageBoard"),
+                    title: this.$t("sideBar.messageBoard"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/casestudy',
-                    title: this.$t("homePage.caseStudy"),
+                    title: this.$t("sideBar.caseStudy"),
                     hiddenOnCollapse: true
                 },
                 {
                     href:'/',
-                    title: "Departments",
+                    // title: "Departments",
+                    title: this.$t("sideBar.departments"),
                     child: departments,
                     hiddenOnCollapse: true
                 },  
                 {
                     href: "/register",
-                    title: this.$t("header.register"),
+                    title: this.$t("sideBar.register"),
                     hiddenOnCollapse: true
                 },      
             ];
