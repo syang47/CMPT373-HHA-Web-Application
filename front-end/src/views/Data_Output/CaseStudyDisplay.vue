@@ -14,6 +14,11 @@
         font-weight: bold;
         text-align: center;
     }
+    p{
+        font-family: "Arial";
+        font-weight: normal;
+        text-align: center;
+    }
     .box {
         width: 100%;
         height: 100%;
@@ -56,10 +61,12 @@
                                 <div class="card w-25" v-for="ad in Object.entries(caseStudyExpandedData[entry[0] - 1])" :key="ad">
                                     <div class="col-auto">
                                         <h1 class="card-title text-primary"> {{ad[0]}} </h1>
-                                        <p class="card-text"> {{ad[1]}}</p>
+                                        <div class="card-body"> 
+                                            <p>{{ad[1]}}</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div>
+                                <div v-if="photos[entry[0] - 1]">
                                     <img :src="photos[entry[0] - 1]" />
                                 </div>
                             </div>
@@ -105,6 +112,8 @@ export default defineComponent({
                     var obj = response.data[d];
                     if(obj[4]) {
                         this.photos.push("data:" + obj[5] + ";base64," + obj[4]);
+                    } else {
+                        this.photos.push(false);
                     }
                     this.caseStudyExpandedData.push(obj[6]);
                     obj = obj.slice(0, 4);
@@ -130,6 +139,7 @@ export default defineComponent({
 
         showCaseStudy(entry){
             this.showData[entry[0] - 1] = !this.showData[entry[0] - 1];
+            console.log(this.photos);
         },
 
         deleteCaseStudy(entry){
