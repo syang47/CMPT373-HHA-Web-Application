@@ -55,6 +55,7 @@ const i18n = createI18n({
       msppData: {
         blank: "",
         msppForm: "Formulaire de saisie de données MSPP",
+        maternityForm: "Formulaire de saisie des données de maternité",
         rehabForm: "Formulaire de saisie de données de réadaptation",
         nicupaedForm: "Formulaire de saisie de données USIN/PAED",
         communityHealthForm: "Formulaire de saisie des données de santé communautaire",
@@ -404,6 +405,8 @@ const i18n = createI18n({
 
       },
       departmentPage: {
+        data: "Données",
+        department: "Départements",
         nicupaed: "USIN/PAED",
         maternity: "Maternité",
         rehab: "Désintox",
@@ -525,6 +528,7 @@ const i18n = createI18n({
       msppData: {
         blank: "",
         msppForm: "MSPP Data Entry Form",
+        maternityForm: "Maternity Data Entry Form",
         rehabForm: "Rehab Data Entry Form",
         nicupaedForm: "NICU/PAED Data Entry Form",
         communityHealthForm: "Community Health Data Entry Form",
@@ -870,6 +874,8 @@ const i18n = createI18n({
         
       },
       departmentPage: {
+        data: "Data",
+        department: "Departments",
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",

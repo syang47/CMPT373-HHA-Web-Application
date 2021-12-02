@@ -14,8 +14,7 @@ public class AdditionalMSPP {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @OneToOne(mappedBy = "additionalData", fetch = FetchType.LAZY,
-            cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "additionalData", fetch = FetchType.LAZY)
     @JsonIgnore
     private MSPPRequirement msppRequirementData;
 

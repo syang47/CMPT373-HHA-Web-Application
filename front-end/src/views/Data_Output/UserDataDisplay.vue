@@ -28,7 +28,7 @@
     <div class="signup-form main-content">
         <div class="text-center container-fluid">
             <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
-            <div > 
+            <div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -38,7 +38,7 @@
                     <tbody>
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
-                            
+
                             <td v-if="hasPermissions">
                                 <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">Set Employee Of The Month</button>
                             </td>
@@ -146,8 +146,8 @@ export default defineComponent({
 
         setEmployeeOfTheMonth(user){
             let token = JSON.parse(localStorage.getItem('user')!);
-            var months = ['January', 'February', 'March', 
-               'April', 'May', 'June', 'July', 
+            var months = ['January', 'February', 'March',
+               'April', 'May', 'June', 'July',
                'August', 'September', 'October', 'November', 'December'];
             this.$axios.post("/api/user/employeeofthemonth/submit", {}, {
                 headers: {

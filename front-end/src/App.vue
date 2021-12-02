@@ -52,7 +52,7 @@
    h1, h2, label, p {
     font-family: "Arial";
     font-weight: bold;
-    
+
   }
   .btn{
     font-family: "Arial";
@@ -88,7 +88,22 @@
   max-width: 600px;
     background-color: #f6f9f9;
     margin: 0 auto;
-    box-shadow: 0 0.0625rem 0.5rem rgb(155 154 154 / 15%)
+}
+
+/* box style */
+.card{
+  box-shadow: none !important;
+}
+.card.has-bg{
+    background-color: #edf2f9;
+    box-shadow: none !important;
+}
+.btn:hover{
+  box-shadow: none !important;
+}
+/* global style */
+.font-weight-normal{
+  font-weight: 400;
 }
 
 </style>
@@ -101,7 +116,7 @@
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
         <li class="my-auto nav-item">
           <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language">
                 {{ language }}
               </option>
           </select>
@@ -122,12 +137,11 @@
   <div class="menu" v-if="showSidebar" :key="reloadSidebar">
     <SideMenu />
   </div>
-  
-  <router-view /> 
+
+  <router-view />
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
 import SideMenu from "@/views/sidebar/SideMenu.vue";
@@ -137,7 +151,7 @@ export default defineComponent({
   components: {
     SideMenu,
   },
-  
+
   data: function() {
     return{
       languages: ["Français", "English"],
@@ -183,8 +197,8 @@ export default defineComponent({
     },
     gettestemployee(): void {
       let token = JSON.parse(localStorage.getItem('user')!);
-      var months = ['January', 'February', 'March', 
-        'April', 'May', 'June', 'July', 
+      var months = ['January', 'February', 'March',
+        'April', 'May', 'June', 'July',
         'August', 'September', 'October', 'November', 'December'];
       this.$axios.get("/api/user/employeeofthemonth", {
         headers: {
