@@ -72,7 +72,7 @@
 </div>
 
 </template>
-s
+
 <script lang="ts" type="text/typescript">
 
 import { defineComponent } from 'vue'
