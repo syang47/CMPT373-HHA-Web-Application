@@ -21,7 +21,7 @@
             <div class="text-center">
               <h2 class="display-5">Message Board</h2>
             </div>
-            <div>
+            <div v-if="hasPermissions">
               
               <div class="mb-3">
                 <button class="btn btn-primary" @click="show = !show">Add message</button>
@@ -88,7 +88,7 @@ export default defineComponent({
       messageToPost: string,
       dateSubmitted: string,
       username: string,
-      show: boolean
+      show: boolean,
     };
     const dataSchema = yup.object().shape({
       title: yup
@@ -104,14 +104,24 @@ export default defineComponent({
       loading: false,
       errorMessage: "",
       dataSchema,
+      hasPermissions: false
     };
   },
   mounted() {
     this.getMessages();
+    let token = JSON.parse(localStorage.getItem('user')!);
+    if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "HOSPITALADMN"){
+      this.hasPermissions = true;
+    }
   },
   methods: {
     getMessages(): void {
-      axios.get("/api/messages").then(response=> {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      axios.get("/api/messages", {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response=> {
         this.messages = response.data;
         this.rerender += 1;
       });
@@ -122,28 +132,26 @@ export default defineComponent({
     },
     handleData(entry): void {
       let token = JSON.parse(localStorage.getItem('user')!);
-      if(token != null) {
-        entry.departmentname = "NICU_PAED";
-        this.$axios.post("/api/messageboard/submit", entry, {
-            headers: {
-                'Authorization': `Bearer ${token.jwt}`
-            }
-        }).then(response => {
-                this.successful = true;
-                this.loading = false;
-                this.getMessages();
-            }
-        ).catch((error: any) => {
-              this.errorMessage =
-                  (error.response &&
-                  error.response.data &&
-                  error.response.data.message) ||
-                  error.message;
-              this.successful = false;
+      entry.departmentname = token.department;
+      this.$axios.post("/api/messageboard/submit", entry, {
+          headers: {
+              'Authorization': `Bearer ${token.jwt}`
+          }
+      }).then(response => {
+              this.successful = true;
               this.loading = false;
-              alert("entry could not be submitted");
-        });
-      }
+              this.getMessages();
+          }
+      ).catch((error: any) => {
+            this.errorMessage =
+                (error.response &&
+                error.response.data &&
+                error.response.data.message) ||
+                error.message;
+            this.successful = false;
+            this.loading = false;
+            alert("entry could not be submitted");
+      });
     }
   }
 });
