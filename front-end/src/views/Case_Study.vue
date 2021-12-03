@@ -39,7 +39,7 @@
 <div class="main-content">
     <div class="card shadow-none">
         <div class="card-body">
-            <div class="card form-box">
+            <div class="card form-box has-bg">
                 <div class="card-body">
                 <Form @submit="handleData" :validation-schema="dataSchema">
                     <div class="text-center">
@@ -288,7 +288,7 @@
                                 <ErrorMessage name="permission" class="error-feedback fw-bold text-warning" />
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-outline-light btn-block" :disabled="loading">
+                                <button class="btn btn-secondary btn-block" :disabled="loading">
                                     <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                                     {{ $t('caseStudyForm.submit') }}
                                 </button>
