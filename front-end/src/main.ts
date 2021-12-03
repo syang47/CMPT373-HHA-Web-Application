@@ -30,7 +30,7 @@ app.use(BootstrapVue3);
 app.use(VueSideBarMenu);
 app.use(VuesticPlugin);
 app.config.globalProperties.$axios = axios;
-axios.defaults.baseURL = "http://localhost:8080";
+axios.defaults.baseURL = "http://142.58.21.184:8080";
 app.use(Equal);
 router.isReady().then(()=>app.mount("#app")).catch(onerror);
 

@@ -178,25 +178,38 @@ export default defineComponent({
             return false;
         },
         getMonthlyPrize(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
             axios.get("/api/announcements", {
                 params: {
                     field: "monthly"
+                },
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response=> {
                 this.MonthlyPrize = response.data.filter(message => message);
             });
         },
         getAnnualPrize(): void{
+            let token = JSON.parse(localStorage.getItem('user')!);
             axios.get("/api/announcements", {
                 params: {
                     field: "annual"
+                },
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response=> {
                 this.AnnualPrize = response.data.filter(message => message);
             });
         },
         getDepartmentPoints(): void {
-            axios.get("/api/departments/points").then(response=> {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/departments/points", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                }
+            }).then(response=> {
                 var departmentPointsData = response.data;
                 
                 //https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
