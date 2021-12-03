@@ -165,27 +165,28 @@ public class MainController {
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
-    // @CrossOrigin
-    // @GetMapping("/api/mspp/data")
-    // public ResponseEntity<?> getAllMSPPData(){
-    //     return ResponseEntity.ok(msppRepositoryService.listAllData());
-    // }
 
     @GetMapping("/api/mspp/{documentId}")
-    public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
-        MSPPRequirement requiredData = msppRepositoryService.getAForm(documentId);
+    public ResponseEntity<?> getADataForm(@PathVariable("documentId") String documentId){
+        int id = Integer.parseInt(documentId);
+        MSPPRequirement requiredData = msppRepositoryService.getAForm(id);
+        System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(requiredData);
     }
-
-    @GetMapping("/api/mspp/data/{date}/{id}")
-    public ResponseEntity<?> getMsppByDateAndId(@PathVariable("id") String id, @PathVariable("date") String date) throws ParseException {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        Date d = format.parse(date);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(d);
-        int finalId = Integer.parseInt(id);
-        System.out.println(cal);
-        return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, cal));
+  
+    // list mspp additional data 
+    @GetMapping("/api/msppadditional/{documentId}")
+    public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") String documentId){
+        int id = Integer.parseInt(documentId);
+        AdditionalMSPP additionalData = msppRepositoryService.getAdditional(id);
+        return ResponseEntity.ok(additionalData);
+    }
+    // list mspp data by id, date, department good
+    @CrossOrigin
+    @GetMapping("/api/mspp/data/all")
+    public ResponseEntity<?> getAllMSPPData(){
+        System.out.println(msppRepositoryService.listMsppData());
+        return ResponseEntity.ok(msppRepositoryService.listMsppData());
     }
 
     @CrossOrigin
@@ -217,14 +218,6 @@ public class MainController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @CrossOrigin
-    @GetMapping("/api/mspp/data/all")
-    public ResponseEntity<?> getAllMSPPData(){
-        // console.log(msppRepositoryService.listAllMsppData());
-        return ResponseEntity.ok(msppRepositoryService.listAllMsppData());
-    }
-
 
     @GetMapping(value = "/api/departments/totalreports")
     public ResponseEntity<?> getTotalReportsSubmittedForDepartment(@RequestParam("department") String department) {

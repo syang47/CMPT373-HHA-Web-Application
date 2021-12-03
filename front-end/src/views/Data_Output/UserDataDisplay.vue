@@ -42,9 +42,6 @@
                             <td v-if="hasPermissions">
                                 <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">Set Employee Of The Month</button>
                             </td>
-                            <!-- <td>
-                                <button class="btn btn-warning px-2">Edit</button>
-                            </td> -->
                             <td v-if="hasPermissions">
                                 <button @click="deleteUser(user)" class="btn btn-danger">Delete</button>
                             </td>

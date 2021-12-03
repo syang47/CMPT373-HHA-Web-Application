@@ -75,15 +75,29 @@ public class MSPPRepositoryService {
         return msppRepository.findByidAndDateSubmitted(id, date);
     }
     
-    public List<List<Object>> listAllMsppData() {
-        List<List<Object>> msppData = new ArrayList<>();
+    // list additional mspp data with an id input
+    public AdditionalMSPP getAdditional(Integer documentId) {
+        return additionalMSPPRepository.findById(documentId).get();
+    } 
+    
+    // return all input data as a list
+    public List<List<Object>> listMsppData() {
+        List<List<Object>> datalist = new ArrayList<>();
         for(MSPPRequirement d : msppRepository.findAll()) {
             List<Object> dData = new ArrayList<>();
             dData.add(d.getId());
             dData.add(d.getDateSubmitted().getTime().toString());
-            dData.add(d.getUser().getUsername());
-            dData.add(d.getDepartment());
-            dData.add(d.getAdditionalData());
+            dData.add(d.getDepartment().getDepartmentname());
+            datalist.add(dData);
+        }
+        return datalist;
+    }
+
+    // display mspp only data given an id
+    public List<List<Object>> listMsppOnlyData(int id) {
+        List<List<Object>> msppData = new ArrayList<>();
+        for(MSPPRequirement d : msppRepository.findRequiredMSPPDataById(id)) {
+            List<Object> dData = new ArrayList<>();
             dData.add(d.getRequiredMSPPData());
             msppData.add(dData);
         }

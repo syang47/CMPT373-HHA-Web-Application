@@ -7,7 +7,7 @@ import { defineComponent } from 'vue'
 import * as yup from "yup";
 import DynamicForm from '@/components/DynamicForm.vue';
 export default defineComponent({
-    name: "Rehab_Data",
+    name: "NICU_PAED_data",
     components: {
         DynamicForm
     },
