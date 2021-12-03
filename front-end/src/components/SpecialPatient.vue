@@ -11,16 +11,16 @@
     <!-- Radio buttons -->
     <div>
         <div class="form-check">
-            <Field class="form-check-input" id="option1" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
-            <label class="form-check-label" for="option1"> SCI</label>
+            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
+            <label class="form-check-label"> SCI</label>
         </div>
         <div class="form-check">
-            <Field class="form-check-input" id="option2" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
-            <label class="form-check-label" for="option2"> Stroke</label>
+            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
+            <label class="form-check-label" > Stroke</label>
         </div>
         <div class="form-check">
-            <Field class="form-check-input" id="option3" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
-            <label class="form-check-label" for="option3"> Other</label>
+            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
+            <label class="form-check-label" > Other</label>
         </div>
         <br>
         <br>
