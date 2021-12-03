@@ -398,11 +398,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Sexe des nouveaux patients",
         newMale: "Mâle",
         newFemale: "Femelle",
-
-        
-
-
-
       },
       departmentPage: {
         data: "Données",
@@ -871,7 +866,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Gender of New patients",
         newMale: "Male",
         newFemale: "Female",
-        
       },
       departmentPage: {
         data: "Data",

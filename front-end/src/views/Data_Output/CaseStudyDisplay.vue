@@ -107,14 +107,13 @@ export default defineComponent({
             expandedHeaders: [],
             csEntries: [],
             caseStudyAllData: {},
-            hasPermissions: false
+            hasPermissions: false,
         };
     },
     mounted() {
         "#v-for-object";
-        this.$nextTick(() => {
-            this.showAllCaseStudies();
-        })
+        this.showAllCaseStudies();
+        
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
             this.hasPermissions = true

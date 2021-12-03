@@ -119,7 +119,7 @@ public class MainController {
         }
     }
 
-    @RequestMapping(value = "/api/datainput", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/mspp/submit", method = RequestMethod.POST)
     public ResponseEntity<?> saveData(@RequestHeader("Authorization") String jwt, @RequestBody String[] MSPPDataJson) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         try{

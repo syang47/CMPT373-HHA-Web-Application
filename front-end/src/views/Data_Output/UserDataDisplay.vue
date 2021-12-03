@@ -124,15 +124,10 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.finalmessage = response.data;
-                console.log(response.data);
-                if(response != null) {
-                    console.log("successfully deleted user");
-                    this.$nextTick(() => {
-                        this.fetchAllUserData();
-                    })
-                } else {
-                    alert("no user was deleted...");
-                }
+                alert("user was deleted");
+                this.$nextTick(() => {
+                    this.fetchAllUserData();
+                })
             }).catch((error: any) => {
                 this.message =
                     (error.response &&
