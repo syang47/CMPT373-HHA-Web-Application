@@ -44,7 +44,7 @@
                 <div class="card form-box has-bg mb-3">
                     <div class="card-body">
                         <Form @submit="handleData" :validation-schema="dataSchema">
-                            <div class="signup-form text-monospace">
+                            <div class="text-monospace">
                                 <div class="text-center">
                                     <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
                                 </div>

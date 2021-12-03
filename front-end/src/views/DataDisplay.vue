@@ -34,7 +34,7 @@
                 </div>
             </div>
             <b-container class="mt-3">
-                <h2 class="text-center text-dark">{{ message }}</h2>
+                <h2 class="text-center text-dark mb-3">{{ message }}</h2>
                 <first-component v-if="showComponentOne" />
                 <second-component v-else-if="showComponentTwo" />
                 <user-data-component v-else-if="showUserDataComponent" />
