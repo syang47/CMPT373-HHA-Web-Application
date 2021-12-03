@@ -57,7 +57,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.headers().frameOptions().disable();
-        http.csrf().disable()
+        http.cors().and().headers()
+                .and().csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
                 .antMatchers("/api/login", "/api/checktoken").permitAll()
                 .antMatchers("/api/register", "/api/casestudy/delete").hasRole("HEAD")

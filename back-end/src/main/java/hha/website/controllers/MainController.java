@@ -36,7 +36,7 @@ import java.util.*;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MainController {
 
     /*
