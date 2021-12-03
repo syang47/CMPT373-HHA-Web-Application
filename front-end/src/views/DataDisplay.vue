@@ -13,8 +13,10 @@
 <template>
 <div class="main-content">
     <div class="card shadow-none">
-        <div class="card-body box">
-            <div class="text-center mb-3">
+        <div class="card-body">
+            <div class="card has-bg">
+                <div class="card-body">
+                <div class="text-center mb-3">
                 <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
                 <div class="row">
                     <div class="form-group col">
@@ -38,6 +40,8 @@
                 <user-data-component v-else-if="showUserDataComponent" />
                 <employee-of-the-month v-else-if="showEmployeeOfTheMonthComponent" />
             </b-container>
+            </div>
+            </div>
         </div>
     </div>
 </div>
