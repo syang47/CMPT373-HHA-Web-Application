@@ -9,16 +9,16 @@
         <div>
             <legend>Patient {{ idx+1 }} Diagnosis: </legend>
             <div class="form-check">
-                <Field class="form-check-input" id="option1" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="SCI"></Field>
-                <label class="form-check-label" for="option1"> SCI</label>
+                <Field class="form-check-input" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="SCI"></Field>
+                <label class="form-check-label" > SCI</label>
             </div>
             <div class="form-check">
-                <Field class="form-check-input" id="option2" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="CVA"></Field>
-                <label class="form-check-label" for="option2"> CVA</label>
+                <Field class="form-check-input" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="CVA"></Field>
+                <label class="form-check-label" > CVA</label>
             </div>
             <div class="form-check">
-                <Field class="form-check-input" id="option3" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="Other"></Field>
-                <label class="form-check-label" for="option3"> Other</label>
+                <Field class="form-check-input" :name="`diedAfter48hPatient[${idx}].diedAfter48hOption`" type="radio" value="Other"></Field>
+                <label class="form-check-label" > Other</label>
             </div>
             <br>
             <br>
