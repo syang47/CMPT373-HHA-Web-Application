@@ -15,6 +15,10 @@ configurations {
 }
 
 repositories {
+    maven { url 'https://maven.aliyun.com/repository/jcenter' }
+    maven { url 'https://maven.aliyun.com/repository/google' }
+    maven { url 'https://maven.aliyun.com/repository/central' }
+    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
     mavenCentral()
 }
 
@@ -34,7 +38,7 @@ task copyFrontendToBuild(type: Copy) {
 
 task npmBuild(type: Exec) {
     workingDir '../front-end/'
-    commandLine 'npm.cmd','run','build'
+    commandLine 'npm','run','build'
 }
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.6'
