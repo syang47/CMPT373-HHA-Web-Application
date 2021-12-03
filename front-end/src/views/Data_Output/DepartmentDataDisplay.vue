@@ -25,8 +25,8 @@
 
 <template>
 
-    <div class="signup-form main-content">
-        <div class="text-center container-fluid">
+    <div>
+        <div class="text-center">
             <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
             <div class="row">
                 <div class="form-group col">

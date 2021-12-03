@@ -30,8 +30,8 @@
 </style>
 
 <template>
-<div class="signup-form main-content">
-    <div class="text-center container-fluid">
+<div>
+    <div class="text-center">
         <h2 class="font-weight-bold display-5 text-dark col">Case Studies</h2>
         <div>
             <table class="table table-bordered table-striped table-hover">
