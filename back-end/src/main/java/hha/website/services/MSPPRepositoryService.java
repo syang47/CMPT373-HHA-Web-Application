@@ -74,6 +74,21 @@ public class MSPPRepositoryService {
     public List<MSPPRequirement> listByIdAndDate(Integer id, Calendar date) {
         return msppRepository.findByidAndDateSubmitted(id, date);
     }
+    
+    public List<List<Object>> listAllMsppData() {
+        List<List<Object>> msppData = new ArrayList<>();
+        for(MSPPRequirement d : msppRepository.findAll()) {
+            List<Object> dData = new ArrayList<>();
+            dData.add(d.getId());
+            dData.add(d.getDateSubmitted().getTime().toString());
+            dData.add(d.getUser().getUsername());
+            dData.add(d.getDepartment());
+            dData.add(d.getAdditionalData());
+            dData.add(d.getRequiredMSPPData());
+            msppData.add(dData);
+        }
+        return msppData;
+    }
 
     public void deleteForm(Integer documentId){
         System.out.println("form deleted");

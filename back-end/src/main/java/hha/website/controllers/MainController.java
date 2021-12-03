@@ -165,11 +165,11 @@ public class MainController {
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
-    @CrossOrigin
-    @GetMapping("/api/mspp/data")
-    public ResponseEntity<?> getAllMSPPData(){
-        return ResponseEntity.ok(msppRepositoryService.listAllData());
-    }
+    // @CrossOrigin
+    // @GetMapping("/api/mspp/data")
+    // public ResponseEntity<?> getAllMSPPData(){
+    //     return ResponseEntity.ok(msppRepositoryService.listAllData());
+    // }
 
     @GetMapping("/api/mspp/{documentId}")
     public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
@@ -216,6 +216,13 @@ public class MainController {
         } catch(Exception e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/mspp/data/all")
+    public ResponseEntity<?> getAllMSPPData(){
+        // console.log(msppRepositoryService.listAllMsppData());
+        return ResponseEntity.ok(msppRepositoryService.listAllMsppData());
     }
 
 
@@ -273,15 +280,4 @@ public class MainController {
         }
     }
 
-    // @DeleteMapping(value = "/posts/{id}")
-    // public ResponseEntity<?> deletePost(@PathVariable String id) {
-    //     Integer ID = Integer.parseInt(id);
-    //     var isRemoved = userDetailsService.deleteUser(id);
-
-    //     if (!isRemoved) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     return new ResponseEntity<>(id, HttpStatus.OK);
-    // }
 }
