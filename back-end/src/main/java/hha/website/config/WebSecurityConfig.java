@@ -59,9 +59,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.headers().frameOptions().disable();
         http.csrf().disable()
                 .authorizeRequests().expressionHandler(webExpressionHandler())
-                .antMatchers("/**").permitAll()
-                //.antMatchers("/api/register").hasRole("HEAD")
-                //.antMatchers("/api/**").authenticated()
+                .antMatchers("/api/login", "/api/checktoken").permitAll()
+                .antMatchers("/api/register", "/api/casestudy/delete").hasRole("HEAD")
+                .antMatchers("/api/user/employeeofthemonth/submit", "/api/announcements/submit","/api/messageboard/submit","/api/user/delete/**").hasRole("HOSPITALADMN")
+                .antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);

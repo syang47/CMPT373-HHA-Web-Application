@@ -89,7 +89,6 @@ public class MainController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment().getDepartmentname()));
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/checktoken", method = RequestMethod.GET)
     public ResponseEntity<?> checkToken(@RequestHeader("Authorization") String jwt) throws Exception {
         try {
@@ -134,7 +133,6 @@ public class MainController {
         return ResponseEntity.ok("User " + userDetailsService.setEmployeeOfTheMonth(userId, month) + " set as employee of the month for " + month);
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/user/employeeofthemonth", method = RequestMethod.GET)
     public ResponseEntity<?> getEmployeeOfTheMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(userDetailsService.getEmployeeOfTheMonth(month));
@@ -145,27 +143,23 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.getAllEmployeesOfTheMonths());
     }
 
-    @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
-    @CrossOrigin
     @GetMapping("/api/user/all")
     public ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String jwt) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(userDetailsService.listAllUsers(user).toArray());
     }
 
-    @CrossOrigin
     @GetMapping("/api/departments")
     public ResponseEntity<?> getAllDepartments(){
         System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
-    @CrossOrigin
     @GetMapping("/api/mspp/data")
     public ResponseEntity<?> getAllMSPPData(){
         return ResponseEntity.ok(msppRepositoryService.listAllData());
@@ -188,26 +182,22 @@ public class MainController {
         return ResponseEntity.ok(msppRepositoryService.listByIdAndDate(finalId, cal));
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
     public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(caseStudyService.save(user, json, file));
     }
 
-    @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
 
-    @CrossOrigin
     @GetMapping("/api/casestudy/entry")
     public ResponseEntity<?> getCaseStudyEntry(){
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/casestudy/delete")
     public ResponseEntity<?> deleteCaseStudy(@RequestParam("id") Integer id) {
         try{
@@ -243,7 +233,6 @@ public class MainController {
         return ResponseEntity.ok(announcementService.save(data, monthlyPhoto, annualPhoto));
     }
 
-    @CrossOrigin
     @GetMapping("/api/announcements")
     public ResponseEntity<?> getAnnouncements(@RequestParam("field") String field){
         return ResponseEntity.ok(announcementService.listAField(field));
@@ -256,13 +245,11 @@ public class MainController {
         return ResponseEntity.ok(messageBoardService.save(user, data));
     }
 
-    @CrossOrigin
     @GetMapping("/api/messages")
     public ResponseEntity<?> getMessages(){
         return ResponseEntity.ok(messageBoardService.listAllMessages());
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
         try{
@@ -272,16 +259,4 @@ public class MainController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    // @DeleteMapping(value = "/posts/{id}")
-    // public ResponseEntity<?> deletePost(@PathVariable String id) {
-    //     Integer ID = Integer.parseInt(id);
-    //     var isRemoved = userDetailsService.deleteUser(id);
-
-    //     if (!isRemoved) {
-    //         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //     }
-
-    //     return new ResponseEntity<>(id, HttpStatus.OK);
-    // }
 }
