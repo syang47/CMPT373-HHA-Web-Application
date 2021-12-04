@@ -113,9 +113,6 @@
       <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
-      <li>
-          Due Date for Report, Case Study and Employee of the Month submission is due {{ this.getDate() }}
-      </li>
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
         <li class="my-auto nav-item">
           <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
@@ -187,13 +184,6 @@ export default defineComponent({
         this.$store.dispatch('auth/logout');
       }
       this.$router.push('/login');
-    },
-    getDate(): string {
-      let date = new Date();
-      let year = date.getFullYear();
-      let month=date.getMonth()+1;
-      let d = new Date(year,month,0);
-      return year+'/'+month+'/'+d.getDate();
     },
 
     changeLang(choice: string): void {

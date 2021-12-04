@@ -60,17 +60,17 @@
                                         <Field name="monthlyPhoto" type="file" rules="image" />
                                         <ErrorMessage name="monthlyPhoto" class="error-feedback" />
                                     </div>
-                                    <div class="form-group">
-                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>
-                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >
-                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
-                                        </Field>
-                                        <ErrorMessage name="annual" class="error-feedback" />
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>-->
+<!--                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >-->
+<!--                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>-->
+<!--                                        </Field>-->
+<!--                                        <ErrorMessage name="annual" class="error-feedback" />-->
 
-                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                                        <Field name="annualPhoto" type="file" rules="image" />
-                                        <ErrorMessage name="annualPhoto" class="error-feedback" />
-                                    </div>
+<!--                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>-->
+<!--                                        <Field name="annualPhoto" type="file" rules="image" />-->
+<!--                                        <ErrorMessage name="annualPhoto" class="error-feedback" />-->
+<!--                                    </div>-->
                                     <div class="form-group">
                                         <button class="btn btn-outline-light btn-block" :disabled="loading">
                                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>

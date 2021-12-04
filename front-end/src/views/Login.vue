@@ -140,7 +140,6 @@ export default defineComponent({
                     if(response != null) {
                         let token = JSON.parse(localStorage.getItem('user')!);
                         console.log(token.roles[0].authority);
-                        alert("Please Submit The Report Before the "+ this.getDate());
                         this.$router.push("/");
                     } else {
                         alert("invalid credentials");
@@ -151,12 +150,6 @@ export default defineComponent({
                     alert("invalid credentials");
                 }
             );
-        },getDate(){
-            let date = new Date();
-            let year = date.getFullYear();
-            let month=date.getMonth()+1;
-            let d = new Date(year,month,0);
-            return year+'/'+month+'/'+d.getDate();
         }
     }
 });

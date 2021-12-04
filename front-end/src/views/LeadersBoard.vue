@@ -98,7 +98,7 @@ table td.gap span {
                                     <h2 style="color:#000000;" class="card-title w-40">Employee of the month</h2>
                                     <ul>
                                         <li v-for="prize in AnnualPrize" :key="prize">
-                                            {{ prize }}
+                                            {{ employeeofthemonth }}
                                         </li>
                                     </ul>
                                 </div>
@@ -158,7 +158,7 @@ export default defineComponent({
     name: "LeadersBoard",
     mounted() {
         this.getMonthlyPrize();
-        this.getAnnualPrize();
+//        this.getEmployeeoftheMonth();
         this.getDepartmentPoints();
     },
     data: function() {
@@ -186,15 +186,9 @@ export default defineComponent({
                 this.MonthlyPrize = response.data.filter(message => message);
             });
         },
-        getAnnualPrize(): void{
-            axios.get("/api/announcements", {
-                params: {
-                    field: "annual"
-                }
-            }).then(response=> {
-                this.AnnualPrize = response.data.filter(message => message);
-            });
-        },
+//        getEmployeeoftheMonth(): void{
+            // to be implemented
+//        },
         getDepartmentPoints(): void {
             axios.get("/api/departments/points").then(response=> {
                 var departmentPointsData = response.data;
