@@ -63,18 +63,10 @@ public class MSPPRepositoryService {
         return "saved";
     }
 
-    public List<MSPPRequirement> listAllData() {
-        return msppRepository.findAll();
-    }
-
     public MSPPRequirement getAForm(Integer documentId) {
         return msppRepository.findById(documentId).get();
     }
-
-    public List<MSPPRequirement> listByIdAndDate(Integer id, Calendar date) {
-        return msppRepository.findByidAndDateSubmitted(id, date);
-    }
-    
+   
     // list additional mspp data with an id input
     public AdditionalMSPP getAdditional(Integer documentId) {
         return additionalMSPPRepository.findById(documentId).get();
@@ -91,17 +83,6 @@ public class MSPPRepositoryService {
             datalist.add(dData);
         }
         return datalist;
-    }
-
-    // display mspp only data given an id
-    public List<List<Object>> listMsppOnlyData(int id) {
-        List<List<Object>> msppData = new ArrayList<>();
-        for(MSPPRequirement d : msppRepository.findRequiredMSPPDataById(id)) {
-            List<Object> dData = new ArrayList<>();
-            dData.add(d.getRequiredMSPPData());
-            msppData.add(dData);
-        }
-        return msppData;
     }
 
     public void deleteForm(Integer documentId){

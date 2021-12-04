@@ -14,21 +14,25 @@
       <div class="card-body">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
+      
       <div class="carousel-item active">
         <div class="img-wrap">
-          <img src="../assets/project_photos/pic1.jpeg" class="img-fluid" alt="...">
+          <img src="../assets/project_photos/pic10.jpg" class="img-fluid" alt="..."> 
         </div>
       </div>
+
       <div class="carousel-item">
         <div class="img-wrap">
-          <img src="../assets/project_photos/pic2.jpg" class="img-fluid" alt="...">
+          <img src="../assets/project_photos/pic5.jpeg" class="img-fluid" alt="...">
         </div>
+
       </div>
       <div class="carousel-item">
         <div class="img-wrap">
           <img src="../assets/project_photos/pic3.jpeg" class="img-fluid" alt="...">
         </div>
       </div>
+      
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>

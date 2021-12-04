@@ -37,7 +37,7 @@ const i18n = createI18n({
         admin: "administrateur",
       },
       announcementPage: {
-        addAnnouncement: "Ajouter une annonce",
+        addAnnouncement: "Ajouter une prix",
         monthlyAward: "Récompense mensuelle",
         addPhoto: "Ajouter une photo:",
         annualAward: "Prix ​​annuel",
@@ -505,7 +505,7 @@ const i18n = createI18n({
         admin: "admin",
       },
       announcementPage: {
-        addAnnouncement: "Add an Announcement",
+        addAnnouncement: "Add an Award",
         monthlyAward: "Monthly Award",
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",

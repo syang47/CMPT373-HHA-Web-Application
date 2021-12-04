@@ -25,8 +25,8 @@
 </style>
 
 <template>
-    <div class="signup-form main-content">
-        <div class="text-center container-fluid">
+    <div>
+        <div class="text-center">
             <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
             <div>
                 <table class="table table-bordered table-striped table-hover">
@@ -105,9 +105,7 @@ export default defineComponent({
                 alert("failed to fetch user data types");
             });
         },
-        // editUser() {
-        //     this.finalmessage = "trying to edit user...";
-        // },
+
         deleteUser(tuple) {
             var id = tuple[0];
             console.log(id);

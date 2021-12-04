@@ -205,7 +205,7 @@ export default defineComponent({
         border-color: #5cb85c;
     }
     .signup-form{
-        width: 400px;
+        max-width: 400px;
         margin: 0 auto;
         padding: 30px 0;
     }
