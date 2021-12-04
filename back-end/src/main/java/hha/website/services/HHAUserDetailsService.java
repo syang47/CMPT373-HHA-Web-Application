@@ -4,8 +4,6 @@ import hha.website.UserRepository;
 import hha.website.models.Department;
 import hha.website.models.User;
 import hha.website.models.UserDTO;
-
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -49,7 +47,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         newUser.setPassword(passwordEncoder.encode(user.getPassword()));
         newUser.setRole(user.getRole());
         Optional<Department> userDepartment = HHADepartmentService.loadDepartmentByDepartmentName(user.getDepartment());
-        userDepartment.ifPresent(d -> newUser.setDepartments(d));
+        userDepartment.ifPresent(newUser::setDepartments);
         newUser.setPoints(0);
         return userRepository.save(newUser);
     }
@@ -72,8 +70,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         admin.setPassword(passwordEncoder.encode("admin"));
         admin.setRole("ROLE_ADMIN");
         admin.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
-        admin.setReportsSubmitted(0);
-        admin.setPoints(0);
         userRepository.save(admin);
 
         User randomHead = new User();
@@ -82,7 +78,6 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomHead.setPassword(passwordEncoder.encode("head"));
         randomHead.setRole("ROLE_HEAD");
         randomHead.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("NICU_PAED").get());
-        randomHead.setPoints(0);
         userRepository.save(randomHead);
 
         User randomUser = new User();
@@ -91,17 +86,22 @@ public class HHAUserDetailsService implements UserDetailsService {
         randomUser.setPassword(passwordEncoder.encode("user"));
         randomUser.setRole("ROLE_USER");
         randomUser.setDepartments(HHADepartmentService.loadDepartmentByDepartmentName("maternity").get());
-        randomUser.setPoints(0);
         userRepository.save(randomUser);
     }
 
     public void addASubmittedReportForUser(User user) {
         userRepository.updateUserReportsSubmitted(user.getId());
     }
-    
-    public List<List<String>> listAllUsers() {
+
+    public List<List<String>> listAllUsers(User user) {
         List<List<String>> users = new ArrayList<>();
-        for(User u : userRepository.findAll()){
+        List<User> userList;
+        if(user.getRole().equals("ROLE_ADMIN") || user.getRole().equals("ROLE_HOSPITALADMIN")){
+            userList = userRepository.findAll();
+        } else {
+            userList = userRepository.findByDepartmentId(user.getDepartment().getDepartmentname());
+        }
+        for(User u : userList){
             List<String> userData = new ArrayList<>();
             userData.add(u.getId().toString());
             userData.add(u.getUsername());
@@ -112,15 +112,47 @@ public class HHAUserDetailsService implements UserDetailsService {
         return users;
     }
 
-    public void deleteUser(int id) {
-        userRepository.deleteById(id);
-    }
-    // public List<String> listUsernames() {
-    //     return userRepository.queryUsername();
-    // }
+    public void deleteUser(int id) throws Exception {
+        Optional<User> userToDelete = userRepository.findById(id);
+        if(userToDelete.isPresent()){
+            if(userToDelete.get().getRole().equals("ROLE_ADMIN") || userToDelete.get().getRole().equals("ROLE_HEAD") || userToDelete.get().getRole().equals("ROLE_HOSPITALADMIN")){
+                throw new Exception("Cannot delete elevated user");
+            } else {
+                userRepository.deleteById(id);
+            }
+        }
 
-    // private Session session;
-    // public List<User> findAllUsers() {
-    //     return Session.createQuery("SELECT a FROM User a", User.class).getResultList();
-    // }
+    }
+
+    public String setEmployeeOfTheMonth(Integer userId, String month){
+        Optional<User> currentEmployeeOfTheMonth = userRepository.findByEmployeeOfTheMonth(month);
+        currentEmployeeOfTheMonth.ifPresent(e -> e.setEmployeeOfTheMonth(""));
+        User u = userRepository.getById(userId);
+        u.setEmployeeOfTheMonth(month);
+        return u.getUsername();
+    }
+
+    public List<String> getEmployeeOfTheMonth(String month) {
+        List<String> employeeInfo = new ArrayList<>();
+        Optional<User> u = userRepository.findByEmployeeOfTheMonth(month);
+        u.ifPresent(e -> {
+            employeeInfo.add(e.getUsername());
+            employeeInfo.add(e.getDepartment().getDepartmentname());
+            employeeInfo.add(e.getEmployeeOfTheMonth());
+        });
+
+        return employeeInfo;
+    }
+
+    public List<List<String>> getAllEmployeesOfTheMonths() {
+        List<List<String>> users = new ArrayList<>();
+        for(User u : userRepository.queryAllEmployeesOfTheMonths()){
+            List<String> userData = new ArrayList<>();
+            userData.add(u.getUsername());
+            userData.add(u.getDepartment().getDepartmentname());
+            userData.add(u.getEmployeeOfTheMonth());
+            users.add(userData);
+        }
+        return users;
+    }
 }

@@ -24,7 +24,7 @@ export default defineComponent({
         menu() {
             var departments = [] as any;
             let token = JSON.parse(localStorage.getItem('user')!);
-            if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMIN"){
+            if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
                 let d1 = {
                     href:"/maternity",
                     title:  this.$t("sideBar.maternity"),

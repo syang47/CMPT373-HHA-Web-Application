@@ -38,6 +38,7 @@ const i18n = createI18n({
         password: "Mot de passe",
         selectDept: "Sélectionnez un département:",
         deptHeadMedDir: "Chef de service/Directeur médical?",
+        hospitalAdmin: "Administrateur de l'hôpital?",
         mbal6c: "Doit être au moins 6 caractères!",
         mbal4c: "Doit comporter au moins 4 caractères!",
         role: "Rôle",
@@ -50,7 +51,7 @@ const i18n = createI18n({
         admin: "administrateur",
       },
       announcementPage: {
-        addAnnouncement: "Ajouter une annonce",
+        addAnnouncement: "Ajouter une prix",
         monthlyAward: "Récompense mensuelle",
         addPhoto: "Ajouter une photo:",
         annualAward: "Prix ​​annuel",
@@ -439,6 +440,8 @@ const i18n = createI18n({
         newFemale: "Femelle",
       },
       departmentPage: {
+        data: "Données",
+        department: "Départements",
         nicupaed: "USIN/PAED",
         maternity: "Maternité",
         rehab: "Désintox",
@@ -588,6 +591,7 @@ const i18n = createI18n({
         password: "Password",
         selectDept: "Select A Department:",
         deptHeadMedDir: "Department Head/Medical Director?",
+        hospitalAdmin: "Hospital Admin?",
         mbal6c: "Must be at least 6 characters!",
         mbal4c: "Must be at least 4 characters!",
         role: "Role",
@@ -600,7 +604,7 @@ const i18n = createI18n({
         admin: "admin",
       },
       announcementPage: {
-        addAnnouncement: "Add an Announcement",
+        addAnnouncement: "Add an Award",
         monthlyAward: "Monthly Award",
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",
@@ -989,6 +993,8 @@ const i18n = createI18n({
         newFemale: "Female",
       },
       departmentPage: {
+        data: "Data",
+        department: "Departments",
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",
