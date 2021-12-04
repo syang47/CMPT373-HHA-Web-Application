@@ -15,7 +15,7 @@
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
       <li>
-        Due Date for Report, Case Study and Employee of the Month submission is due {{ this.getDate() }}
+        {{ $t('homePage.notify') }}{{ this.getDate() }}
       </li>
       <div class="carousel-item active">
         <div class="img-wrap">

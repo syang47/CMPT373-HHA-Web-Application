@@ -51,6 +51,7 @@ const i18n = createI18n({
         communityHealth: "SANTÉ COMMUNAUTAIRE",
         messageBoard: "TABLEAU DE MESSAGES",
         caseStudy: "ÉTUDE DE CAS",
+        notify: "La date d'échéance pour la soumission du rapport, de l'étude de cas et de l'employé du mois est due le ",
       },
       msppData: {
         blank: "",
@@ -524,6 +525,7 @@ const i18n = createI18n({
         communityHealth: "COMMUNITY HEALTH",
         messageBoard: "MESSAGE BOARD",
         caseStudy: "CASE STUDY",
+        notify: "Due Date for Report, Case Study and Employee of the Month submission is due on ",
       },
       msppData: {
         blank: "",
