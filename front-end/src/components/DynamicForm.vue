@@ -76,7 +76,7 @@
                       :key="cField"
                     >
                       <h4 v-if="cField.header" style="color:green; text-align:center">{{ $t(cField.header) }}</h4>
-                      <h4 v-if="cField.blueHeader" style="color:blue; text-align:center">{{ $t(cField.blueHeader) }}</h4>
+                      <h4 v-else-if="cField.blueHeader" style="color:blue; text-align:center">{{ $t(cField.blueHeader) }}</h4>
                       <div v-else>
                         <RegularInput :field="cField" v-model="s[cField.name]" />
                       </div>
@@ -205,7 +205,7 @@ export default defineComponent({
         border-color: #5cb85c;
     }
     .signup-form{
-        width: 400px;
+        max-width: 400px;
         margin: 0 auto;
         padding: 30px 0;
     }

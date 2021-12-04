@@ -25,8 +25,8 @@
 </style>
 
 <template>
-    <div class="signup-form main-content">
-        <div class="text-center container-fluid">
+    <div>
+        <div class="text-center">
             <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
             <div>
                 <table class="table table-bordered table-striped table-hover">
@@ -124,15 +124,10 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.finalmessage = response.data;
-                console.log(response.data);
-                if(response != null) {
-                    console.log("successfully deleted user");
-                    this.$nextTick(() => {
-                        this.fetchAllUserData();
-                    })
-                } else {
-                    alert("no user was deleted...");
-                }
+                alert("user was deleted");
+                this.$nextTick(() => {
+                    this.fetchAllUserData();
+                })
             }).catch((error: any) => {
                 this.message =
                     (error.response &&

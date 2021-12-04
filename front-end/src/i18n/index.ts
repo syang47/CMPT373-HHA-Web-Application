@@ -37,7 +37,7 @@ const i18n = createI18n({
         admin: "administrateur",
       },
       announcementPage: {
-        addAnnouncement: "Ajouter une annonce",
+        addAnnouncement: "Ajouter une prix",
         monthlyAward: "Récompense mensuelle",
         addPhoto: "Ajouter une photo:",
         annualAward: "Prix ​​annuel",
@@ -399,11 +399,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Sexe des nouveaux patients",
         newMale: "Mâle",
         newFemale: "Femelle",
-
-        
-
-
-
       },
       departmentPage: {
         data: "Données",
@@ -511,7 +506,7 @@ const i18n = createI18n({
         admin: "admin",
       },
       announcementPage: {
-        addAnnouncement: "Add an Announcement",
+        addAnnouncement: "Add an Award",
         monthlyAward: "Monthly Award",
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",
@@ -873,7 +868,6 @@ const i18n = createI18n({
         genderOfNewpatients: "Gender of New patients",
         newMale: "Male",
         newFemale: "Female",
-        
       },
       departmentPage: {
         data: "Data",
