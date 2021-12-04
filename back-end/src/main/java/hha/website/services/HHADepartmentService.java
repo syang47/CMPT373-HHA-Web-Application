@@ -51,7 +51,7 @@ public class HHADepartmentService {
         departmentRepository.save(maternity);
 
         Department rehab = new Department();
-        rehab.setDepartmentname("rehab");
+        rehab.setDepartmentname("Rehab");
         rehab.setPoints(0);
         rehab.setReportsSubmitted(0);
         departmentRepository.save(rehab);

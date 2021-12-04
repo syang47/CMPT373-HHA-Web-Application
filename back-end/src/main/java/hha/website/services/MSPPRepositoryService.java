@@ -87,7 +87,7 @@ public class MSPPRepositoryService {
             List<Object> dData = new ArrayList<>();
             dData.add(d.getId());
             dData.add(d.getDateSubmitted().getTime().toString());
-            dData.add(d.getUser().getDepartment().getDepartmentname());
+            dData.add(d.getDepartment().getDepartmentname());
             datalist.add(dData);
         }
         return datalist;
