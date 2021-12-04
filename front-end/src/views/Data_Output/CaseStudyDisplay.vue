@@ -103,7 +103,7 @@ export default defineComponent({
     name: "CaseStudyDisplay",
     data: function() {
         return {
-            tableHeaders: ["ID", "Date Submitted", "Case Study Type", "Submitted By"],
+            tableHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.caseStudyType'), this.$t('dataDisplay.submittedBy')],
             expandedHeaders: [],
             csEntries: [],
             caseStudyAllData: {},

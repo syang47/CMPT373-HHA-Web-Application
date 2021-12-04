@@ -646,7 +646,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "msppData.IUDPeice",
+                                rowName: "msppData.IUDPiece",
                             },
                             {
                                 name: 'quantity_IUDPeice',

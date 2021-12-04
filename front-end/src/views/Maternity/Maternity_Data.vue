@@ -226,7 +226,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "msppData.notWeighted",
+                                rowName: "msppData.notWeighed",
                             },
                             {
                                 name: 'not_weighted_normal',
