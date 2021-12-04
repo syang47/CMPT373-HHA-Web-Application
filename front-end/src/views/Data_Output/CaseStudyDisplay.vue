@@ -1,12 +1,5 @@
 <style scoped>
 
-    .box {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        box-sizing: border-box;
-        padding: 40px;
-    }
     .signup-form{
         width: 1000px;
         margin: 0 auto;
@@ -16,40 +9,87 @@
         text-align: center;
         margin-bottom: 20px;
     }
-    h2{
-        color: #636363;
-        margin: 0 0 15px;
-        position: relative;
+    h1, h2{
+        font-family: "Arial";
+        font-weight: bold;
         text-align: center;
+    }
+    p{
+        font-family: "Arial";
+        font-weight: normal;
+        text-align: center;
+    }
+    .box {
+        width: 100%;
+        height: 100%;
+        background: #00000060;
+        box-sizing: border-box;
+        display: block;
+        padding: 40px;
     }
 </style>
 
 <template>
-<div class="signup-form main-content">
-    <div class="text-center container-fluid">
-        <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
-        <div class="row">
-            <div class="form-group col">
-                <button class="btn btn-secondary" v-on:click="showCaseStudyTypes">{{ $t("dataDisplay.caseStudyTypes") }}</button>
-            </div>
-            <div class="col">
-                <button class="btn btn-secondary" v-on:click="showAllCaseStudies">{{ $t('dataDisplay.allCaseStudies') }}</button>
-            </div>
-        </div>
-        <div v-if="showComponentOne"> 
-            <ul class="text-left" style="list-style-type:none;">
-                <li v-for="(value) in caseStudyTypes" :key="value">
-                    <button class="btn btn-primary"> {{ value }} </button>
-                </li>
-            </ul>
-        </div>
-        <div v-else-if="showComponentTwo">
-            <div v-for="(p) in photos" :key="p">
-                <img :src="p" />
-            </div>
-            <ul class="text-left">
-                <li v-for="(name) in caseStudyAllData" :key="name"> {{name}}</li>
-            </ul>
+<div>
+    <div class="text-center">
+        <h2 class="font-weight-bold display-5 text-dark col">{{ $t('dataDisplay.caseStudies') }}</h2>
+        <div>
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col" v-for="header in tableHeaders" :key="header">{{header}}</th>
+                    </tr>
+                </thead>
+                <tbody v-for="entry in Object.entries(caseStudyAllData)" :key="entry">
+                    <tr>
+                        <td>
+                            <div>
+                                {{entry[1].id}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{entry[1].date}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{entry[1].csType}}
+                            </div>
+                        </td>
+                        <td>
+                            <div>
+                                {{entry[1].username}}
+                            </div>
+                        </td>
+                        <td>
+                            <button @click="showCaseStudy(entry)" class="btn btn-info">{{ $t('dataDisplay.expand') }}</button>
+                        </td>
+                        <td v-if="hasPermissions">
+                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger">{{ $t('dataDisplay.delete') }}</button>
+                        </td>
+                    </tr>
+                    <tr v-if="entry[1].showData">
+                        <td class="container" colspan=6>
+                            <div class="row">
+                                <div class="card w-25" v-for="ad in Object.entries(entry[1].additionalData)" :key="ad">
+                                    <div class="col-auto">
+                                        <h1 class="card-title text-primary"> {{ad[0]}} </h1>
+                                        <div class="card-body"> 
+                                            <p>{{ad[1]}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-if="entry[1].photo != ''">
+                                    <img :src="entry[1].photo" />
+                                </div>
+                            </div>
+                            
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -63,81 +103,71 @@ export default defineComponent({
     name: "CaseStudyDisplay",
     data: function() {
         return {
-            message: "",
-            caseStudyTypes: [],
-            caseStudyAllData: [],
-            photos: [""],
-            showComponentOne: false,
-            showComponentTwo: false,
-            
+            tableHeaders: ["ID", "Date Submitted", "Case Study Type", "Submitted By"],
+            expandedHeaders: [],
+            csEntries: [],
+            caseStudyAllData: {},
+            hasPermissions: false,
         };
     },
     mounted() {
         "#v-for-object";
+        this.showAllCaseStudies();
+        
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
     },
     methods: {
-        showCaseStudyTypes() {
-            let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing case study data types / Affichage des types de données d'études de cas existants";
-            this.showComponentOne = !this.showComponentOne;
-            this.showComponentTwo = false;
-            this.$axios.get("/api/casestudy/types", {
-                headers: {
-                    'Authorization': `Bearer ${token.jwt}`,
-                }
-            }).then(response => {
-                // this.caseStudyTypes = JSON.stringify(response.data);
-                this.caseStudyTypes = response.data;
-                if(response != null) {
-                    console.log("getting casestudy types successful");
-                } else {
-                    alert("no data in case study can be fetched / aucune donnée dans l'étude de cas ne peut être récupérée");
-                }
-            }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
-                
-                alert("failed to fetch casestudy data types / échec de la récupération des types de données d'étude de cas");
-            });
-        },
         showAllCaseStudies() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying employee of the month data / Affichage des données de l'employé du mois";
-            this.showComponentOne = false;
-            this.showComponentTwo = !this.showComponentTwo;
             this.$axios.get("/api/casestudy/entry", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                this.caseStudyAllData=response.data;
-                var d: any;
-                for(d in response.data){
-                    const obj = response.data[d];
-                    if(obj.photo) {
-                        this.photos.push("data:" + obj.photoType + ";base64," + obj.photo);
-                    }
-                }
-                console.log(this.photos);
-                if(response != null) {
-                    console.log("getting casestudy data successful");
-                        
-                } else {
-                    alert("no data in case study can be fetched / aucune donnée dans l'étude de cas ne peut être récupérée");
+                for(var d in response.data){
+                    var ph = '';
+                    if(response.data[d][4]) {
+                        ph = "data:" + response.data[d][5] + ";base64," + response.data[d][4];
+                    } 
+                    var obj = {
+                        id: response.data[d][0],
+                        date: response.data[d][1],
+                        csType: response.data[d][2],
+                        username: response.data[d][3],
+                        photo: ph,
+                        additionalData: response.data[d][6],
+                        showData: false
+                    };
+                    this.caseStudyAllData[response.data[d][0]] = obj;
                 }
             }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
-                
                 alert("failed to fetch casestudy data entries / n'a pas réussi à récupérer les entrées de données de l'étude de cas");
             });
         },
+
+        showCaseStudy(entry) {
+            this.caseStudyAllData[entry[0]].showData = !this.caseStudyAllData[entry[0]].showData;
+        },
+
+        deleteCaseStudy(entry){
+            let token = JSON.parse(localStorage.getItem('user')!);
+
+            this.$axios.delete("/api/casestudy/delete", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    id: entry[0]
+                }
+            }).then(response => {
+                alert(response.data);
+            }).catch((error: any) => {                
+                alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
+            });
+        }
     }
     
 });

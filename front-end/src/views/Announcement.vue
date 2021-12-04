@@ -41,50 +41,57 @@
     <div class="main-content">
         <div class="card shadow-none">
             <div class="card-body">
-                <div class="card form-box has-bg">
+                <div class="card form-box has-bg mb-3">
                     <div class="card-body">
                         <Form @submit="handleData" :validation-schema="dataSchema">
-        <div class="signup-form text-monospace">
-            <div class="text-center">
-                <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
-            </div>
-            <div v-if="!successful">
-                <div class="mb-3">
-                    <div class="mb-3">
-                        <label class="mb-2" for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
-                    <Field name="monthly" type="text" class="form-control" />
-                    <ErrorMessage name="monthly" class="error-feedback" />
+                            <div class="text-monospace">
+                                <div class="text-center">
+                                    <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
+                                </div>
+                                <div v-if="!successful">
+                                    <div class="mb-3">
+                                        <label class="mb-3" for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
+                                        <Field name="monthly" v-slot="{ field }" class="form-control mb-3" >
+                                            <textarea name="monthly" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                        </Field>
+                                        <div class="mt-2">
+                                            <ErrorMessage name="monthly" class="error-feedback" />
+                                        </div>
 
-                    </div>
-                    <label class="mb-2" for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                    <Field name="monthlyPhoto" type="file" rules="image" />
-                    <ErrorMessage name="monthlyPhoto" class="error-feedback" />
-                </div>
-                <div class="mb-3">
-                    <div class="mb-3">
-                        <label class="mb-2" for="annual">{{ $t('announcementPage.annualAward') }}</label>
-                            <Field name="annual" type="text" class="form-control" />
-                            <ErrorMessage name="annual" class="error-feedback" />
-                    </div>
+                                        <label class="mb-2" for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                                        <Field name="monthlyPhoto" type="file" rules="image" />
+                                        <div class="mt-2">
+                                        <ErrorMessage name="monthlyPhoto" class="error-feedback" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>
+                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >
+                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
+                                        </Field>
+                                        <div class="mt-2">
+                                        <ErrorMessage name="annual" class="error-feedback" />
+                                        </div>
 
+                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
+                                        <Field name="annualPhoto" type="file" rules="image" />
+                                        <div class="mt-2">
+                                        <ErrorMessage name="annualPhoto" class="error-feedback" />
+                                        </div>
+                                    </div>
+                                    <div class="mb-3">
+                                        <button class="btn btn-outline-light btn-block" :disabled="loading">
+                                            <span v-show="loading" class="spinner-border spinner-border-sm"></span>
+                                            {{ $t('announcementPage.submit') }}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </Form>
                     
-                    <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                    <Field name="annualPhoto" type="file" rules="image" />
-                    <ErrorMessage name="annualPhoto" class="error-feedback" />
-                </div>
-                <div class="mb-3">
-                    <button class="btn btn-secondary btn-block" :disabled="loading">
-                        <span v-show="loading" class="spinner-border spinner-border-sm"></span>
-                        {{ $t('announcementPage.submit') }}
-                    </button>
-                </div>
-            </div>
-        </div>
-    </Form>
-
-    <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
-        {{ message }}
-    </div>
+                        <div v-if="message" style="width: 60%; margin:0 auto;" class="alert text-center" :class="successful ? 'alert-success' : 'alert-danger'">
+                            {{ message }}
+                        </div>
                     </div>
                 </div>
             </div>
@@ -171,7 +178,7 @@ export default defineComponent({
                         'Authorization': `Bearer ${token.jwt}`,
                     }
                 }).then(response => {
-                        this.message = response.data;
+                        this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
                         if(response != null) {

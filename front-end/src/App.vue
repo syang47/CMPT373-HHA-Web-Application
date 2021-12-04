@@ -52,7 +52,7 @@
    h1, h2, label, p {
     font-family: "Arial";
     font-weight: bold;
-    
+
   }
   .btn{
     font-family: "Arial";
@@ -116,7 +116,7 @@
       <ul class="d-flex justify-content-end navbar-nav ml-auto">
         <li class="my-auto nav-item">
           <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
-              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language"> 
+              <option class="dropdown-item" v-for="language in languages" :key="language" :value="language">
                 {{ language }}
               </option>
           </select>
@@ -126,17 +126,22 @@
             {{ $t('header.loginOut') }}
           </button>
         </li>
+        <li class="my-auto nav-item">
+          <button class="btn btn-sm btn-outline-secondary" @click="gettestemployee">
+            get employeeofthemonth
+          </button>
+        </li>
+
       </ul>
   </nav>
   <div class="menu" v-if="showSidebar" :key="reloadSidebar">
     <SideMenu />
   </div>
-  
-  <router-view /> 
+
+  <router-view />
 </template>
 
 <script lang="ts">
-
 import { defineComponent } from 'vue'
 import i18n from "./i18n";
 import SideMenu from "@/views/sidebar/SideMenu.vue";
@@ -146,7 +151,7 @@ export default defineComponent({
   components: {
     SideMenu,
   },
-  
+
   data: function() {
     return{
       languages: ["Français", "English"],
@@ -189,7 +194,24 @@ export default defineComponent({
       else if(choice == "English"){
         i18n.global.locale = 'en';
       }
+    },
+    gettestemployee(): void {
+      let token = JSON.parse(localStorage.getItem('user')!);
+      var months = ['January', 'February', 'March',
+        'April', 'May', 'June', 'July',
+        'August', 'September', 'October', 'November', 'December'];
+      this.$axios.get("/api/user/employeeofthemonth", {
+        headers: {
+          'Authorization': `Bearer ${token.jwt}`
+        },
+        params: {
+          month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+        }
+      }).then(response => {
+        console.log(response.data);
+      });
     }
+
   },
  
 });

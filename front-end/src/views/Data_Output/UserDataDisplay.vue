@@ -25,10 +25,10 @@
 </style>
 
 <template>
-    <div class="signup-form main-content">
-        <div class="text-center container-fluid">
+    <div>
+        <div class="text-center">
             <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
-            <div v-if="showComponentOne"> 
+            <div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
                         <tr>
@@ -38,11 +38,15 @@
                     <tbody>
                         <tr v-for="user in userAllData" :key="user">
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
-                            <td>
-                                <button class="btn btn-warning px-2">{{ $t("dataDisplay.edit") }}</button>
+
+                            <td v-if="hasPermissions">
+                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">{{ $t("dataDisplay.setEmployeeOTM") }}</button>
                             </td>
-                            <td>
-                                <button @click="deleteUser(user)" class="btn btn-danger px-2">{{ $t("dataDisplay.delete") }}</button>
+                            <!-- <td>
+                                <button class="btn btn-warning px-2">Edit</button>
+                            </td> -->
+                            <td v-if="hasPermissions">
+                                <button @click="deleteUser(user)" class="btn btn-danger">{{ $t("dataDisplay.delete") }}</button>
                             </td>
                         </tr>
                     </tbody>
@@ -66,6 +70,7 @@ export default defineComponent({
             tableHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.username'), this.$t('dataDisplay.department'), this.$t('dataDisplay.role')],
             showComponentOne: true,
             finalmessage: "",
+            hasPermissions: false
         };
     },
     mounted() {
@@ -73,6 +78,10 @@ export default defineComponent({
         this.$nextTick(() => {
             this.fetchAllUserData();
         })
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
     },
     methods: {
         fetchAllUserData() {
@@ -116,15 +125,10 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.finalmessage = response.data;
-                console.log(response.data);
-                if(response != null) {
-                    console.log("successfully deleted user");
-                    this.$nextTick(() => {
-                        this.fetchAllUserData();
-                    })
-                } else {
-                    alert("no user was deleted / aucun utilisateur n'a été supprimé");
-                }
+                alert("user was deleted / l'utilisateur a été supprimé");
+                this.$nextTick(() => {
+                    this.fetchAllUserData();
+                })
             }).catch((error: any) => {
                 this.message =
                     (error.response &&
@@ -134,7 +138,25 @@ export default defineComponent({
                 
                 alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });
-        }
+        },
+
+        setEmployeeOfTheMonth(user){
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+               'April', 'May', 'June', 'July',
+               'August', 'September', 'October', 'November', 'December'];
+            this.$axios.post("/api/user/employeeofthemonth/submit", {}, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    userId: user[0],
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response => {
+                alert(response.data);
+            });
+        },
         
     }
     
