@@ -28,7 +28,7 @@
                 <div class="card rounded text-center text-white mb-3 mt-3 " style="background: #7A4183">
                   <div class="card-body">
                     <h2 class="card-title w-70">{{ $t('departmentPage.caseStudy') }}</h2>
-                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }}</h4>
+                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
                     <button class="btn" @click="goToCaseStudy">
                       <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
@@ -38,8 +38,8 @@
               <div class="row-6"> 
                 <div class="card text-center text-white mb-3 mt-3 " style="background: #008eaa">
                   <div class="card-body">
-                    <h2 class="card-title w-40">{{ $t('departmentPage.dataInput') }}</h2>
-                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }}</h4>    
+                    <h2 class="card-title w-40">{{ $t('departmentPage.dataInput') }} </h2>
+                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
                     <button class="btn" @click="goToDataInput">
                       <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
@@ -90,8 +90,14 @@ export default defineComponent({
     // gotoBiomech(): void {
     //   this.$router.push('/biomech');
     // }
+    getDate(): string {
+      let date = new Date();
+      let year = date.getFullYear();
+      let month=date.getMonth()+1;
+      let d = new Date(year,month,0);
+      return year+'/'+month+'/'+d.getDate();
+    }
   }
-  
 });
 
 </script>

@@ -95,7 +95,7 @@ table td.gap span {
                         <div class="col" >
                             <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                                 <div class="card-body">
-                                    <h2 style="color:#000000;" class="card-title w-40">{{ $t('leaderBoard.annualAward') }}</h2>
+                                    <h2 style="color:#000000;" class="card-title w-40">Employee of the month</h2>
                                     <ul>
                                         <li v-for="prize in AnnualPrize" :key="prize">
                                             {{ prize }}
