@@ -10,7 +10,7 @@ public class OpenBrowserConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
         System.out.println("Application is ready... Automatically open the browser and load the page...");
         try {
-//            Runtime.getRuntime().exec("cmd /c start http://localhost:8080/");
+            Runtime.getRuntime().exec("cmd /c start http://localhost:8080/");
         } catch (Exception e) {
             e.printStackTrace();
         }
