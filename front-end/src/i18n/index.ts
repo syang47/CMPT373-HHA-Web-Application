@@ -520,7 +520,7 @@ const i18n = createI18n({
         communityHealth: "COMMUNITY HEALTH",
         messageBoard: "MESSAGE BOARD",
         caseStudy: "CASE STUDY",
-        notify: "Due Date for Report, Case Study and Employee of the Month submission is due on ",
+        notify: "Due Date for Report, Case Study, and Employee of the Month submissions are due on ",
       },
       msppData: {
         blank: "",
