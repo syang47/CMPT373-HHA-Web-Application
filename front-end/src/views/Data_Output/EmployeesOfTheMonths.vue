@@ -27,7 +27,7 @@
 <template>
     <div>
         <div class="text-center">
-            <h2 class="font-weight-bold display-5 text-dark col">Display All Employees Of The Months</h2>
+            <h2 class="font-weight-bold display-5 text-dark col">{{ $t('dataDisplay.displayAllEmployeeOTM') }}</h2>
             <div> 
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
@@ -56,7 +56,7 @@ export default defineComponent({
         return {
             message: "",
             allEmployeesOfTheMonths: [],
-            tableHeaders: ["USERNAME", "DEPARTMENT", "MONTH"],
+            tableHeaders: [this.$t('dataDisplay.username'), this.$t('dataDisplay.department'), this.$t('dataDisplay.month')],
             finalmessage: "",
             hasPermissions: false
         };

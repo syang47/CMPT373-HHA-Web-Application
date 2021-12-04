@@ -66,7 +66,7 @@ export default defineComponent({
                 },
                 {
                     href:'/announcement',
-                    title: this.$t("sideBar.addAnnouncement"),
+                    title: this.$t("sideBar.addAward"),
                     hiddenOnCollapse: true
                 },
                 {
