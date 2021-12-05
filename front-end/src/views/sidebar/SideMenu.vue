@@ -37,7 +37,7 @@ export default defineComponent({
                 departments.push(d2);
                 let d3 = {
                     href:"/community_health",
-                    title:  this.$t("departmentPage.communityHealth"),
+                    title:  this.$t("sideBar.communityHealth"),
                 }
                 departments.push(d3);
                 let d4 = {

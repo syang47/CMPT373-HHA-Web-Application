@@ -593,7 +593,7 @@ const i18n = createI18n({
         nicupaed: "NICU/PAED",
         maternity: "MATERNITY",
         rehab: "REHAB",
-        communityhealth: "COMMUNITY HEALTH",
+        communityHealth: "COMMUNITY HEALTH",
         register: "Register",
       },
       registerPage: {
