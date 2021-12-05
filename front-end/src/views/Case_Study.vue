@@ -340,14 +340,14 @@ export default defineComponent({
                 .string(),
             permission: yup
                 .boolean()
-                .required("Must get permission to share."),
+                .required("Must get permission to share. / Doit obtenir la permission de partager."),
 
         });
         return {
             successful: false,
             loading: false,
             message: "",
-            caseStudyTypes: ["patient_story", "staff_recognition", "training_session", "equipment_received", "other"],
+            caseStudyTypes: [this.$t('caseStudyForm.patientStory'), this.$t('caseStudyForm.staffRecognition'), this.$t('caseStudyForm.trainingSession'), this.$t('caseStudyForm.equipmentReceived'), this.$t('caseStudyForm.other')],
             caseStudySelected: null,
             dataSchema,
         };
@@ -379,6 +379,12 @@ export default defineComponent({
                         this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
+                        if(response != null) {
+                            console.log("entry successful: " + this.successful);
+                            this.$router.push("/");
+                        } else {
+                            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
+                        }
                     }
                 ).catch((error: any) => {
                       this.message =
@@ -388,6 +394,7 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
+                      alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
                 });
             }
         },

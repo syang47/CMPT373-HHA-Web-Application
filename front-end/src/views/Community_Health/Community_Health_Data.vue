@@ -24,8 +24,8 @@ export default defineComponent({
         DynamicForm
     },
     data() {
-        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.").default(0);
-        const a: any = yup.number().min(0, "Cannot be negative.").default(0);
+        const r: any = yup.number().min(0, "Cannot be negative. / Ne peut pas être négatif.").required("Required. / Obligatoire.").default(0);
+        const a: any = yup.number().min(0, "Cannot be negative. / Ne peut pas être négatif.").default(0);
         const formSchema = {
             fields: [
                 {
@@ -646,7 +646,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "msppData.IUDPeice",
+                                rowName: "msppData.IUDPiece",
                             },
                             {
                                 name: 'quantity_IUDPeice',

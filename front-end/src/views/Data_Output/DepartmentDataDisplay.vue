@@ -27,7 +27,7 @@
 
 <div >
     <div class="text-center">
-        <h2 class="font-weight-bold display-5 text-dark col">Stored Data</h2>
+        <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
         <table v-if="showAllListTable" class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
                 <th scope="col" v-for="header in dataListHeaders" :key="header"> {{header}}</th>
@@ -111,7 +111,8 @@ export default defineComponent({
             this.showMSPPOnly = false;
             this.showMSPPAddData = false;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data";            
+            this.message = "Displaying existing mspp only data / Affichage des données mspp existantes uniquement";
+            
             this.$axios.get("/api/mspp/data/all", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
@@ -130,7 +131,7 @@ export default defineComponent({
                     this.msppAllData[response.data[d][0]] = obj;
                 }
             }).catch((error: any) => {
-                alert("failed to fetch department data");
+                alert("failed to fetch department data / n'a pas réussi à récupérer les données du département");
             });
         },
         
@@ -149,7 +150,7 @@ export default defineComponent({
             let colName = [] as any;
             let colKey = [] as any;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data";            
+            this.message = "Displaying existing mspp only data by date / Affichage des données mspp existantes uniquement par date";
             this.$axios.get(`/api/mspp/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
@@ -206,7 +207,7 @@ export default defineComponent({
                 this.msppAndAddData = this.msppOnlyData.concat(this.msppAddData);
 
             }).catch((error: any) => {
-                alert("failed to fetch department data");
+                alert("failed to fetch department data by date / n'a pas réussi à récupérer les données du service par date");
             });
         },
         

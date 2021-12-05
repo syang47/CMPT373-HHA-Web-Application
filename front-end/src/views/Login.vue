@@ -142,12 +142,12 @@ export default defineComponent({
                         console.log(token.roles[0].authority);
                         this.$router.push("/");
                     } else {
-                        alert("invalid credentials");
+                        alert("invalid credentials / les informations d'identification invalides");
                     }
                 },
                 (error) => {
                     console.log(error);
-                    alert("invalid credentials");
+                    alert("invalid credentials / les informations d'identification invalides");
                 }
             );
         }
