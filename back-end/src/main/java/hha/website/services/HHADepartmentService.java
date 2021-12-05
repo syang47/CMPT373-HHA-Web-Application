@@ -73,9 +73,12 @@ public class HHADepartmentService {
         departmentRepository.updateDepartmentReportsSubmittedSubtract(user.getDepartment().getDepartmentname());
     }
 
-
-    public List<Department> listAllDepartments() {
-        return departmentRepository.findAll();
+    public HashMap<String, Integer> listDepartmentPoints() {
+        HashMap<String, Integer> departmentPoints = new HashMap<>();
+        for(Department d : departmentRepository.findAll()){
+            departmentPoints.put(d.getDepartmentname(), d.getPoints());
+        }
+        return departmentPoints;
     }
 
     public Collection<String> listDepartmentNames() {
@@ -84,5 +87,9 @@ public class HHADepartmentService {
 
     public Integer listTotalReportsSubmittedForDepartment(String departmentname) {
         return departmentRepository.queryTotalReportsSubmittedForDepartment(departmentname);
+    }
+
+    public List<Department> getAllDepartments(){
+        return departmentRepository.findAll();
     }
 }

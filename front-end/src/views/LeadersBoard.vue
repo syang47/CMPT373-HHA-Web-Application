@@ -131,22 +131,32 @@ table td.gap span {
                             <div class="row-6 rounded-left">
                                 <div class="card shadow-none rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
                                     <div class="card-body">
-                                        <table class="mx-auto table table-bordered table-striped table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>{{ $t('leaderBoard.position') }}</th>
-                                                    <th>{{ $t('leaderBoard.department') }}</th>
-                                                    <th>{{ $t('leaderBoard.points') }}</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr v-for="(points, dep, index) in departmentPoints" :key="index">
-                                                    <th>{{ index + 1 }}</th>
-                                                    <td>{{ dep }}</td>
-                                                    <td>{{ points }}</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                        <div class="row justify-content-center">
+                                            <div class="col-auto">
+                                                <table class="table table-bordered table-striped table-hover">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{{ $t('leaderBoard.position') }}</th>
+                                                            <th>{{ $t('leaderBoard.department') }}</th>
+                                                            <th>{{ $t('leaderBoard.points') }}</th>
+                                                            <th>{{ $t('leaderBoard.reportsSubmittedMonth') }}</th>
+                                                            <th>{{ $t('leaderBoard.reportsSubmittedYear') }}</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr v-for="(points, dep, index) in departmentPoints" :key="index">
+                                                            <th>{{ index + 1 }}</th>
+                                                            <td>{{ dep }}</td>
+                                                            <td>{{ points }}</td>
+                                                            <td v-if="msppReportsSubmittedMonthAndYear[dep] && caseStudyReportsSubmittedMonthAndYear[dep]">{{ msppReportsSubmittedMonthAndYear[dep][0] + caseStudyReportsSubmittedMonthAndYear[dep][0] }}</td>
+                                                            <td v-if="msppReportsSubmittedMonthAndYear[dep] && caseStudyReportsSubmittedMonthAndYear[dep]">{{ msppReportsSubmittedMonthAndYear[dep][1] + caseStudyReportsSubmittedMonthAndYear[dep][1] }}</td>
+                                                            
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -212,14 +222,16 @@ import axios from 'axios';
 export default defineComponent({
     name: "LeadersBoard",
     mounted() {
-        this.getMonthlyPrize();
-        this.getEmployeeoftheMonth();
-        this.getDepartmentPoints();
-        this.getCaseStudyOfTheMonth();
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
             this.hasPermissions = true
         }
+        this.getMonthlyPrize();
+        this.getEmployeeoftheMonth();
+        this.getDepartmentPoints();
+        this.getMSPPReportsForMonthAndYear();
+        this.getCaseStudyReportsForMonthAndYear();
+        this.getCaseStudyOfTheMonth();
     },
     data: function() {
         return {
@@ -230,6 +242,8 @@ export default defineComponent({
             employeeofthemonth: [],
             caseStudyOfTheMonth: [] as any,
             hasPermissions: false,
+            msppReportsSubmittedMonthAndYear: {},
+            caseStudyReportsSubmittedMonthAndYear: [] as any
         }
     },
     methods: {
@@ -254,7 +268,6 @@ export default defineComponent({
                     month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
-                console.log(response.data);
                 this.MonthlyPrize = response.data;
             });
         },
@@ -328,6 +341,38 @@ export default defineComponent({
                 this.getMonthlyPrize();
             }).catch((error: any) => {                
                 alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
+            });
+        },
+
+        getMSPPReportsForMonthAndYear(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+
+            this.$axios.get("/api/mspp/totalreports", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    month: new Date().getMonth(),
+                    year: new Date().getFullYear(),
+                }
+            }).then(response => {
+                this.msppReportsSubmittedMonthAndYear = response.data;
+            });
+        },
+
+        getCaseStudyReportsForMonthAndYear(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+
+            this.$axios.get("/api/casestudy/totalreports", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    month: new Date().getMonth(),
+                    year: new Date().getFullYear(),
+                }
+            }).then(response => {
+                this.caseStudyReportsSubmittedMonthAndYear = response.data;
             });
         }
     }

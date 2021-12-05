@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -106,5 +108,25 @@ public class MSPPRepositoryService {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public HashMap<String, List<Integer>> listReportsForMonthAndYear(Integer year, Integer month) {
+        Calendar queryDate = new GregorianCalendar(year,Calendar.JANUARY,1);
+        List<MSPPRequirement> allReportsGivenYear = msppRepository.findAllByDateSubmittedAfter(queryDate);
+
+        HashMap<String, List<Integer>> departmentReports = new HashMap<>();
+        for(Department d : hhaDepartmentService.getAllDepartments()){
+            List<MSPPRequirement> filterReports = allReportsGivenYear.stream().filter(r -> r.getDepartment() == d).collect(Collectors.toList());
+            List<Integer> reportsSubmitted = new ArrayList<>();
+
+            reportsSubmitted.add(filterReports.size());
+
+            filterReports = filterReports.stream().filter(r -> r.getDepartment() == d && r.getDateSubmitted().get(Calendar.MONTH) == month).collect(Collectors.toList());
+            reportsSubmitted.add(filterReports.size());
+
+            departmentReports.put(d.getDepartmentname(), reportsSubmitted);
+        }
+
+        return departmentReports;
     }
 }

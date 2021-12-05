@@ -476,6 +476,8 @@ const i18n = createI18n({
         department: "Département",
         points: "Points",
         caseStudyOTM: "Étude de cas du mois",
+        reportsSubmittedMonth: "Rapports soumis ce mois-ci",
+        reportsSubmittedYear: "Rapports soumis cette année"
       },
       dataInput: {
         awards: "Récompenses",
@@ -1022,7 +1024,7 @@ const i18n = createI18n({
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",
-        communityhealth: "Community Health",
+        communityHealth: "Community Health",
         caseStudy: "Case Study",
         dueDate: "Due Date: ",
         dataInput: "Data Input",
@@ -1041,6 +1043,8 @@ const i18n = createI18n({
         department: "Department",
         points: "Points",
         caseStudyOTM: "Case Study of the Month",
+        reportsSubmittedMonth: "Reports submitted this month",
+        reportsSubmittedYear: "Reports submitted this year"
       },
       dataInput: {
         awards: "Awards",

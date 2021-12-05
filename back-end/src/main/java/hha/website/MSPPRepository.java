@@ -2,6 +2,7 @@ package hha.website;
 
 import hha.website.models.MSPPRequirement;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Calendar;
@@ -14,4 +15,6 @@ public interface MSPPRepository extends JpaRepository<MSPPRequirement, Integer> 
     List<MSPPRequirement> findAdditionalDataById(Integer id);
     List<MSPPRequirement> findRequiredMSPPDataById(Integer id);
 
+
+    List<MSPPRequirement> findAllByDateSubmittedAfter(Calendar date);
 }
