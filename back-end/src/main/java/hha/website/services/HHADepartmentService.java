@@ -63,8 +63,14 @@ public class HHADepartmentService {
 
     public void addASubmittedReport(User user) {
         userDetailsService.addASubmittedReportForUser(user);
-        departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
-        departmentRepository.updateDepartmentReportsSubmitted(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentPointsAdd(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentReportsSubmittedAdd(user.getDepartment().getDepartmentname());
+    }
+
+    public void deleteASubmittedReport(User user) {
+        userDetailsService.deleteASubmittedReportForUser(user);
+        departmentRepository.updateDepartmentPointsSubtract(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentReportsSubmittedSubtract(user.getDepartment().getDepartmentname());
     }
 
 

@@ -90,7 +90,11 @@ public class HHAUserDetailsService implements UserDetailsService {
     }
 
     public void addASubmittedReportForUser(User user) {
-        userRepository.updateUserReportsSubmitted(user.getId());
+        userRepository.updateUserReportsSubmittedAdd(user.getId());
+    }
+
+    public void deleteASubmittedReportForUser(User user) {
+        userRepository.updateUserReportsSubmittedSubtract(user.getId());
     }
 
     public List<List<String>> listAllUsers(User user) {

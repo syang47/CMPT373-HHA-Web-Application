@@ -82,7 +82,10 @@ public class CaseStudyService {
 
     public void deleteCaseStudy(Integer id) {
         Optional<CaseStudy> caseStudyToDelete = caseStudyRepository.findById(id);
-        caseStudyToDelete.ifPresent(c -> caseStudyRepository.deleteById(id));
+        caseStudyToDelete.ifPresent(c -> {
+            hhaDepartmentService.deleteASubmittedReport(c.getUser());
+            caseStudyRepository.deleteById(id);
+        });
     }
 
     public List<Object> getACaseStudy(String month) {

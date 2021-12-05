@@ -86,8 +86,12 @@ public class MSPPRepositoryService {
     }
 
     public void deleteForm(Integer documentId){
-        System.out.println("form deleted");
-        msppRepository.deleteById(documentId);
+        Optional<MSPPRequirement> formToDelete = msppRepository.findById(documentId);
+        formToDelete.ifPresent(c -> {
+            hhaDepartmentService.deleteASubmittedReport(c.getUser());
+            System.out.println("form deleted");
+            msppRepository.deleteById(documentId);
+        });
     }
 
     public MSPPRequirement editRequiredForm(Integer documentId, String requiredMSPPDataJson) throws JsonProcessingException{

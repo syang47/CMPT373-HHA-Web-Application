@@ -24,14 +24,22 @@ public interface DepartmentRepository extends JpaRepository<Department, String> 
 
     @Modifying
     @Query("UPDATE Department SET reportsSubmitted = reportsSubmitted + 1 WHERE departmentname = ?1")
-    void updateDepartmentReportsSubmitted(String departmentname);
+    void updateDepartmentReportsSubmittedAdd(String departmentname);
+
+    @Modifying
+    @Query("UPDATE Department SET reportsSubmitted = reportsSubmitted - 1 WHERE departmentname = ?1")
+    void updateDepartmentReportsSubmittedSubtract(String departmentname);
 
     @Query("SELECT points FROM Department")
     List<Integer> queryAllDepartmentPoints();
 
     @Modifying
     @Query("UPDATE Department SET points = points + 1 WHERE departmentname = ?1")
-    void updateDepartmentPoints(String departmentname);
+    void updateDepartmentPointsAdd(String departmentname);
+
+    @Modifying
+    @Query("UPDATE Department SET points = points - 1 WHERE departmentname = ?1")
+    void updateDepartmentPointsSubtract(String departmentname);
 
     @Modifying
     @Query("UPDATE Department SET points = points - 0.5 WHERE departmentname = ?1")
