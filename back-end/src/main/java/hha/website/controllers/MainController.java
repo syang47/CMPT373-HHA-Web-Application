@@ -160,11 +160,6 @@ public class MainController {
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
 
-    @GetMapping("/api/mspp/data")
-    public ResponseEntity<?> getAllMSPPData(){
-        return ResponseEntity.ok(msppRepositoryService.listAllData());
-    }
-
     @GetMapping("/api/mspp/{documentId}")
     public ResponseEntity<?> getADataForm(@PathVariable("documentId") String documentId){
         int id = Integer.parseInt(documentId);
@@ -173,15 +168,13 @@ public class MainController {
         return ResponseEntity.ok(requiredData);
     }
 
-    // list mspp additional data
     @GetMapping("/api/msppadditional/{documentId}")
     public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") String documentId){
         int id = Integer.parseInt(documentId);
         AdditionalMSPP additionalData = msppRepositoryService.getAdditional(id);
         return ResponseEntity.ok(additionalData);
     }
-    // list mspp data by id, date, department good
-    @CrossOrigin
+
     @GetMapping("/api/mspp/data/all")
     public ResponseEntity<?> getAllMSPPData(){
         System.out.println(msppRepositoryService.listMsppData());
