@@ -5,7 +5,9 @@ const i18n = createI18n({
   messages: {
     fr: {
       header: {
-        loginOut: "CONNEXION / DEconnexion",
+        login: "CONNEXION",
+        logout: "DECONNEXION",
+        loggedInAs: "Connecté en tant que: ",
         getEmployeeOTM: "OBTENEZ L'EMPLOYÉ DU MOIS",
         register: "S'INSCRIRE",
         showDepartments: "MONTRER LES DÉPARTEMENTS",
@@ -568,7 +570,9 @@ const i18n = createI18n({
 
     en: {
       header: {
-        loginOut: "LOG IN / LOG OUT",
+        login: "LOG IN",
+        logout: "LOG OUT",
+        loggedInAs: "Logged in as: ",
         getEmployeeOTM: "GET EMPLOYEE OF THE MONTH",
         register: "REGISTER",
         showDepartments: "SHOW DEPARTMENTS",

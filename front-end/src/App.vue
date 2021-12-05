@@ -113,17 +113,25 @@
       <router-link to="/" class="navbar-brand active px-3">
         <img src="@/assets/logo.png" width="140" alt=""/>
       </router-link>
-      <ul class="d-flex justify-content-end navbar-nav ml-auto">
-        <li class="my-auto nav-item">
-          <select class="btn btn-sm btn-secondary dropdown-toggle" v-model="l" name="languages" as="select" @change="changeLang(l)">
+      <ul class="d-flex align-self-center navbar-nav ml-auto">
+        <li class="my-auto nav-item" v-if="$store.state.auth.status.loggedIn">
+          <div>
+            <h2 class="text-info mt-3">
+              {{$t('header.loggedInAs')}} {{username}}
+            </h2>
+          </div>
+          
+        </li>
+        <li class="my-auto align-self-center nav-item">
+          <select class="btn btn-sm btn-secondary dropdown-toggle mb-3" v-model="l" name="languages" as="select" @change="changeLang(l)">
               <option class="dropdown-item" v-for="language in languages" :key="language" :value="language">
                 {{ language }}
               </option>
           </select>
         </li>
         <li class="my-auto nav-item">
-          <button class="btn btn-sm btn-outline-secondary" @click="loginOrLogout">
-            {{ $t('header.loginOut') }}
+          <button class="btn btn-sm btn-outline-secondary mb-3" @click="loginOrLogout">
+            {{ $t('header.' + loginText) }}
           </button>
         </li>
 
@@ -151,16 +159,21 @@ export default defineComponent({
       languages: ["Français", "English"],
       l: "Français",
       showSidebar: false,
-      reloadSidebar: 0
+      reloadSidebar: 0,
+      loginText: "",
+      username: ""
     };
   },
   watch: {
     '$store.state.auth.status.loggedIn': function() {
-      console.log(this.$store.state.auth.status.loggedIn);
       if(this.$store.state.auth.status.loggedIn){
+        this.username = this.$store.state.auth.user.username;
+        this.loginText = "logout"
         this.showSidebar = true;
         this.reloadSidebar += 1
       } else {
+        this.username = "";
+        this.loginText = "login"
         this.showSidebar = false;
         this.reloadSidebar += 1
       }
@@ -168,11 +181,16 @@ export default defineComponent({
   },
   beforeMount() {
     if(this.$store.state.auth.status.loggedIn){
+        this.username = this.$store.state.auth.user.username;
         this.showSidebar = true;
+        this.loginText = "logout"
       } else {
+        this.username = "";
         this.showSidebar = false;
+        this.loginText = "login"
       }
   },
+  
   methods: {
     loginOrLogout(): void {
       if(this.$store.state.auth.status.loggedIn) {
