@@ -1,16 +1,8 @@
 package hha.website.models;
 
 public class AnnouncementDTO {
-    private String annual;
+    private String month;
     private String monthly;
-
-    public String getAnnual() {
-        return annual;
-    }
-
-    public void setAnnual(String annual) {
-        this.annual = annual;
-    }
 
     public String getMonthly() {
         return monthly;
@@ -18,5 +10,13 @@ public class AnnouncementDTO {
 
     public void setMonthly(String monthly) {
         this.monthly = monthly;
+    }
+
+    public String getMonth() {
+        return month;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
     }
 }

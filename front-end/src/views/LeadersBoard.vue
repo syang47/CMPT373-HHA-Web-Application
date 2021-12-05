@@ -83,11 +83,23 @@ table td.gap span {
                                 <div class="card shadow-none rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
                                     <div class="card-body">
                                         <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
-                                        <ul>
-                                            <li v-for="prize in MonthlyPrize" :key="prize">
-                                                {{ prize }}
-                                            </li>
-                                        </ul>
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
+                                            <tbody>
+                                                <tr v-for="field in MonthlyPrize" :key="field">
+                                                    <td>
+                                                        <div class="mb-3">
+                                                            <h3 class="fw-light">
+                                                                Posted On {{field[1]}} for {{field[2]}}
+                                                            </h3>
+                                                            
+                                                        </div>
+                                                        <div class="mb-3" v-if="field[3] != ''">
+                                                            <img :src="'data:' + field[3] + ';base64,' + field[4]" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
@@ -96,11 +108,18 @@ table td.gap span {
                             <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                                 <div class="card-body">
                                     <h2 style="color:#000000;" class="card-title w-40">Employee of the month</h2>
-                                    <ul>
-                                        <li v-for="prize in AnnualPrize" :key="prize">
-                                            {{ employeeofthemonth }}
-                                        </li>
-                                    </ul>
+                                    <div class="justify-content-center">
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
+                                            <tbody>
+                                                <tr v-for="field in employeeofthemonth" :key="field">
+                                                    <td>
+                                                        {{field}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -110,7 +129,7 @@ table td.gap span {
                             <div class="row-6 rounded-left">
                                 <div class="card shadow-none rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
                                     <div class="card-body">
-                                        <table>
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>{{ $t('leaderBoard.position') }}</th>
@@ -158,7 +177,7 @@ export default defineComponent({
     name: "LeadersBoard",
     mounted() {
         this.getMonthlyPrize();
-//        this.getEmployeeoftheMonth();
+        this.getEmployeeoftheMonth();
         this.getDepartmentPoints();
     },
     data: function() {
@@ -166,7 +185,8 @@ export default defineComponent({
             departmentPoints: {},
             departments: [""],
             MonthlyPrize: [""],
-            AnnualPrize: [""]
+            AnnualPrize: [""],
+            employeeofthemonth: {}
         }
     },
     methods: {
@@ -178,19 +198,44 @@ export default defineComponent({
             return false;
         },
         getMonthlyPrize(): void {
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            let token = JSON.parse(localStorage.getItem('user')!);
             axios.get("/api/announcements", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
                 params: {
-                    field: "monthly"
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
-                this.MonthlyPrize = response.data.filter(message => message);
+                this.MonthlyPrize = response.data;
             });
         },
-//        getEmployeeoftheMonth(): void{
-            // to be implemented
-//        },
+        getEmployeeoftheMonth(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            this.$axios.get("/api/user/employeeofthemonth", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response => {
+                this.employeeofthemonth = response.data;
+            });
+        },
         getDepartmentPoints(): void {
-            axios.get("/api/departments/points").then(response=> {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/departments/points", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+            }).then(response=> {
                 var departmentPointsData = response.data;
                 
                 //https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key

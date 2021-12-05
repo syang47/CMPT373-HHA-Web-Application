@@ -248,16 +248,16 @@ public class MainController {
     }
 
     @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
-    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestPart(value = "monthlyPhoto", required = false) MultipartFile monthlyPhoto, @RequestPart(value = "annualPhoto", required = false) MultipartFile annualPhoto, @RequestPart("data") String json) throws JsonProcessingException {
+    public ResponseEntity<?> saveAnnouncement(@RequestHeader("Authorization") String jwt, @RequestPart(value = "monthlyPhoto", required = false) MultipartFile monthlyPhoto, @RequestPart("data") String json) throws JsonProcessingException {
         ObjectMapper objectMapper = new ObjectMapper();
         AnnouncementDTO data = objectMapper.readValue(json, AnnouncementDTO.class);
-        return ResponseEntity.ok(announcementService.save(data, monthlyPhoto, annualPhoto));
+        return ResponseEntity.ok(announcementService.save(data, monthlyPhoto));
     }
 
     @CrossOrigin
     @GetMapping("/api/announcements")
-    public ResponseEntity<?> getAnnouncements(@RequestParam("field") String field){
-        return ResponseEntity.ok(announcementService.listAField(field));
+    public ResponseEntity<?> getLatestAnnouncements(@RequestParam("month") String month){
+        return ResponseEntity.ok(announcementService.listMonthlyAnnouncements(month));
     }
 
 

@@ -3,6 +3,7 @@ package hha.website.services;
 import hha.website.AnnouncementRepository;
 import hha.website.models.AnnouncementDTO;
 import hha.website.models.Announcement;
+import hha.website.models.CaseStudy;
 import hha.website.models.MessageBoard;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,20 +22,12 @@ public class AnnouncementService {
     @Autowired
     private AnnouncementRepository announcementRepository;
 
-    public Announcement save(AnnouncementDTO data, MultipartFile monthlyPhoto, MultipartFile annualPhoto) {
+    public Announcement save(AnnouncementDTO data, MultipartFile monthlyPhoto) {
         Announcement entry = new Announcement();
         TimeZone timeZone = TimeZone.getTimeZone("GMT");
         entry.setDateSubmitted(Calendar.getInstance(timeZone));
+        entry.setInfo(data.getMonthly());
 
-        Optional<MultipartFile> annualPhotoBytes = Optional.ofNullable(annualPhoto);
-        annualPhotoBytes.ifPresent(p -> {
-            try{
-                entry.setAnnualPhoto(p.getBytes());
-                entry.setAnnualPhotoType(p.getContentType());
-            } catch(IOException e) {
-                e.printStackTrace();
-            }
-        });
 
         Optional<MultipartFile> monthlyPhotoBytes = Optional.ofNullable(monthlyPhoto);
         monthlyPhotoBytes.ifPresent(p -> {
@@ -46,16 +39,21 @@ public class AnnouncementService {
             }
         });
 
-        entry.setAnnual(data.getAnnual());
-        entry.setMonthly(data.getMonthly());
+        entry.setMonth(data.getMonth());
         return announcementRepository.save(entry);
     }
-    public List<String> listAField(String field) {
-        if(field.equals("monthly")) {
-            return announcementRepository.queryMonthly();
-        } else if(field.equals("annual")) {
-            return announcementRepository.queryAnnually();
+
+    public List<List<Object>> listMonthlyAnnouncements(String month) {
+        List<List<Object>> monthlyAnnouncement = new ArrayList<>();
+        for(Announcement a : announcementRepository.findByMonth(month)){
+            List<Object> aData = new ArrayList<>();
+            aData.add(a.getId());
+            aData.add(a.getDateSubmitted().getTime().toString());
+            aData.add(a.getMonth());
+            aData.add(a.getMonthlyPhotoType());
+            aData.add(a.getMonthlyPhoto());
+            monthlyAnnouncement.add(aData);
         }
-        return null;
+        return monthlyAnnouncement;
     }
 }

@@ -158,31 +158,24 @@ export default defineComponent({
                         formData.append("monthlyPhoto", p);
                     }
                 }
-                if(entry.annualPhoto){
-                    for(let p of entry.annualPhoto){
-                        formData.append("annualPhoto", p);
-                    }
-                }
                 delete entry["monthlyPhoto"];
-                delete entry["annualPhoto"];
+                var months = ['January', 'February', 'March',
+                    'April', 'May', 'June', 'July',
+                    'August', 'September', 'October', 'November', 'December'];
+                entry.month = months[new Date().getMonth()] + " " + new Date().getFullYear();
+
                 formData.append("data", new Blob([JSON.stringify(entry)], {
                                 type: "application/json"
                             }));
-
+                console.log(entry)
                 this.$axios.post("/api/announcements/submit", formData, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`,
-                    }
+                    },
                 }).then(response => {
                         this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
-                        if(response != null) {
-                            console.log("entry successful: " + this.successful);
-                            this.$router.push("/");
-                        } else {
-                            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
-                        }
                     }
                 ).catch((error: any) => {
                       this.message =
@@ -192,7 +185,6 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
-                      alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
                 });
             }
         },
