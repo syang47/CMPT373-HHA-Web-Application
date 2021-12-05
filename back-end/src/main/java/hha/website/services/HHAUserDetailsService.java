@@ -112,7 +112,7 @@ public class HHAUserDetailsService implements UserDetailsService {
         return users;
     }
 
-    public void deleteUser(int id) throws Exception {
+    public void deleteUser(Integer id) throws Exception {
         Optional<User> userToDelete = userRepository.findById(id);
         if(userToDelete.isPresent()){
             if(userToDelete.get().getRole().equals("ROLE_ADMIN") || userToDelete.get().getRole().equals("ROLE_HEAD") || userToDelete.get().getRole().equals("ROLE_HOSPITALADMIN")){

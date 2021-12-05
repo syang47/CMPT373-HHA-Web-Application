@@ -57,6 +57,7 @@ const i18n = createI18n({
         addPhoto: "Ajouter une photo:",
         annualAward: "Prix ​​annuel",
         submit: "Soumettre",
+        deleteAnnouncement: "Supprimer un prix"
       },
       dataDisplay: {
         displayData: "Afficher les données",
@@ -619,6 +620,7 @@ const i18n = createI18n({
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",
         submit: "Submit",
+        deleteAnnouncement: "Delete an Award"
       },
       dataDisplay: {
         displayData: "Display Data",

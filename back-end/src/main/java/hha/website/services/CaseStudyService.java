@@ -80,7 +80,7 @@ public class CaseStudyService {
         return caseStudyRepository.queryCaseStudyTypes();
     }
 
-    public void deleteCaseStudy(int id) {
+    public void deleteCaseStudy(Integer id) {
         Optional<CaseStudy> caseStudyToDelete = caseStudyRepository.findById(id);
         caseStudyToDelete.ifPresent(c -> caseStudyRepository.deleteById(id));
     }

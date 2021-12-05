@@ -186,6 +186,7 @@ export default defineComponent({
                 }
             }).then(response => {
                 alert(response.data);
+                this.showAllCaseStudies();
             }).catch((error: any) => {                
                 alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });

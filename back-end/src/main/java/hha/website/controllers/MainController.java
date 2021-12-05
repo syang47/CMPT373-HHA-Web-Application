@@ -256,6 +256,15 @@ public class MainController {
         return ResponseEntity.ok(announcementService.listMonthlyAnnouncements(month));
     }
 
+    @DeleteMapping("/api/announcements/delete")
+    public ResponseEntity<?> deleteAnnouncement(@RequestParam("id") Integer id){
+        try{
+            announcementService.deleteAnAnnouncement(id);
+            return new ResponseEntity<>("Announcement has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
     public ResponseEntity<?> saveMessage(@RequestHeader("Authorization") String jwt, @RequestBody MessageBoardDTO data) {
