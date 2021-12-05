@@ -106,7 +106,7 @@
             </div>
         </Form>
 
-        <div v-if="message" class="alert alert-danger" :class="successful ? 'alert-success' : 'alert-danger'">
+        <div v-if="message" style="width: 60%; margin:0 auto;" class="alert text-center" :class="successful ? 'alert-success' : 'alert-danger'">
             {{ message }}
         </div>
       </div>
