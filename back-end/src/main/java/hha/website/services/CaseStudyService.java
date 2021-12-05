@@ -84,4 +84,27 @@ public class CaseStudyService {
         Optional<CaseStudy> caseStudyToDelete = caseStudyRepository.findById(id);
         caseStudyToDelete.ifPresent(c -> caseStudyRepository.deleteById(id));
     }
+
+    public List<Object> getACaseStudy(String month) {
+        Optional<CaseStudy> cs = caseStudyRepository.findByCaseStudyOfTheMonth(month);
+        List<Object> csData = new ArrayList<>();
+        cs.ifPresent(c -> {
+            csData.add(c.getDateSubmitted().getTime().toString());
+            csData.add(c.getCaseStudyType());
+            csData.add(c.getUser().getUsername());
+            csData.add(c.getPhoto());
+            csData.add(c.getPhotoType());
+            csData.add(c.getCaseStudyData());
+        });
+
+        return csData;
+    }
+
+    public String setCaseStudyOfTheMonth(Integer id, String month){
+        Optional<CaseStudy> currentCaseStudyofTheMonth = caseStudyRepository.findByCaseStudyOfTheMonth(month);
+        currentCaseStudyofTheMonth.ifPresent(e -> e.setCaseStudyOfTheMonth(""));
+        CaseStudy cs = caseStudyRepository.getById(id);
+        cs.setCaseStudyOfTheMonth(month);
+        return cs.getId().toString();
+    }
 }

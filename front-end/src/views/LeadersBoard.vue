@@ -79,7 +79,7 @@ table td.gap span {
                 <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leaderBoard') }}</h1>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col">
+                        <div class="col" v-if="MonthlyPrize.length != 0">
                                 <div class="card shadow-none rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
                                     <div class="card-body">
                                         <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
@@ -91,7 +91,6 @@ table td.gap span {
                                                             <h3 class="fw-light">
                                                                 Posted On {{field[1]}} for {{field[2]}}
                                                             </h3>
-                                                            
                                                         </div>
                                                         <div class="mb-3" v-if="field[3] != ''">
                                                             <img :src="'data:' + field[3] + ';base64,' + field[4]" />
@@ -104,7 +103,7 @@ table td.gap span {
                                 </div>
 
                         </div>
-                        <div class="col" >
+                        <div class="col" v-if="employeeofthemonth.length != 0">
                             <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                                 <div class="card-body">
                                     <h2 style="color:#000000;" class="card-title w-40">Employee of the month</h2>
@@ -149,11 +148,42 @@ table td.gap span {
                                 </div>
                             </div>
                         </div>
-                        <div class="col rounded mb-3 mt-3" style="background: #F59A23">
+                        <div v-if="caseStudyOfTheMonth.length != 0" class="col rounded mb-3 mt-3" style="background: #F59A23">
                             <div class="card shadow-none w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                                 <div class="card-body">
                                     <h2 style="color:#000000;">{{ $t('leaderBoard.caseStudyOTM') }}</h2>
-                                    
+                                    <table class="mx-auto table table-bordered table-striped table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <div class="mb-3">
+                                                    <h3 class="fw-light">
+                                                        Posted On {{caseStudyOfTheMonth[0]}} by {{caseStudyOfTheMonth[2]}}
+                                                    </h3>
+                                                    <h3 class="fw-light">
+                                                        Type: {{caseStudyOfTheMonth[1]}}
+                                                    </h3>
+                                                    <img v-if="caseStudyOfTheMonth[3] != null" :src="'data:' + caseStudyOfTheMonth[4] + ';base64,' + caseStudyOfTheMonth[3]" />
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <table class="mx-auto table table-bordered table-striped table-hover">
+                                                    
+                                                    <thead>
+                                                        <tr>
+                                                            <th v-for="header in Object.keys(caseStudyOfTheMonth[5])" :key="header">{{header}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <div v-for="field in caseStudyOfTheMonth[5]" :key="field">
+                                                                {{field}}
+                                                            </div>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -179,6 +209,7 @@ export default defineComponent({
         this.getMonthlyPrize();
         this.getEmployeeoftheMonth();
         this.getDepartmentPoints();
+        this.getCaseStudyOfTheMonth();
     },
     data: function() {
         return {
@@ -186,7 +217,8 @@ export default defineComponent({
             departments: [""],
             MonthlyPrize: [""],
             AnnualPrize: [""],
-            employeeofthemonth: {}
+            employeeofthemonth: [],
+            caseStudyOfTheMonth: [] as any
         }
     },
     methods: {
@@ -210,6 +242,7 @@ export default defineComponent({
                     month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
+                console.log(response.data);
                 this.MonthlyPrize = response.data;
             });
         },
@@ -227,7 +260,7 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.employeeofthemonth = response.data;
-            });
+            })
         },
         getDepartmentPoints(): void {
             let token = JSON.parse(localStorage.getItem('user')!);
@@ -243,7 +276,26 @@ export default defineComponent({
                                 result[key] = departmentPointsData[key];
                                 return result;
                             }, {});
+            }).catch((error: any) => {
+                alert("could not get department points");
             });
+        },
+        getCaseStudyOfTheMonth(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            axios.get("/api/casestudy/entry", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response=> {
+                console.log(response.data);
+                this.caseStudyOfTheMonth = response.data;
+            })
         }
     }
 });

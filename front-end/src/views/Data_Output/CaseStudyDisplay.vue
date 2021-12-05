@@ -66,6 +66,9 @@
                             <button @click="showCaseStudy(entry)" class="btn btn-info">{{ $t('dataDisplay.expand') }}</button>
                         </td>
                         <td v-if="hasPermissions">
+                            <button @click="setCaseStudyOfTheMonth(entry)" class="btn btn-secondary">{{ $t('dataDisplay.caseStudyOTM') }}</button>
+                        </td>
+                        <td v-if="hasPermissions">
                             <button @click="deleteCaseStudy(entry)" class="btn btn-danger">{{ $t('dataDisplay.delete') }}</button>
                         </td>
                     </tr>
@@ -122,7 +125,7 @@ export default defineComponent({
     methods: {
         showAllCaseStudies() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.$axios.get("/api/casestudy/entry", {
+            this.$axios.get("/api/casestudy/all", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
@@ -150,6 +153,25 @@ export default defineComponent({
 
         showCaseStudy(entry) {
             this.caseStudyAllData[entry[0]].showData = !this.caseStudyAllData[entry[0]].showData;
+        },
+
+        setCaseStudyOfTheMonth(entry){
+            console.log(entry);
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+               'April', 'May', 'June', 'July',
+               'August', 'September', 'October', 'November', 'December'];
+            this.$axios.post("/api/casestudy/casestudyofthemonth/submit", {}, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    id: entry[0],
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response => {
+                alert(response.data);
+            });
         },
 
         deleteCaseStudy(entry){

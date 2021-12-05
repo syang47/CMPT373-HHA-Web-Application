@@ -214,9 +214,21 @@ public class MainController {
     }
 
     @CrossOrigin
-    @GetMapping("/api/casestudy/entry")
-    public ResponseEntity<?> getCaseStudyEntry(){
+    @GetMapping("/api/casestudy/all")
+    public ResponseEntity<?> getCaseStudyEntries(){
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
+    }
+
+    @CrossOrigin
+    @GetMapping("/api/casestudy/entry")
+    public ResponseEntity<?> getCaseStudyEntry(@RequestParam("month") String month){
+        return ResponseEntity.ok(caseStudyService.getACaseStudy(month));
+    }
+
+    @CrossOrigin
+    @RequestMapping(value = "/api/casestudy/casestudyofthemonth/submit", method = RequestMethod.POST)
+    public ResponseEntity<?> setCaseStudyOfTheMonth(@RequestParam("id") Integer id, @RequestParam("month") String month){
+        return ResponseEntity.ok("Case study " + caseStudyService.setCaseStudyOfTheMonth(id, month) + " set as case study of the month for " + month);
     }
 
     @CrossOrigin

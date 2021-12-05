@@ -17,9 +17,6 @@ public class HHADepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    @Autowired
-    DeadLineService deadLineService;
-
     @Lazy
     @Autowired
     private HHAUserDetailsService userDetailsService;
@@ -65,40 +62,8 @@ public class HHADepartmentService {
     }
 
     public void addASubmittedReport(User user) {
-        DeadLine deadLine = deadLineService.getDeadLine();
-
-        TimeZone timeZone = TimeZone.getTimeZone("GMT");
-        Calendar curr = Calendar.getInstance(timeZone);
-
-        int cmonth = curr.get(Calendar.MONTH) + 1;
-
-        String currStr = cmonth<=9?"0"+cmonth:""+cmonth;
-        cmonth = Integer.parseInt(curr.get(Calendar.YEAR)+""+currStr);
-        if (cmonth == deadLine.getCurrentMonth()) {
-            departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
-        }
-        // new year?
-        if (cmonth > deadLine.getCurrentMonth()) {
-            //check up month has submit
-            User dbuser = userDetailsService.findByUsername(user.getUsername());
-            Set<CaseStudy> studies = dbuser.getCaseStudies();
-            int count = 0;
-            for (CaseStudy caseStudy : studies) {
-                int submitMonth = caseStudy.getDateSubmitted().get(Calendar.MONTH) + 1;
-                if (submitMonth == deadLine.getCurrentMonth()) {
-                    count++;
-                }
-            }
-            if(count>0){
-                // next month submit
-                departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
-            }else {
-                //out date reduce point
-                departmentRepository.reduceDepartmentPoints(user.getDepartment().getDepartmentname());
-            }
-        }
-
         userDetailsService.addASubmittedReportForUser(user);
+        departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
         departmentRepository.updateDepartmentReportsSubmitted(user.getDepartment().getDepartmentname());
     }
 

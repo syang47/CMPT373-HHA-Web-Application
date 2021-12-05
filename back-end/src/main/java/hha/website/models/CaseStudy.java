@@ -40,7 +40,7 @@ public class CaseStudy {
     private Map<String, Object> caseStudyData;
 
     @Column
-    private Integer reportPoints;
+    private String caseStudyOfTheMonth;
 
 
     public Integer getId() {
@@ -91,12 +91,12 @@ public class CaseStudy {
         this.caseStudyData = caseStudyData;
     }
 
-    public Integer getReportPoints() {
-        return reportPoints;
+    public String getCaseStudyOfTheMonth() {
+        return caseStudyOfTheMonth;
     }
 
-    public void setReportPoints(Integer reportPoints) {
-        this.reportPoints = reportPoints;
+    public void setCaseStudyOfTheMonth(String caseStudyOfTheMonth) {
+        this.caseStudyOfTheMonth = caseStudyOfTheMonth;
     }
 
     public String getPhotoType() {
