@@ -77,6 +77,7 @@ table td.gap span {
                 <div class="card-body">
                     <div class="container-fluid">
                 <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leaderBoard') }}</h1>
+                <button v-if="hasPermissions" class="btn btn-secondary" @click="goToAddAnnouncement"> {{$t("announcementPage.addAnnouncement")}} </button>
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col" v-if="MonthlyPrize.length != 0">
@@ -213,6 +214,10 @@ export default defineComponent({
         this.getEmployeeoftheMonth();
         this.getDepartmentPoints();
         this.getCaseStudyOfTheMonth();
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
     },
     data: function() {
         return {
@@ -221,7 +226,8 @@ export default defineComponent({
             MonthlyPrize: [""],
             AnnualPrize: [""],
             employeeofthemonth: [],
-            caseStudyOfTheMonth: [] as any
+            caseStudyOfTheMonth: [] as any,
+            hasPermissions: false
         }
     },
     methods: {
@@ -297,6 +303,10 @@ export default defineComponent({
             }).then(response=> {
                 this.caseStudyOfTheMonth = response.data;
             })
+        },
+
+        goToAddAnnouncement(): void {
+            this.$router.push('/announcement');
         }
     }
 });
