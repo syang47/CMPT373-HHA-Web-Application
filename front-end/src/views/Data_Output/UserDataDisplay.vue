@@ -42,9 +42,6 @@
                             <td v-if="hasPermissions">
                                 <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">{{ $t("dataDisplay.setEmployeeOTM") }}</button>
                             </td>
-                            <!-- <td>
-                                <button class="btn btn-warning px-2">Edit</button>
-                            </td> -->
                             <td v-if="hasPermissions">
                                 <button @click="deleteUser(user)" class="btn btn-danger">{{ $t("dataDisplay.delete") }}</button>
                             </td>
@@ -109,9 +106,7 @@ export default defineComponent({
                 alert("failed to fetch user data types / échec de la récupération des types de données utilisateur");
             });
         },
-        // editUser() {
-        //     this.finalmessage = "trying to edit user...";
-        // },
+
         deleteUser(tuple) {
             var id = tuple[0];
             console.log(id);

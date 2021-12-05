@@ -37,19 +37,19 @@ export default defineComponent({
                 departments.push(d2);
                 let d3 = {
                     href:"/community_health",
-                    title:  this.$t("sideBar.communityHealth"),
+                    title:  this.$t("sideBar.communityhealth"),
                 }
                 departments.push(d3);
                 let d4 = {
                     href:"/nicu_paed",
-                    title:  this.$t("sideBar.nicuPaed"),
+                    title:  this.$t("sideBar.nicupaed"),
                 }
                 departments.push(d4);
                 // return departments.push(d1,d2,d3,d4);
             } else {
                 let d = {
                     href: '/' + token.department.toLowerCase(),
-                    title: this.$t("departmentPage." + token.department.toLowerCase().replace("_","")),
+                    title: this.$t("sideBar." + token.department.toLowerCase().replace("_","")),
                 }
                 // return departments.push(d);
                 departments.push(d);

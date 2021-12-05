@@ -11,4 +11,7 @@ import java.util.List;
 public interface MSPPRepository extends JpaRepository<MSPPRequirement, Integer> {
 
     List<MSPPRequirement> findByidAndDateSubmitted(Integer id, Calendar date);
+    List<MSPPRequirement> findAdditionalDataById(Integer id);
+    List<MSPPRequirement> findRequiredMSPPDataById(Integer id);
+
 }
