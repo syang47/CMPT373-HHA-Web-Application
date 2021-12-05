@@ -7,22 +7,22 @@
             v-for="(field, idx) in fields"
             :key="field.key"
         >
-        <legend style="color:green"><strong> Patient {{ idx+1 }}: </strong></legend>
+        <legend style="color:green"><strong> {{ $t('patient.patient') }} {{ idx+1 }}: </strong></legend>
 
         <!-- Radio buttons -->
         <div>
-            <legend>Patient {{ idx+1 }} Diagnosis: </legend>
+            <legend>{{ $t('patient.patient') }} {{ idx+1 }} {{ $t('patient.diagnosis') }} </legend>
             <div class="form-check">
-                <Field class="form-check-input" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="SCI"></Field>
-                <label class="form-check-label" > SCI</label>
+                <Field class="form-check-input" id="option1" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="SCI"></Field>
+                <label class="form-check-label" for="option1"> {{ $t('patient.sci') }}</label>
             </div>
             <div class="form-check">
-                <Field class="form-check-input" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="CVA"></Field>
-                <label class="form-check-label" > CVA</label>
+                <Field class="form-check-input" id="option2" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="CVA"></Field>
+                <label class="form-check-label" for="option2"> {{ $t('patient.cva') }}</label>
             </div>
             <div class="form-check">
-                <Field class="form-check-input" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="Other"></Field>
-                <label class="form-check-label" > Other</label>
+                <Field class="form-check-input" id="option3" :name="`diedBefore48hPatient[${idx}].diedBefore48hOption`" type="radio" value="Other"></Field>
+                <label class="form-check-label" for="option3"> {{ $t('patient.other') }}</label>
             </div>
             <br>
             <br>
@@ -33,7 +33,7 @@
         <div>
             <br>
             <div class="my-3">
-                <label :for="`diedBefore48hAge_${idx}`">Age</label>
+                <label :for="`diedBefore48hAge_${idx}`">{{ $t('patient.age') }}</label>
                 <Field class="form-control"
                     :id="`diedBefore48hAge_${idx}`" 
                     @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -42,7 +42,7 @@
             </div>
             <div class="my-3">
                 <br>
-                <legend :for="`diedBefore48hCause_${idx}`">Patient {{ idx+1 }} Cause of Death</legend>
+                <legend :for="`diedBefore48hCause_${idx}`">{{ $t('patient.patient') }} {{ idx+1 }} {{ $t('patient.causeOfDeath') }}</legend>
                 <Field class="form-control"
                     :id="`diedBefore48hCause_${idx}`"
                     :name="`diedBefore48hPatient[${idx}].diedBefore48hCause`" />
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+        <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">{{ $t('patient.removePatient') }}</button>
         </fieldset>
 
         <button class="btn btn-primary btn-block" type="button" @click="push({ 
@@ -58,7 +58,7 @@
             diedBefore48hAge: '', 
             diedBefore48hCause: '', 
             })">
-        New Patient + 
+        {{ $t('patient.newPatient') }} 
         </button>
     </FieldArray>
 </template>

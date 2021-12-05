@@ -27,7 +27,7 @@
 <template>
     <div>
         <div class="text-center">
-            <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+            <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
             <div>
                 <table class="table table-bordered table-striped table-hover">
                     <thead class="thead-dark">
@@ -40,13 +40,13 @@
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
 
                             <td v-if="hasPermissions">
-                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">Set Employee Of The Month</button>
+                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">{{ $t("dataDisplay.setEmployeeOTM") }}</button>
                             </td>
                             <!-- <td>
                                 <button class="btn btn-warning px-2">Edit</button>
                             </td> -->
                             <td v-if="hasPermissions">
-                                <button @click="deleteUser(user)" class="btn btn-danger">Delete</button>
+                                <button @click="deleteUser(user)" class="btn btn-danger">{{ $t("dataDisplay.delete") }}</button>
                             </td>
                         </tr>
                     </tbody>
@@ -67,7 +67,8 @@ export default defineComponent({
         return {
             message: "",
             userAllData: [],
-            tableHeaders: ["ID", "USERNAME", "DEPARTMENT", "ROLE"],
+            tableHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.username'), this.$t('dataDisplay.department'), this.$t('dataDisplay.role')],
+            showComponentOne: true,
             finalmessage: "",
             hasPermissions: false
         };
@@ -85,7 +86,7 @@ export default defineComponent({
     methods: {
         fetchAllUserData() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying all user data";
+            this.message = "Displaying all user data / Affichage de toutes les données utilisateur";
             
             this.$axios.get("/api/user/all", {
                 headers: {
@@ -96,7 +97,7 @@ export default defineComponent({
                 if(response != null) {
                     console.log("getting all user data successful");
                 } else {
-                    alert("no data in user data can be fetched...");
+                    alert("no data in user data can be fetched / aucune donnée dans les données utilisateur ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -105,7 +106,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch user data types");
+                alert("failed to fetch user data types / échec de la récupération des types de données utilisateur");
             });
         },
         // editUser() {
@@ -116,7 +117,7 @@ export default defineComponent({
             console.log(id);
             console.log(typeof id);
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying all user data";
+            this.message = "Displaying all user data / Affichage de toutes les données utilisateur";
             
             this.$axios.delete(`/api/user/delete/${id}`, {
                 headers: {
@@ -124,7 +125,7 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.finalmessage = response.data;
-                alert("user was deleted");
+                alert("user was deleted / l'utilisateur a été supprimé");
                 this.$nextTick(() => {
                     this.fetchAllUserData();
                 })
@@ -135,7 +136,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("error occurred when deleting user");
+                alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });
         },
 

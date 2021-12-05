@@ -32,7 +32,7 @@
 <template>
 <div>
     <div class="text-center">
-        <h2 class="font-weight-bold display-5 text-dark col">Case Studies</h2>
+        <h2 class="font-weight-bold display-5 text-dark col">{{ $t('dataDisplay.caseStudies') }}</h2>
         <div>
             <table class="table table-bordered table-striped table-hover">
                 <thead class="thead-dark">
@@ -63,10 +63,10 @@
                             </div>
                         </td>
                         <td>
-                            <button @click="showCaseStudy(entry)" class="btn btn-info">Expand</button>
+                            <button @click="showCaseStudy(entry)" class="btn btn-info">{{ $t('dataDisplay.expand') }}</button>
                         </td>
                         <td v-if="hasPermissions">
-                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger">Delete</button>
+                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger">{{ $t('dataDisplay.delete') }}</button>
                         </td>
                     </tr>
                     <tr v-if="entry[1].showData">
@@ -103,7 +103,7 @@ export default defineComponent({
     name: "CaseStudyDisplay",
     data: function() {
         return {
-            tableHeaders: ["ID", "Date Submitted", "Case Study Type", "Submitted By"],
+            tableHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.caseStudyType'), this.$t('dataDisplay.submittedBy')],
             expandedHeaders: [],
             csEntries: [],
             caseStudyAllData: {},
@@ -144,7 +144,7 @@ export default defineComponent({
                     this.caseStudyAllData[response.data[d][0]] = obj;
                 }
             }).catch((error: any) => {
-                alert("failed to fetch casestudy data entries");
+                alert("failed to fetch casestudy data entries / n'a pas réussi à récupérer les entrées de données de l'étude de cas");
             });
         },
 
@@ -165,7 +165,7 @@ export default defineComponent({
             }).then(response => {
                 alert(response.data);
             }).catch((error: any) => {                
-                alert("error occurred when deleting user");
+                alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });
         }
     }

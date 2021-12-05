@@ -133,17 +133,17 @@ export default defineComponent({
         const userSchema = yup.object().shape({ //need translation handling for err messages
             username: yup
                 .string()
-                .required("Username is required!")
-                .min(4, "Must be at least 4 characters!")
-                .max(20, "Must be maximum 20 characters!"),
+                .required("Username is required! / Nom d'utilisateur est nécessaire!")
+                .min(4, "Must be at least 4 characters! / Doit comporter au moins 4 caractères !")
+                .max(20, "Must be maximum 20 characters! / Doit contenir au maximum 20 caractères !"),
             password: yup
                 .string()
-                .required("Password is required!")
-                .min(6, "Must be at least 6 characters!")
-                .max(40, "Must be maximum 40 characters!"),
+                .required("Password is required! / Mot de passe requis!")
+                .min(6, "Must be at least 6 characters! / Doit être au moins 6 caractères!")
+                .max(40, "Must be maximum 40 characters! / Doit contenir au maximum 40 caractères !"),
             departments: yup
                 .string()
-                .required("Must select a department for the user."),
+                .required("Must select a department for the user. / Doit sélectionner un département pour l'utilisateur."),
             hospitalAdmin:yup
                 .boolean(),
             head: yup

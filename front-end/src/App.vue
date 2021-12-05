@@ -128,7 +128,7 @@
         </li>
         <li class="my-auto nav-item">
           <button class="btn btn-sm btn-outline-secondary" @click="gettestemployee">
-            get employeeofthemonth
+            {{ $t('header.getEmployeeOTM') }}
           </button>
         </li>
 

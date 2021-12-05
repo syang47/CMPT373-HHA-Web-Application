@@ -27,13 +27,13 @@
 
     <div>
         <div class="text-center">
-            <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
+            <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
             <div class="row">
                 <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAll">All Department's MSPP Data</button>
+                    <button class="btn btn-secondary" v-on:click="switch_msppAll">{{ $t("dataDisplay.allDepartmentMSPPData") }}</button>
                 </div>
                 <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAllDate">MSPP Data List By Dates</button>
+                    <button class="btn btn-secondary" v-on:click="switch_msppAllDate">{{ $t("dataDisplay.MSPPDataListByDates") }}</button>
                 </div>
             </div>
             <div v-if="showAllMspp"> 
@@ -53,65 +53,65 @@
                 <table class="table table-bordered table-striped table-hover" v-for="(name) in selectedMsppDataByDate" :key="name">
                     <thead class="thead-dark">
                         <tr>
-                            <th scope="col">Data Type</th>
-                            <th scope="col">Data Value</th>
+                            <th scope="col">{{ $t("dataDisplay.dataType") }}</th>
+                            <th scope="col">{{ $t("dataDisplay.dataValue") }}</th>
                         </tr>
                     </thead>    
                     <tr>
 
-                        <th scope="row">Date Submitted</th>
+                        <th scope="row">{{ $t("dataDisplay.dateSubmitted") }}</th>
                         <td>{{name.dateSubmitted}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Beds Available</th>
+                        <th scope="row">{{ $t("msppData.bedsAvailable") }}</th>
                         <td>{{name.bedsAvailable}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Bed Days</th>
+                        <th scope="row">{{ $t("msppData.bedDays") }}</th>
                         <td>{{name.bedDays}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Patient Days</th>
+                        <th scope="row">{{ $t("msppData.patientDays") }}</th>
                         <td>{{name.patientDays}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Hospitalized</th>
+                        <th scope="row">{{ $t("msppData.hospitalised") }}</th>
                         <td>{{name.hospitalized}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Discharged Alive</th>
+                        <th scope="row">{{ $t("msppData.dischargedAlive") }}</th>
                         <td>{{name.dischargedAlive}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Died Before 48h</th>
+                        <th scope="row">{{ $t("msppData.diedBefore48h") }}</th>
                         <td>{{name.diedBefore48h}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Died After 48h</th>
+                        <th scope="row">{{ $t("msppData.diedAfter48h") }}</th>
                         <td>{{name.diedAfter48h}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Days Hospitalised</th>
+                        <th scope="row">{{ $t("msppData.daysHospitalised") }}</th>
                         <td>{{name.daysHospitalised}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Referrals</th>
+                        <th scope="row">{{ $t("msppData.referrals") }}</th>
                         <td>{{name.referrals}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Transfers</th>
+                        <th scope="row">{{ $t("msppData.transfers") }}</th>
                         <td>{{name.transfers}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Self Discharged</th>
+                        <th scope="row">{{ $t("msppData.selfDischarged") }}</th>
                         <td>{{name.selfDischarged}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">StayedInTheWard</th>
+                        <th scope="row">{{ $t("msppData.stayedInTheWard") }}</th>
                         <td>{{name.stayedInTheWard}}</td>
                     </tr>
                     <tr>
-                        <th scope="row">Admissions</th>
+                        <th scope="row">{{ $t("msppData.admissions") }}</th>
                         <td>{{name.admissions}}</td>
                     </tr>
                 </table>
@@ -157,7 +157,7 @@ export default defineComponent({
         },
         showAllMsppData() {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data";
+            this.message = "Displaying existing mspp only data / Affichage des données mspp existantes uniquement";
             
             this.$axios.get("/api/mspp/data", {
                 headers: {
@@ -168,7 +168,7 @@ export default defineComponent({
                 if(response != null) {
                     console.log("getting department data successful");
                 } else {
-                    alert("no data in mspp data can be fetched...");
+                    alert("no data in mspp data can be fetched / aucune donnée dans mspp ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -177,12 +177,12 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch department data");
+                alert("failed to fetch department data / n'a pas réussi à récupérer les données du département");
             });
         },
         querySelectedDate(id, datedate) {
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data by date";
+            this.message = "Displaying existing mspp only data by date / Affichage des données mspp existantes uniquement par date";
             this.showSelectedMsppByDate = true;
             this.$axios.get(`/api/mspp/data/${datedate}/${id}`, {
                 headers: {
@@ -199,7 +199,7 @@ export default defineComponent({
                 if(response != null) {                    
                     console.log("getting deparment data by date successful");
                 } else {
-                    alert("no data in mspp can be fetched...");
+                    alert("no data in mspp can be fetched / aucune donnée dans mspp ne peut être récupérée");
                 }
             }).catch((error: any) => {
                 this.message =
@@ -208,7 +208,7 @@ export default defineComponent({
                     error.response.data.message) ||
                     error.message;
                 
-                alert("failed to fetch department data by date");
+                alert("failed to fetch department data by date / n'a pas réussi à récupérer les données du service par date");
             });
         }
         

@@ -19,21 +19,21 @@
           <div class="card has-bg">
             <div class="card-body">
             <div class="text-center">
-              <h2 class="display-5">Message Board</h2>
+              <h2 class="display-5">{{ $t('messageBoard.messageBoard') }}</h2>
             </div>
             <div>
               
               <div class="mb-3">
-                <button class="btn btn-primary" @click="show = !show">Add message</button>
+                <button class="btn btn-primary" @click="show = !show">{{ $t('messageBoard.addMessage') }}</button>
               </div>
                 <Form v-if="show" @submit="handleData" :validation-schema="dataSchema">
                   <div class="mb-3">
-                    <label class="mb-2" for="title">Title</label>
+                    <label class="mb-2" for="title">{{ $t('messageBoard.title') }}</label>
                     <Field name="title" type="text" class="form-control" />
                     <ErrorMessage name="title" class="error-feedback" />
                   </div>
                   <div class="mb-3">
-                    <label class="mb-2" for="messageToPost">Message</label>
+                    <label class="mb-2" for="messageToPost">{{ $t('messageBoard.message') }}</label>
                     <Field name="messageToPost" type="text" class="form-control" />
                     <ErrorMessage name="messageToPost" class="error-feedback" />
                   </div>
@@ -141,7 +141,7 @@ export default defineComponent({
                   error.message;
               this.successful = false;
               this.loading = false;
-              alert("entry could not be submitted");
+              alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
         });
       }
     }
