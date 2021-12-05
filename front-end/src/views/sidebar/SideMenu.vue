@@ -37,12 +37,12 @@ export default defineComponent({
                 departments.push(d2);
                 let d3 = {
                     href:"/community_health",
-                    title:  this.$t("sideBar.communityhealth"),
+                    title:  this.$t("departmentPage.communityHealth"),
                 }
                 departments.push(d3);
                 let d4 = {
                     href:"/nicu_paed",
-                    title:  this.$t("sideBar.nicupaed"),
+                    title:  this.$t("departmentPage.nicupaed"),
                 }
                 departments.push(d4);
                 // return departments.push(d1,d2,d3,d4);
@@ -62,11 +62,6 @@ export default defineComponent({
                 {
                     href:'/leadersboard',
                     title: this.$t("sideBar.leaderBoard"),
-                    hiddenOnCollapse: true
-                },
-                {
-                    href:'/announcement',
-                    title: this.$t("sideBar.addAward"),
                     hiddenOnCollapse: true
                 },
                 {

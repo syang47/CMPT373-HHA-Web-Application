@@ -1,9 +1,7 @@
 package hha.website.services;
 
 import hha.website.DepartmentRepository;
-import hha.website.models.Department;
-import hha.website.models.DepartmentDTO;
-import hha.website.models.User;
+import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Sort;
@@ -68,6 +66,7 @@ public class HHADepartmentService {
         departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
         departmentRepository.updateDepartmentReportsSubmitted(user.getDepartment().getDepartmentname());
     }
+
 
     public List<Department> listAllDepartments() {
         return departmentRepository.findAll();

@@ -77,30 +77,49 @@ table td.gap span {
                 <div class="card-body">
                     <div class="container-fluid">
                 <h1 class="display-2 text-center text-dark">{{ $t('leaderBoard.leaderBoard') }}</h1>
+                <button v-if="hasPermissions" class="btn btn-secondary" @click="goToAddAnnouncement"> {{$t("announcementPage.addAnnouncement")}} </button>
                 <div class="container-fluid">
                     <div class="row">
-                        <div class="col">
+                        <div class="col" v-if="MonthlyPrize.length != 0">
                                 <div class="card shadow-none rounded text-left text-white mb-3 mt-3" style="background: lightblue;">
                                     <div class="card-body">
                                         <h2 style="color:#000000;" class="card-title w-70">{{ $t('leaderBoard.monthlyAward') }}</h2>
-                                        <ul>
-                                            <li v-for="prize in MonthlyPrize" :key="prize">
-                                                {{ prize }}
-                                            </li>
-                                        </ul>
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
+                                            <tbody>
+                                                <tr v-for="field in MonthlyPrize" :key="field">
+                                                    <td>
+                                                        <div class="mb-3">
+                                                            <h3 class="fw-light">
+                                                                Posted On {{field[1]}} for {{field[2]}}
+                                                            </h3>
+                                                        </div>
+                                                        <div class="mb-3" v-if="field[3] != ''">
+                                                            <img :src="'data:' + field[3] + ';base64,' + field[4]" />
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
 
                         </div>
-                        <div class="col" >
+                        <div class="col" v-if="employeeofthemonth.length != 0">
                             <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                                 <div class="card-body">
-                                    <h2 style="color:#000000;" class="card-title w-40">{{ $t('leaderBoard.annualAward') }}</h2>
-                                    <ul>
-                                        <li v-for="prize in AnnualPrize" :key="prize">
-                                            {{ prize }}
-                                        </li>
-                                    </ul>
+                                    <h2 style="color:#000000;" class="card-title w-40">{{$t('dataDisplay.employeeOTM')}}</h2>
+                                    <div class="justify-content-center">
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
+                                            <tbody>
+                                                <tr v-for="field in employeeofthemonth" :key="field">
+                                                    <td>
+                                                        {{field}}
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -110,7 +129,7 @@ table td.gap span {
                             <div class="row-6 rounded-left">
                                 <div class="card shadow-none rounded text-center text-white mb-3 mt-3" style="background:#7fffd4">
                                     <div class="card-body">
-                                        <table>
+                                        <table class="mx-auto table table-bordered table-striped table-hover">
                                             <thead>
                                                 <tr>
                                                     <th>{{ $t('leaderBoard.position') }}</th>
@@ -130,11 +149,45 @@ table td.gap span {
                                 </div>
                             </div>
                         </div>
-                        <div class="col rounded mb-3 mt-3" style="background: #F59A23">
+                        <div v-if="caseStudyOfTheMonth.length != 0" class="col rounded mb-3 mt-3" style="background: #F59A23">
                             <div class="card shadow-none w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                                 <div class="card-body">
                                     <h2 style="color:#000000;">{{ $t('leaderBoard.caseStudyOTM') }}</h2>
-                                    
+                                    <table class="mx-auto table table-bordered table-striped table-hover">
+                                        <tbody>
+                                            <tr>
+                                                <div class="mb-3">
+                                                    <h3 class="fw-light">
+                                                        Posted On {{caseStudyOfTheMonth[0]}} by {{caseStudyOfTheMonth[2]}}
+                                                    </h3>
+                                                    <h3 class="fw-light">
+                                                        Type: {{caseStudyOfTheMonth[1]}}
+                                                    </h3>
+                                                    <img v-if="caseStudyOfTheMonth[3] != null" :src="'data:' + caseStudyOfTheMonth[4] + ';base64,' + caseStudyOfTheMonth[3]" />
+                                                </div>
+                                            </tr>
+                                            <tr>
+                                                <table class="mx-auto table table-bordered table-striped table-hover">
+                                                    
+                                                    <thead>
+                                                        <tr>
+                                                            <th v-for="header in Object.keys(caseStudyOfTheMonth[5])" :key="header">{{header}}</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td v-for="field in caseStudyOfTheMonth[5]" :key="field">
+                                                                <div class="mx-auto text-wrap justify-content-center" style="width: 6rem; text-align: center">
+                                                                    {{field}}
+                                                                </div>
+                                                                
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
@@ -158,15 +211,23 @@ export default defineComponent({
     name: "LeadersBoard",
     mounted() {
         this.getMonthlyPrize();
-        this.getAnnualPrize();
+        this.getEmployeeoftheMonth();
         this.getDepartmentPoints();
+        this.getCaseStudyOfTheMonth();
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
     },
     data: function() {
         return {
             departmentPoints: {},
             departments: [""],
             MonthlyPrize: [""],
-            AnnualPrize: [""]
+            AnnualPrize: [""],
+            employeeofthemonth: [],
+            caseStudyOfTheMonth: [] as any,
+            hasPermissions: false
         }
     },
     methods: {
@@ -178,25 +239,44 @@ export default defineComponent({
             return false;
         },
         getMonthlyPrize(): void {
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            let token = JSON.parse(localStorage.getItem('user')!);
             axios.get("/api/announcements", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
                 params: {
-                    field: "monthly"
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
-                this.MonthlyPrize = response.data.filter(message => message);
+                this.MonthlyPrize = response.data;
             });
         },
-        getAnnualPrize(): void{
-            axios.get("/api/announcements", {
+        getEmployeeoftheMonth(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            this.$axios.get("/api/user/employeeofthemonth", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
                 params: {
-                    field: "annual"
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
-            }).then(response=> {
-                this.AnnualPrize = response.data.filter(message => message);
-            });
+            }).then(response => {
+                this.employeeofthemonth = response.data;
+            })
         },
         getDepartmentPoints(): void {
-            axios.get("/api/departments/points").then(response=> {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            axios.get("/api/departments/points", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+            }).then(response=> {
                 var departmentPointsData = response.data;
                 
                 //https://stackoverflow.com/questions/5467129/sort-javascript-object-by-key
@@ -204,7 +284,29 @@ export default defineComponent({
                                 result[key] = departmentPointsData[key];
                                 return result;
                             }, {});
+            }).catch((error: any) => {
+                alert("could not get department points");
             });
+        },
+        getCaseStudyOfTheMonth(): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            axios.get("/api/casestudy/entry", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`
+                },
+                params: {
+                    month: months[new Date().getMonth()] + " " + new Date().getFullYear()
+                }
+            }).then(response=> {
+                this.caseStudyOfTheMonth = response.data;
+            })
+        },
+
+        goToAddAnnouncement(): void {
+            this.$router.push('/announcement');
         }
     }
 });

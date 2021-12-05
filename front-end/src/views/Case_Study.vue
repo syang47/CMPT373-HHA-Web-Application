@@ -50,7 +50,7 @@
                             <div class="form-group mb-3">
                                 <label class="mb-2" for="caseStudyType">{{ $t('caseStudyForm.selectCSType') }}</label>
                                 <Field v-model="caseStudySelected" v-slot="{ value }" name="caseStudyType" as="select">
-                                    <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
+                                    <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ $t("caseStudyForm." + d) }}</option>
                                 </Field>
                             </div>
                             <div v-if="caseStudySelected == 'patient_story'">
@@ -347,7 +347,7 @@ export default defineComponent({
             successful: false,
             loading: false,
             message: "",
-            caseStudyTypes: [this.$t('caseStudyForm.patientStory'), this.$t('caseStudyForm.staffRecognition'), this.$t('caseStudyForm.trainingSession'), this.$t('caseStudyForm.equipmentReceived'), this.$t('caseStudyForm.other')],
+            caseStudyTypes: ["patient_story", "staff_recognition", "training_session", "equipment_received", "other"],
             caseStudySelected: null,
             dataSchema,
         };

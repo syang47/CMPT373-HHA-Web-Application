@@ -126,11 +126,6 @@
             {{ $t('header.loginOut') }}
           </button>
         </li>
-        <li class="my-auto nav-item">
-          <button class="btn btn-sm btn-outline-secondary" @click="gettestemployee">
-            {{ $t('header.getEmployeeOTM') }}
-          </button>
-        </li>
 
       </ul>
   </nav>
@@ -151,7 +146,6 @@ export default defineComponent({
   components: {
     SideMenu,
   },
-
   data: function() {
     return{
       languages: ["Français", "English"],
@@ -195,22 +189,7 @@ export default defineComponent({
         i18n.global.locale = 'en';
       }
     },
-    gettestemployee(): void {
-      let token = JSON.parse(localStorage.getItem('user')!);
-      var months = ['January', 'February', 'March',
-        'April', 'May', 'June', 'July',
-        'August', 'September', 'October', 'November', 'December'];
-      this.$axios.get("/api/user/employeeofthemonth", {
-        headers: {
-          'Authorization': `Bearer ${token.jwt}`
-        },
-        params: {
-          month: months[new Date().getMonth()] + " " + new Date().getFullYear()
-        }
-      }).then(response => {
-        console.log(response.data);
-      });
-    }
+    
 
   },
  
