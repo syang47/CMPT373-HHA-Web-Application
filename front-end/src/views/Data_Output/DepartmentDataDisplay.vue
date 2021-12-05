@@ -44,7 +44,7 @@
                         <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm">MSPP/ADDITONAL</button>
                     </td>
                     <td v-if="hasPermissions">
-                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm">DEL</button>
+                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm">DELETE</button>
                     </td>
                 </tr>
             </tbody>
