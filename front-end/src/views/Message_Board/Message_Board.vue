@@ -46,7 +46,7 @@
                 </Form>
               
             </div>
-            <div :key="rerender" >
+            <div :key="rerender">
               <div class="card">
                 <div class="card-body" v-for="m in messages" :key="m" @click="showMessage(m)">
                   <h1 class="mb-2" style="text-align:left">
@@ -91,7 +91,7 @@ export default defineComponent({
       messageToPost: string,
       dateSubmitted: string,
       username: string,
-      show: boolean
+      show: boolean,
     };
     const dataSchema = yup.object().shape({
       title: yup
@@ -180,7 +180,7 @@ export default defineComponent({
         alert("message could not be deleted / le message n'a pas pu être supprimé");
       });
     }
-    
+
   }
 });
 

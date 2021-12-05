@@ -29,7 +29,7 @@
                 <div class="card rounded text-center text-white mb-3 mt-3 " style="background: #7A4183">
                   <div class="card-body">
                     <h2 class="card-title w-70">{{ $t('departmentPage.caseStudy') }}</h2>
-                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
+                    <h4 class="card-text alert alert-warning">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
                     <button class="btn" @click="goToCaseStudy">
                       <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
@@ -40,7 +40,7 @@
                 <div class="card text-center text-white mb-3 mt-3 " style="background: #008eaa">
                   <div class="card-body">
                     <h2 class="card-title w-40">{{ $t('departmentPage.dataInput') }}</h2>
-                    <h4 class="card-text">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
+                    <h4 class="card-text alert alert-warning">{{ $t('departmentPage.dueDate') }} {{ this.getDate() }}</h4>
                     <button class="btn" @click="goToDataInput">
                       <img src="../../assets/add_button.png"  class="rounded-circle" alt="" />
                     </button>
@@ -48,7 +48,7 @@
                 </div>
               </div>
             </div>
-            <div class="col rounded mb-3 mt-3" style="background: #F59A23" >
+            <!-- <div class="col rounded mb-3 mt-3" style="background: #F59A23" >
               <div class="card w-100 text-center text-white mb-3 mt-3 " style="background: #F59A23; height:93%">
                 <div class="card-body">
                   <h2 class="card-title w-40">{{ $t('departmentPage.employeeOfTheMonth') }}</h2>
@@ -65,7 +65,7 @@
                 <img src="../../assets/add_button.png"  class="rounded-circle" alt="">
               </button>
             </div>
-          </div>      
+          </div>       -->
         </div>
     </div>
   </div>

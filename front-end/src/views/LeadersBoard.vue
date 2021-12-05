@@ -93,9 +93,11 @@ table td.gap span {
                                                                 Posted On {{field[1]}} for {{field[2]}}
                                                             </h3>
                                                         </div>
-                                                        <div class="mb-3" v-if="field[3] != ''">
+                                                        <div class="mb-3" v-if="field[3]">
                                                             <img :src="'data:' + field[3] + ';base64,' + field[4]" />
                                                         </div>
+                                                        <button v-if="hasPermissions" class="btn btn-danger" @click="deleteMonthlyAnnouncement(field)"> {{$t("announcementPage.deleteAnnouncement")}} </button>
+                                                
                                                     </td>
                                                 </tr>
                                             </tbody>
@@ -119,7 +121,7 @@ table td.gap span {
                                             </tbody>
                                         </table>
                                     </div>
-                                    
+
                                 </div>
                             </div>
                         </div>
@@ -168,7 +170,7 @@ table td.gap span {
                                             </tr>
                                             <tr>
                                                 <table class="mx-auto table table-bordered table-striped table-hover">
-                                                    
+
                                                     <thead>
                                                         <tr>
                                                             <th v-for="header in Object.keys(caseStudyOfTheMonth[5])" :key="header">{{header}}</th>
@@ -180,7 +182,7 @@ table td.gap span {
                                                                 <div class="mx-auto text-wrap justify-content-center" style="width: 6rem; text-align: center">
                                                                     {{field}}
                                                                 </div>
-                                                                
+
                                                             </td>
                                                         </tr>
                                                     </tbody>
@@ -227,7 +229,7 @@ export default defineComponent({
             AnnualPrize: [""],
             employeeofthemonth: [],
             caseStudyOfTheMonth: [] as any,
-            hasPermissions: false
+            hasPermissions: false,
         }
     },
     methods: {
@@ -243,6 +245,7 @@ export default defineComponent({
                 'April', 'May', 'June', 'July',
                 'August', 'September', 'October', 'November', 'December'];
             let token = JSON.parse(localStorage.getItem('user')!);
+            
             axios.get("/api/announcements", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
@@ -251,6 +254,7 @@ export default defineComponent({
                     month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
+                console.log(response.data);
                 this.MonthlyPrize = response.data;
             });
         },
@@ -307,6 +311,24 @@ export default defineComponent({
 
         goToAddAnnouncement(): void {
             this.$router.push('/announcement');
+        },
+
+        deleteMonthlyAnnouncement(announcement): void {
+            let token = JSON.parse(localStorage.getItem('user')!);
+
+            this.$axios.delete("/api/announcements/delete", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    id: announcement[0]
+                }
+            }).then(response => {
+                alert(response.data);
+                this.getMonthlyPrize();
+            }).catch((error: any) => {                
+                alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
+            });
         }
     }
 });

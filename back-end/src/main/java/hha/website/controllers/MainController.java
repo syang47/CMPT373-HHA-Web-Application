@@ -36,7 +36,7 @@ import java.util.*;
 
 
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*", allowedHeaders = "*")
 public class MainController {
 
     /*
@@ -89,7 +89,6 @@ public class MainController {
         return ResponseEntity.ok(new AuthenticationResponse(jwt, userDetails.getUsername(), userDetails.getAuthorities(), u.getDepartment().getDepartmentname()));
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/checktoken", method = RequestMethod.GET)
     public ResponseEntity<?> checkToken(@RequestHeader("Authorization") String jwt) throws Exception {
         try {
@@ -134,7 +133,6 @@ public class MainController {
         return ResponseEntity.ok("User " + userDetailsService.setEmployeeOfTheMonth(userId, month) + " set as employee of the month for " + month);
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/user/employeeofthemonth", method = RequestMethod.GET)
     public ResponseEntity<?> getEmployeeOfTheMonth(@RequestParam("month") String month) {
         return ResponseEntity.ok(userDetailsService.getEmployeeOfTheMonth(month));
@@ -145,26 +143,22 @@ public class MainController {
         return ResponseEntity.ok(userDetailsService.getAllEmployeesOfTheMonths());
     }
 
-    @CrossOrigin
     @GetMapping("/api/user/role")
     public ResponseEntity<?> getUserField() {
         return ResponseEntity.ok(userDetailsService.listDistinctItemsInField());
     }
 
-    @CrossOrigin
     @GetMapping("/api/user/all")
     public ResponseEntity<?> getAllUsers(@RequestHeader("Authorization") String jwt) {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(userDetailsService.listAllUsers(user).toArray());
     }
 
-    @CrossOrigin
     @GetMapping("/api/departments")
     public ResponseEntity<?> getAllDepartments(){
         System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(HHADepartmentService.listDepartmentNames());
     }
-
 
     @GetMapping("/api/mspp/{documentId}")
     public ResponseEntity<?> getADataForm(@PathVariable("documentId") String documentId){
@@ -173,23 +167,20 @@ public class MainController {
         System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(requiredData);
     }
-  
-    // list mspp additional data 
+
     @GetMapping("/api/msppadditional/{documentId}")
     public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") String documentId){
         int id = Integer.parseInt(documentId);
         AdditionalMSPP additionalData = msppRepositoryService.getAdditional(id);
         return ResponseEntity.ok(additionalData);
     }
-    // list mspp data by id, date, department good
-    @CrossOrigin
+
     @GetMapping("/api/mspp/data/all")
     public ResponseEntity<?> getAllMSPPData(){
         System.out.println(msppRepositoryService.listMsppData());
         return ResponseEntity.ok(msppRepositoryService.listMsppData());
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/mspp/data/delete")
     public ResponseEntity<?> deleteMsppData(@RequestParam("id") Integer id) {
         try{
@@ -200,38 +191,32 @@ public class MainController {
         }
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/casestudyinput", method = RequestMethod.POST)
     public ResponseEntity<?> saveCaseStudy(@RequestHeader("Authorization") String jwt, @RequestPart(value = "file", required = false) MultipartFile file, @RequestPart("data") String json) throws JsonProcessingException {
         final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
         return ResponseEntity.ok(caseStudyService.save(user, json, file));
     }
 
-    @CrossOrigin
     @GetMapping("/api/casestudy/types")
     public ResponseEntity<?> getCaseStudyTypes(){
         return ResponseEntity.ok(caseStudyService.listCaseStudyTypes());
     }
 
-    @CrossOrigin
     @GetMapping("/api/casestudy/all")
     public ResponseEntity<?> getCaseStudyEntries(){
         return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
     }
 
-    @CrossOrigin
     @GetMapping("/api/casestudy/entry")
     public ResponseEntity<?> getCaseStudyEntry(@RequestParam("month") String month){
         return ResponseEntity.ok(caseStudyService.getACaseStudy(month));
     }
 
-    @CrossOrigin
     @RequestMapping(value = "/api/casestudy/casestudyofthemonth/submit", method = RequestMethod.POST)
     public ResponseEntity<?> setCaseStudyOfTheMonth(@RequestParam("id") Integer id, @RequestParam("month") String month){
         return ResponseEntity.ok("Case study " + caseStudyService.setCaseStudyOfTheMonth(id, month) + " set as case study of the month for " + month);
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/casestudy/delete")
     public ResponseEntity<?> deleteCaseStudy(@RequestParam("id") Integer id) {
         try{
@@ -266,12 +251,20 @@ public class MainController {
         return ResponseEntity.ok(announcementService.save(data, monthlyPhoto));
     }
 
-    @CrossOrigin
     @GetMapping("/api/announcements")
     public ResponseEntity<?> getLatestAnnouncements(@RequestParam("month") String month){
         return ResponseEntity.ok(announcementService.listMonthlyAnnouncements(month));
     }
 
+    @DeleteMapping("/api/announcements/delete")
+    public ResponseEntity<?> deleteAnnouncement(@RequestParam("id") Integer id){
+        try{
+            announcementService.deleteAnAnnouncement(id);
+            return new ResponseEntity<>("Announcement has been deleted successfully", HttpStatus.OK);
+        } catch(Exception e){
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @RequestMapping(value = "/api/messageboard/submit", method = RequestMethod.POST)
     public ResponseEntity<?> saveMessage(@RequestHeader("Authorization") String jwt, @RequestBody MessageBoardDTO data) {
@@ -279,7 +272,6 @@ public class MainController {
         return ResponseEntity.ok(messageBoardService.save(user, data));
     }
 
-    @CrossOrigin
     @GetMapping("/api/messages")
     public ResponseEntity<?> getMessages(){
         return ResponseEntity.ok(messageBoardService.listAllMessages());

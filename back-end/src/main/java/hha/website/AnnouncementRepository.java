@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnnouncementRepository extends JpaRepository<Announcement, String>{
+public interface AnnouncementRepository extends JpaRepository<Announcement, Integer>{
     List<Announcement> findByMonth(String month);
 }

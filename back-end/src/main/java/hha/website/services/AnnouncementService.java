@@ -1,10 +1,7 @@
 package hha.website.services;
 
 import hha.website.AnnouncementRepository;
-import hha.website.models.AnnouncementDTO;
-import hha.website.models.Announcement;
-import hha.website.models.CaseStudy;
-import hha.website.models.MessageBoard;
+import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -55,5 +52,10 @@ public class AnnouncementService {
             monthlyAnnouncement.add(aData);
         }
         return monthlyAnnouncement;
+    }
+
+    public void deleteAnAnnouncement(Integer id){
+        Optional<Announcement> announcementToDelete = announcementRepository.findById(id);
+        announcementToDelete.ifPresent(c -> announcementRepository.deleteById(id));
     }
 }

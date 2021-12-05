@@ -40,10 +40,10 @@
                             <td v-for="attribute in user" :key="attribute"> {{attribute}} </td>
 
                             <td v-if="hasPermissions">
-                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary">{{ $t("dataDisplay.setEmployeeOTM") }}</button>
+                                <button @click="setEmployeeOfTheMonth(user)" class="btn btn-secondary mb-4">{{ $t("dataDisplay.setEmployeeOTM") }}</button>
                             </td>
                             <td v-if="hasPermissions">
-                                <button @click="deleteUser(user)" class="btn btn-danger">{{ $t("dataDisplay.delete") }}</button>
+                                <button @click="deleteUser(user)" class="btn btn-danger mb-4">{{ $t("dataDisplay.delete") }}</button>
                             </td>
                         </tr>
                     </tbody>

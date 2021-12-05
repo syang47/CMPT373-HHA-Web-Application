@@ -38,13 +38,13 @@
                         {{attribute}}
                     </td>
                     <td>
-                        <button @click="showDataDetail(data[1].id)" class="btn btn-info btn-sm">MSPP ONLY</button>
+                        <button @click="showDataDetail(data[1].id)" class="btn btn-info btn-sm mb-4">MSPP ONLY</button>
                     </td>
                     <td>
-                        <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm">MSPP/ADDITONAL</button>
+                        <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm mb-4">MSPP/ADDITONAL</button>
                     </td>
                     <td v-if="hasPermissions">
-                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm">DELETE</button>
+                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm mb-4">DELETE</button>
                     </td>
                 </tr>
             </tbody>

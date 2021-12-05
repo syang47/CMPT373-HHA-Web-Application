@@ -11,12 +11,16 @@
 <template>
   <div class="main-content">
     <div class="card">
+      
       <div class="card-body">
+        <div class="alert alert-warning">
+        <h2>
+          {{ $t('homePage.notify') }}{{ this.getDate() }}
+        </h2>
+      </div>  
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
-      <li>
-        {{ $t('homePage.notify') }}{{ this.getDate() }}
-      </li>
+      
       <div class="carousel-item active">
         <div class="img-wrap">
           <img src="../assets/project_photos/pic10.jpg" class="img-fluid" alt="..."> 

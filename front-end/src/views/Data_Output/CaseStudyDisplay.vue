@@ -63,13 +63,13 @@
                             </div>
                         </td>
                         <td>
-                            <button @click="showCaseStudy(entry)" class="btn btn-info">{{ $t('dataDisplay.expand') }}</button>
+                            <button @click="showCaseStudy(entry)" class="btn btn-info mb-4">{{ $t('dataDisplay.expand') }}</button>
                         </td>
                         <td v-if="hasPermissions">
-                            <button @click="setCaseStudyOfTheMonth(entry)" class="btn btn-secondary">{{ $t('dataDisplay.caseStudyOTM') }}</button>
+                            <button @click="setCaseStudyOfTheMonth(entry)" class="btn btn-secondary mb-4">{{ $t('dataDisplay.caseStudyOTM') }}</button>
                         </td>
                         <td v-if="hasPermissions">
-                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger">{{ $t('dataDisplay.delete') }}</button>
+                            <button @click="deleteCaseStudy(entry)" class="btn btn-danger mb-4">{{ $t('dataDisplay.delete') }}</button>
                         </td>
                     </tr>
                     <tr v-if="entry[1].showData">
@@ -186,6 +186,7 @@ export default defineComponent({
                 }
             }).then(response => {
                 alert(response.data);
+                this.showAllCaseStudies();
             }).catch((error: any) => {                
                 alert("error occurred when deleting user / une erreur s'est produite lors de la suppression de l'utilisateur");
             });

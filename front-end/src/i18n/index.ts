@@ -5,7 +5,9 @@ const i18n = createI18n({
   messages: {
     fr: {
       header: {
-        loginOut: "CONNEXION / DEconnexion",
+        login: "CONNEXION",
+        logout: "DECONNEXION",
+        loggedInAs: "Connecté en tant que: ",
         getEmployeeOTM: "OBTENEZ L'EMPLOYÉ DU MOIS",
         register: "S'INSCRIRE",
         showDepartments: "MONTRER LES DÉPARTEMENTS",
@@ -57,6 +59,7 @@ const i18n = createI18n({
         addPhoto: "Ajouter une photo:",
         annualAward: "Prix ​​annuel",
         submit: "Soumettre",
+        deleteAnnouncement: "Supprimer un prix"
       },
       dataDisplay: {
         displayData: "Afficher les données",
@@ -567,7 +570,9 @@ const i18n = createI18n({
 
     en: {
       header: {
-        loginOut: "LOG IN / LOG OUT",
+        login: "LOG IN",
+        logout: "LOG OUT",
+        loggedInAs: "Logged in as: ",
         getEmployeeOTM: "GET EMPLOYEE OF THE MONTH",
         register: "REGISTER",
         showDepartments: "SHOW DEPARTMENTS",
@@ -592,7 +597,7 @@ const i18n = createI18n({
         nicupaed: "NICU/PAED",
         maternity: "MATERNITY",
         rehab: "REHAB",
-        communityhealth: "COMMUNITY HEALTH",
+        communityHealth: "COMMUNITY HEALTH",
         register: "Register",
       },
       registerPage: {
@@ -619,6 +624,7 @@ const i18n = createI18n({
         addPhoto: "Add a Photo:",
         annualAward: "Annual Award",
         submit: "Submit",
+        deleteAnnouncement: "Delete an Award"
       },
       dataDisplay: {
         displayData: "Display Data",

@@ -150,43 +150,38 @@ export default defineComponent({
 
         handleData(entry) {
             let token = JSON.parse(localStorage.getItem('user')!);
-            if(token != null) {
-
-                let formData = new FormData();
-                if(entry.monthlyPhoto){
-                    for(let p of entry.monthlyPhoto){
-                        formData.append("monthlyPhoto", p);
-                    }
+            let formData = new FormData();
+            if(entry.monthlyPhoto){
+                for(let p of entry.monthlyPhoto){
+                    formData.append("monthlyPhoto", p);
                 }
-                delete entry["monthlyPhoto"];
-                var months = ['January', 'February', 'March',
-                    'April', 'May', 'June', 'July',
-                    'August', 'September', 'October', 'November', 'December'];
-                entry.month = months[new Date().getMonth()] + " " + new Date().getFullYear();
-
-                formData.append("data", new Blob([JSON.stringify(entry)], {
-                                type: "application/json"
-                            }));
-                console.log(entry)
-                this.$axios.post("/api/announcements/submit", formData, {
-                    headers: {
-                        'Authorization': `Bearer ${token.jwt}`,
-                    },
-                }).then(response => {
-                        this.message = "Entry successful";
-                        this.successful = true;
-                        this.loading = false;
-                    }
-                ).catch((error: any) => {
-                      this.message =
-                          (error.response &&
-                          error.response.data &&
-                          error.response.data.message) ||
-                          error.message;
-                      this.successful = false;
-                      this.loading = false;
-                });
             }
+            delete entry["monthlyPhoto"];
+            var months = ['January', 'February', 'March',
+                'April', 'May', 'June', 'July',
+                'August', 'September', 'October', 'November', 'December'];
+            entry.month = months[new Date().getMonth()] + " " + new Date().getFullYear();
+
+            formData.append("data", new Blob([JSON.stringify(entry)], {
+                            type: "application/json"
+                        }));
+            this.$axios.post("/api/announcements/submit", formData, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+            }).then(response => {
+                this.message = "Entry successful";
+                this.successful = true;
+                this.loading = false;
+            }).catch((error: any) => {
+                this.message =
+                    (error.response &&
+                    error.response.data &&
+                    error.response.data.message) ||
+                    error.message;
+                this.successful = false;
+                this.loading = false;
+            });
         },
 
     }

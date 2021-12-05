@@ -1,13 +1,3 @@
-// export interface User {
-//     username: string
-//     department: string
-// }
-// export interface RegisterUserInfo {
-//     username: string
-//     password: string
-//     department: string
-// }
-
 // ref: https://www.bezkoder.com/vue-3-authentication-jwt/
 import AuthService from "@/services/auth.service";
 
