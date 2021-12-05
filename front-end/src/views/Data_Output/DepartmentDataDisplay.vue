@@ -52,12 +52,17 @@
         <b-container v-if="!showAllListTable" class="text-center" >
             <b-row>
                 <b-button pill @click="showAllMsppData" variant="outline-primary" size="sm" align-v="end">Return to Previous</b-button>
+                <hr class="my-4">
             </b-row>
-            <b-row>
-                <b-table v-if="showMSPPOnly" hover :items="msppOnlyData" :fields="fields">
+            
+            <b-row v-if="showMSPPOnly">
+                <h1>MSPP Only Data</h1>
+                <b-table hover :items="msppOnlyData" :fields="fields">
                 </b-table>
-
-                <b-table v-if="showMSPPAddData" hover :items="msppAndAddData" :fields="fields">
+            </b-row>
+            <b-row v-if="showMSPPAddData" >
+                <h1>MSPP and Additional Data</h1>
+                <b-table hover :items="msppAndAddData" :fields="fields">
                 </b-table>
             </b-row>
         </b-container>    
