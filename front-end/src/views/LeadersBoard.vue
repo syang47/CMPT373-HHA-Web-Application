@@ -106,7 +106,7 @@ table td.gap span {
                         <div class="col" v-if="employeeofthemonth.length != 0">
                             <div class="card shadow-none w-100 text-left text-white mb-3 mt-3" style="background:#C0C0C0;">
                                 <div class="card-body">
-                                    <h2 style="color:#000000;" class="card-title w-40">Employee of the month</h2>
+                                    <h2 style="color:#000000;" class="card-title w-40">{{$t('dataDisplay.employeeOTM')}}</h2>
                                     <div class="justify-content-center">
                                         <table class="mx-auto table table-bordered table-striped table-hover">
                                             <tbody>
@@ -175,9 +175,12 @@ table td.gap span {
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <div v-for="field in caseStudyOfTheMonth[5]" :key="field">
-                                                                {{field}}
-                                                            </div>
+                                                            <td v-for="field in caseStudyOfTheMonth[5]" :key="field">
+                                                                <div class="mx-auto text-wrap justify-content-center" style="width: 6rem; text-align: center">
+                                                                    {{field}}
+                                                                </div>
+                                                                
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -242,7 +245,6 @@ export default defineComponent({
                     month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
-                console.log(response.data);
                 this.MonthlyPrize = response.data;
             });
         },
@@ -293,7 +295,6 @@ export default defineComponent({
                     month: months[new Date().getMonth()] + " " + new Date().getFullYear()
                 }
             }).then(response=> {
-                console.log(response.data);
                 this.caseStudyOfTheMonth = response.data;
             })
         }
