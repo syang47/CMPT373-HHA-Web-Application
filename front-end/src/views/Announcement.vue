@@ -41,36 +41,40 @@
     <div class="main-content">
         <div class="card shadow-none">
             <div class="card-body">
-                <div class="card form-box mb-3">
+                <div class="card form-box has-bg mb-3">
                     <div class="card-body">
                         <Form @submit="handleData" :validation-schema="dataSchema">
-                            <div class="signup-form text-monospace">
+                            <div class="text-monospace">
                                 <div class="text-center">
                                     <h2 class="font-weight-bold display-5 text-dark text-monospace">{{ $t('announcementPage.addAnnouncement') }}</h2>
                                 </div>
                                 <div v-if="!successful">
-                                    <div class="form-group">
+                                    <div class="mb-3">
                                         <label class="mb-3" for="monthly">{{ $t('announcementPage.monthlyAward') }}</label>
                                         <Field name="monthly" v-slot="{ field }" class="form-control mb-3" >
                                             <textarea name="monthly" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
                                         </Field>
-                                        <ErrorMessage name="monthly" class="error-feedback" />
+                                        <div class="mt-2">
+                                            <ErrorMessage name="monthly" class="error-feedback" />
+                                        </div>
 
                                         <label class="mb-2" for="monthlyPhoto">{{ $t('announcementPage.addPhoto') }}</label>
                                         <Field name="monthlyPhoto" type="file" rules="image" />
+                                        <div class="mt-2">
                                         <ErrorMessage name="monthlyPhoto" class="error-feedback" />
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>
-                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >
-                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
-                                        </Field>
-                                        <ErrorMessage name="annual" class="error-feedback" />
+<!--                                    <div class="form-group">-->
+<!--                                        <label class="mb-3" for="annual">{{ $t('announcementPage.annualAward') }}</label>-->
+<!--                                        <Field name="annual" v-slot="{ field }" class="form-control mb-3" >-->
+<!--                                            <textarea name="annual" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>-->
+<!--                                        </Field>-->
+<!--                                        <ErrorMessage name="annual" class="error-feedback" />-->
 
-                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>
-                                        <Field name="annualPhoto" type="file" rules="image" />
-                                        <ErrorMessage name="annualPhoto" class="error-feedback" />
-                                    </div>
+<!--                                        <label class="mb-2" for="annualPhoto">{{ $t('announcementPage.addPhoto') }}</label>-->
+<!--                                        <Field name="annualPhoto" type="file" rules="image" />-->
+<!--                                        <ErrorMessage name="annualPhoto" class="error-feedback" />-->
+<!--                                    </div>-->
                                     <div class="form-group">
                                         <button class="btn btn-outline-light btn-block" :disabled="loading">
                                             <span v-show="loading" class="spinner-border spinner-border-sm"></span>
@@ -81,10 +85,10 @@
                             </div>
                         </Form>
                     
+                        <div v-if="message" style="width: 60%; margin:0 auto;" class="alert text-center" :class="successful ? 'alert-success' : 'alert-danger'">
+                            {{ message }}
+                        </div>
                     </div>
-                </div>
-                <div v-if="message" style="width: 60%; margin:0 auto;" class="alert text-center" :class="successful ? 'alert-success' : 'alert-danger'">
-                    {{ message }}
                 </div>
             </div>
         </div>
@@ -154,21 +158,20 @@ export default defineComponent({
                         formData.append("monthlyPhoto", p);
                     }
                 }
-                if(entry.annualPhoto){
-                    for(let p of entry.annualPhoto){
-                        formData.append("annualPhoto", p);
-                    }
-                }
                 delete entry["monthlyPhoto"];
-                delete entry["annualPhoto"];
+                var months = ['January', 'February', 'March',
+                    'April', 'May', 'June', 'July',
+                    'August', 'September', 'October', 'November', 'December'];
+                entry.month = months[new Date().getMonth()] + " " + new Date().getFullYear();
+
                 formData.append("data", new Blob([JSON.stringify(entry)], {
                                 type: "application/json"
                             }));
-
+                console.log(entry)
                 this.$axios.post("/api/announcements/submit", formData, {
                     headers: {
                         'Authorization': `Bearer ${token.jwt}`,
-                    }
+                    },
                 }).then(response => {
                         this.message = "Entry successful";
                         this.successful = true;

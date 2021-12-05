@@ -25,193 +25,223 @@
 
 <template>
 
-    <div class="signup-form main-content">
-        <div class="text-center container-fluid">
-            <h2 class="font-weight-bold display-5 text-dark col">Display Data</h2>
-            <div class="row">
-                <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAll">All Department's MSPP Data</button>
-                </div>
-                <div class="form-group col">
-                    <button class="btn btn-secondary" v-on:click="switch_msppAllDate">MSPP Data List By Dates</button>
-                </div>
-            </div>
-            <div v-if="showAllMspp"> 
-                <ul class="text-left">
-                    <li v-for="(name) in msppAllData" :key="name"> {{ name }}</li>
-                </ul>
-            </div>
-            <div v-else-if="showAllMsppDate">
-                <ul class="text-left" style="list-style-type:none;">
-                    <li v-for="(value, name) in msppAllData" :key="name">
-                        <button class="btn btn-primary" v-on:click="querySelectedDate(value.id, value.dateSubmitted)">
-                        {{ value.id }}-{{ value.dateSubmitted }}</button>
-                    </li>
-                </ul>
-            </div> 
-            <div v-if="showSelectedMsppByDate"> 
-                <table class="table table-bordered table-striped table-hover" v-for="(name) in selectedMsppDataByDate" :key="name">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Data Type</th>
-                            <th scope="col">Data Value</th>
-                        </tr>
-                    </thead>    
-                    <tr>
-
-                        <th scope="row">Date Submitted</th>
-                        <td>{{name.dateSubmitted}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Beds Available</th>
-                        <td>{{name.bedsAvailable}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Bed Days</th>
-                        <td>{{name.bedDays}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Patient Days</th>
-                        <td>{{name.patientDays}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Hospitalized</th>
-                        <td>{{name.hospitalized}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Discharged Alive</th>
-                        <td>{{name.dischargedAlive}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Died Before 48h</th>
-                        <td>{{name.diedBefore48h}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Died After 48h</th>
-                        <td>{{name.diedAfter48h}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Days Hospitalised</th>
-                        <td>{{name.daysHospitalised}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Referrals</th>
-                        <td>{{name.referrals}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Transfers</th>
-                        <td>{{name.transfers}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Self Discharged</th>
-                        <td>{{name.selfDischarged}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">StayedInTheWard</th>
-                        <td>{{name.stayedInTheWard}}</td>
-                    </tr>
-                    <tr>
-                        <th scope="row">Admissions</th>
-                        <td>{{name.admissions}}</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+<div >
+    <div class="text-center">
+        <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
+        <table v-if="showAllListTable" class="table table-bordered table-striped table-hover">
+            <thead class="thead-dark">
+                <th scope="col" v-for="header in dataListHeaders" :key="header"> {{header}}</th>
+            </thead>
+            <tbody v-for="data in Object.entries(msppAllData)" :key="data">
+                <tr>
+                    <td v-for="attribute in data[1]" :key="attribute">
+                        {{attribute}}
+                    </td>
+                    <td>
+                        <button @click="showDataDetail(data[1].id)" class="btn btn-info btn-sm">MSPP ONLY</button>
+                    </td>
+                    <td>
+                        <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm">MSPP/ADDITONAL</button>
+                    </td>
+                    <td v-if="hasPermissions">
+                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm">DELETE</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <b-container v-if="!showAllListTable" class="text-center" >
+            <b-row>
+                <b-button pill @click="showAllMsppData" variant="outline-primary" size="sm" align-v="end">Return to Previous</b-button>
+                <hr class="my-4">
+            </b-row>
+            
+            <b-row v-if="showMSPPOnly">
+                <h1>MSPP Only Data</h1>
+                <b-table hover :items="msppOnlyData" :fields="fields">
+                </b-table>
+            </b-row>
+            <b-row v-if="showMSPPAddData" >
+                <h1>MSPP and Additional Data</h1>
+                <b-table hover :items="msppAndAddData" :fields="fields">
+                </b-table>
+            </b-row>
+        </b-container>    
     </div>
+    
+</div>
 
 </template>
 
 <script lang="ts" type="text/typescript">
 
-import { defineComponent } from 'vue'
+import { defineComponent , nextTick} from 'vue'
 export default defineComponent({
     name: "DepartmentDataDisplay",
     
     data: function() {
         return {
-            message: "",
-            msppAllData: [],
-            msppAllDataDate: [],
-            selectedMsppDataByDate: [],
-            showAllMspp: false,
-            showAllMsppDate: false,     
-            showSelectedMsppByDate: false      
+            showMSPPOnly: false,
+            showMSPPAddData: false,
+            showAllListTable: true,
+            hasPermissions: false,
+
+            msppAllData: {},
+            msppOnlyData: [] as any,
+            msppAddData: [] as any,
+            msppAndAddData: [] as any,
+
+            columnName: [] as any,
+            columnKeyValue: [] as any,
+            addColumnName: [] as any,
+            addColumnKeyValue: [] as any,
+
+            fields: ["name","value"],
+            dataListHeaders: ["ID", "Date Submitted", "Department"],
+            message:"",
         };
     },
     mounted() {
         "#v-for-object";
+        this.$nextTick(() => {
+            this.showAllMsppData();
+        });        
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
     },
     methods: {
-        switch_msppAll() {
-            this.showAllMspp = true;
-            this.showAllMsppDate = false;
-            this.showSelectedMsppByDate = false;
-            this.showAllMsppData();
-        },
-        switch_msppAllDate() {
-            this.showAllMspp = false;
-            this.showAllMsppDate = true;
-            this.showSelectedMsppByDate = false;
-            this.showAllMsppData();
-            console.log("getting date only")
-        },
         showAllMsppData() {
+            this.showAllListTable = true;
+            this.showMSPPOnly = false;
+            this.showMSPPAddData = false;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data";
+            this.message = "Displaying existing mspp only data / Affichage des données mspp existantes uniquement";
             
-            this.$axios.get("/api/mspp/data", {
+            this.$axios.get("/api/mspp/data/all", {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                this.msppAllData = response.data;
-                if(response != null) {
-                    console.log("getting department data successful");
-                } else {
-                    alert("no data in mspp data can be fetched...");
+                for(var d in response.data) {
+                    var ph = '';
+                    if(response.data[d][4]) {
+                        ph = "data:" + response.data[d][5] + ";base64," + response.data[d][4];
+                    } 
+                    var obj = {
+                        id: response.data[d][0],
+                        date: response.data[d][1],
+                        department: response.data[d][2],
+                    };
+                    this.msppAllData[response.data[d][0]] = obj;
                 }
             }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
-                
-                alert("failed to fetch department data");
+                alert("failed to fetch department data / n'a pas réussi à récupérer les données du département");
             });
         },
-        querySelectedDate(id, datedate) {
+        
+        getCombined(id) {
+            this.showDataDetail(id);
+            this.getAdditionalData(id);
+            this.showAllListTable = false;
+            this.showMSPPOnly = false;
+            this.showMSPPAddData = true;  
+        },
+
+        showDataDetail(id) {
+            this.showAllListTable = false;
+            this.showMSPPOnly = true;
+            this.showMSPPAddData = false;
+            let colName = [] as any;
+            let colKey = [] as any;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data by date";
-            this.showSelectedMsppByDate = true;
-            this.$axios.get(`/api/mspp/data/${datedate}/${id}`, {
+            this.message = "Displaying existing mspp only data by date / Affichage des données mspp existantes uniquement par date";
+            this.$axios.get(`/api/mspp/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                this.selectedMsppDataByDate = response.data;
-                // let temp = JSON.stringify(response.data);
-                // temp = temp.replace("[","").replace("{","").replace("}","").replace("}","");
-                // let dataToArray = temp.split(',').map(item=>item.trim());
-                // console.log(dataToArray);
-                // this.selectedMsppDataByDate=dataToArray.join("\n");
-
-                if(response != null) {                    
-                    console.log("getting deparment data by date successful");
-                } else {
-                    alert("no data in mspp can be fetched...");
-                }
-            }).catch((error: any) => {
-                this.message =
-                    (error.response &&
-                    error.response.data &&
-                    error.response.data.message) ||
-                    error.message;
+                this.msppOnlyData = response.data.requiredMSPPData;
+                for(var key in this.msppOnlyData ) {
+                    colName.push(key);
+                    colKey.push(this.msppOnlyData[key]);
+                };
                 
-                alert("failed to fetch department data by date");
+                const temp = colName.map((name, index) => {
+                    return {
+                        'name': this.formatDataHeaders(name),
+                        'value': colKey[index]
+                    }
+                });
+                this.msppOnlyData = temp;
+                this.columnName = colName;
+                this.columnKeyValue = colKey;
+            }).catch((error: any) => {
+                alert("failed to fetch additional data");
             });
-        }
+        },
+
+        getAdditionalData(id) {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            
+            let colName = [] as any;
+            let colKey = [] as any;
+
+            this.message = "Displaying existing additional mspp data";            
+            this.$axios.get(`/api/msppadditional/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                }
+            }).then(response => {
+                this.msppAddData = response.data.additionalMSPPData;
+                for(var key in this.msppAddData ) {
+                    colName.push(key);
+                    colKey.push(this.msppAddData[key]);
+                    
+                }
+                const temp = colName.map((name, index) => {
+                    return {
+                        'name': this.formatDataHeaders(name),
+                        'value': colKey[index]
+                    }
+                });
+
+                this.msppAddData = temp;
+                this.addColumnName = colName;
+                this.addColumnKeyValue = colKey;
+                this.msppAndAddData = this.msppOnlyData.concat(this.msppAddData);
+
+            }).catch((error: any) => {
+                alert("failed to fetch department data by date / n'a pas réussi à récupérer les données du service par date");
+            });
+        },
         
+        deleteDataEntry(entry) {
+            let token = JSON.parse(localStorage.getItem('user')!);
+            this.$axios.delete("/api/mspp/data/delete", {
+                headers: {
+                    'Authorization': `Bearer ${token.jwt}`,
+                },
+                params: {
+                    id: entry[0]
+                }
+            }).then(response => {
+                alert(response.data);
+                // window.location.reload();      
+                this.$nextTick(() => {
+                    this.showAllMsppData();
+                })                     
+            }).catch((error: any) => {                
+                alert("error occurred when deleting user");
+            });
+        },
+
+        formatDataHeaders(str) {
+            let str2 = str.replace(/([a-z])([A-Z])/g, '$1 $2').trim().replace(/(\D)(\d)/, '$1 $2');
+            str = str2.replace(/([A-Z])([A-Z])([a-z])/g, '$1 $2')
+            str = str2.charAt(0).toUpperCase()+str2.slice(1);
+            return str;
+        }
     }
     
 });

@@ -48,8 +48,8 @@ export default defineComponent({
     },
     data() {
             
-        const r: any = yup.number().min(0, "Cannot be negative.").required("Required.");
-        const a: any = yup.number().min(0, "Cannot be negative.");
+        const r: any = yup.number().min(0, "Cannot be negative. / Ne peut pas être négatif.").required("Required. / Obligatoire.");
+        const a: any = yup.number().min(0, "Cannot be negative. / Ne peut pas être négatif.");
         const formSchema: any = {
             fields: [
                 {

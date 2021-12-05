@@ -39,7 +39,7 @@
 <div class="main-content">
     <div class="card shadow-none">
         <div class="card-body">
-            <div class="card form-box">
+            <div class="card form-box has-bg">
                 <div class="card-body">
                 <Form @submit="handleData" :validation-schema="dataSchema">
                     <div class="text-center">
@@ -48,15 +48,15 @@
                         </div>
                         <div v-if="!successful" class="text-center">
                             <div class="form-group mb-3">
-                                <label for="caseStudyType">{{ $t('caseStudyForm.selectCSType') }}</label>
+                                <label class="mb-2" for="caseStudyType">{{ $t('caseStudyForm.selectCSType') }}</label>
                                 <Field v-model="caseStudySelected" v-slot="{ value }" name="caseStudyType" as="select">
-                                    <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ d }}</option>
+                                    <option v-for="d in caseStudyTypes" :key="d" :value="d" :selected="value && value.includes(d)">{{ $t("caseStudyForm." + d) }}</option>
                                 </Field>
                             </div>
                             <div v-if="caseStudySelected == 'patient_story'">
                                 <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.pStory') }}</h2>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientName">{{ $t('caseStudyForm.pName') }}</label>
+                                    <label class="mb-2" for="patientName">{{ $t('caseStudyForm.pName') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientName" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientName" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -65,7 +65,7 @@
                                     <ErrorMessage name="patientName" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientAge">{{ $t('caseStudyForm.pAge') }}</label>
+                                    <label class="mb-2" for="patientAge">{{ $t('caseStudyForm.pAge') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientAge" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientAge" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -74,7 +74,7 @@
                                     <ErrorMessage name="patientAge" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientOrigin">{{ $t('caseStudyForm.pFrom') }}</label>
+                                    <label class="mb-2" for="patientOrigin">{{ $t('caseStudyForm.pFrom') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientOrigin" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientOrigin" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -83,7 +83,7 @@
                                     <ErrorMessage name="patientOrigin" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientReasoning">{{ $t('caseStudyForm.pChoose') }}</label>
+                                    <label class="mb-2" for="patientReasoning">{{ $t('caseStudyForm.pChoose') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientReasoning" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientReasoning" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -92,7 +92,7 @@
                                     <ErrorMessage name="patientReasoning" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientDuration">{{ $t('caseStudyForm.pHowLongHCBH') }}</label>
+                                    <label class="mb-2" for="patientDuration">{{ $t('caseStudyForm.pHowLongHCBH') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientDuration" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientDuration" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -101,7 +101,7 @@
                                     <ErrorMessage name="patientDuration" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="patientDiagnosis">{{ $t('caseStudyForm.diagnosis') }}</label>
+                                    <label class="mb-2" for="patientDiagnosis">{{ $t('caseStudyForm.diagnosis') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="patientDiagnosis" v-slot="{ field }" class="form-control" >
                                             <textarea name="patientDiagnosis" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -109,12 +109,12 @@
                                     </div>
                                     <ErrorMessage name="patientDiagnosis" class="error-feedback fw-bold text-warning" />
                                 </div>
-                                <p style="text-align:center">{{ $t('caseStudyForm.morePersonalElements') }}</p>
+                                <p style="text-align:center" class="mb-2">{{ $t('caseStudyForm.morePersonalElements') }}</p>
                             </div>
                             <div v-if="caseStudySelected == 'staff_recognition'">
                                 <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.sRecognition') }}</h2>
                                 <div class="form-group text-center mb-3">
-                                    <label for="staffName">{{ $t('caseStudyForm.sName') }}</label>
+                                    <label class="mb-2" for="staffName">{{ $t('caseStudyForm.sName') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="staffName" v-slot="{ field }" class="form-control" >
                                             <textarea name="staffName" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -123,7 +123,7 @@
                                     <ErrorMessage name="staffName" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="staffTitle">{{ $t('caseStudyForm.roleJob') }}</label>
+                                    <label class="mb-2" for="staffTitle">{{ $t('caseStudyForm.roleJob') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="staffTitle" v-slot="{ field }" class="form-control" >
                                             <textarea name="staffTitle" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -132,7 +132,7 @@
                                     <ErrorMessage name="staffTitle" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="staffDepartment">{{ $t('caseStudyForm.whatDept') }}</label>
+                                    <label class="mb-2" for="staffDepartment">{{ $t('caseStudyForm.whatDept') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="staffDepartment" v-slot="{ field }" class="form-control" >
                                             <textarea name="staffDepartment" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -141,7 +141,7 @@
                                     <ErrorMessage name="staffDepartment" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="staffEmploymentDuration">{{ $t('caseStudyForm.sHowLongHCBH') }}</label>
+                                    <label class="mb-2" for="staffEmploymentDuration">{{ $t('caseStudyForm.sHowLongHCBH') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="staffEmploymentDuration" v-slot="{ field }" class="form-control" >
                                             <textarea name="staffEmploymentDuration" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -150,7 +150,7 @@
                                     <ErrorMessage name="staffEmploymentDuration" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="staffEnjoymentPoints">{{ $t('caseStudyForm.enjoyHCBH') }}</label>
+                                    <label class="mb-2" for="staffEnjoymentPoints">{{ $t('caseStudyForm.enjoyHCBH') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="staffEnjoymentPoints" v-slot="{ field }" class="form-control" >
                                             <textarea name="staffEnjoymentPoints" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -158,12 +158,12 @@
                                     </div>
                                     <ErrorMessage name="staffEnjoymentPoints" class="error-feedback fw-bold text-warning" />
                                 </div>
-                                <p style="text-align:center">{{ $t('caseStudyForm.sRecognise') }}</p>
+                                <p style="text-align:center" class="mb-2">{{ $t('caseStudyForm.sRecognise') }}</p>
                             </div>
                             <div v-if="caseStudySelected == 'training_session'">
                                 <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.tSession') }}</h2>
                                 <div class="form-group text-center mb-3">
-                                    <label for="trainingDate">{{ $t('caseStudyForm.tDate') }}</label>
+                                    <label class="mb-2" for="trainingDate">{{ $t('caseStudyForm.tDate') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="trainingDate" v-slot="{ field }" class="form-control" >
                                             <textarea name="trainingDate" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -172,7 +172,7 @@
                                     <ErrorMessage name="trainingDate" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="trainingSubject">{{ $t('caseStudyForm.tAbout') }}</label>
+                                    <label class="mb-2" for="trainingSubject">{{ $t('caseStudyForm.tAbout') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="trainingSubject" v-slot="{ field }" class="form-control" >
                                             <textarea name="trainingSubject" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -181,7 +181,7 @@
                                     <ErrorMessage name="trainingSubject" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="trainingConductor">{{ $t('caseStudyForm.tConducted') }}</label>
+                                    <label class="mb-2" for="trainingConductor">{{ $t('caseStudyForm.tConducted') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="trainingConductor" v-slot="{ field }" class="form-control" >
                                             <textarea name="trainingConductor" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -190,7 +190,7 @@
                                     <ErrorMessage name="trainingConductor" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="trainingAttendees">{{ $t('caseStudyForm.tAttend') }}</label>
+                                    <label class="mb-2" for="trainingAttendees">{{ $t('caseStudyForm.tAttend') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="trainingAttendees" v-slot="{ field }" class="form-control" >
                                             <textarea name="trainingAttendees" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -199,7 +199,7 @@
                                     <ErrorMessage name="trainingAttendees" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="trainingBenefits">{{ $t('caseStudyForm.tBenefit') }}</label>
+                                    <label class="mb-2" for="trainingBenefits">{{ $t('caseStudyForm.tBenefit') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="trainingBenefits" v-slot="{ field }" class="form-control" >
                                             <textarea name="trainingBenefits" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -207,12 +207,12 @@
                                     </div>
                                     <ErrorMessage name="trainingBenefits" class="error-feedback fw-bold text-warning" />
                                 </div>
-                                <p style="text-align:center">{{ $t('caseStudyForm.generalSummary') }}</p>
+                                <p style="text-align:center" class="mb-2">{{ $t('caseStudyForm.generalSummary') }}</p>
                             </div>
                             <div v-if="caseStudySelected == 'equipment_received'">
                                 <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.eReceived') }}</h2>
                                 <div class="form-group text-center mb-3">
-                                    <label for="equipmentReceived">{{ $t('caseStudyForm.eWhat') }} </label>
+                                    <label class="mb-2" for="equipmentReceived">{{ $t('caseStudyForm.eWhat') }} </label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="equipmentReceived" v-slot="{ field }" class="form-control" >
                                             <textarea name="equipmentReceived" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -221,7 +221,7 @@
                                     <ErrorMessage name="equipmentReceived" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="equipmentDepartmentTo">{{ $t('caseStudyForm.eDept') }}</label>
+                                    <label class="mb-2" for="equipmentDepartmentTo">{{ $t('caseStudyForm.eDept') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="equipmentDepartmentTo" v-slot="{ field }" class="form-control" >
                                             <textarea name="equipmentDepartmentTo" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -230,7 +230,7 @@
                                     <ErrorMessage name="equipmentDepartmentTo" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="equipmentFrom">{{ $t('caseStudyForm.eFrom') }}</label>
+                                    <label class="mb-2" for="equipmentFrom">{{ $t('caseStudyForm.eFrom') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="equipmentFrom" v-slot="{ field }" class="form-control" >
                                             <textarea name="equipmentFrom" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -239,7 +239,7 @@
                                     <ErrorMessage name="equipmentFrom" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="equipmentOrigin">{{ $t('caseStudyForm.eDonatePurchase') }}</label>
+                                    <label class="mb-2" for="equipmentOrigin">{{ $t('caseStudyForm.eDonatePurchase') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="equipmentOrigin" v-slot="{ field }" class="form-control" >
                                             <textarea name="equipmentOrigin" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -248,7 +248,7 @@
                                     <ErrorMessage name="equipmentOrigin" class="error-feedback fw-bold text-warning" />
                                 </div>
                                 <div class="form-group text-center mb-3">
-                                    <label for="equipmentUsage">{{ $t('caseStudyForm.eDo') }}</label>
+                                    <label class="mb-2" for="equipmentUsage">{{ $t('caseStudyForm.eDo') }}</label>
                                     <div style="width: 60%; margin:0 auto;">
                                         <Field name="equipmentUsage" v-slot="{ field }" class="form-control" >
                                             <textarea name="equipmentUsage" v-bind="field" type="text" style="width: 100%; max-width: 100%;"/>
@@ -256,11 +256,11 @@
                                     </div>
                                     <ErrorMessage name="equipmentUsage" class="error-feedback fw-bold text-warning" />
                                 </div>
-                                <p style="text-align:center">{{ $t('caseStudyForm.eBenefit') }}</p>
+                                <p style="text-align:center" class="mb-2">{{ $t('caseStudyForm.eBenefit') }}</p>
                             </div>
                             <div v-if="caseStudySelected == 'other'">
                                 <h2 class="mb-3" style="color:red; text-align:center">{{ $t('caseStudyForm.other') }}</h2>
-                                <p style="text-align:center">{{ $t('caseStudyForm.eExtra') }}</p>
+                                <p style="text-align:center" class="mb-2">{{ $t('caseStudyForm.eExtra') }}</p>
                             </div>
 
                             <div class="form-group text-center mb-3" v-if="caseStudySelected != null">
@@ -275,20 +275,20 @@
 
                             
                             <div class="form-group mb-3">
-                                <label for="photo">{{ $t('caseStudyForm.addPhoto') }}</label>
+                                <label class="mb-2" for="photo">{{ $t('caseStudyForm.addPhoto') }}</label>
                                 <Field name="photo" type="file" rules="image" />
                                 <ErrorMessage name="photo" class="error-feedback fw-bold text-warning" />
                             </div>
                             <div class="form-group text-center mb-3">
                                 <Field name="permission" class="mb-3" type="checkbox" :value="true"/>
                                 <div style="margin:0 auto;" class="mb-3">
-                                    <label for="permission">{{ $t('caseStudyForm.disclaimer') }}</label>
+                                    <label class="mb-2" for="permission">{{ $t('caseStudyForm.disclaimer') }}</label>
                                 </div>
                                 
                                 <ErrorMessage name="permission" class="error-feedback fw-bold text-warning" />
                             </div>
                             <div class="form-group">
-                                <button class="btn btn-outline-light btn-block" :disabled="loading">
+                                <button class="btn btn-secondary btn-block" :disabled="loading">
                                     <span v-show="loading" class="spinner-border spinner-border-sm"></span>
                                     {{ $t('caseStudyForm.submit') }}
                                 </button>
@@ -340,7 +340,7 @@ export default defineComponent({
                 .string(),
             permission: yup
                 .boolean()
-                .required("Must get permission to share."),
+                .required("Must get permission to share. / Doit obtenir la permission de partager."),
 
         });
         return {
@@ -379,6 +379,12 @@ export default defineComponent({
                         this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
+                        if(response != null) {
+                            console.log("entry successful: " + this.successful);
+                            this.$router.push("/");
+                        } else {
+                            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
+                        }
                     }
                 ).catch((error: any) => {
                       this.message =
@@ -388,6 +394,7 @@ export default defineComponent({
                           error.message;
                       this.successful = false;
                       this.loading = false;
+                      alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
                 });
             }
         },

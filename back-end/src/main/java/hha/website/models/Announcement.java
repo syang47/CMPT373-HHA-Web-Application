@@ -22,24 +22,17 @@ public class Announcement {
     private Calendar dateSubmitted;
 
     @Column
-    private String monthly;
+    private String info;
 
-    @Column 
-    private String annual;
+    @Column
+    private String month;
 
     @Lob
     @Column
     private byte[] monthlyPhoto;
 
-    @Lob
-    @Column
-    private byte[] annualPhoto;
-
     @Column
     private String monthlyPhotoType;
-
-    @Column
-    private String annualPhotoType;
 
     public Calendar getDateSubmitted() {
         return dateSubmitted;
@@ -49,18 +42,20 @@ public class Announcement {
         this.dateSubmitted = dateSubmitted;
     }
 
-    public String getMonthly(){
-        return monthly;
-    }
-    public void setMonthly(String monthly){
-        this.monthly = monthly;
+    public String getMonth(){
+        return month;
     }
 
-    public String getAnnual(){
-        return annual;
+    public void setMonth(String month){
+        this.month = month;
     }
-    public void setAnnual(String annual){
-        this.annual = annual;
+
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
     }
 
     public Integer getId() {
@@ -79,27 +74,11 @@ public class Announcement {
         this.monthlyPhoto = monthlyPhoto;
     }
 
-    public byte[] getAnnualPhoto() {
-        return annualPhoto;
-    }
-
-    public void setAnnualPhoto(byte[] annualPhoto) {
-        this.annualPhoto = annualPhoto;
-    }
-
     public String getMonthlyPhotoType() {
         return monthlyPhotoType;
     }
 
     public void setMonthlyPhotoType(String monthlyPhotoType) {
         this.monthlyPhotoType = monthlyPhotoType;
-    }
-
-    public String getAnnualPhotoType() {
-        return annualPhotoType;
-    }
-
-    public void setAnnualPhotoType(String annualPhotoType) {
-        this.annualPhotoType = annualPhotoType;
     }
 }

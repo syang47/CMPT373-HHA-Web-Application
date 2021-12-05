@@ -63,16 +63,26 @@ public class MSPPRepositoryService {
         return "saved";
     }
 
-    public List<MSPPRequirement> listAllData() {
-        return msppRepository.findAll();
-    }
-
     public MSPPRequirement getAForm(Integer documentId) {
         return msppRepository.findById(documentId).get();
     }
-
-    public List<MSPPRequirement> listByIdAndDate(Integer id, Calendar date) {
-        return msppRepository.findByidAndDateSubmitted(id, date);
+   
+    // list additional mspp data with an id input
+    public AdditionalMSPP getAdditional(Integer documentId) {
+        return additionalMSPPRepository.findById(documentId).get();
+    } 
+    
+    // return all input data as a list
+    public List<List<Object>> listMsppData() {
+        List<List<Object>> datalist = new ArrayList<>();
+        for(MSPPRequirement d : msppRepository.findAll()) {
+            List<Object> dData = new ArrayList<>();
+            dData.add(d.getId());
+            dData.add(d.getDateSubmitted().getTime().toString());
+            dData.add(d.getDepartment().getDepartmentname());
+            datalist.add(dData);
+        }
+        return datalist;
     }
 
     public void deleteForm(Integer documentId){

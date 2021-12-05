@@ -31,12 +31,17 @@ public class MessageBoardService {
         entry.setMessage(data.getMessageToPost());
         entry.setUsername(user.getUsername());
         Optional<Department> department = hhaDepartmentService.loadDepartmentByDepartmentName(data.getDepartmentname());
-        department.ifPresent(d -> entry.setDepartment(d));
+        department.ifPresent(entry::setDepartment);
         return messageBoardRepository.save(entry);
     }
 
 
     public List<MessageBoard> listAllMessages() {
         return messageBoardRepository.findAll();
+    }
+
+    public void deleteMessage(Integer documentId){
+        System.out.println("message deleted");
+        messageBoardRepository.deleteById(documentId);
     }
 }

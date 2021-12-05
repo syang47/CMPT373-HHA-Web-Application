@@ -14,21 +14,27 @@
       <div class="card-body">
         <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
     <div class="carousel-inner">
+      <li>
+        {{ $t('homePage.notify') }}{{ this.getDate() }}
+      </li>
       <div class="carousel-item active">
         <div class="img-wrap">
-          <img src="../assets/project_photos/pic1.jpeg" class="img-fluid" alt="...">
+          <img src="../assets/project_photos/pic10.jpg" class="img-fluid" alt="..."> 
         </div>
       </div>
+
       <div class="carousel-item">
         <div class="img-wrap">
-          <img src="../assets/project_photos/pic2.jpg" class="img-fluid" alt="...">
+          <img src="../assets/project_photos/pic5.jpeg" class="img-fluid" alt="...">
         </div>
+
       </div>
       <div class="carousel-item">
         <div class="img-wrap">
           <img src="../assets/project_photos/pic3.jpeg" class="img-fluid" alt="...">
         </div>
       </div>
+      
     </div>
     <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -44,8 +50,17 @@
   </div>
 </template>
 <script lang="ts" type="text/typescript">
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
 export default defineComponent({
   name: "Home",
+  methods: {
+      getDate(): string {
+        let date = new Date();
+        let year = date.getFullYear();
+        let month=date.getMonth()+1;
+        let d = new Date(year,month,0);
+        return year+'/'+month+'/'+d.getDate();
+    },
+  }
 });
 </script>

@@ -19,21 +19,21 @@
           <div class="card has-bg">
             <div class="card-body">
             <div class="text-center">
-              <h2 class="display-5">Message Board</h2>
+              <h2 class="display-5">{{ $t('messageBoard.messageBoard') }}</h2>
             </div>
             <div v-if="hasPermissions">
               
               <div class="mb-3">
-                <button class="btn btn-primary" @click="show = !show">Add message</button>
+                <button class="btn btn-primary" @click="show = !show">{{ $t('messageBoard.addMessage') }}</button>
               </div>
                 <Form v-if="show" @submit="handleData" :validation-schema="dataSchema">
                   <div class="mb-3">
-                    <label class="mb-2" for="title">Title</label>
+                    <label class="mb-2" for="title">{{ $t('messageBoard.title') }}</label>
                     <Field name="title" type="text" class="form-control" />
                     <ErrorMessage name="title" class="error-feedback" />
                   </div>
                   <div class="mb-3">
-                    <label class="mb-2" for="messageToPost">Message</label>
+                    <label class="mb-2" for="messageToPost">{{ $t('messageBoard.message') }}</label>
                     <Field name="messageToPost" type="text" class="form-control" />
                     <ErrorMessage name="messageToPost" class="error-feedback" />
                   </div>
@@ -49,14 +49,17 @@
             <div :key="rerender">
               <div class="card">
                 <div class="card-body" v-for="m in messages" :key="m" @click="showMessage(m)">
-                <h1 class="mb-2" style="text-align:left">
-                  <p class="text-dark">{{ m.title }} <span class="font-weight-normal">({{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}})</span></p>
-                </h1>
-                <div v-if="m.show">
-                  <div>
-                    {{ m.message }}
+                  <h1 class="mb-2" style="text-align:left">
+                    <p class="text-dark">{{ m.title }} <span class="font-weight-normal">({{"Posted on " + m.dateSubmitted.substring(0, 10) + " at " + m.dateSubmitted.substring(11, 16) + "GMT by " + m.username}})</span></p>
+                  </h1>
+                  <div v-if="m.show">
+                    <div>
+                      {{ m.message }}
+                    </div>
+                    <td v-if="hasPermissions">
+                      <button @click="deleteMessage(m)" class="btn btn-danger btn-sm">DELETE</button>
+                    </td>
                   </div>
-                </div>
                 
               </div>
               </div>
@@ -138,11 +141,10 @@ export default defineComponent({
               'Authorization': `Bearer ${token.jwt}`
           }
       }).then(response => {
-              this.successful = true;
-              this.loading = false;
-              this.getMessages();
-          }
-      ).catch((error: any) => {
+        this.successful = true;
+        this.loading = false;
+        this.getMessages();
+      }).catch((error: any) => {
             this.errorMessage =
                 (error.response &&
                 error.response.data &&
@@ -150,9 +152,35 @@ export default defineComponent({
                 error.message;
             this.successful = false;
             this.loading = false;
-            alert("entry could not be submitted");
+            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
+      });
+    },
+
+    deleteMessage(message){
+      let token = JSON.parse(localStorage.getItem('user')!);
+      this.$axios.delete("/api/messages/delete", {
+        headers: {
+            'Authorization': `Bearer ${token.jwt}`,
+        },
+        params: {
+            id: message.id
+        }
+      }).then(response => {
+        this.successful = true;
+        this.loading = false;
+        this.getMessages();
+      }).catch((error: any) => {
+        this.errorMessage =
+            (error.response &&
+            error.response.data &&
+            error.response.data.message) ||
+            error.message;
+        this.successful = false;
+        this.loading = false;
+        alert("message could not be deleted / le message n'a pas pu être supprimé");
       });
     }
+
   }
 });
 

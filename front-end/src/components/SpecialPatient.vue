@@ -5,22 +5,22 @@
         v-for="(field, idx) in fields"
         :key="field.key" 
     >
-    <legend style="color:green"><strong>Patient {{ idx+1 }} Discharged Diagnosis: </strong></legend>
+    <legend style="color:green"><strong>{{ $t('patient.patient') }} {{ idx+1 }} {{ $t('patient.dischargeDiagnosis') }} </strong></legend>
 
 
     <!-- Radio buttons -->
     <div>
         <div class="form-check">
-            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
-            <label class="form-check-label"> SCI</label>
+            <Field class="form-check-input" id="option1" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="SCI"></Field>
+            <label class="form-check-label" for="option1"> {{ $t('patient.sci') }}</label>
         </div>
         <div class="form-check">
-            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
-            <label class="form-check-label" > Stroke</label>
+            <Field class="form-check-input" id="option2" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Stroke"></Field>
+            <label class="form-check-label" for="option2"> {{ $t('patient.stroke') }}</label>
         </div>
         <div class="form-check">
-            <Field class="form-check-input" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
-            <label class="form-check-label" > Other</label>
+            <Field class="form-check-input" id="option3" :name="`dischargedAlivePatient[${idx}].dischargedAliveOption`" type="radio" value="Other"></Field>
+            <label class="form-check-label" for="option3"> {{ $t('patient.other') }}</label>
         </div>
         <br>
         <br>
@@ -31,7 +31,7 @@
     <!-- Input boxed list -->
     <div>
         <div class="my-3">
-            <legend :for="`dischargedAlivePatientNo_${idx}`" style="color:green"><strong>Patient {{ idx+1 }}: No. Days in Rehab Unit from admission to discharge: </strong></legend>
+            <legend :for="`dischargedAlivePatientNo_${idx}`" style="color:green"><strong>{{ $t('patient.patient') }} {{ idx+1 }}: {{ $t('patient.numDaysInRehab') }}</strong></legend>
             <br>
             <Field class="form-control"
                 type="number"
@@ -43,9 +43,9 @@
 
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Discharge Reason</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.dischargeReason') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveAllGoals_${idx}`">All goals met</label>
+            <label :for="`dischargedAliveAllGoals_${idx}`">{{ $t('patient.allGoalsMet') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveAllGoals_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -55,7 +55,7 @@
 
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveGoalsPartially_${idx}`">Goals partially met, sufficient for discharge</label>
+            <label :for="`dischargedAliveGoalsPartially_${idx}`">{{ $t('patient.goalsPartiallyMet') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveGoalsPartially_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -64,7 +64,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveNoGoals_${idx}`">Goals not met, discharged for alternate reason</label>
+            <label :for="`dischargedAliveNoGoals_${idx}`">{{ $t('patient.goalsNotMet') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveNoGoals_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -74,9 +74,9 @@
         
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Discharge Outcome (ADLs/Self-Care)</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.dischargeOutcomeASC') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveADLsIndependent_${idx}`">Independent </label>
+            <label :for="`dischargedAliveADLsIndependent_${idx}`">{{ $t('patient.independent') }} </label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsIndependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -85,7 +85,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsModifiedIndependent_${idx}`">Modified Independent</label>
+            <label :for="`dischargedAliveADLsModifiedIndependent_${idx}`">{{ $t('patient.modIndependent') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsModifiedIndependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -94,7 +94,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsSupervision_${idx}`">Supervision</label>
+            <label :for="`dischargedAliveADLsSupervision_${idx}`">{{ $t('patient.supervision') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsSupervision_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -103,7 +103,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsMinimumAssistance_${idx}`">Minimum Assistance</label>
+            <label :for="`dischargedAliveADLsMinimumAssistance_${idx}`">{{ $t('patient.minAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsMinimumAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -112,7 +112,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsModerateAssistance_${idx}`">Moderate Assistance</label>
+            <label :for="`dischargedAliveADLsModerateAssistance_${idx}`">{{ $t('patient.modAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsModerateAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -121,7 +121,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsMaximumAssistance_${idx}`">Maximum Assistance</label>
+            <label :for="`dischargedAliveADLsMaximumAssistance_${idx}`">{{ $t('patient.maxAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsMaximumAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -130,7 +130,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveADLsDependent_${idx}`">Dependent</label>
+            <label :for="`dischargedAliveADLsDependent_${idx}`">{{ $t('patient.dependent') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveADLsDependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -140,9 +140,9 @@
 
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Discharge Outcome (Transfers and Mobility)</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.dischargeOutcomeTM') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveTransfersIndependent_${idx}`">Independent </label>
+            <label :for="`dischargedAliveTransfersIndependent_${idx}`">{{ $t('patient.independent') }} </label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersIndependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -151,7 +151,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersModifiedIndependent_${idx}`">Modified Independent</label>
+            <label :for="`dischargedAliveTransfersModifiedIndependent_${idx}`">{{ $t('patient.modIndependent') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersModifiedIndependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -160,7 +160,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersSupervision_${idx}`">Supervision</label>
+            <label :for="`dischargedAliveTransfersSupervision_${idx}`">{{ $t('patient.supervision') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersSupervision_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -169,7 +169,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersMinimumAssistance_${idx}`">Minimum Assistance</label>
+            <label :for="`dischargedAliveTransfersMinimumAssistance_${idx}`">{{ $t('patient.minAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersMinimumAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -178,7 +178,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersModerateAssistance_${idx}`">Moderate Assistance</label>
+            <label :for="`dischargedAliveTransfersModerateAssistance_${idx}`">{{ $t('patient.modAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersModerateAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -187,7 +187,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersMaximumAssistance_${idx}`">Maximum Assistance</label>
+            <label :for="`dischargedAliveTransfersMaximumAssistance_${idx}`">{{ $t('patient.maxAssistance') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersMaximumAssistance_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -196,7 +196,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveTransfersDependent_${idx}`">Dependent</label>
+            <label :for="`dischargedAliveTransfersDependent_${idx}`">{{ $t('patient.dependent') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveTransfersDependent_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -206,9 +206,9 @@
 
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Mobility Aid/Assistive Device Given?</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.mobilityAid') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveWheelchair_${idx}`">Wheelchair</label>
+            <label :for="`dischargedAliveWheelchair_${idx}`">{{ $t('patient.wheelchair') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveWheelchair_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -217,7 +217,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveWalker_${idx}`">Walker</label>
+            <label :for="`dischargedAliveWalker_${idx}`">{{ $t('patient.walker') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveWalker_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -226,7 +226,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveCane_${idx}`">Cane</label>
+            <label :for="`dischargedAliveCane_${idx}`">{{ $t('patient.cane') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveCane_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -235,7 +235,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveCrutches_${idx}`">Crutches</label>
+            <label :for="`dischargedAliveCrutches_${idx}`">{{ $t('patient.crutches') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveCrutches_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -245,9 +245,9 @@
 
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Discharge Location</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.dischargeLocation') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveHomeAlone_${idx}`">Return home, alone</label>
+            <label :for="`dischargedAliveHomeAlone_${idx}`">{{ $t('patient.returnHomeAlone') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveHomeAlone_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -256,7 +256,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveHomeWithOther_${idx}`">Return home, with family/caregiver(s)</label>
+            <label :for="`dischargedAliveHomeWithOther_${idx}`">{{ $t('patient.returnHomeFamily') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveHomeWithOther_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -265,7 +265,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveHospital_${idx}`">Admitted to hospital</label>
+            <label :for="`dischargedAliveHospital_${idx}`">{{ $t('patient.admittedToHospital') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveHospital_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -275,9 +275,9 @@
 
         <div class="my-3">
             <br>
-            <label style="color:green"><strong>Discharge Employment Status</strong></label>
+            <label style="color:green"><strong>{{ $t('patient.dischargeEmploymentStatus') }}</strong></label>
             <br>
-            <label :for="`dischargedAliveEmployed_${idx}`">Employed</label>
+            <label :for="`dischargedAliveEmployed_${idx}`">{{ $t('patient.employed') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveEmployed_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -287,7 +287,7 @@
 
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveUnableToFindWork_${idx}`">Unemployed, unable to find work</label>
+            <label :for="`dischargedAliveUnableToFindWork_${idx}`">{{ $t('patient.unemployedWork') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveUnableToFindWork_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -296,7 +296,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveDueToCondition_${idx}`">Unemployed, due to condition</label>
+            <label :for="`dischargedAliveDueToCondition_${idx}`">{{ $t('patient.unemployedCondition') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveDueToCondition_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -305,7 +305,7 @@
         </div>
         <div class="my-3">
             <br>
-            <label :for="`dischargedAliveRetired_${idx}`">Retired, not working due to age</label>
+            <label :for="`dischargedAliveRetired_${idx}`">{{ $t('patient.retiredAge') }}</label>
             <Field class="form-control"
                 :id="`dischargedAliveRetired_${idx}`"
                 @input="$emit('update:modelValue', Object.keys(fields).length)"
@@ -316,7 +316,7 @@
 
     
 
-    <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">Remove patient X</button>
+    <button class="btn btn-danger btn-block" type="button" @click="remove(idx)">{{ $t('patient.removePatient') }}</button>
     </fieldset>
 
     <button class="btn btn-primary btn-block" type="button" @click="push({ 
@@ -358,7 +358,7 @@
         dischargedAliveDueToCondition: '',
         dischargedAliveRetired: '',
         })">
-    New Patient + 
+    {{ $t('patient.newPatient') }}
     </button>
 </FieldArray>
 </template>
