@@ -65,13 +65,12 @@ public class MSPPRepositoryService {
         return "saved";
     }
 
-    public MSPPRequirement getAForm(Integer documentId) {
-        return msppRepository.findById(documentId).get();
+    public Map<String, Object> getAForm(Integer documentId) {
+        return msppRepository.findById(documentId).get().getRequiredMSPPData();
     }
    
     // list additional mspp data with an id input
     public Map<String, Object> getAdditional(Integer documentId) {
-        System.out.println(additionalMSPPRepository.findById(documentId).get().getAdditionalMSPPData());
         return additionalMSPPRepository.findById(documentId).get().getAdditionalMSPPData();
     } 
     

@@ -149,9 +149,7 @@ public class MainController {
 
     @GetMapping("/api/mspp/{documentId}")
     public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
-        MSPPRequirement requiredData = msppRepositoryService.getAForm(documentId);
-        System.out.println(HHADepartmentService.listDepartmentNames());
-        return ResponseEntity.ok(requiredData);
+        return ResponseEntity.ok(msppRepositoryService.getAForm(documentId));
     }
 
     @GetMapping("/api/mspp/totalreports")
