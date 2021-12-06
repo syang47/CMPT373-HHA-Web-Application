@@ -166,9 +166,9 @@ public class MainController {
     }
 
     @GetMapping("/api/mspp/data/all")
-    public ResponseEntity<?> getAllMSPPData(){
-        System.out.println(msppRepositoryService.listMsppData());
-        return ResponseEntity.ok(msppRepositoryService.listMsppData());
+    public ResponseEntity<?> getAllMSPPData(@RequestHeader("Authorization") String jwt){
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        return ResponseEntity.ok(msppRepositoryService.listMsppData(user));
     }
 
     @DeleteMapping(value="/api/mspp/data/delete")
@@ -193,8 +193,9 @@ public class MainController {
     }
 
     @GetMapping("/api/casestudy/all")
-    public ResponseEntity<?> getCaseStudyEntries(){
-        return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
+    public ResponseEntity<?> getCaseStudyEntries(@RequestHeader("Authorization") String jwt){
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        return ResponseEntity.ok(caseStudyService.listAllCaseStudies(user));
     }
 
     @GetMapping("/api/casestudy/entry")

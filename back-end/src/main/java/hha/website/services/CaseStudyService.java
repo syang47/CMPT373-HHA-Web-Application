@@ -61,9 +61,13 @@ public class CaseStudyService {
         return caseStudyRepository.save(entry);
     }
 
-    public List<List<Object>> listAllCaseStudies() {
+    public List<List<Object>> listAllCaseStudies(User user) {
+        List<CaseStudy> allcs = caseStudyRepository.findAll();
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
+            allcs = allcs.stream().filter(fcs -> fcs.getUser().getDepartment() == user.getDepartment()).collect(Collectors.toList());
+        }
         List<List<Object>> caseStudies = new ArrayList<>();
-        for(CaseStudy c : caseStudyRepository.findAll()){
+        for(CaseStudy c : allcs){
             List<Object> cData = new ArrayList<>();
             cData.add(c.getId());
             cData.add(c.getDateSubmitted().getTime().toString());

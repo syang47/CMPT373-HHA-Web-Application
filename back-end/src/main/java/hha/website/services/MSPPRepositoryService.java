@@ -75,9 +75,15 @@ public class MSPPRepositoryService {
     } 
     
     // return all input data as a list
-    public List<List<Object>> listMsppData() {
+    public List<List<Object>> listMsppData(User user) {
+        List<MSPPRequirement> allreq = msppRepository.findAll();
+        System.out.println(user.getRole());
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
+            allreq = allreq.stream().filter(freq -> freq.getDepartment() == user.getDepartment()).collect(Collectors.toList());
+        }
+
         List<List<Object>> datalist = new ArrayList<>();
-        for(MSPPRequirement d : msppRepository.findAll()) {
+        for(MSPPRequirement d : allreq) {
             List<Object> dData = new ArrayList<>();
             dData.add(d.getId());
             dData.add(d.getDateSubmitted().getTime().toString());
