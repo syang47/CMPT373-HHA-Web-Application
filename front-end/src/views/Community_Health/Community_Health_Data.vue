@@ -232,7 +232,7 @@ export default defineComponent({
                     rows: [
                         [
                             {
-                                rowName: "msppData.bFWomenVitA",
+                                rowName: "msppData.breastfeeding_WomenVitA",
                             },
                             {
                                 name: 'breastfeeding_women_receiving_vitaminA_matron',
@@ -247,7 +247,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "msppData.bFWomenMUAC",
+                                rowName: "msppData.breastfeeding_WomenMUAC",
                             },
                             {
                                 name: 'breastfeeding_women_with_MUAC<210mm_matron',
@@ -262,7 +262,7 @@ export default defineComponent({
                         ],
                         [
                             {
-                                rowName: "msppData.bFWomenMalnutrition",
+                                rowName: "msppData.breastfeeding_WomenMalnutrition",
                             },
                             {
                                 name: 'breastfeeding_women_with_malnutrition_matron',

@@ -286,9 +286,9 @@ export default defineComponent({
         },
 
         formatDataHeaders(str) {
-            let str2 = str.replace(/([a-z])([A-Z])/g, '$1 $2').trim().replace(/(\D)(\d)/, '$1 $2');
-            str = str2.replace(/([A-Z])([A-Z])([a-z])/g, '$1 $2')
-            str = str2.charAt(0).toUpperCase()+str2.slice(1);
+            let str2 = str.replace(/([a-z])([A-Z])/g, '$1 $2').trim().replace(/(\D)(\d)/, '$1 $2').replace(/_/g, ' ');
+            str = str2.replace(/([A-Z])([A-Z])([a-z])/g, '$1 $2');
+            str = str.charAt(0).toUpperCase()+str.slice(1);
             return str;
         }
     }
