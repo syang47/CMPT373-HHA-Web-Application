@@ -156,7 +156,6 @@ export default defineComponent({
         },
 
         setCaseStudyOfTheMonth(entry){
-            console.log(entry);
             let token = JSON.parse(localStorage.getItem('user')!);
             var months = ['January', 'February', 'March',
                'April', 'May', 'June', 'July',

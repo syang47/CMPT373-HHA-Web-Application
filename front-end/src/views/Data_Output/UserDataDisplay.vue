@@ -91,11 +91,6 @@ export default defineComponent({
                 }
             }).then(response => {
                 this.userAllData = response.data;
-                if(response != null) {
-                    console.log("getting all user data successful");
-                } else {
-                    alert("no data in user data can be fetched / aucune donnée dans les données utilisateur ne peut être récupérée");
-                }
             }).catch((error: any) => {
                 this.message =
                     (error.response &&
@@ -109,8 +104,6 @@ export default defineComponent({
 
         deleteUser(tuple) {
             var id = tuple[0];
-            console.log(id);
-            console.log(typeof id);
             let token = JSON.parse(localStorage.getItem('user')!);
             this.message = "Displaying all user data / Affichage de toutes les données utilisateur";
             
