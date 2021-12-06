@@ -62,7 +62,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().expressionHandler(webExpressionHandler())
                 .antMatchers("/api/login", "/api/checktoken").permitAll()
                 .antMatchers("/api/register", "/api/casestudy/delete", "/api/mspp/data/delete").hasRole("HEAD")
-                .antMatchers("/api/user/employeeofthemonth/submit", "/api/announcements/**","/api/messageboard/submit","/api/user/delete/**", "/api/messages/delete").hasRole("HOSPITALADMN")
+                .antMatchers("/api/user/employeeofthemonth/submit", "/api/announcements/submit","/api/announcements/delete","/api/messageboard/submit","/api/user/delete/**", "/api/messages/delete").hasRole("HOSPITALADMN")
                 .antMatchers("/api/**").authenticated()
                 .and().sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
