@@ -277,7 +277,6 @@ public class MainController {
         }
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
         try{
