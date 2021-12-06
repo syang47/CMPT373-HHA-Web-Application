@@ -53,8 +53,9 @@ export default defineComponent({
                 }
                 // return departments.push(d);
                 departments.push(d);
-            }          
-            return [
+            }
+
+            var sb = [
                 {
                     header: this.$t("sideBar.HHA"),
                     hiddenOnCollapse: true
@@ -85,12 +86,17 @@ export default defineComponent({
                     child: departments,
                     hiddenOnCollapse: true
                 },  
-                {
+                
+            ];
+            if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+                sb.push({
                     href: "/register",
                     title: this.$t("sideBar.register"),
                     hiddenOnCollapse: true
-                },      
-            ];
+                });  
+            }
+                
+            return sb;
         },
     },
 });

@@ -33,6 +33,7 @@ const i18n = createI18n({
         maternity: "MATERNITÉ",
         rehab: "DÉSINTOX",
         communityHealth: "SANTÉ COMMUNAUTAIRE",
+        communityhealth: "SANTÉ COMMUNAUTAIRE",
         register: "S'inscrire",
       },
       registerPage: {
@@ -87,6 +88,12 @@ const i18n = createI18n({
         submittedBy: "Proposé par",
         displayAllEmployeeOTM: "Afficher tous les employés du mois",
         month: "MOIS",
+        msppOnly: "MSPP UNIQUEMENT",
+        msppAdditional: "MSPP/ADDITIONNEL",
+        delete2: "EFFACER",
+        returnPrev: "Retourner au précédent",
+        msppOnlyData: "Données MSPP uniquement",
+        msppAdditionalData: "MSPP et données supplémentaires",
       },
       messageBoard: {
         messageBoard: "Babillard",
@@ -476,6 +483,8 @@ const i18n = createI18n({
         department: "Département",
         points: "Points",
         caseStudyOTM: "Étude de cas du mois",
+        reportsSubmittedMonth: "Rapports soumis ce mois-ci",
+        reportsSubmittedYear: "Rapports soumis cette année"
       },
       dataInput: {
         awards: "Récompenses",
@@ -598,6 +607,7 @@ const i18n = createI18n({
         maternity: "MATERNITY",
         rehab: "REHAB",
         communityHealth: "COMMUNITY HEALTH",
+        communityhealth: "COMMUNITY HEALTH",
         register: "Register",
       },
       registerPage: {
@@ -652,6 +662,12 @@ const i18n = createI18n({
         submittedBy: "Submitted By",
         displayAllEmployeeOTM: "Display All Employees Of The Month",
         month: "MONTH",
+        msppOnly: "MSPP ONLY",
+        msppAdditional: "MSPP/ADDITONAL",
+        delete2: "DELETE",
+        returnPrev: "Return to Previous",
+        msppOnlyData: "MSPP Only Data",
+        msppAdditionalData: "MSPP and Additional Data",
       },
       messageBoard: {
         messageBoard: "Message Board",
@@ -1022,7 +1038,7 @@ const i18n = createI18n({
         nicupaed: "NICU/PAED",
         maternity: "Maternity",
         rehab: "Rehab",
-        communityhealth: "Community Health",
+        communityHealth: "Community Health",
         caseStudy: "Case Study",
         dueDate: "Due Date: ",
         dataInput: "Data Input",
@@ -1041,6 +1057,8 @@ const i18n = createI18n({
         department: "Department",
         points: "Points",
         caseStudyOTM: "Case Study of the Month",
+        reportsSubmittedMonth: "Reports submitted this month",
+        reportsSubmittedYear: "Reports submitted this year"
       },
       dataInput: {
         awards: "Awards",

@@ -38,30 +38,30 @@
                         {{attribute}}
                     </td>
                     <td>
-                        <button @click="showDataDetail(data[1].id)" class="btn btn-info btn-sm mb-4">MSPP ONLY</button>
+                        <button @click="showDataDetail(data[1].id)" class="btn btn-info btn-sm mb-4">{{ $t('dataDisplay.msppOnly') }}</button>
                     </td>
                     <td>
-                        <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm mb-4">MSPP/ADDITONAL</button>
+                        <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm mb-4">{{ $t('dataDisplay.msppAdditional') }}</button>
                     </td>
-                    <td v-if="hasPermissions">
-                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm mb-4">DELETE</button>
+                    <td v-if="hasPermissions || headPermissions">
+                        <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm mb-4">{{ $t('dataDisplay.delete2') }}</button>
                     </td>
                 </tr>
             </tbody>
         </table>
         <b-container v-if="!showAllListTable" class="text-center" >
             <b-row>
-                <b-button pill @click="showAllMsppData" variant="outline-primary" size="sm" align-v="end">Return to Previous</b-button>
+                <b-button pill @click="showAllMsppData" variant="outline-primary" size="sm" align-v="end">{{ $t('dataDisplay.returnPrev') }}</b-button>
                 <hr class="my-4">
             </b-row>
             
             <b-row v-if="showMSPPOnly">
-                <h1>MSPP Only Data</h1>
+                <h1>{{ $t('dataDisplay.msppOnlyData') }}</h1>
                 <b-table hover :items="msppOnlyData" :fields="fields">
                 </b-table>
             </b-row>
             <b-row v-if="showMSPPAddData" >
-                <h1>MSPP and Additional Data</h1>
+                <h1>{{ $t('dataDisplay.msppAdditionalData') }}</h1>
                 <b-table hover :items="msppAndAddData" :fields="fields">
                 </b-table>
             </b-row>
@@ -84,6 +84,7 @@ export default defineComponent({
             showMSPPAddData: false,
             showAllListTable: true,
             hasPermissions: false,
+            headPermissions: false,
 
             msppAllData: {},
             msppOnlyData: [] as any,
@@ -96,7 +97,7 @@ export default defineComponent({
             addColumnKeyValue: [] as any,
 
             fields: ["name","value"],
-            dataListHeaders: ["ID", "Date Submitted", "Department"],
+            dataListHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.department')],
             message:"",
         };
     },
@@ -108,6 +109,9 @@ export default defineComponent({
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
             this.hasPermissions = true
+        }
+        if(token.roles[0].authority == "ROLE_HEAD"){
+            this.headPermissions = true
         }
     },
     methods: {

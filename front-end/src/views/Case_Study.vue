@@ -379,22 +379,15 @@ export default defineComponent({
                         this.message = "Entry successful";
                         this.successful = true;
                         this.loading = false;
-                        if(response != null) {
-                            console.log("entry successful: " + this.successful);
-                            this.$router.push("/");
-                        } else {
-                            alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
-                        }
                     }
                 ).catch((error: any) => {
-                      this.message =
-                          (error.response &&
-                          error.response.data &&
-                          error.response.data.message) ||
-                          error.message;
-                      this.successful = false;
-                      this.loading = false;
-                      alert("entry could not be submitted / l'entrée n'a pas pu être soumise");
+                    this.message =
+                        (error.response &&
+                        error.response.data &&
+                        error.response.data.message) ||
+                        error.message;
+                    this.successful = false;
+                    this.loading = false;
                 });
             }
         },

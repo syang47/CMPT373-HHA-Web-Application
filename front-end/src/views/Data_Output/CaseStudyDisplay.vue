@@ -68,7 +68,7 @@
                         <td v-if="hasPermissions">
                             <button @click="setCaseStudyOfTheMonth(entry)" class="btn btn-secondary mb-4">{{ $t('dataDisplay.caseStudyOTM') }}</button>
                         </td>
-                        <td v-if="hasPermissions">
+                        <td v-if="hasPermissions || headPermissions">
                             <button @click="deleteCaseStudy(entry)" class="btn btn-danger mb-4">{{ $t('dataDisplay.delete') }}</button>
                         </td>
                     </tr>
@@ -111,6 +111,7 @@ export default defineComponent({
             csEntries: [],
             caseStudyAllData: {},
             hasPermissions: false,
+            headPermissions: false
         };
     },
     mounted() {
@@ -120,6 +121,9 @@ export default defineComponent({
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
             this.hasPermissions = true
+        }
+        if(token.roles[0].authority == "ROLE_HEAD"){
+            this.headPermissions = true
         }
     },
     methods: {
@@ -156,7 +160,6 @@ export default defineComponent({
         },
 
         setCaseStudyOfTheMonth(entry){
-            console.log(entry);
             let token = JSON.parse(localStorage.getItem('user')!);
             var months = ['January', 'February', 'March',
                'April', 'May', 'June', 'July',

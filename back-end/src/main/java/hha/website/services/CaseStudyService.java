@@ -17,6 +17,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -60,9 +61,13 @@ public class CaseStudyService {
         return caseStudyRepository.save(entry);
     }
 
-    public List<List<Object>> listAllCaseStudies() {
+    public List<List<Object>> listAllCaseStudies(User user) {
+        List<CaseStudy> allcs = caseStudyRepository.findAll();
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
+            allcs = allcs.stream().filter(fcs -> fcs.getUser().getDepartment() == user.getDepartment()).collect(Collectors.toList());
+        }
         List<List<Object>> caseStudies = new ArrayList<>();
-        for(CaseStudy c : caseStudyRepository.findAll()){
+        for(CaseStudy c : allcs){
             List<Object> cData = new ArrayList<>();
             cData.add(c.getId());
             cData.add(c.getDateSubmitted().getTime().toString());
@@ -82,7 +87,10 @@ public class CaseStudyService {
 
     public void deleteCaseStudy(Integer id) {
         Optional<CaseStudy> caseStudyToDelete = caseStudyRepository.findById(id);
-        caseStudyToDelete.ifPresent(c -> caseStudyRepository.deleteById(id));
+        caseStudyToDelete.ifPresent(c -> {
+            hhaDepartmentService.deleteASubmittedReport(c.getUser());
+            caseStudyRepository.deleteById(id);
+        });
     }
 
     public List<Object> getACaseStudy(String month) {
@@ -106,5 +114,25 @@ public class CaseStudyService {
         CaseStudy cs = caseStudyRepository.getById(id);
         cs.setCaseStudyOfTheMonth(month);
         return cs.getId().toString();
+    }
+
+    public HashMap<String, List<Integer>> listReportsForMonthAndYear(Integer year, Integer month) {
+        Calendar queryDate = new GregorianCalendar(year,Calendar.JANUARY,1);
+        List<CaseStudy> allReportsGivenYear = caseStudyRepository.findAllByDateSubmittedAfter(queryDate);
+
+        HashMap<String, List<Integer>> departmentReports = new HashMap<>();
+        for(Department d : hhaDepartmentService.getAllDepartments()){
+            List<CaseStudy> filterReports = allReportsGivenYear.stream().filter(r -> r.getUser().getDepartment() == d).collect(Collectors.toList());
+            List<Integer> reportsSubmitted = new ArrayList<>();
+
+            reportsSubmitted.add(filterReports.size());
+
+            filterReports = filterReports.stream().filter(r -> r.getUser().getDepartment() == d && r.getDateSubmitted().get(Calendar.MONTH) == month).collect(Collectors.toList());
+            reportsSubmitted.add(filterReports.size());
+
+            departmentReports.put(d.getDepartmentname(), reportsSubmitted);
+        }
+
+        return departmentReports;
     }
 }

@@ -63,13 +63,22 @@ public class HHADepartmentService {
 
     public void addASubmittedReport(User user) {
         userDetailsService.addASubmittedReportForUser(user);
-        departmentRepository.updateDepartmentPoints(user.getDepartment().getDepartmentname());
-        departmentRepository.updateDepartmentReportsSubmitted(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentPointsAdd(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentReportsSubmittedAdd(user.getDepartment().getDepartmentname());
     }
 
+    public void deleteASubmittedReport(User user) {
+        userDetailsService.deleteASubmittedReportForUser(user);
+        departmentRepository.updateDepartmentPointsSubtract(user.getDepartment().getDepartmentname());
+        departmentRepository.updateDepartmentReportsSubmittedSubtract(user.getDepartment().getDepartmentname());
+    }
 
-    public List<Department> listAllDepartments() {
-        return departmentRepository.findAll();
+    public HashMap<String, Integer> listDepartmentPoints() {
+        HashMap<String, Integer> departmentPoints = new HashMap<>();
+        for(Department d : departmentRepository.findAll()){
+            departmentPoints.put(d.getDepartmentname(), d.getPoints());
+        }
+        return departmentPoints;
     }
 
     public Collection<String> listDepartmentNames() {
@@ -78,5 +87,9 @@ public class HHADepartmentService {
 
     public Integer listTotalReportsSubmittedForDepartment(String departmentname) {
         return departmentRepository.queryTotalReportsSubmittedForDepartment(departmentname);
+    }
+
+    public List<Department> getAllDepartments(){
+        return departmentRepository.findAll();
     }
 }

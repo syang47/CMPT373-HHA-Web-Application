@@ -95,12 +95,12 @@
             <div class="box">
                 <h2>{{ $t('loginPage.login') }}</h2>
                 <div class="item">
-                    <input v-model="username" type="text" required @keyup.enter="login">
-                    <label for="username">{{ $t('loginPage.username') }}</label>
+                    <input v-model="username" class="text-light" type="text" required @keyup.enter="login">
+                    <label for="username" class="text-dark">{{ $t('loginPage.username') }}</label>
                 </div>
                 <div class="item">
-                    <input v-model="password" type="password" required @keyup.enter="login">
-                    <label for="password">{{ $t('loginPage.password') }}</label>
+                    <input v-model="password" class="text-light" type="password" required @keyup.enter="login">
+                    <label for="password" class="text-dark">{{ $t('loginPage.password') }}</label>
                 </div>
                 <div class="row">
                     <div class="col">

@@ -8,31 +8,18 @@ import hha.website.auth.AuthenticationResponse;
 import hha.website.services.*;
 import hha.website.auth.JwtUtil;
 import hha.website.models.*;
-import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.configurers.userdetails.UserDetailsAwareConfigurer;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
-import javax.persistence.SqlResultSetMapping;
-import javax.persistence.SqlResultSetMappings;
-import javax.servlet.http.HttpServletRequest;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.util.*;
 
 
 @RestController
@@ -161,24 +148,27 @@ public class MainController {
     }
 
     @GetMapping("/api/mspp/{documentId}")
-    public ResponseEntity<?> getADataForm(@PathVariable("documentId") String documentId){
-        int id = Integer.parseInt(documentId);
-        MSPPRequirement requiredData = msppRepositoryService.getAForm(id);
+    public ResponseEntity<?> getADataForm(@PathVariable("documentId") Integer documentId){
+        MSPPRequirement requiredData = msppRepositoryService.getAForm(documentId);
         System.out.println(HHADepartmentService.listDepartmentNames());
         return ResponseEntity.ok(requiredData);
     }
 
+    @GetMapping("/api/mspp/totalreports")
+    public ResponseEntity<?> getTotalMSPPReportsForMonthAndYear(@RequestParam("year") Integer year, @RequestParam("month") Integer month){
+        return ResponseEntity.ok(msppRepositoryService.listReportsForMonthAndYear(year, month));
+    }
+
     @GetMapping("/api/msppadditional/{documentId}")
-    public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") String documentId){
-        int id = Integer.parseInt(documentId);
-        AdditionalMSPP additionalData = msppRepositoryService.getAdditional(id);
+    public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") Integer documentId){
+        AdditionalMSPP additionalData = msppRepositoryService.getAdditional(documentId);
         return ResponseEntity.ok(additionalData);
     }
 
     @GetMapping("/api/mspp/data/all")
-    public ResponseEntity<?> getAllMSPPData(){
-        System.out.println(msppRepositoryService.listMsppData());
-        return ResponseEntity.ok(msppRepositoryService.listMsppData());
+    public ResponseEntity<?> getAllMSPPData(@RequestHeader("Authorization") String jwt){
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        return ResponseEntity.ok(msppRepositoryService.listMsppData(user));
     }
 
     @DeleteMapping(value="/api/mspp/data/delete")
@@ -203,13 +193,19 @@ public class MainController {
     }
 
     @GetMapping("/api/casestudy/all")
-    public ResponseEntity<?> getCaseStudyEntries(){
-        return ResponseEntity.ok(caseStudyService.listAllCaseStudies());
+    public ResponseEntity<?> getCaseStudyEntries(@RequestHeader("Authorization") String jwt){
+        final User user = userDetailsService.findByUsername(jwtToken.extractUserName(jwt.substring(7)));
+        return ResponseEntity.ok(caseStudyService.listAllCaseStudies(user));
     }
 
     @GetMapping("/api/casestudy/entry")
     public ResponseEntity<?> getCaseStudyEntry(@RequestParam("month") String month){
         return ResponseEntity.ok(caseStudyService.getACaseStudy(month));
+    }
+
+    @GetMapping("/api/casestudy/totalreports")
+    public ResponseEntity<?> getTotalCaseStudyReportsForMonthAndYear(@RequestParam("year") Integer year, @RequestParam("month") Integer month){
+        return ResponseEntity.ok(caseStudyService.listReportsForMonthAndYear(year, month));
     }
 
     @RequestMapping(value = "/api/casestudy/casestudyofthemonth/submit", method = RequestMethod.POST)
@@ -236,12 +232,7 @@ public class MainController {
 
     @GetMapping(value = "/api/departments/points")
     public ResponseEntity<?> getAllDepartmentPoints() {
-        List<Department> departments = HHADepartmentService.listAllDepartments();
-        HashMap<String, Integer> departmentPoints = new HashMap<>();
-        for(Department d : departments){
-            departmentPoints.put(d.getDepartmentname(), d.getPoints());
-        }
-        return ResponseEntity.ok(departmentPoints);
+        return ResponseEntity.ok(HHADepartmentService.listDepartmentPoints());
     }
 
     @RequestMapping(value = "/api/announcements/submit", method = RequestMethod.POST)
@@ -287,7 +278,6 @@ public class MainController {
         }
     }
 
-    @CrossOrigin
     @DeleteMapping(value="/api/user/delete/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable("id") Integer id) {
         try{

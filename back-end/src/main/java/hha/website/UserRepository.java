@@ -19,7 +19,11 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Modifying
     @Query("UPDATE User SET reportsSubmitted = reportsSubmitted + 1 WHERE id = ?1")
-    void updateUserReportsSubmitted(Integer id);
+    void updateUserReportsSubmittedAdd(Integer id);
+
+    @Modifying
+    @Query("UPDATE User SET reportsSubmitted = reportsSubmitted - 1 WHERE id = ?1")
+    void updateUserReportsSubmittedSubtract(Integer id);
 
     @Query("SELECT u FROM User u WHERE department_id = ?1")
     List<User> findByDepartmentId(String departmentname);

@@ -49,6 +49,7 @@ public class AnnouncementService {
             aData.add(a.getMonth());
             aData.add(a.getMonthlyPhotoType());
             aData.add(a.getMonthlyPhoto());
+            aData.add(a.getInfo());
             monthlyAnnouncement.add(aData);
         }
         return monthlyAnnouncement;

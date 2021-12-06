@@ -9,7 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -73,9 +75,14 @@ public class MSPPRepositoryService {
     } 
     
     // return all input data as a list
-    public List<List<Object>> listMsppData() {
+    public List<List<Object>> listMsppData(User user) {
+        List<MSPPRequirement> allreq = msppRepository.findAll();
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
+            allreq = allreq.stream().filter(freq -> freq.getDepartment() == user.getDepartment()).collect(Collectors.toList());
+        }
+
         List<List<Object>> datalist = new ArrayList<>();
-        for(MSPPRequirement d : msppRepository.findAll()) {
+        for(MSPPRequirement d : allreq) {
             List<Object> dData = new ArrayList<>();
             dData.add(d.getId());
             dData.add(d.getDateSubmitted().getTime().toString());
@@ -86,8 +93,12 @@ public class MSPPRepositoryService {
     }
 
     public void deleteForm(Integer documentId){
-        System.out.println("form deleted");
-        msppRepository.deleteById(documentId);
+        Optional<MSPPRequirement> formToDelete = msppRepository.findById(documentId);
+        formToDelete.ifPresent(c -> {
+            hhaDepartmentService.deleteASubmittedReport(c.getUser());
+            System.out.println("form deleted");
+            msppRepository.deleteById(documentId);
+        });
     }
 
     public MSPPRequirement editRequiredForm(Integer documentId, String requiredMSPPDataJson) throws JsonProcessingException{
@@ -102,5 +113,25 @@ public class MSPPRepositoryService {
             e.printStackTrace();
             throw e;
         }
+    }
+
+    public HashMap<String, List<Integer>> listReportsForMonthAndYear(Integer year, Integer month) {
+        Calendar queryDate = new GregorianCalendar(year,Calendar.JANUARY,1);
+        List<MSPPRequirement> allReportsGivenYear = msppRepository.findAllByDateSubmittedAfter(queryDate);
+
+        HashMap<String, List<Integer>> departmentReports = new HashMap<>();
+        for(Department d : hhaDepartmentService.getAllDepartments()){
+            List<MSPPRequirement> filterReports = allReportsGivenYear.stream().filter(r -> r.getDepartment() == d).collect(Collectors.toList());
+            List<Integer> reportsSubmitted = new ArrayList<>();
+
+            reportsSubmitted.add(filterReports.size());
+
+            filterReports = filterReports.stream().filter(r -> r.getDepartment() == d && r.getDateSubmitted().get(Calendar.MONTH) == month).collect(Collectors.toList());
+            reportsSubmitted.add(filterReports.size());
+
+            departmentReports.put(d.getDepartmentname(), reportsSubmitted);
+        }
+
+        return departmentReports;
     }
 }
