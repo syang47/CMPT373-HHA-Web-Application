@@ -63,7 +63,7 @@ public class CaseStudyService {
 
     public List<List<Object>> listAllCaseStudies(User user) {
         List<CaseStudy> allcs = caseStudyRepository.findAll();
-        if(!user.getRole().equals("ROLE_ADMIN") || !user.getRole().equals("ROLE_HOSPITALADMN")){
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
             allcs = allcs.stream().filter(fcs -> fcs.getUser().getDepartment() == user.getDepartment()).collect(Collectors.toList());
         }
         List<List<Object>> caseStudies = new ArrayList<>();

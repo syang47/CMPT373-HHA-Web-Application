@@ -77,7 +77,8 @@ public class MSPPRepositoryService {
     // return all input data as a list
     public List<List<Object>> listMsppData(User user) {
         List<MSPPRequirement> allreq = msppRepository.findAll();
-        if(!user.getRole().equals("ROLE_ADMIN") || !user.getRole().equals("ROLE_HOSPITALADMN")){
+        System.out.println(user.getRole());
+        if(!user.getRole().equals("ROLE_ADMIN") && !user.getRole().equals("ROLE_HOSPITALADMN")){
             allreq = allreq.stream().filter(freq -> freq.getDepartment() == user.getDepartment()).collect(Collectors.toList());
         }
 
