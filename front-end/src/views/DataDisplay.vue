@@ -28,7 +28,7 @@
                     <div class="col">
                         <button class="btn btn-secondary btn-lg" v-on:click="showDepartmentData">{{ $t("dataDisplay.departmentDataDisplay") }}</button> 
                     </div>
-                    <div class="col">
+                    <div class="col" v-if="hasPermissions">
                         <button class="btn btn-secondary btn-lg" v-on:click="showAllUserData">{{ $t("dataDisplay.userDataDisplay") }}</button> 
                     </div>
                 </div>
@@ -62,13 +62,20 @@ export default defineComponent({
         'user-data-component': UserDataDisplay,
         'employee-of-the-month': EmployeesOfTheMonths,
     },
+    mounted() {
+        let token = JSON.parse(localStorage.getItem('user')!);
+        if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
+            this.hasPermissions = true
+        }
+    },
     data: function() {
         return {
             message: "",
             showComponentOne: false,
             showComponentTwo: false,
             showUserDataComponent: false,
-            showEmployeeOfTheMonthComponent: false
+            showEmployeeOfTheMonthComponent: false,
+            hasPermissions: false
         };
     },
     methods: {

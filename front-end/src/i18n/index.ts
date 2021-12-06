@@ -33,6 +33,7 @@ const i18n = createI18n({
         maternity: "MATERNITÉ",
         rehab: "DÉSINTOX",
         communityHealth: "SANTÉ COMMUNAUTAIRE",
+        communityhealth: "SANTÉ COMMUNAUTAIRE",
         register: "S'inscrire",
       },
       registerPage: {
@@ -600,6 +601,7 @@ const i18n = createI18n({
         maternity: "MATERNITY",
         rehab: "REHAB",
         communityHealth: "COMMUNITY HEALTH",
+        communityhealth: "COMMUNITY HEALTH",
         register: "Register",
       },
       registerPage: {
