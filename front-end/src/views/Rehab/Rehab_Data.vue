@@ -268,279 +268,279 @@ export default defineComponent({
                             header: 'msppData.mainCondition'
                         },
                         {
-                            label: 'msppData.mainCoditionTetraplegia',
-                            name: 'mainCoditionTetraplegia',
+                            label: 'msppData.mainConditionTetraplegia',
+                            name: 'mainConditionTetraplegia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionComplete',
-                            name: 'mainCoditionComplete',
+                            label: 'msppData.mainConditionComplete',
+                            name: 'mainConditionComplete',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionIncomplete',
-                            name: 'mainCoditionIncomplete',
+                            label: 'msppData.mainConditionIncomplete',
+                            name: 'mainConditionIncomplete',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC1',
-                            name: 'mainCoditionC1',
+                            label: 'msppData.mainConditionC1',
+                            name: 'mainConditionC1',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC2',
-                            name: 'mainCoditionC2',
+                            label: 'msppData.mainConditionC2',
+                            name: 'mainConditionC2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC3',
-                            name: 'mainCoditionC3',
+                            label: 'msppData.mainConditionC3',
+                            name: 'mainConditionC3',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC4',
-                            name: 'mainCoditionC4',
+                            label: 'msppData.mainConditionC4',
+                            name: 'mainConditionC4',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC5',
-                            name: 'mainCoditionC5',
+                            label: 'msppData.mainConditionC5',
+                            name: 'mainConditionC5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC6',
-                            name: 'mainCoditionC6',
+                            label: 'msppData.mainConditionC6',
+                            name: 'mainConditionC6',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC7',
-                            name: 'mainCoditionC7',
+                            label: 'msppData.mainConditionC7',
+                            name: 'mainConditionC7',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC8',
-                            name: 'mainCoditionC8',
+                            label: 'msppData.mainConditionC8',
+                            name: 'mainConditionC8',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT1',
-                            name: 'mainCoditionT1',
+                            label: 'msppData.mainConditionT1',
+                            name: 'mainConditionT1',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionParaplegia',
-                            name: 'mainCoditionParaplegia',
+                            label: 'msppData.mainConditionParaplegia',
+                            name: 'mainConditionParaplegia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionComplete2',
-                            name: 'mainCoditionComplete2',
+                            label: 'msppData.mainConditionComplete2',
+                            name: 'mainConditionComplete2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionIncomplete2',
-                            name: 'mainCoditionIncomplete2',
+                            label: 'msppData.mainConditionIncomplete2',
+                            name: 'mainConditionIncomplete2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT2',
-                            name: 'mainCoditionT2',
+                            label: 'msppData.mainConditionT2',
+                            name: 'mainConditionT2',
                             as: 'input',
                             rules: a
                         },
 
                         {
-                            label: 'msppData.mainCoditionC4',
-                            name: 'mainCoditionC4',
+                            label: 'msppData.mainConditionC4',
+                            name: 'mainConditionC4',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC5',
-                            name: 'mainCoditionC5',
+                            label: 'msppData.mainConditionC5',
+                            name: 'mainConditionC5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC6',
-                            name: 'mainCoditionC6',
+                            label: 'msppData.mainConditionC6',
+                            name: 'mainConditionC6',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC7',
-                            name: 'mainCoditionC7',
+                            label: 'msppData.mainConditionC7',
+                            name: 'mainConditionC7',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionC8',
-                            name: 'mainCoditionC8',
+                            label: 'msppData.mainConditionC8',
+                            name: 'mainConditionC8',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT1',
-                            name: 'mainCoditionT1',
+                            label: 'msppData.mainConditionT1',
+                            name: 'mainConditionT1',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionParaplegia',
-                            name: 'mainCoditionParaplegia',
+                            label: 'msppData.mainConditionParaplegia',
+                            name: 'mainConditionParaplegia',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionComplete2',
-                            name: 'mainCoditionComplete2',
+                            label: 'msppData.mainConditionComplete2',
+                            name: 'mainConditionComplete2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionIncomplete2',
-                            name: 'mainCoditionIncomplete2',
+                            label: 'msppData.mainConditionIncomplete2',
+                            name: 'mainConditionIncomplete2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT2',
-                            name: 'mainCoditionT2',
+                            label: 'msppData.mainConditionT2',
+                            name: 'mainConditionT2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT3',
-                            name: 'mainCoditionT3',
+                            label: 'msppData.mainConditionT3',
+                            name: 'mainConditionT3',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT4',
-                            name: 'mainCoditionT4',
+                            label: 'msppData.mainConditionT4',
+                            name: 'mainConditionT4',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT5',
-                            name: 'mainCoditionT5',
+                            label: 'msppData.mainConditionT5',
+                            name: 'mainConditionT5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT6',
-                            name: 'mainCoditionT6',
+                            label: 'msppData.mainConditionT6',
+                            name: 'mainConditionT6',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT7',
-                            name: 'mainCoditionT7',
+                            label: 'msppData.mainConditionT7',
+                            name: 'mainConditionT7',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT8',
-                            name: 'mainCoditionT8',
+                            label: 'msppData.mainConditionT8',
+                            name: 'mainConditionT8',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT9',
-                            name: 'mainCoditionT9',
+                            label: 'msppData.mainConditionT9',
+                            name: 'mainConditionT9',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT10',
-                            name: 'mainCoditionT10',
+                            label: 'msppData.mainConditionT10',
+                            name: 'mainConditionT10',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT11',
-                            name: 'mainCoditionT11',
+                            label: 'msppData.mainConditionT11',
+                            name: 'mainConditionT11',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionT12',
-                            name: 'mainCoditionT12',
+                            label: 'msppData.mainConditionT12',
+                            name: 'mainConditionT12',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionL1',
-                            name: 'mainCoditionL1',
+                            label: 'msppData.mainConditionL1',
+                            name: 'mainConditionL1',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionL2',
-                            name: 'mainCoditionL2',
+                            label: 'msppData.mainConditionL2',
+                            name: 'mainConditionL2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionL3',
-                            name: 'mainCoditionL3',
+                            label: 'msppData.mainConditionL3',
+                            name: 'mainConditionL3',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionL4',
-                            name: 'mainCoditionL4',
+                            label: 'msppData.mainConditionL4',
+                            name: 'mainConditionL4',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionL5',
-                            name: 'mainCoditionL5',
+                            label: 'msppData.mainConditionL5',
+                            name: 'mainConditionL5',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionS1',
-                            name: 'mainCoditionS1',
+                            label: 'msppData.mainConditionS1',
+                            name: 'mainConditionS1',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionS2',
-                            name: 'mainCoditionS2',
+                            label: 'msppData.mainConditionS2',
+                            name: 'mainConditionS2',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionS3',
-                            name: 'mainCoditionS3',
+                            label: 'msppData.mainConditionS3',
+                            name: 'mainConditionS3',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionS4',
-                            name: 'mainCoditionS4',
+                            label: 'msppData.mainConditionS4',
+                            name: 'mainConditionS4',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionS5',
-                            name: 'mainCoditionS5',
+                            label: 'msppData.mainConditionS5',
+                            name: 'mainConditionS5',
                             as: 'input',
                             rules: a
                         },
@@ -657,50 +657,50 @@ export default defineComponent({
                             header: 'msppData.mainConditionCont'
                         },
                         {
-                            label: 'msppData.mainCoditionStroke',
-                            name: 'mainCoditionStroke',
+                            label: 'msppData.mainConditionStroke',
+                            name: 'mainConditionStroke',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionFracturedHip',
-                            name: 'mainCoditionFracturedHip',
+                            label: 'msppData.mainConditionFracturedHip',
+                            name: 'mainConditionFracturedHip',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionFracturedLongBones',
-                            name: 'mainCoditionFracturedLongBones',
+                            label: 'msppData.mainConditionFracturedLongBones',
+                            name: 'mainConditionFracturedLongBones',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionNeurodegenerativeDisease',
-                            name: 'mainCoditionNeurodegenerativeDisease',
+                            label: 'msppData.mainConditionNeurodegenerativeDisease',
+                            name: 'mainConditionNeurodegenerativeDisease',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionHeadInjury',
-                            name: 'mainCoditionHeadInjury',
+                            label: 'msppData.mainConditionHeadInjury',
+                            name: 'mainConditionHeadInjury',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionWoundCare',
-                            name: 'mainCoditionWoundCare',
+                            label: 'msppData.mainConditionWoundCare',
+                            name: 'mainConditionWoundCare',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionOtherMedical',
-                            name: 'mainCoditionOtherMedical',
+                            label: 'msppData.mainConditionOtherMedical',
+                            name: 'mainConditionOtherMedical',
                             as: 'input',
                             rules: a
                         },
                         {
-                            label: 'msppData.mainCoditionOtherTrauma',
-                            name: 'mainCoditionOtherTrauma',
+                            label: 'msppData.mainConditionOtherTrauma',
+                            name: 'mainConditionOtherTrauma',
                             as: 'input',
                             rules: a
                         },

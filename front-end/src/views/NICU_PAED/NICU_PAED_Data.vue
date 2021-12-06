@@ -398,7 +398,7 @@ export default defineComponent({
                     as: 'input',
                     children: [
                         {
-                            header: 'age'
+                            header: 'msppData.age'
                         },
                         {
                             label: 'msppData.extremePreterm',
