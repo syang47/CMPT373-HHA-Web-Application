@@ -43,7 +43,7 @@
                     <td>
                         <button @click="getCombined(data[1].id)" class="btn btn-info btn-sm mb-4">{{ $t('dataDisplay.msppAdditional') }}</button>
                     </td>
-                    <td v-if="hasPermissions">
+                    <td v-if="hasPermissions || headPermissions">
                         <button @click="deleteDataEntry(data)" class="btn btn-danger btn-sm mb-4">{{ $t('dataDisplay.delete2') }}</button>
                     </td>
                 </tr>
@@ -84,6 +84,7 @@ export default defineComponent({
             showMSPPAddData: false,
             showAllListTable: true,
             hasPermissions: false,
+            headPermissions: false,
 
             msppAllData: {},
             msppOnlyData: [] as any,
@@ -108,6 +109,9 @@ export default defineComponent({
         let token = JSON.parse(localStorage.getItem('user')!);
         if(token.roles[0].authority == "ROLE_ADMIN" || token.roles[0].authority == "ROLE_HOSPITALADMN"){
             this.hasPermissions = true
+        }
+        if(token.roles[0].authority == "ROLE_HEAD"){
+            this.headPermissions = true
         }
     },
     methods: {
