@@ -89,9 +89,12 @@ table td.gap span {
                                                 <tr v-for="field in MonthlyPrize" :key="field">
                                                     <td>
                                                         <div class="mb-3">
-                                                            <h3 class="fw-light">
+                                                            <h3 class="fw-light mb-3">
                                                                 Posted On {{field[1]}} for {{field[2]}}
                                                             </h3>
+                                                            <p class="fw-light">
+                                                                {{field[5]}}
+                                                            </p>
                                                         </div>
                                                         <div class="mb-3" v-if="field[3]">
                                                             <img :src="'data:' + field[3] + ';base64,' + field[4]" />
