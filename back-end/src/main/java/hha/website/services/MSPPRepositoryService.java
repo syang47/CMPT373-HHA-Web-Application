@@ -70,8 +70,9 @@ public class MSPPRepositoryService {
     }
    
     // list additional mspp data with an id input
-    public AdditionalMSPP getAdditional(Integer documentId) {
-        return additionalMSPPRepository.findById(documentId).get();
+    public Map<String, Object> getAdditional(Integer documentId) {
+        System.out.println(additionalMSPPRepository.findById(documentId).get().getAdditionalMSPPData());
+        return additionalMSPPRepository.findById(documentId).get().getAdditionalMSPPData();
     } 
     
     // return all input data as a list

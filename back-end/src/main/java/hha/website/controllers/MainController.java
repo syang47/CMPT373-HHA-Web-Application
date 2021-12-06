@@ -161,8 +161,7 @@ public class MainController {
 
     @GetMapping("/api/msppadditional/{documentId}")
     public ResponseEntity<?> getAdditionalDataForm(@PathVariable("documentId") Integer documentId){
-        AdditionalMSPP additionalData = msppRepositoryService.getAdditional(documentId);
-        return ResponseEntity.ok(additionalData);
+        return ResponseEntity.ok(msppRepositoryService.getAdditional(documentId));
     }
 
     @GetMapping("/api/mspp/data/all")
