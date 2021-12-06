@@ -30,7 +30,7 @@
         <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
         <table v-if="showAllListTable" class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
-                <th scope="col" v-for="header in dataListHeaders" :key="header"> {{header}}</th>
+                <th scope="col" v-for="header in dataListHeaders" :key="header"> {{this.$t('dataDisplay.' + header)}}</th>
             </thead>
             <tbody v-for="data in Object.entries(msppAllData)" :key="data">
                 <tr>
@@ -145,8 +145,7 @@ export default defineComponent({
             addColumnName: [] as any,
             addColumnKeyValue: [] as any,
 
-            fields: ["name","value"],
-            dataListHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.department')],
+            dataListHeaders: ["id", "dateSubmitted", "department"],
         };
     },
     mounted() {
@@ -286,9 +285,9 @@ export default defineComponent({
         },
 
         formatDataHeaders(str) {
-            let str2 = str.replace(/([a-z])([A-Z])/g, '$1 $2').trim().replace(/(\D)(\d)/, '$1 $2');
-            str = str2.replace(/([A-Z])([A-Z])([a-z])/g, '$1 $2')
-            str = str2.charAt(0).toUpperCase()+str2.slice(1);
+            let str2 = str.replace(/([a-z])([A-Z])/g, '$1 $2').trim().replace(/(\D)(\d)/, '$1 $2').replace(/_/g, ' ');
+            str = str2.replace(/([A-Z])([A-Z])([a-z])/g, '$1 $2');
+            str = str.charAt(0).toUpperCase()+str.slice(1);
             return str;
         }
     }
