@@ -3,10 +3,13 @@ package hha.website.services;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import hha.website.AdditionalMSPPRepository;
+import hha.website.HashMapConverter;
 import hha.website.MSPPRepository;
 import hha.website.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.persistence.Convert;
 import javax.transaction.Transactional;
 
 import java.text.SimpleDateFormat;
@@ -68,12 +71,13 @@ public class MSPPRepositoryService {
     public Map<String, Object> getAForm(Integer documentId) {
         return msppRepository.findById(documentId).get().getRequiredMSPPData();
     }
-   
+
     // list additional mspp data with an id input
     public Map<String, Object> getAdditional(Integer documentId) {
         return additionalMSPPRepository.findById(documentId).get().getAdditionalMSPPData();
-    } 
-    
+    }
+
+
     // return all input data as a list
     public List<List<Object>> listMsppData(User user) {
         List<MSPPRequirement> allreq = msppRepository.findAll();

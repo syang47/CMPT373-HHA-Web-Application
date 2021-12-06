@@ -49,23 +49,72 @@
                 </tr>
             </tbody>
         </table>
-        <b-container v-if="!showAllListTable" class="text-center" >
-            <b-row>
-                <b-button pill @click="showAllMsppData" variant="outline-primary" size="sm" align-v="end">{{ $t('dataDisplay.returnPrev') }}</b-button>
-                <hr class="my-4">
-            </b-row>
-            
-            <b-row v-if="showMSPPOnly">
-                <h1>{{ $t('dataDisplay.msppOnlyData') }}</h1>
-                <b-table hover :items="msppOnlyData" :fields="fields">
-                </b-table>
-            </b-row>
-            <b-row v-if="showMSPPAddData" >
-                <h1>{{ $t('dataDisplay.msppAdditionalData') }}</h1>
-                <b-table hover :items="msppAndAddData" :fields="fields">
-                </b-table>
-            </b-row>
-        </b-container>    
+        <div class="container text-center" v-if="!showAllListTable">
+            <table class="table table-bordered table-striped table-hover">
+                <thead class="thead-dark">
+                    <button class="btn btn-primary" @click="showAllMsppData">{{ $t('dataDisplay.returnPrev') }}</button>
+                    <hr class="my-4">
+                </thead>
+                <tbody>
+                    <div v-if="showMSPPOnly">
+                        <h1>{{ $t('dataDisplay.msppOnlyData') }}</h1>
+                        <table class="table table-bordered table-striped table-hover" v-for="h in msppOnlyData" :key="h">
+                            <tbody>
+                                <tr>
+                                    <th class="thead-dark">
+                                        <div style="float:left">
+                                            {{h.name}}
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div style="float:right">
+                                            {{h.value}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div v-if="showMSPPAddData">
+                        <h1>{{ $t('dataDisplay.msppAdditionalData') }}</h1>
+                        <table class="table table-bordered table-striped table-hover" v-for="h in msppAndAddData" :key="h">
+                            <tbody>
+                                <tr>
+                                    <th class="thead-dark">
+                                        <div style="float:left">
+                                            {{h.name}}
+                                        </div>
+                                    </th>
+                                    <td>
+                                        <div v-if="!(typeof h.value === 'string' || h.value instanceof String)">
+                                            <table class="table table-bordered table-striped table-hover mb-3" v-for="(ad) in h.value" :key="ad">
+                                                <tbody>
+                                                    <tr class="mb-3" v-for="adVal in Object.entries(ad)" :key="adVal">
+                                                        <th v-if="adVal[1] || adVal[1] != ''" class="thead-dark">
+                                                            <div style="float:left">
+                                                                {{adVal[0]}}
+                                                            </div>
+                                                        </th>
+                                                        <td v-if="adVal[1] || adVal[1] != ''">
+                                                            <div style="float:right">
+                                                                {{adVal[1]}}
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div v-else style="float:right">
+                                            {{h.value}}
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </tbody>
+            </table>
+        </div>
     </div>
     
 </div>
@@ -98,7 +147,6 @@ export default defineComponent({
 
             fields: ["name","value"],
             dataListHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.department')],
-            message:"",
         };
     },
     mounted() {
@@ -120,7 +168,6 @@ export default defineComponent({
             this.showMSPPOnly = false;
             this.showMSPPAddData = false;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data / Affichage des données mspp existantes uniquement";
             
             this.$axios.get("/api/mspp/data/all", {
                 headers: {
@@ -159,13 +206,12 @@ export default defineComponent({
             let colName = [] as any;
             let colKey = [] as any;
             let token = JSON.parse(localStorage.getItem('user')!);
-            this.message = "Displaying existing mspp only data by date / Affichage des données mspp existantes uniquement par date";
             this.$axios.get(`/api/mspp/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                this.msppOnlyData = response.data.requiredMSPPData;
+                this.msppOnlyData = response.data;
                 for(var key in this.msppOnlyData ) {
                     colName.push(key);
                     colKey.push(this.msppOnlyData[key]);
@@ -190,14 +236,13 @@ export default defineComponent({
             
             let colName = [] as any;
             let colKey = [] as any;
-
-            this.message = "Displaying existing additional mspp data";            
+        
             this.$axios.get(`/api/msppadditional/${id}`, {
                 headers: {
                     'Authorization': `Bearer ${token.jwt}`,
                 }
             }).then(response => {
-                this.msppAddData = response.data.additionalMSPPData;
+                this.msppAddData = response.data;
                 for(var key in this.msppAddData ) {
                     colName.push(key);
                     colKey.push(this.msppAddData[key]);
