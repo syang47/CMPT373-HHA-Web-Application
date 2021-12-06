@@ -115,16 +115,16 @@ To build the project and produce a .jar file:
 If you have all the npm dependencies, skip to step 2.
 
 1. Go to the front-end and install all dependencies needed to run the Vue application. More specifically:
-
+    ```
     $ cd /prj/front-end
     $ npm install
-
+    ```
 2. Now you can use the build.gradle file which produces a .jar.
-
+    ```
     $ cd ..
     $ cd back-end
     $ ./gradlew build
-
+    ```
 ## Run Instructions
 
 Assuming the user is in the back-end folder:
