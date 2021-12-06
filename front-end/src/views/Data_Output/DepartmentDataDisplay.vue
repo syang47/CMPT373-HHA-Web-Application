@@ -30,7 +30,7 @@
         <h2 class="font-weight-bold display-5 text-dark col">{{ $t("dataDisplay.displayData") }}</h2>
         <table v-if="showAllListTable" class="table table-bordered table-striped table-hover">
             <thead class="thead-dark">
-                <th scope="col" v-for="header in dataListHeaders" :key="header"> {{header}}</th>
+                <th scope="col" v-for="header in dataListHeaders" :key="header"> {{this.$t('dataDisplay.' + header)}}</th>
             </thead>
             <tbody v-for="data in Object.entries(msppAllData)" :key="data">
                 <tr>
@@ -145,8 +145,7 @@ export default defineComponent({
             addColumnName: [] as any,
             addColumnKeyValue: [] as any,
 
-            fields: ["name","value"],
-            dataListHeaders: [this.$t('dataDisplay.id'), this.$t('dataDisplay.dateSubmitted'), this.$t('dataDisplay.department')],
+            dataListHeaders: ["id", "dateSubmitted", "department"],
         };
     },
     mounted() {
